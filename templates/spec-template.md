@@ -18,6 +18,16 @@
   - Tested independently
   - Deployed independently
   - Demonstrated to users independently
+
+  FOR INFRASTRUCTURE PROJECTS:
+  User stories describe infrastructure capabilities needed (e.g., "provision database", "configure networking").
+  Keep stories technology-agnostic here - no cloud provider names. Provider details go in plan.md.
+
+  Example Infrastructure User Stories:
+  - "Provision managed database with automated backups and high availability"
+  - "Configure network isolation with public and private subnets"
+  - "Implement auto-scaling compute tier with load balancing"
+  - "Set up secure secrets management for application credentials"
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)
@@ -70,6 +80,13 @@
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
   Fill them out with the right edge cases.
+
+  FOR INFRASTRUCTURE PROJECTS, consider:
+  - State management conflicts (concurrent modifications)
+  - Resource quota limits and cloud provider constraints
+  - Infrastructure dependencies between features (shared networks, common data stores)
+  - Configuration changes requiring resource recreation vs in-place updates
+  - Multi-environment deployment ordering and dependencies
 -->
 
 - What happens when [boundary condition]?
@@ -80,6 +97,17 @@
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
   Fill them out with the right functional requirements.
+
+  FOR INFRASTRUCTURE PROJECTS:
+  Functional requirements describe infrastructure capabilities needed (e.g., "provision database", "configure networking").
+  Keep requirements technology-agnostic here - no cloud provider names. Provider details go in plan.md.
+
+  Example Infrastructure Functional Requirements:
+  - **FR-001**: Infrastructure MUST provision a managed relational database with automated backups
+  - **FR-002**: Infrastructure MUST configure network isolation with public and private subnets
+  - **FR-003**: Infrastructure MUST implement auto-scaling compute tier with load balancing
+  - **FR-004**: Infrastructure MUST set up secure secrets management for application credentials
+  - **FR-005**: Infrastructure MUST enable monitoring and alerting for key metrics
 -->
 
 ### Functional Requirements

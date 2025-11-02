@@ -12,6 +12,8 @@ description: "Task list template for feature implementation"
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
+**Infrastructure Projects Note**: For infrastructure-as-code projects, tasks follow a 4-tier dependency hierarchy to ensure proper provisioning order. See infrastructure task examples and dependency ordering guidance below.
+
 ## Format: `[ID] [P?] [Story] Description`
 
 - **[P]**: Can run in parallel (different files, no dependencies)
@@ -48,9 +50,19 @@ description: "Task list template for feature implementation"
 
 **Purpose**: Project initialization and basic structure
 
+<!-- APPLICATION PROJECT EXAMPLES -->
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
+
+<!-- INFRASTRUCTURE PROJECT EXAMPLES (Terraform):
+- [ ] T001 Create iac/ directory structure per plan.md
+- [ ] T002 [P] Configure Terraform backend (S3 + DynamoDB) in iac/backend.tf
+- [ ] T003 [P] Configure cloud provider and required providers in iac/provider.tf
+- [ ] T004 Create terraform.tfvars files for each environment (dev/staging/prod)
+- [ ] T005 Run `terraform init` to initialize backend and download providers
+- [ ] T006 Run `terraform validate` - foundation checkpoint
+-->
 
 ---
 
@@ -60,6 +72,7 @@ description: "Task list template for feature implementation"
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
+<!-- APPLICATION PROJECT EXAMPLES -->
 Examples of foundational tasks (adjust based on your project):
 
 - [ ] T004 Setup database schema and migrations framework
@@ -68,6 +81,17 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T007 Create base models/entities that all stories depend on
 - [ ] T008 Configure error handling and logging infrastructure
 - [ ] T009 Setup environment configuration management
+
+<!-- INFRASTRUCTURE PROJECT EXAMPLES (Terraform):
+This phase implements the NETWORK LAYER - prerequisite for all compute/data resources.
+
+- [ ] T007 Create VPC and subnets (public + private) in iac/vpc.tf
+- [ ] T008 [P] Create Internet Gateway and NAT Gateway in iac/vpc.tf
+- [ ] T009 [P] Create route tables and subnet associations in iac/vpc.tf
+- [ ] T010 [P] Create security groups (ALB, compute, database) in iac/security-groups.tf
+- [ ] T011 [P] Create IAM roles and policies in iac/iam.tf
+- [ ] T012 Run `terraform validate` - networking checkpoint
+-->
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -88,12 +112,26 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Implementation for User Story 1
 
+<!-- APPLICATION PROJECT EXAMPLES -->
 - [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
 - [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
 - [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
 - [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
 - [ ] T016 [US1] Add validation and error handling
 - [ ] T017 [US1] Add logging for user story 1 operations
+
+<!-- INFRASTRUCTURE PROJECT EXAMPLES (Terraform):
+This phase implements COMPUTE & DATA LAYER - depends on networking from Phase 2.
+
+- [ ] T013 [P] [US1] Create RDS database instance in iac/rds.tf (depends on private subnets, DB security group)
+- [ ] T014 [P] [US1] Create ElastiCache Redis cluster in iac/elasticache.tf (depends on private subnets)
+- [ ] T015 [P] [US1] Create S3 bucket for static assets in iac/s3.tf
+- [ ] T016 [US1] Create Application Load Balancer in iac/alb.tf (depends on public subnets, ALB SG)
+- [ ] T017 [US1] Create ECS cluster and task definition in iac/ecs.tf (depends on IAM roles)
+- [ ] T018 [US1] Create ECS service with auto-scaling in iac/ecs.tf (depends on ALB, ECS SG, RDS)
+- [ ] T019 [US1] Run `terraform validate` - compute/data layer checkpoint
+- [ ] T020 [US1] Run `terraform plan -var-file=terraform.tfvars.dev` to preview changes
+-->
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -150,12 +188,23 @@ Examples of foundational tasks (adjust based on your project):
 
 **Purpose**: Improvements that affect multiple user stories
 
+<!-- APPLICATION PROJECT EXAMPLES -->
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
+
+<!-- INFRASTRUCTURE PROJECT EXAMPLES (Terraform):
+- [ ] TXXX Run `terraform fmt -check` across all .tf files
+- [ ] TXXX Run `tflint` to check for common issues and best practices
+- [ ] TXXX Generate architecture diagram documentation
+- [ ] TXXX Document Terraform usage in iac/README.md
+- [ ] TXXX [P] Add outputs for key infrastructure values (ALB DNS, database endpoints)
+- [ ] TXXX [P] Add tags to all resources for cost tracking and management
+- [ ] TXXX Run quickstart.md validation
+-->
 
 ---
 
@@ -178,20 +227,42 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
+**Application Projects:**
 - Tests (if included) MUST be written and FAIL before implementation
 - Models before services
 - Services before endpoints
 - Core implementation before integration
 - Story complete before moving to next priority
 
+**Infrastructure Projects (4-Tier Dependency Hierarchy):**
+1. **Foundation Tier**: State backend, provider configuration (no dependencies)
+2. **Network Tier**: VPC, subnets, routing, security groups (depends on Foundation)
+3. **Compute & Data Tier**: Instances, databases, load balancers, storage (depends on Network)
+4. **Application Tier**: DNS, monitoring, application configuration (depends on Compute & Data)
+
+**Infrastructure Task Sequencing Rules:**
+- Network resources MUST complete before compute resources
+- Security groups MUST be defined before resources that reference them
+- IAM roles MUST exist before resources that use them
+- VPC/subnets MUST exist before placing resources in them
+- Validation checkpoints (`terraform validate`) after each tier
+- Formatting checks (`terraform fmt`) before completing user story
+
 ### Parallel Opportunities
 
+**Application Projects:**
 - All Setup tasks marked [P] can run in parallel
 - All Foundational tasks marked [P] can run in parallel (within Phase 2)
 - Once Foundational phase completes, all user stories can start in parallel (if team capacity allows)
 - All tests for a user story marked [P] can run in parallel
 - Models within a story marked [P] can run in parallel
 - Different user stories can be worked on in parallel by different team members
+
+**Infrastructure Projects:**
+- Resources within same tier can execute in parallel (e.g., multiple security groups together)
+- Different environments (dev/staging/prod) can be provisioned in parallel
+- Independent infrastructure components (separate VPCs, separate applications) can execute in parallel
+- Variable file creation can happen in parallel with infrastructure definition
 
 ---
 
