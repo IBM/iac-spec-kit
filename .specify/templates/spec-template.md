@@ -11,23 +11,13 @@
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
   Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
   you should still have a viable MVP (Minimum Viable Product) that delivers value.
-
+  
   Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
   Think of each story as a standalone slice of functionality that can be:
   - Developed independently
   - Tested independently
   - Deployed independently
   - Demonstrated to users independently
-
-  FOR INFRASTRUCTURE PROJECTS:
-  User stories describe infrastructure capabilities needed (e.g., "provision database", "configure networking").
-  Keep stories technology-agnostic here - no cloud provider names. Provider details go in plan.md.
-
-  Example Infrastructure User Stories:
-  - "Provision managed database with automated backups and high availability"
-  - "Configure network isolation with public and private subnets"
-  - "Implement auto-scaling compute tier with load balancing"
-  - "Set up secure secrets management for application credentials"
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)
@@ -80,13 +70,6 @@
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
   Fill them out with the right edge cases.
-
-  FOR INFRASTRUCTURE PROJECTS, consider:
-  - State management conflicts (concurrent modifications)
-  - Resource quota limits and cloud provider constraints
-  - Infrastructure dependencies between features (shared networks, common data stores)
-  - Configuration changes requiring resource recreation vs in-place updates
-  - Multi-environment deployment ordering and dependencies
 -->
 
 - What happens when [boundary condition]?
@@ -113,17 +96,6 @@
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
 ### Key Entities *(include if feature involves data)*
-
-<!--
-  FOR INFRASTRUCTURE PROJECTS:
-  Entities represent infrastructure components and their relationships.
-  Keep descriptions technology-agnostic (no cloud provider names).
-
-  Example Infrastructure Entities:
-  - **Infrastructure Specification**: Technology-agnostic description of required infrastructure (database with backups, network isolation, auto-scaling compute). Lives in spec.md.
-  - **Infrastructure Architecture**: Provider-specific infrastructure design (RDS PostgreSQL, VPC with subnets, ECS Fargate). Lives in plan.md.
-  - **Environment Configuration**: Multi-environment infrastructure parameters (instance sizes per environment, scaling limits, network ranges). Defined in variable files.
--->
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
 - **[Entity 2]**: [What it represents, relationships to other entities]
