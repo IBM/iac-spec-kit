@@ -862,6 +862,132 @@ def ensure_executable_scripts(project_path: Path, tracker: StepTracker | None = 
             for f in failures:
                 console.print(f"  - {f}")
 
+def copy_local_template(
+    local_source_path: Path,
+    project_path: Path,
+    ai_assistant: str,
+    script_type: str,
+    is_current_dir: bool = False,
+    *,
+    verbose: bool = True,
+    tracker: StepTracker | None = None
+) -> Path:
+    """Copy templates from local spec-kit repository to create a new project.
+
+    Args:
+        local_source_path: Absolute path to local spec-kit repository
+        project_path: Destination path for new project
+        ai_assistant: Selected AI assistant (determines which agent folder to copy)
+        script_type: Selected script type ("sh" or "ps")
+        is_current_dir: True if initializing in current directory (merge mode)
+        verbose: Print progress messages (ignored if tracker provided)
+        tracker: Optional StepTracker for progress updates
+
+    Returns:
+        Path to initialized project
+    """
+    if tracker:
+        tracker.add("copy", "Copy templates from local spec-kit")
+        tracker.start("copy")
+    elif verbose:
+        console.print("[cyan]Copying templates from local spec-kit...[/cyan]")
+
+    try:
+        # Create project directory if needed
+        if not is_current_dir:
+            project_path.mkdir(parents=True, exist_ok=True)
+
+        # Copy templates/ to destination
+        templates_src = local_source_path / "templates"
+        templates_dest = project_path / ".specify" / "templates"
+        templates_dest.parent.mkdir(parents=True, exist_ok=True)
+
+        if templates_dest.exists():
+            shutil.rmtree(templates_dest)
+        shutil.copytree(templates_src, templates_dest)
+
+        # Copy .specify/ directory
+        specify_src = local_source_path / ".specify"
+        specify_dest = project_path / ".specify"
+
+        # Copy .specify subdirectories
+        for subdir in ["commands", "scripts", "memory"]:
+            src_subdir = specify_src / subdir
+            if src_subdir.exists():
+                dest_subdir = specify_dest / subdir
+                if dest_subdir.exists():
+                    shutil.rmtree(dest_subdir)
+                shutil.copytree(src_subdir, dest_subdir)
+
+        # Filter scripts by type
+        scripts_dest = specify_dest / "scripts"
+        if scripts_dest.exists():
+            # Remove scripts for the non-selected type
+            if script_type == "sh":
+                ps_dir = scripts_dest / "powershell"
+                if ps_dir.exists():
+                    shutil.rmtree(ps_dir)
+            elif script_type == "ps":
+                bash_dir = scripts_dest / "bash"
+                if bash_dir.exists():
+                    shutil.rmtree(bash_dir)
+
+        # Copy agent-specific directory
+        agent_config = AGENT_CONFIG.get(ai_assistant)
+        if agent_config:
+            agent_folder = agent_config["folder"]
+            agent_src = local_source_path / agent_folder
+            if agent_src.exists():
+                agent_dest = project_path / agent_folder
+                if agent_dest.exists():
+                    shutil.rmtree(agent_dest)
+                shutil.copytree(agent_src, agent_dest)
+
+        # Copy README.md if exists
+        readme_src = local_source_path / "README.md"
+        if readme_src.exists():
+            readme_dest = project_path / "README.md"
+            shutil.copy2(readme_src, readme_dest)
+
+        # Copy .gitignore if exists
+        gitignore_src = local_source_path / ".gitignore"
+        if gitignore_src.exists():
+            gitignore_dest = project_path / ".gitignore"
+            shutil.copy2(gitignore_src, gitignore_dest)
+
+        # Handle .vscode/settings.json merging
+        vscode_src = local_source_path / ".vscode"
+        if vscode_src.exists():
+            vscode_dest = project_path / ".vscode"
+            vscode_dest.mkdir(exist_ok=True)
+
+            for item in vscode_src.iterdir():
+                if item.is_file():
+                    dest_file = vscode_dest / item.name
+                    if item.name == "settings.json" and dest_file.exists():
+                        # Merge settings.json
+                        handle_vscode_settings(item, dest_file, Path(item.name), verbose, tracker)
+                    else:
+                        shutil.copy2(item, dest_file)
+
+        # Set execute permissions on shell scripts
+        ensure_executable_scripts(project_path, tracker=tracker)
+
+        if tracker:
+            tracker.complete("copy", "templates copied")
+        elif verbose:
+            console.print("[cyan]Templates copied from local spec-kit[/cyan]")
+
+    except Exception as e:
+        if tracker:
+            tracker.error("copy", str(e))
+        else:
+            if verbose:
+                console.print(f"[red]Error copying templates:[/red] {e}")
+        raise
+
+    return project_path
+
 @app.command()
 def init(
     project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
@@ -874,18 +1000,19 @@ def init(
     skip_tls: bool = typer.Option(False, "--skip-tls", help="Skip SSL/TLS verification (not recommended)"),
     debug: bool = typer.Option(False, "--debug", help="Show verbose diagnostic output for network and extraction failures"),
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
+    local: str = typer.Option(None, "--local", help="Path to local spec-kit repository for development/testing"),
 ):
     """
     Initialize a new Specify project from the latest template.
-    
+
     This command will:
     1. Check that required tools are installed (git is optional)
     2. Let you choose your AI assistant
-    3. Download the appropriate template from GitHub
+    3. Download the appropriate template from GitHub (or copy from local spec-kit if --local provided)
     4. Extract the template to a new project directory or current directory
     5. Initialize a fresh git repository (if not --no-git and no existing repo)
     6. Optionally set up AI assistant commands
-    
+
     Examples:
         specify init my-project
         specify init my-project --ai claude
@@ -898,6 +1025,12 @@ def init(
         specify init --here --ai codebuddy
         specify init --here
         specify init --here --force  # Skip confirmation when current directory not empty
+
+        # Using local spec-kit for development/testing:
+        specify init my-project --local /path/to/spec-kit --ai claude
+        specify init my-project --local ../spec-kit --ai claude  # Relative path
+        specify init --local ~/git/spec-kit --ai claude --here   # Initialize in current directory
+        specify init . --local /path/to/spec-kit --ai claude     # Alternative syntax
     """
 
     show_banner()
@@ -913,6 +1046,33 @@ def init(
     if not here and not project_name:
         console.print("[red]Error:[/red] Must specify either a project name, use '.' for current directory, or use --here flag")
         raise typer.Exit(1)
+
+    # Validate local spec-kit path if --local flag provided
+    local_path_resolved = None
+    if local:
+        local_path_resolved = Path(local).resolve()
+
+        if not local_path_resolved.exists():
+            console.print(f"[red]Error:[/red] Local path does not exist: {local}")
+            raise typer.Exit(1)
+
+        if not local_path_resolved.is_dir():
+            console.print(f"[red]Error:[/red] Local path is not a directory: {local}")
+            raise typer.Exit(1)
+
+        templates_dir = local_path_resolved / "templates"
+        if not templates_dir.exists():
+            console.print(f"[red]Error:[/red] Local spec-kit missing required directory: templates/")
+            console.print(f"Path: {local_path_resolved}")
+            console.print("This does not appear to be a valid spec-kit repository.")
+            raise typer.Exit(1)
+
+        specify_dir = local_path_resolved / ".specify"
+        if not specify_dir.exists():
+            console.print(f"[red]Error:[/red] Local spec-kit missing required directory: .specify/")
+            console.print(f"Path: {local_path_resolved}")
+            console.print("This does not appear to be a valid spec-kit repository.")
+            raise typer.Exit(1)
 
     if here:
         project_name = Path.cwd().name
@@ -1021,18 +1181,31 @@ def init(
     tracker.complete("ai-select", f"{selected_ai}")
     tracker.add("script-select", "Select script type")
     tracker.complete("script-select", selected_script)
-    for key, label in [
-        ("fetch", "Fetch latest release"),
-        ("download", "Download template"),
-        ("extract", "Extract template"),
-        ("zip-list", "Archive contents"),
-        ("extracted-summary", "Extraction summary"),
-        ("chmod", "Ensure scripts executable"),
-        ("cleanup", "Cleanup"),
-        ("git", "Initialize git repository"),
-        ("final", "Finalize")
-    ]:
-        tracker.add(key, label)
+
+    # Add different tracker steps based on whether using local or remote source
+    if local_path_resolved:
+        # Local workflow: skip fetch/download, use copy instead of extract
+        for key, label in [
+            ("copy", "Copy templates from local spec-kit"),
+            ("chmod", "Ensure scripts executable"),
+            ("git", "Initialize git repository"),
+            ("final", "Finalize")
+        ]:
+            tracker.add(key, label)
+    else:
+        # Remote workflow: original steps
+        for key, label in [
+            ("fetch", "Fetch latest release"),
+            ("download", "Download template"),
+            ("extract", "Extract template"),
+            ("zip-list", "Archive contents"),
+            ("extracted-summary", "Extraction summary"),
+            ("chmod", "Ensure scripts executable"),
+            ("cleanup", "Cleanup"),
+            ("git", "Initialize git repository"),
+            ("final", "Finalize")
+        ]:
+            tracker.add(key, label)
 
     # Track git error message outside Live context so it persists
     git_error_message = None
@@ -1040,13 +1213,36 @@ def init(
     with Live(tracker.render(), console=console, refresh_per_second=8, transient=True) as live:
         tracker.attach_refresh(lambda: live.update(tracker.render()))
         try:
-            verify = not skip_tls
-            local_ssl_context = ssl_context if verify else False
-            local_client = httpx.Client(verify=local_ssl_context)
+            if local_path_resolved:
+                # Use local template copy workflow
+                copy_local_template(
+                    local_path_resolved,
+                    project_path,
+                    selected_ai,
+                    selected_script,
+                    here,
+                    verbose=False,
+                    tracker=tracker
+                )
+            else:
+                # Use remote GitHub download workflow
+                verify = not skip_tls
+                local_ssl_context = ssl_context if verify else False
+                local_client = httpx.Client(verify=local_ssl_context)
 
-            download_and_extract_template(project_path, selected_ai, selected_script, here, verbose=False, tracker=tracker, client=local_client, debug=debug, github_token=github_token)
+                download_and_extract_template(
+                    project_path,
+                    selected_ai,
+                    selected_script,
+                    here,
+                    verbose=False,
+                    tracker=tracker,
+                    client=local_client,
+                    debug=debug,
+                    github_token=github_token
+                )
 
-            ensure_executable_scripts(project_path, tracker=tracker)
+                ensure_executable_scripts(project_path, tracker=tracker)
 
             if not no_git:
                 tracker.start("git")
