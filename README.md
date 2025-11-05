@@ -35,6 +35,8 @@
 - [📽️ Video Overview](#️-video-overview)
 - [🤖 Supported AI Agents](#-supported-ai-agents)
 - [🔧 Specify CLI Reference](#-specify-cli-reference)
+  - [Contributing to Spec Kit Templates](#contributing-to-spec-kit-templates)
+  - [Infrastructure-as-Code Projects](#infrastructure-as-code-projects)
 - [📚 Core Philosophy](#-core-philosophy)
 - [🌟 Development Phases](#-development-phases)
 - [🎯 Experimental Goals](#-experimental-goals)
@@ -50,6 +52,8 @@
 ## 🤔 What is Spec-Driven Development?
 
 Spec-Driven Development **flips the script** on traditional software development. For decades, code has been king — specifications were just scaffolding we built and discarded once the "real work" of coding began. Spec-Driven Development changes this: **specifications become executable**, directly generating working implementations rather than just guiding them.
+
+**Now supporting Infrastructure-as-Code**: Use the same structured workflow for Terraform infrastructure projects. Document cloud resources, networking, and security in specifications, then let AI agents generate production-ready infrastructure code.
 
 ## ⚡ Get Started
 
@@ -180,6 +184,7 @@ The `specify` command supports the following options:
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
 | `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, or `q` |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
+| `--local`              | Option   | Initialize from local spec-kit directory (for testing template changes). Supports relative and absolute paths |
 | `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                             |
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
 | `--here`               | Flag     | Initialize project in the current directory instead of creating a new one   |
@@ -216,7 +221,7 @@ specify init --here --ai copilot
 
 # Force merge into current (non-empty) directory without confirmation
 specify init . --force --ai copilot
-# or 
+# or
 specify init --here --force --ai copilot
 
 # Skip git initialization
@@ -227,6 +232,13 @@ specify init my-project --ai claude --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
 specify init my-project --ai claude --github-token ghp_your_token_here
+
+# Initialize from local spec-kit (for template development and testing)
+specify init my-project --local /path/to/spec-kit --ai claude
+# or with relative path
+specify init my-project --local ../spec-kit --ai claude
+# or in current directory
+specify init --local ~/git/spec-kit --ai claude --here
 
 # Check system requirements
 specify check
@@ -258,6 +270,85 @@ Additional commands for enhanced quality and validation:
 | `/speckit.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.iac.tasks`, before `/speckit.implement`) |
 | `/speckit.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
+### Contributing to Spec Kit Templates
+
+If you're a spec-kit contributor working on template enhancements, you can use the `--local` flag to test your changes without publishing them:
+
+#### Quick Template Testing Workflow
+
+```bash
+# 1. Make changes to templates in your local spec-kit repository
+cd ~/git/spec-kit
+vim templates/plan-template.md  # or any other template
+
+# 2. Initialize a test project from your local spec-kit
+cd ~/projects
+mkdir test-project && cd test-project
+specify init --local ~/git/spec-kit --ai claude --here
+
+# 3. Test the workflow with your changes
+# - Use /speckit.specify to create a spec
+# - Use /speckit.plan to verify your template changes appear
+# - Use /speckit.tasks and /speckit.implement to test end-to-end
+
+# 4. Iterate: make changes in spec-kit, re-initialize test project
+cd ~/git/spec-kit
+vim templates/plan-template.md  # make more changes
+cd ~/projects/test-project2
+specify init --local ~/git/spec-kit --ai claude --here
+```
+
+**Key Benefits**:
+- Tests uncommitted changes from your working directory
+- No need to publish to test template modifications
+- Rapid iteration cycle (< 5 seconds to initialize)
+- Works with all AI assistants and script types
+
+### Infrastructure-as-Code Projects
+
+Spec Kit now supports infrastructure projects using Terraform with the same structured workflow as application development.
+
+#### Key Differences for Infrastructure Projects
+
+| Aspect | Application Project | Infrastructure Project |
+|--------|-------------------|----------------------|
+| **Specification** | User stories for features | User stories for infrastructure needs (technology-agnostic) |
+| **Planning** | Tech stack & architecture | Cloud provider selection + **Infrastructure Architecture section** |
+| **Implementation** | AI generates application code | AI generates Terraform configuration files (.tf) |
+| **Validation** | Run tests | Run `terraform validate`, `terraform fmt`, `tflint` |
+
+#### Infrastructure Architecture Section
+
+When using `/speckit.plan` for infrastructure projects, your `plan.md` will include an **Infrastructure Architecture** section with:
+
+- **Cloud Provider Selection**: Which provider and why (AWS, Azure, GCP, etc.)
+- **Compute Resources**: VMs, containers, serverless, load balancers
+- **Data Storage**: Databases, object storage, caching layers
+- **Networking**: VPCs, subnets, security groups, routing
+- **Security**: IAM roles, encryption, secrets management
+- **Environment Configuration**: Development, staging, production settings
+- **State Management**: Terraform backend configuration, workspace strategy
+
+#### Quick Example
+
+```bash
+# 1. Create infrastructure specification (technology-agnostic)
+/speckit.specify Build production web app infrastructure with database, caching, and auto-scaling
+
+# 2. Create technical plan (specify AWS, document Infrastructure Architecture)
+/speckit.plan We'll use AWS with ECS Fargate, RDS PostgreSQL, ElastiCache Redis, and Application Load Balancer
+
+# 3. Generate tasks (includes terraform validation checkpoints)
+/speckit.tasks
+
+# 4. Implement (AI generates Terraform .tf files)
+/speckit.implement
+```
+
+**Important**: Spec Kit generates and validates Terraform code. Actual provisioning (`terraform apply`) is a manual step you control.
+
+**Learn more**: See the [Infrastructure Projects Quickstart](specs/001-terraform-generation/quickstart.md) for detailed examples and patterns.
+
 ### Environment Variables
 
 | Variable         | Description                                                                                    |
@@ -280,6 +371,7 @@ Spec-Driven Development is a structured process that emphasizes:
 | **0-to-1 Development** ("Greenfield") | Generate from scratch | <ul><li>Start with high-level requirements</li><li>Generate specifications</li><li>Plan implementation steps</li><li>Build production-ready applications</li></ul> |
 | **Creative Exploration** | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple technology stacks & architectures</li><li>Experiment with UX patterns</li></ul> |
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add features iteratively</li><li>Modernize legacy systems</li><li>Adapt processes</li></ul> |
+| **Infrastructure-as-Code** | Infrastructure provisioning | <ul><li>Specify cloud resources technology-agnostically</li><li>Document Infrastructure Architecture</li><li>Generate Terraform configurations</li><li>Validate with terraform validate/fmt/tflint</li></ul> |
 
 ## 🎯 Experimental Goals
 
