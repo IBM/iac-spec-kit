@@ -92,8 +92,8 @@
 
 *Example of marking unclear requirements:*
 
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **FR-006**: System MUST provision VPC with configurable CIDR block ranges [NEEDS CLARIFICATION: CIDR range requirements not specified - /16, /24, custom?]
+- **FR-007**: System MUST retain tfstate backups for [NEEDS CLARIFICATION: retention period not specified - 30 days, 90 days, indefinite?]
 
 ### Key Entities *(include if feature involves data)*
 

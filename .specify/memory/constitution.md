@@ -1,19 +1,27 @@
 <!--
 Sync Impact Report:
-Version: 0.0.0 → 1.0.0
-Modified Principles: N/A (initial constitution creation)
+Version: 1.0.0 → 1.1.0
+Modified Principles: Added Principle VIII (Runtime Command Integrity)
 Added Sections:
-  - Core Principles (I-VII)
-  - Development Workflow
-  - Governance
-Removed Sections: N/A (template replacement)
+  - Principle VIII: Runtime Command Integrity
+Added Rules:
+  - Files in .claude/commands/ MUST NOT be modified during feature implementation
+  - Branding/configuration changes MUST be applied to .specify/templates/ only
+  - Runtime command changes require explicit constitution amendment
+  - Task lists MUST NOT include modifications to .claude/commands/ files
+Removed Sections: N/A
 Templates Status:
-  ✅ plan-template.md - Reviewed, Constitution Check section aligns
-  ✅ spec-template.md - Reviewed, no constitution-specific constraints needed
-  ✅ tasks-template.md - Reviewed, aligns with TDD and user story principles
-  ✅ agent-file-template.md - Reviewed, generic guidance suitable
-  ✅ checklist-template.md - Reviewed, quality validation aligns
+  ✅ plan-template.md - No changes needed (no runtime command references)
+  ✅ spec-template.md - No changes needed (specifications are technology-agnostic)
+  ✅ tasks-template.md - Aligned (template already shows .specify/templates/ as modification target)
+  ✅ agent-file-template.md - No changes needed (agent guidance separate from constitution)
+  ✅ checklist-template.md - No changes needed (validation only)
 Follow-up TODOs: None
+Rationale for MINOR version bump (1.1.0):
+  - Adds material guidance (new principle with multiple rules)
+  - Does not break existing specifications or implementations
+  - Prevents future errors in feature implementation
+  - Based on real operational feedback from 002-iac-branding implementation
 -->
 
 # Spec Kit Constitution
@@ -116,6 +124,20 @@ All processes, decisions, and artifacts MUST be transparent, traceable, and audi
 
 **Rationale:** Transparency enables collaboration, knowledge transfer, onboarding, and post-mortem analysis. Traceability ensures every line of code can be traced back to a requirement and business value.
 
+### VIII. Runtime Command Integrity (NON-NEGOTIABLE)
+
+Runtime command files MUST be protected from modification during feature implementation to preserve operational stability.
+
+**Rules:**
+- Files in `.claude/commands/` are runtime command definitions and MUST NOT be modified during feature implementation
+- Branding, configuration, or workflow changes MUST be applied to template files in `.specify/templates/` and `templates/commands/` only
+- Command name customization MUST be done by renaming templates in `templates/commands/` (e.g., `specify.md` → `iac.specify.md`)
+- Template changes propagate to future releases; runtime commands in `.claude/commands/` execute current workflows
+- Runtime command changes require explicit constitution amendment and cross-feature validation
+- Task lists (tasks.md) MUST NOT include modifications to `.claude/commands/` files
+
+**Rationale:** Runtime commands actively execute the development workflow. Modifying them during implementation can break in-flight operations, invalidate existing specifications, and create inconsistencies between template expectations and command behavior. The build system generates release command files from `templates/commands/` sources, so customization happens there, not in the active runtime directory. Separation of runtime execution from template generation preserves system stability.
+
 ## Development Workflow
 
 ### Amendment Procedure
@@ -165,4 +187,4 @@ All pull requests, code reviews, and retrospectives MUST verify compliance with 
 
 Use `.specify/memory/constitution.md` (this file) for constitutional governance and `.specify/templates/agent-file-template.md` for runtime development guidance specific to AI agents.
 
-**Version**: 1.0.0 | **Ratified**: 2025-11-01 | **Last Amended**: 2025-11-01
+**Version**: 1.1.0 | **Ratified**: 2025-11-01 | **Last Amended**: 2025-11-04
