@@ -8,6 +8,17 @@ agent_scripts:
   ps: scripts/powershell/update-agent-context.ps1 -AgentType __AGENT__
 ---
 
+## Infrastructure-as-Code Context
+
+**IMPORTANT**: This is the Infrastructure-as-Code (IaC) edition of Spec Kit, optimized for Terraform and cloud infrastructure workflows.
+
+When creating implementation plans:
+- **Select cloud provider**: NOW is when you choose AWS, Azure, GCP, or IBM Cloud (spec was provider-agnostic)
+- **Define Infrastructure Architecture**: Compute (VMs/containers), networking (VPCs/subnets), storage (databases/object storage), security (IAM/firewalls)
+- **Terraform-specific decisions**: Module structure, state backend (S3/Azure Storage), workspace strategy, provider versions
+- **NOT software APIs**: This is infrastructure, not application code - focus on Terraform resources, not REST endpoints
+- **Research IaC patterns**: Multi-region setup, disaster recovery, state management, environment separation
+
 ## User Input
 
 ```text
