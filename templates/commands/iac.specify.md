@@ -5,6 +5,17 @@ scripts:
   ps: scripts/powershell/create-new-feature.ps1 -Json "{ARGS}"
 ---
 
+## Infrastructure-as-Code Context
+
+**IMPORTANT**: This is the Infrastructure-as-Code (IaC) edition of Spec Kit, optimized for Terraform and cloud infrastructure workflows.
+
+When creating specifications:
+- **Focus on infrastructure resources**: VPCs, subnets, compute instances, storage, databases, networking, security groups, IAM policies
+- **Use cloud terminology**: regions, availability zones, CIDR blocks, security groups, load balancers, auto-scaling
+- **Think infrastructure capabilities**: "provision managed database", "configure network isolation", "implement auto-scaling", "set up monitoring"
+- **Stay technology-agnostic**: User stories describe infrastructure needs WITHOUT specifying cloud providers (AWS/Azure/GCP/IBM Cloud details go in plan.md)
+- **IaC-specific constraints**: State management, resource dependencies, configuration drift, multi-environment deployments
+
 ## User Input
 
 ```text

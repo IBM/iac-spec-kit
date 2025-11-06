@@ -184,7 +184,6 @@ The `specify` command supports the following options:
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
 | `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, or `q` |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
-| `--local`              | Option   | Initialize from local spec-kit directory (for testing template changes). Supports relative and absolute paths |
 | `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                             |
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
 | `--here`               | Flag     | Initialize project in the current directory instead of creating a new one   |
@@ -233,13 +232,6 @@ specify init my-project --ai claude --debug
 # Use GitHub token for API requests (helpful for corporate environments)
 specify init my-project --ai claude --github-token ghp_your_token_here
 
-# Initialize from local spec-kit (for template development and testing)
-specify init my-project --local /path/to/spec-kit --ai claude
-# or with relative path
-specify init my-project --local ../spec-kit --ai claude
-# or in current directory
-specify init --local ~/git/spec-kit --ai claude --here
-
 # Check system requirements
 specify check
 ```
@@ -266,43 +258,9 @@ Additional commands for enhanced quality and validation:
 
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
-| `/speckit.clarify`   | Clarify underspecified areas (recommended before `/speckit.iac.plan`; formerly `/quizme`) |
-| `/speckit.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.iac.tasks`, before `/speckit.implement`) |
-| `/speckit.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
-
-### Contributing to Spec Kit Templates
-
-If you're a spec-kit contributor working on template enhancements, you can use the `--local` flag to test your changes without publishing them:
-
-#### Quick Template Testing Workflow
-
-```bash
-# 1. Make changes to templates in your local spec-kit repository
-cd ~/git/spec-kit
-vim templates/plan-template.md  # or any other template
-
-# 2. Initialize a test project from your local spec-kit
-cd ~/projects
-mkdir test-project && cd test-project
-specify init --local ~/git/spec-kit --ai claude --here
-
-# 3. Test the workflow with your changes
-# - Use /speckit.specify to create a spec
-# - Use /speckit.plan to verify your template changes appear
-# - Use /speckit.tasks and /speckit.implement to test end-to-end
-
-# 4. Iterate: make changes in spec-kit, re-initialize test project
-cd ~/git/spec-kit
-vim templates/plan-template.md  # make more changes
-cd ~/projects/test-project2
-specify init --local ~/git/spec-kit --ai claude --here
-```
-
-**Key Benefits**:
-- Tests uncommitted changes from your working directory
-- No need to publish to test template modifications
-- Rapid iteration cycle (< 5 seconds to initialize)
-- Works with all AI assistants and script types
+| `/speckit.iac.clarify`   | Clarify underspecified areas (recommended before `/speckit.iac.plan`; formerly `/quizme`) |
+| `/speckit.iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.iac.tasks`, before `/speckit.iac.implement`) |
+| `/speckit.iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
 ### Infrastructure-as-Code Projects
 

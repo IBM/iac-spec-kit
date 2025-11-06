@@ -2,6 +2,10 @@
 description: Create or update the project constitution from interactive or provided principle inputs, ensuring all dependent templates stay in sync
 ---
 
+## Infrastructure-as-Code Context
+
+**IMPORTANT**: This is the IaC edition of Spec Kit for Terraform and cloud infrastructure workflows. When discussing or updating principles, remember this project focuses on infrastructure provisioning, not application development.
+
 ## User Input
 
 ```text
