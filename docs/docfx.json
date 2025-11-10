@@ -9,11 +9,7 @@
       },
       {
         "files": [
-          "../README.md",
-          "../CONTRIBUTING.md",
-          "../CODE_OF_CONDUCT.md",
-          "../SECURITY.md",
-          "../SUPPORT.md"
+          "../README.md"
         ],
         "dest": "."
       }
@@ -56,13 +52,13 @@
     "cleanupCacheHistory": false,
     "disableGitFeatures": false,
     "globalMetadata": {
-      "_appTitle": "Spec Kit Documentation",
-      "_appName": "Spec Kit",
-      "_appFooter": "Spec Kit - A specification-driven development toolkit",
+      "_appTitle": "IaC Spec Kit Documentation",
+      "_appName": "IaC Spec Kit",
+      "_appFooter": "IaC Spec Kit - Infrastructure as Code with specification-driven development",
       "_enableSearch": true,
       "_disableContribution": false,
       "_gitContribute": {
-        "repo": "https://github.com/github/spec-kit",
+        "repo": "https://github.com/ibm/iac-spec-kit",
         "branch": "main"
       }
     }

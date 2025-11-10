@@ -10,7 +10,7 @@
   ============================================================================
   IMPORTANT: The checklist items below are SAMPLE ITEMS for illustration only.
   
-  The /speckit.checklist command MUST replace these with actual items based on:
+  The /iac.checklist command MUST replace these with actual items based on:
   - User's specific checklist request
   - Feature requirements from spec.md
   - Technical context from plan.md

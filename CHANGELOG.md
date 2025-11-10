@@ -11,6 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **IAC Spec Kit** is a domain-specific implementation of the spec-driven development pattern optimized for Infrastructure as Code workflows. This project is forked from the original [GitHub Spec Kit](https://github.com/github/spec-kit) which focuses on general software development.
 
-**For the complete changelog history prior to the IAC fork, please refer to the [original GitHub Spec Kit changelog](https://github.com/github/spec-kit/blob/main/CHANGELOG.md).**
+**For the complete changelog history prior to the IaC fork, please refer to the [original GitHub Spec Kit changelog](https://github.com/github/spec-kit/blob/main/CHANGELOG.md).**
 
 IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns. All infrastructure commands use the `.iac` namespace (e.g., `/iac.specify`, `/iac.plan`, `/iac.tasks`).
