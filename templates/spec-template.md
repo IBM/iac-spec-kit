@@ -1,143 +1,249 @@
-# Feature Specification: [FEATURE NAME]
+# Infrastructure Specification: [INFRASTRUCTURE_NAME]
+<!-- Example: Production Web Platform, Data Analytics Infrastructure, Multi-Region DR Setup -->
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
+**Spec ID**: `[###-infrastructure-name]`
+**Created**: [DATE]
+**Status**: Draft
 **Input**: User description: "$ARGUMENTS"
 
-## User Scenarios & Testing *(mandatory)*
+## Executive Summary *(mandatory)*
 
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
-
-  FOR INFRASTRUCTURE PROJECTS:
-  User stories describe infrastructure capabilities needed (e.g., "provision database", "configure networking").
-  Keep stories technology-agnostic here - no cloud provider names. Provider details go in plan.md.
-
-  Example Infrastructure User Stories:
-  - "Provision managed database with automated backups and high availability"
-  - "Configure network isolation with public and private subnets"
-  - "Implement auto-scaling compute tier with load balancing"
-  - "Set up secure secrets management for application credentials"
+  ACTION REQUIRED: Provide a concise overview of what infrastructure this spec defines and its primary purpose.
 -->
 
-### User Story 1 - [Brief Title] (Priority: P1)
+[Brief description of the infrastructure and its purpose, e.g., "This specification defines the infrastructure requirements for a highly available e-commerce platform supporting 100K daily active users. The infrastructure will enable 99.99% uptime, sub-second response times, and automatic scaling to handle peak shopping periods."]
 
-[Describe this user journey in plain language]
+## Problem Statement *(mandatory)*
 
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 2 - [Brief Title] (Priority: P2)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-[Add more user stories as needed, each with an assigned priority]
-
-### Edge Cases
+### Current State
 
 <!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
-
-  FOR INFRASTRUCTURE PROJECTS, consider:
-  - State management conflicts (concurrent modifications)
-  - Resource quota limits and cloud provider constraints
-  - Infrastructure dependencies between features (shared networks, common data stores)
-  - Configuration changes requiring resource recreation vs in-place updates
-  - Multi-environment deployment ordering and dependencies
+  ACTION REQUIRED: Describe the existing infrastructure situation or lack thereof.
 -->
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+[Description of current infrastructure state, e.g., "Applications currently run on aging on-premises servers with frequent outages, no disaster recovery, and manual scaling requiring 2-3 hours response time."]
 
-## Requirements *(mandatory)*
+### Desired State
 
 <!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
+  ACTION REQUIRED: Describe the target infrastructure capabilities and characteristics.
+-->
 
-  FOR INFRASTRUCTURE PROJECTS:
-  Functional requirements describe infrastructure capabilities needed (e.g., "provision database", "configure networking").
-  Keep requirements technology-agnostic here - no cloud provider names. Provider details go in plan.md.
+[Description of target infrastructure state, e.g., "Cloud-native infrastructure with auto-scaling, multi-region failover, and zero-downtime deployments managed through Infrastructure as Code."]
 
-  Example Infrastructure Functional Requirements:
-  - **FR-001**: Infrastructure MUST provision a managed relational database with automated backups
-  - **FR-002**: Infrastructure MUST configure network isolation with public and private subnets
-  - **FR-003**: Infrastructure MUST implement auto-scaling compute tier with load balancing
-  - **FR-004**: Infrastructure MUST set up secure secrets management for application credentials
-  - **FR-005**: Infrastructure MUST enable monitoring and alerting for key metrics
+### Business Impact
+
+<!--
+  ACTION REQUIRED: Explain the business value and risks.
+-->
+
+[Business value and risk analysis, e.g., "Benefits: 50% reduction in downtime, 3x faster feature deployment, 40% cost optimization. Risks if not implemented: continued revenue loss from outages, inability to handle growth, security vulnerabilities."]
+
+## Infrastructure Requirements *(mandatory)*
+
+<!--
+  Define WHAT infrastructure capabilities are needed, not HOW to implement.
+  Keep technology-agnostic - no cloud provider names (AWS/IBM Cloud/Oracle/Azure/GCP).
+
+  Example Infrastructure Requirements:
+  - Virtual private network with public and private subnets
+  - Compute instances with auto-scaling groups
+  - Load balancer for traffic distribution
+  - Managed relational database with automated backups
+  - Object storage for static files and backups
+  - Container orchestration platform with auto-scaling
+  - Security groups and network access control lists
+  - Identity and access management policies
+  - Content delivery network for static assets
+  - Message queue for asynchronous processing
+  - Monitoring and logging infrastructure
+  - Secrets management service
+  - DNS and domain management
+  - VPN or private connectivity to on-premises
 -->
 
 ### Functional Requirements
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+<!--
+  ACTION REQUIRED: List specific infrastructure capabilities that MUST be provided.
+  Mark unclear requirements with NEEDS CLARIFICATION.
+-->
+
+- **FR-001**: Infrastructure MUST [specific capability, e.g., "provide a virtual private network with network segmentation"]
+- **FR-002**: Infrastructure MUST [specific capability, e.g., "provide managed database with automatic failover"]
+- **FR-003**: Infrastructure MUST [specific capability, e.g., "implement auto-scaling based on load metrics"]
+- **FR-004**: Infrastructure MUST [specific capability]
+- **FR-005**: Infrastructure MUST [specific capability]
+
+[Add more as needed]
 
 *Example of marking unclear requirements:*
 
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+- **FR-006**: Infrastructure MUST [NEEDS CLARIFICATION: e.g., "provide compute resources - serverless, containers, or VMs?"]
 
-### Key Entities *(include if feature involves data)*
+### Non-Functional Requirements
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+#### Performance
+
+<!--
+  ACTION REQUIRED: Define performance requirements.
+-->
+
+- [Performance requirement, e.g., "API response latency p95 < 100ms, p99 < 200ms"]
+- [Performance requirement, e.g., "Support 10,000 requests per second"]
+- [Performance requirement, e.g., "Handle 50,000 concurrent connections"]
+
+#### Availability
+
+<!--
+  ACTION REQUIRED: Define availability requirements.
+-->
+
+- [Availability requirement, e.g., "99.95% uptime SLO (4.38 hours downtime/year)"]
+- [Availability requirement, e.g., "Active-active across 3 availability zones"]
+- [Availability requirement, e.g., "RTO < 1 hour, RPO < 15 minutes"]
+
+#### Security
+
+<!--
+  ACTION REQUIRED: Define security requirements.
+-->
+
+- [Security requirement, e.g., "AES-256 encryption for data at rest"]
+- [Security requirement, e.g., "TLS 1.2+ for all communications"]
+- [Security requirement, e.g., "Private subnets for compute, public only for load balancers"]
+- [Security requirement, e.g., "Role-based access with MFA for administrative operations"]
+
+#### Scalability
+
+<!--
+  ACTION REQUIRED: Define scalability requirements.
+-->
+
+- [Scalability requirement, e.g., "Scale from 2 to 100 instances based on demand"]
+- [Scalability requirement, e.g., "Auto-scale triggers: CPU > 70%, Memory > 80%"]
+- [Scalability requirement, e.g., "New instances operational within 90 seconds"]
+
+## Service Level Objectives (SLOs) *(mandatory)*
+
+<!--
+  ACTION REQUIRED: Define measurable, technology-independent success criteria.
+  Must be verifiable without knowing implementation details.
+-->
+
+- [SLO with measurement criteria, e.g., "Availability: 99.95% uptime measured over 30-day rolling window"]
+- [SLO with measurement criteria, e.g., "Latency: 95th percentile response time < 100ms"]
+- [SLO with measurement criteria, e.g., "Error Rate: Less than 0.1% failed requests"]
+- [SLO with measurement criteria, e.g., "Recovery: Full restoration within 1 hour of outage"]
+
+## Cost Constraints *(mandatory)*
+
+### Budget
+
+<!--
+  ACTION REQUIRED: Define budget constraints and targets.
+-->
+
+[Budget constraints and targets, e.g., "Initial setup: $10,000 one-time; Monthly operating: $5,000 ± 10%; Annual: $60,000 including reserved capacity"]
+
+### Cost Optimization
+
+<!--
+  ACTION REQUIRED: Define cost optimization strategies.
+-->
+
+[Cost optimization strategies, e.g., "Use reserved instances for baseline capacity; Scale down during off-peak hours; Archive logs after 30 days"]
+
+## Compliance Requirements *(include if applicable)*
+
+### Regulatory Frameworks
+
+<!--
+  ACTION REQUIRED: List applicable compliance frameworks.
+-->
+
+[Applicable compliance frameworks, e.g., "SOC 2 Type II, HIPAA, PCI-DSS Level 1, GDPR"]
+
+### Data Requirements
+
+<!--
+  ACTION REQUIRED: Define data handling and retention requirements.
+-->
+
+[Data handling and retention requirements, e.g., "Data residency in US regions only; 7-year retention for audit logs; Encryption required for PII"]
 
 ## Success Criteria *(mandatory)*
 
 <!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  ACTION REQUIRED: Define measurable and verifiable criteria for successful deployment.
+  Infrastructure is considered successfully deployed when these criteria are met.
 -->
 
-### Measurable Outcomes
+### Deployment Validation
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- [ ] [Deployment validation criterion, e.g., "All resources deployed in correct regions"]
+- [ ] [Deployment validation criterion, e.g., "Zero drift from IaC definitions"]
+- [ ] [Deployment validation criterion, e.g., "Required tags applied to all resources"]
+
+### Security Validation
+
+- [ ] [Security validation criterion, e.g., "No HIGH/CRITICAL findings in security scans"]
+- [ ] [Security validation criterion, e.g., "Encryption enabled for all data stores"]
+- [ ] [Security validation criterion, e.g., "IAM policies follow least privilege"]
+
+### Performance Validation
+
+- [ ] [Performance validation criterion, e.g., "Load testing meets throughput requirements"]
+- [ ] [Performance validation criterion, e.g., "Auto-scaling tested and working"]
+- [ ] [Performance validation criterion, e.g., "Latency targets achieved under load"]
+
+### Operational Validation
+
+- [ ] [Operational validation criterion, e.g., "Monitoring dashboards configured"]
+- [ ] [Operational validation criterion, e.g., "Alerts routing correctly"]
+- [ ] [Operational validation criterion, e.g., "Backup/restore validated"]
+
+## Assumptions *(include if making assumptions)*
+
+<!--
+  ACTION REQUIRED: Document any assumptions made when creating this specification.
+-->
+
+- [Assumption, e.g., "Assume 20% monthly traffic growth"]
+- [Assumption, e.g., "Assume read-heavy workload (80% reads, 20% writes)"]
+- [Assumption, e.g., "Assume business hours 6 AM - 10 PM EST"]
+
+## Out of Scope *(include if explicitly excluding items)*
+
+<!--
+  ACTION REQUIRED: Clearly state what this infrastructure will NOT include.
+-->
+
+- [Out of scope item, e.g., "Application code deployment (handled separately)"]
+- [Out of scope item, e.g., "Email service (using existing corporate email)"]
+- [Out of scope item, e.g., "Legacy system migration (phase 2 project)"]
+
+## Dependencies *(include if external dependencies exist)*
+
+<!--
+  ACTION REQUIRED: List external systems or services this infrastructure depends on.
+-->
+
+- [External dependency, e.g., "Corporate Active Directory for authentication"]
+- [External dependency, e.g., "Existing VPN connection to datacenter"]
+- [External dependency, e.g., "Third-party monitoring service (Datadog)"]
+
+## Notes
+
+- [Additional note or context]
+- [Additional note or context]
+
+---
+
+**Specification Quality Checklist**:
+- [ ] No implementation details (cloud providers, specific tools)
+- [ ] All requirements are testable and unambiguous
+- [ ] Success criteria are measurable
+- [ ] Cost constraints clearly defined
+- [ ] Compliance requirements specified (if applicable)

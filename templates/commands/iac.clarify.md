@@ -41,18 +41,18 @@ Execution steps:
    - Lifecycle/state transitions
    - Data volume / scale assumptions
 
-   Interaction & UX Flow:
-   - Critical user journeys / sequences
-   - Error/empty/loading states
-   - Accessibility or localization notes
+   Infrastructure Operations & Deployment Flow:
+   - Critical deployment sequences and dependencies (e.g., VPC before subnets, network before compute)
+   - Failure states and rollback procedures
+   - Disaster recovery and backup restore procedures
 
    Non-Functional Quality Attributes:
-   - Performance (latency, throughput targets)
-   - Scalability (horizontal/vertical, limits)
-   - Reliability & availability (uptime, recovery expectations)
-   - Observability (logging, metrics, tracing signals)
-   - Security & privacy (authN/Z, data protection, threat assumptions)
-   - Compliance / regulatory constraints (if any)
+   - Performance (e.g., network bandwidth requirements, IOPS targets, compute capacity)
+   - Scalability (e.g., auto-scaling parameters, instance limits, regional expansion)
+   - Reliability & availability (e.g., RTO/RPO targets, multi-zone deployment, backup frequency)
+   - Observability (e.g., infrastructure monitoring, log aggregation, alerting thresholds)
+   - Security & compliance (e.g., encryption requirements, network isolation, regulatory constraints like HIPAA/PCI-DSS)
+   - Cost governance (e.g., budget limits, resource tagging, cost allocation)
 
    Integration & External Dependencies:
    - External services/APIs and failure modes
@@ -113,6 +113,15 @@ Execution steps:
        | B | <Option B description> |
        | C | <Option C description> (add D/E as needed up to 5) |
        | Short | Provide a different short answer (<=5 words) (Include only if free-form alternative is appropriate) |
+
+       Example for infrastructure:
+       **Recommended:** Option A - Balances availability with cost, suitable for most production workloads per IBM Cloud best practices
+
+       | Option | Description |
+       |--------|-------------|
+       | A | IBM Cloud VPC with private and public subnets across multiple zones |
+       | B | Classic infrastructure with VLANs (legacy approach) |
+       | C | IBM Cloud Code Engine (serverless platform, no VPC needed) |
 
        - After the table, add: `You can reply with the option letter (e.g., "A"), accept the recommendation by saying "yes" or "recommended", or provide your own short answer.`
     - For short‑answer style (no meaningful discrete options):

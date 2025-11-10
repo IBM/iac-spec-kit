@@ -1,10 +1,6 @@
 ---
-description: Create or update the project constitution from interactive or provided principle inputs, ensuring all dependent templates stay in sync
+description: Create or update the infrastructure project constitution from interactive or provided principle inputs, ensuring all dependent templates stay in sync
 ---
-
-## Infrastructure-as-Code Context
-
-**IMPORTANT**: This is the IaC edition of Spec Kit for Terraform and cloud infrastructure workflows. When discussing or updating principles, remember this project focuses on infrastructure provisioning, not application development.
 
 ## User Input
 
@@ -44,7 +40,7 @@ Follow this execution flow:
    - Read `/templates/plan-template.md` and ensure any "Constitution Check" or rules align with updated principles.
    - Read `/templates/spec-template.md` for scope/requirements alignment—update if constitution adds/removes mandatory sections or constraints.
    - Read `/templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
-   - Read each command file in `/templates/commands/*.md` (including this one) to verify no outdated references (agent-specific names like CLAUDE only) remain when generic guidance is required.
+   - Read each command file in `/templates/commands/*.md` (including this one) to verify no outdated references remain when generic guidance is required.
    - Read any runtime guidance docs (e.g., `README.md`, `docs/quickstart.md`, or agent-specific guidance files if present). Update references to principles changed.
 
 5. Produce a Sync Impact Report (prepend as an HTML comment at top of the constitution file after update):

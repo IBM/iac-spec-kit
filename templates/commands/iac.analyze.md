@@ -112,7 +112,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 - Terminology drift (same concept named differently across files)
 - Data entities referenced in plan but absent in spec (or vice versa)
 - Task ordering contradictions (e.g., integration tasks before foundational setup tasks without dependency note)
-- Conflicting requirements (e.g., one requires Next.js while other specifies Vue)
+- Conflicting requirements (e.g., one specifies IBM Cloud VPC while other requires classic infrastructure)
 
 ### 5. Severity Assignment
 

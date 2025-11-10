@@ -22,7 +22,7 @@ Auto-generated from all feature plans. Last updated: [DATE]
 
 [ONLY COMMANDS FOR ACTIVE TECHNOLOGIES]
 
-# FOR INFRASTRUCTURE PROJECTS (Terraform):
+# Terraform commands:
 # - terraform init: Initialize backend and download providers
 # - terraform validate: Check syntax and configuration validity
 # - terraform fmt: Format code to canonical style
