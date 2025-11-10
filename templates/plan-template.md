@@ -3,7 +3,7 @@
 **Branch**: `[###-infrastructure-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Infrastructure specification from `/specs/[###-infrastructure-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit.iac.plan` command. See `.specify/templates/commands/iac.plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/iac.plan` command. See `.specify/templates/commands/iac.plan.md` for the execution workflow.
 
 ## Summary
 
@@ -40,7 +40,7 @@
   Use this section to document provider-specific infrastructure design.
   The spec.md should remain technology-agnostic; cloud-specific details belong here.
 
-  During /speckit.iac.implement, AI agents will read this section to generate IaC files.
+  During /iac.implement, AI agents will read this section to generate IaC files.
 
   This content will be expanded into architecture.md in Phase 1.
 -->

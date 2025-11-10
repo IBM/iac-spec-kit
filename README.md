@@ -18,7 +18,7 @@ This project builds upon the foundational work of the [GitHub Spec Kit](https://
 
 This implementation adds infrastructure-focused specializations:
 
-- **Infrastructure command namespace**: All commands use `.iac` prefix (`/speckit.iac.specify`, `/speckit.iac.plan`, `/speckit.iac.tasks`)
+- **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.specify`, `/iac.plan`, `/iac.tasks`)
 - **Terraform-centric templates**: Templates designed for cloud resources, networking, security, and compliance
 - **Cloud provider integration**: Examples and patterns for AWS, Azure, GCP, and IBM Cloud
 - **Infrastructure constitutional principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
@@ -111,36 +111,36 @@ uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME
 
 ### 2. Establish project principles
 
-Launch your AI assistant in the project directory. The `/speckit.iac.*` commands are available in the assistant.
+Launch your AI assistant in the project directory. The `/iac.*` commands are available in the assistant.
 
-Use the **`/speckit.iac.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+Use the **`/iac.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```bash
-/speckit.iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence requirements
+/iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence requirements
 ```
 
 ### 3. Create the spec
 
-Use the **`/speckit.iac.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
 ```bash
-/speckit.iac.specify Provision a multi-region AWS VPC infrastructure with public and private subnets across three availability zones. Include NAT gateways for private subnet internet access, VPC peering between regions for cross-region communication, and security groups configured for web tier, app tier, and database tier traffic isolation.
+/iac.specify Provision a multi-region AWS VPC infrastructure with public and private subnets across three availability zones. Include NAT gateways for private subnet internet access, VPC peering between regions for cross-region communication, and security groups configured for web tier, app tier, and database tier traffic isolation.
 ```
 
 ### 4. Create a technical implementation plan
 
-Use the **`/speckit.iac.plan`** command to provide your tech stack and architecture choices.
+Use the **`/iac.plan`** command to provide your tech stack and architecture choices.
 
 ```bash
-/speckit.iac.plan Use Terraform 1.5+ with AWS provider. Store state in S3 with DynamoDB locking. Structure modules for networking (VPC, subnets, gateways), security (security groups, NACLs), and peering. Use Terraform workspaces for environment separation (dev, staging, prod). Output VPC IDs, subnet IDs, and security group IDs for downstream consumption.
+/iac.plan Use Terraform 1.5+ with AWS provider. Store state in S3 with DynamoDB locking. Structure modules for networking (VPC, subnets, gateways), security (security groups, NACLs), and peering. Use Terraform workspaces for environment separation (dev, staging, prod). Output VPC IDs, subnet IDs, and security group IDs for downstream consumption.
 ```
 
 ### 5. Break down into tasks
 
-Use **`/speckit.iac.tasks`** to create an actionable task list from your implementation plan.
+Use **`/iac.tasks`** to create an actionable task list from your implementation plan.
 
 ```bash
-/speckit.iac.tasks
+/iac.tasks
 ```
 
 ### 6. Execute implementation
@@ -254,10 +254,10 @@ Essential commands for the Spec-Driven Development workflow:
 
 | Command                  | Description                                                           |
 |--------------------------|-----------------------------------------------------------------------|
-| `/speckit.iac.constitution`  | Create or update project governing principles and development guidelines |
-| `/speckit.iac.specify`       | Define what you want to build (requirements and user stories)        |
-| `/speckit.iac.plan`          | Create technical implementation plans with your chosen tech stack     |
-| `/speckit.iac.tasks`         | Generate actionable task lists for implementation                     |
+| `/iac.constitution`  | Create or update project governing principles and development guidelines |
+| `/iac.specify`       | Define what you want to build (requirements and user stories)        |
+| `/iac.plan`          | Create technical implementation plans with your chosen tech stack     |
+| `/iac.tasks`         | Generate actionable task lists for implementation                     |
 | `/speckit.implement`     | Execute all tasks to build the feature according to the plan         |
 
 #### Optional Commands
@@ -266,9 +266,9 @@ Additional commands for enhanced quality and validation:
 
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
-| `/speckit.iac.clarify`   | Clarify underspecified areas (recommended before `/speckit.iac.plan`; formerly `/quizme`) |
-| `/speckit.iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/speckit.iac.tasks`, before `/speckit.iac.implement`) |
-| `/speckit.iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
+| `/iac.clarify`   | Clarify underspecified areas (recommended before `/iac.plan`; formerly `/quizme`) |
+| `/iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/iac.tasks`, before `/iac.implement`) |
+| `/iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
 ### Infrastructure-as-Code Projects
 
@@ -285,7 +285,7 @@ IAC Spec Kit specializes in infrastructure projects using Terraform with the sam
 
 #### Infrastructure Architecture Section
 
-When using `/speckit.iac.plan` for infrastructure projects, your `plan.md` will include an **Infrastructure Architecture** section with:
+When using `/iac.plan` for infrastructure projects, your `plan.md` will include an **Infrastructure Architecture** section with:
 
 - **Cloud Provider Selection**: Which provider and why (AWS, Azure, GCP, etc.)
 - **Compute Resources**: VMs, containers, serverless, load balancers
@@ -299,13 +299,13 @@ When using `/speckit.iac.plan` for infrastructure projects, your `plan.md` will 
 
 ```bash
 # 1. Create infrastructure specification (technology-agnostic)
-/speckit.iac.specify Build production web app infrastructure with database, caching, and auto-scaling
+/iac.specify Build production web app infrastructure with database, caching, and auto-scaling
 
 # 2. Create technical plan (specify AWS, document Infrastructure Architecture)
-/speckit.iac.plan We'll use AWS with ECS Fargate, RDS PostgreSQL, ElastiCache Redis, and Application Load Balancer
+/iac.plan We'll use AWS with ECS Fargate, RDS PostgreSQL, ElastiCache Redis, and Application Load Balancer
 
 # 3. Generate tasks (includes terraform validation checkpoints)
-/speckit.iac.tasks
+/iac.tasks
 
 # 4. Implement (AI generates Terraform .tf files)
 /speckit.implement
@@ -317,7 +317,7 @@ When using `/speckit.iac.plan` for infrastructure projects, your `plan.md` will 
 
 | Variable         | Description                                                                                    |
 |------------------|------------------------------------------------------------------------------------------------|
-| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/speckit.iac.plan` or follow-up commands. |
+| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
 
 ## 📚 Core philosophy
 
@@ -444,19 +444,19 @@ Go to the project folder and run your AI agent. In our example, we're using `cla
 
 ![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
 
-You will know that things are configured correctly if you see the `/speckit.iac.constitution`, `/speckit.iac.specify`, `/speckit.iac.plan`, `/speckit.iac.tasks`, and `/speckit.implement` commands available.
+You will know that things are configured correctly if you see the `/iac.constitution`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/speckit.implement` commands available.
 
-The first step should be establishing your project's governing principles using the `/speckit.iac.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+The first step should be establishing your project's governing principles using the `/iac.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
 ```text
-/speckit.iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence. Include governance for how these principles should guide technical decisions and implementation choices.
+/iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
 This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create project specifications
 
-With your project principles established, you can now create the functional specifications. Use the `/speckit.iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
+With your project principles established, you can now create the functional specifications. Use the `/iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
 
 >[!IMPORTANT]
 >Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
@@ -502,12 +502,12 @@ You should run the structured clarification workflow **before** creating a techn
 
 Preferred order:
 
-1. Use `/speckit.iac.clarify` (structured) – sequential, coverage-based questioning that records answers in a Clarifications section.
+1. Use `/iac.clarify` (structured) – sequential, coverage-based questioning that records answers in a Clarifications section.
 2. Optionally follow up with ad-hoc free-form refinement if something still feels vague.
 
 If you intentionally want to skip clarification (e.g., spike or exploratory prototype), explicitly state that so the agent doesn't block on missing clarifications.
 
-Example free-form refinement prompt (after `/speckit.iac.clarify` if still needed):
+Example free-form refinement prompt (after `/iac.clarify` if still needed):
 
 ```text
 For the database services, we need PostgreSQL 14+ with point-in-time recovery enabled. Backup retention should be 30 days for production and 7 days for non-production environments. The database should be deployed in a private subnet with no direct internet access.
@@ -523,7 +523,7 @@ It's important to use the interaction with your AI agent as an opportunity to cl
 
 ### **STEP 4:** Generate a plan
 
-You can now be specific about the tech stack and other technical requirements. You can use the `/speckit.iac.plan` command that is built into the project template with a prompt like this:
+You can now be specific about the tech stack and other technical requirements. You can use the `/iac.plan` command that is built into the project template with a prompt like this:
 
 ```text
 We will use AWS as the cloud provider. For the Kubernetes cluster, use Amazon EKS with managed node groups. Database services will use Amazon RDS for PostgreSQL with Multi-AZ deployment. Object storage will use Amazon S3 with versioning enabled. Use CloudFront for the CDN. Implement infrastructure using Terraform 1.5+ with remote state stored in S3 with DynamoDB locking. Structure the code into reusable modules for networking, compute, database, and monitoring. Use AWS Systems Manager Parameter Store for secrets management.
@@ -588,12 +588,12 @@ You can also ask your AI agent (if you have the [GitHub CLI](https://docs.github
 >[!NOTE]
 >Before you have the agent implement it, it's also worth prompting your AI agent to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask your AI agent to resolve them. Ensure that your AI agent follows the [constitution](memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
 
-### **STEP 6:** Generate task breakdown with /speckit.iac.tasks
+### **STEP 6:** Generate task breakdown with /iac.tasks
 
-With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/speckit.iac.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
+With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/iac.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
 
 ```text
-/speckit.iac.tasks
+/iac.tasks
 ```
 
 This step creates a `tasks.md` file in your feature specification directory that contains:

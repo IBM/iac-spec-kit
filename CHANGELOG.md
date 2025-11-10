@@ -13,4 +13,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **For the complete changelog history prior to the IAC fork, please refer to the [original GitHub Spec Kit changelog](https://github.com/github/spec-kit/blob/main/CHANGELOG.md).**
 
-IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns. All infrastructure commands use the `.iac` namespace (e.g., `/speckit.iac.specify`, `/speckit.iac.plan`, `/speckit.iac.tasks`).
+IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns. All infrastructure commands use the `.iac` namespace (e.g., `/iac.specify`, `/iac.plan`, `/iac.tasks`).

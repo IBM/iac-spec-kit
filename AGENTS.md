@@ -369,7 +369,7 @@ Different agents use different argument placeholders:
 3. **File generation**: Verify correct directory structure and files
 4. **Command validation**: Ensure generated commands work with the agent
 5. **Context update**: Test agent context update scripts
-6. **Infrastructure validation**: Test with infrastructure-specific commands (`/speckit.iac.*`)
+6. **Infrastructure validation**: Test with infrastructure-specific commands (`/iac.*`)
 
 ## Common Pitfalls
 
@@ -396,7 +396,7 @@ When adding new agents:
 
 When working with IAC Spec Kit:
 
-- **Command namespace**: All infrastructure commands use the `.iac` namespace (`/speckit.iac.specify`, `/speckit.iac.plan`, etc.)
+- **Command namespace**: All infrastructure commands use the `.iac` namespace (`/iac.specify`, `/iac.plan`, etc.)
 - **Terraform integration**: Agents should support Terraform validation commands (`terraform validate`, `terraform fmt`, `tflint`)
 - **Cloud provider CLIs**: Consider integration with cloud provider CLIs (AWS CLI, Azure CLI, gcloud, IBM Cloud CLI)
 - **State management**: Agents should understand Terraform state management concepts

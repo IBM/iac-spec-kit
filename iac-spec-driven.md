@@ -424,14 +424,14 @@ IAC Spec Kit extends the core SDD methodology with infrastructure-focused capabi
 
 All infrastructure commands use the `.iac` namespace to distinguish them from general software development commands:
 
-- `/speckit.iac.specify` - Create infrastructure specifications with cloud resource requirements
-- `/speckit.iac.plan` - Generate infrastructure implementation plans with Terraform modules
-- `/speckit.iac.tasks` - Create infrastructure deployment and validation task lists
-- `/speckit.iac.checklist` - Generate infrastructure compliance and security checklists
-- `/speckit.iac.implement` - Execute infrastructure provisioning with validation
-- `/speckit.iac.analyze` - Analyze infrastructure artifacts for consistency and compliance
-- `/speckit.iac.clarify` - Clarify infrastructure requirements and constraints
-- `/speckit.iac.constitution` - Review infrastructure development principles
+- `/iac.specify` - Create infrastructure specifications with cloud resource requirements
+- `/iac.plan` - Generate infrastructure implementation plans with Terraform modules
+- `/iac.tasks` - Create infrastructure deployment and validation task lists
+- `/iac.checklist` - Generate infrastructure compliance and security checklists
+- `/iac.implement` - Execute infrastructure provisioning with validation
+- `/iac.analyze` - Analyze infrastructure artifacts for consistency and compliance
+- `/iac.clarify` - Clarify infrastructure requirements and constraints
+- `/iac.constitution` - Review infrastructure development principles
 
 #### Infrastructure specification example
 
@@ -450,13 +450,13 @@ Total: ~12-15 hours of infrastructure work
 **IAC-SDD Approach:**
 ```bash
 # Step 1: Create infrastructure specification (5 minutes)
-/speckit.iac.specify Multi-tier web application with VPC, load balancer, auto-scaling, and RDS database
+/iac.specify Multi-tier web application with VPC, load balancer, auto-scaling, and RDS database
 
 # Step 2: Generate infrastructure implementation plan (5 minutes)
-/speckit.iac.plan AWS VPC with public/private subnets, ALB, EC2 Auto Scaling, RDS MySQL
+/iac.plan AWS VPC with public/private subnets, ALB, EC2 Auto Scaling, RDS MySQL
 
 # Step 3: Generate executable infrastructure tasks (5 minutes)
-/speckit.iac.tasks
+/iac.tasks
 ```
 
 This generates:
