@@ -292,10 +292,10 @@ echo "✅ Done"
 
 **Quick Tips:**
 
-- **Extension-based agents**: Add to the `extensions` array in `devcontainer.json`
-- **CLI-based agents**: Add installation scripts to `post-create.sh`
+- **Extension-based agents**: Add to the appropriate configuration files
+- **CLI-based agents**: Ensure installation instructions are documented
 - **Hybrid agents**: May require both extension and CLI installation
-- **Test thoroughly**: Ensure installations work in the devcontainer environment
+- **Test thoroughly**: Ensure installations work in the development environment
 
 ## Agent Categories
 

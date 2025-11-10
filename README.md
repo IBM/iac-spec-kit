@@ -1,25 +1,34 @@
 <div align="center">
-    <img src="./media/logo_small.webp" alt="Spec Kit Logo"/>
+    <img src="./media/logo_small.webp" alt="IAC Spec Kit Logo"/>
     <h1>🌱 IAC Spec Kit</h1>
-    <h3><em>Build high-quality infrastructure faster with Terraform and cloud resources.</em></h3>
+    <h3><em>Infrastructure as Code implementation of Spec-Driven Development</em></h3>
 </div>
 
-> **Note**: This is a domain-specific implementation of the [spec-kit pattern](https://github.com/github/spec-kit) optimized for Infrastructure as Code workflows. While the original spec kit focuses on software development, IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns.
+## About this project
 
-## What makes IAC Spec Kit different
+**IAC Spec Kit** is a specialized implementation of the [Specification-Driven Development methodology](https://github.com/github/spec-kit) created by GitHub, adapted specifically for Infrastructure as Code workflows with Terraform and cloud providers.
 
-This is not a fork but rather a specialized implementation of the spec-driven development pattern for infrastructure:
+### Attribution
 
-- **Infrastructure-focused commands**: All slash commands use `.iac` namespace (`/speckit.iac.specify`, `/speckit.iac.plan`, `/speckit.iac.tasks`, etc.)
-- **Terraform-centric templates**: Documentation and templates use Terraform modules, cloud resources, and infrastructure scenarios
-- **Cloud provider coverage**: Examples span AWS, Azure, GCP, and IBM Cloud
-- **Infrastructure constitutional principles**: Governance frameworks specific to cloud infrastructure, security, compliance, and cost management
-- **Cloud resource specifications**: Templates designed for networking, compute, storage, and security infrastructure
+This project builds upon the foundational work of the [GitHub Spec Kit](https://github.com/github/spec-kit) team. The core Spec-Driven Development methodology, workflow patterns, and constitutional principles were created by GitHub. We extend our gratitude to the original authors for their innovative approach to software development.
+
+**For the complete Spec-Driven Development methodology, please refer to the [original GitHub Spec Kit documentation](https://github.com/github/spec-kit).**
+
+### IAC-specific contributions
+
+This implementation adds infrastructure-focused specializations:
+
+- **Infrastructure command namespace**: All commands use `.iac` prefix (`/speckit.iac.specify`, `/speckit.iac.plan`, `/speckit.iac.tasks`)
+- **Terraform-centric templates**: Templates designed for cloud resources, networking, security, and compliance
+- **Cloud provider integration**: Examples and patterns for AWS, Azure, GCP, and IBM Cloud
+- **Infrastructure constitutional principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
+- **Terraform validation workflows**: Integration with `terraform validate`, `terraform fmt`, and `tflint`
+- **Cloud CLI integration**: Support for AWS CLI, Azure CLI, gcloud, and IBM Cloud CLI
 
 ---
 
 <p align="center">
-    <strong>An open source toolkit that allows you to focus on infrastructure scenarios and predictable cloud deployments instead of manually crafting every Terraform module from scratch.</strong>
+    <strong>Focus on infrastructure requirements and let AI agents generate production-ready Terraform configurations.</strong>
 </p>
 
 <p align="center">
@@ -54,9 +63,9 @@ This is not a fork but rather a specialized implementation of the spec-driven de
 
 ## 🤔 What is Spec-Driven Development?
 
-Spec-Driven Development **flips the script** on traditional infrastructure provisioning. For decades, infrastructure code has been written directly — specifications were just documentation we created after the fact. Spec-Driven Development changes this: **specifications become executable**, directly generating working Terraform configurations rather than just guiding them.
+Spec-Driven Development is a methodology created by GitHub that treats specifications as executable artifacts rather than static documentation. **For a complete explanation of the methodology, see the [original GitHub Spec Kit documentation](https://github.com/github/spec-kit).**
 
-**Specialized for Infrastructure as Code**: Use a structured workflow for Terraform infrastructure projects. Document cloud resources, networking, and security in specifications, then let AI agents generate production-ready infrastructure code.
+**IAC Spec Kit adaptation**: This implementation applies the Spec-Driven Development methodology specifically to Infrastructure as Code workflows. Document cloud resources, networking, and security requirements in specifications, then let AI agents generate production-ready Terraform configurations.
 
 ## ⚡ Get Started
 
@@ -142,13 +151,9 @@ Use **`/speckit.implement`** to execute all tasks and build your feature accordi
 /speckit.implement
 ```
 
-For detailed step-by-step instructions, see our [comprehensive guide](./spec-driven.md).
+For detailed step-by-step instructions, see our [IAC-specific guide](./iac-spec-driven.md).
 
-## 📽️ Video Overview
-
-Want to see Spec Kit in action? Watch our [video overview](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)!
-
-[![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)
+For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
 
 ## 🤖 Supported AI Agents
 
@@ -314,14 +319,16 @@ When using `/speckit.iac.plan` for infrastructure projects, your `plan.md` will 
 |------------------|------------------------------------------------------------------------------------------------|
 | `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/speckit.iac.plan` or follow-up commands. |
 
-## 📚 Core Philosophy
+## 📚 Core philosophy
 
-Spec-Driven Development is a structured process that emphasizes:
+The Spec-Driven Development methodology (created by GitHub) emphasizes intent-driven development, rich specification creation, and multi-step refinement. **For the complete philosophy, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).**
 
-- **Intent-driven development** where specifications define the "*what*" before the "*how*"
-- **Rich specification creation** using guardrails and organizational principles
-- **Multi-step refinement** rather than one-shot code generation from prompts
-- **Heavy reliance** on advanced AI model capabilities for specification interpretation
+IAC Spec Kit applies these principles to infrastructure provisioning with additional focus on:
+
+- **Cloud resource specifications**: Technology-agnostic infrastructure requirements
+- **Terraform module design**: Reusable, composable infrastructure components
+- **Security and compliance**: Built-in governance and policy validation
+- **Multi-cloud patterns**: Portable infrastructure specifications across cloud providers
 
 ## 🌟 Development Phases
 
@@ -332,9 +339,9 @@ Spec-Driven Development is a structured process that emphasizes:
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add infrastructure iteratively</li><li>Modernize legacy infrastructure</li><li>Adapt processes</li></ul> |
 | **Infrastructure-as-Code** | Infrastructure provisioning | <ul><li>Specify cloud resources technology-agnostically</li><li>Document Infrastructure Architecture</li><li>Generate Terraform configurations</li><li>Validate with terraform validate/fmt/tflint</li></ul> |
 
-## 🎯 Experimental Goals
+## 🎯 IAC-specific goals
 
-Our research and experimentation focus on:
+This implementation focuses on:
 
 ### Technology independence
 
@@ -369,10 +376,12 @@ Our research and experimentation focus on:
 
 If you encounter issues with an agent, please open an issue so we can refine the integration.
 
-## 📖 Learn More
+## 📖 Learn more
 
-- **[Complete Spec-Driven Development Methodology](./spec-driven.md)** - Deep dive into the full process
-- **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide
+- **[GitHub Spec Kit](https://github.com/github/spec-kit)** - Original Spec-Driven Development methodology and documentation
+- **[IAC Spec-Driven Development](./iac-spec-driven.md)** - Infrastructure-specific adaptations and examples
+- **[Agent Integration Guide](./AGENTS.md)** - How to add support for new AI agents
+- **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide for infrastructure projects
 
 ---
 
@@ -651,18 +660,22 @@ echo "Cleaning up..."
 rm gcm-linux_amd64.2.6.1.deb
 ```
 
-## 👥 Maintainers
-
-- Den Delimarsky ([@localden](https://github.com/localden))
-- John Lam ([@jflam](https://github.com/jflam))
-
 ## 💬 Support
 
-For support, please open a [GitHub issue](https://github.com/github/spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development for Infrastructure as Code.
+For support, please open a [GitHub issue](https://github.com/ibm/iac-spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development for Infrastructure as Code.
 
 ## 🙏 Acknowledgements
 
-This project is heavily influenced by and based on the work and research of [John Lam](https://github.com/jflam) and the [GitHub Spec Kit](https://github.com/github/spec-kit) project.
+This project is built upon the [GitHub Spec Kit](https://github.com/github/spec-kit) methodology created by:
+- [John Lam](https://github.com/jflam)
+- [Den Delimarsky](https://github.com/localden)
+- The GitHub Spec Kit community
+
+We are grateful for their foundational work in Spec-Driven Development. This implementation adapts their methodology specifically for Infrastructure as Code workflows.
+
+### Original work
+
+The core Spec-Driven Development methodology, constitutional principles, and workflow patterns are the intellectual property of GitHub and the original Spec Kit authors. Please refer to the [original GitHub Spec Kit repository](https://github.com/github/spec-kit) for the complete methodology and documentation.
 
 ## 📄 License
 
