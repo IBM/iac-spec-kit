@@ -11,18 +11,18 @@ scripts:
 
 **NOT for verification/testing**:
 
-- ❌ NOT "Verify the button clicks correctly"
-- ❌ NOT "Test error handling works"
-- ❌ NOT "Confirm the API returns 200"
+- ❌ NOT "Verify the VPC deploys successfully"
+- ❌ NOT "Test the load balancer routes traffic correctly"
+- ❌ NOT "Confirm the database accepts connections"
 - ❌ NOT checking if code/implementation matches the spec
 
 **FOR requirements quality validation**:
 
-- ✅ "Are visual hierarchy requirements defined for all card types?" (completeness)
-- ✅ "Is 'prominent display' quantified with specific sizing/positioning?" (clarity)
-- ✅ "Are hover state requirements consistent across all interactive elements?" (consistency)
-- ✅ "Are accessibility requirements defined for keyboard navigation?" (coverage)
-- ✅ "Does the spec define what happens when logo image fails to load?" (edge cases)
+- ✅ "Are network segmentation requirements defined for all tier boundaries?" (completeness)
+- ✅ "Is 'high availability' quantified with specific RTO/RPO values?" (clarity)
+- ✅ "Are security group requirements consistent across all application tiers?" (consistency)
+- ✅ "Are disaster recovery requirements defined for all stateful resources?" (coverage)
+- ✅ "Does the spec define what happens when a zone becomes unavailable?" (edge cases)
 
 **Metaphor**: If your spec is code written in English, the checklist is its unit test suite. You're testing whether the requirements are well-written, complete, unambiguous, and ready for implementation - NOT whether the implementation works.
 
@@ -120,18 +120,18 @@ You **MUST** consider the user input before proceeding (if not empty).
    **HOW TO WRITE CHECKLIST ITEMS - "Unit Tests for English"**:
 
    ❌ **WRONG** (Testing implementation):
-   - "Verify landing page displays 3 episode cards"
-   - "Test hover states work on desktop"
-   - "Confirm logo click navigates home"
+   - "Verify VPC creates 3 subnets across availability zones"
+   - "Test auto-scaling adds compute instances under load"
+   - "Confirm load balancer distributes traffic evenly"
 
    ✅ **CORRECT** (Testing requirements quality):
-   - "Are the exact number and layout of featured episodes specified?" [Completeness]
-   - "Is 'prominent display' quantified with specific sizing/positioning?" [Clarity]
-   - "Are hover state requirements consistent across all interactive elements?" [Consistency]
-   - "Are keyboard navigation requirements defined for all interactive UI?" [Coverage]
-   - "Is the fallback behavior specified when logo image fails to load?" [Edge Cases]
-   - "Are loading states defined for asynchronous episode data?" [Completeness]
-   - "Does the spec define visual hierarchy for competing UI elements?" [Clarity]
+   - "Are the exact number and availability zone distribution of subnets specified?" [Completeness]
+   - "Is 'high availability' quantified with specific RTO/RPO targets?" [Clarity]
+   - "Are security requirements consistent across all tier boundaries?" [Consistency]
+   - "Are disaster recovery requirements defined for all stateful resources?" [Coverage]
+   - "Is the failover behavior specified when a zone becomes unavailable?" [Edge Cases]
+   - "Are scaling thresholds defined for auto-scaling compute groups?" [Completeness]
+   - "Does the spec define resource dependencies and deployment ordering?" [Clarity]
 
    **ITEM STRUCTURE**:
    Each item should follow this pattern:
@@ -144,27 +144,27 @@ You **MUST** consider the user input before proceeding (if not empty).
    **EXAMPLES BY QUALITY DIMENSION**:
 
    Completeness:
-   - "Are error handling requirements defined for all API failure modes? [Gap]"
-   - "Are accessibility requirements specified for all interactive elements? [Completeness]"
-   - "Are mobile breakpoint requirements defined for responsive layouts? [Gap]"
+   - "Are failure handling requirements defined for all zone outage scenarios? [Gap]"
+   - "Are compliance requirements specified for all data storage resources? [Completeness]"
+   - "Are scaling requirements defined for peak load conditions? [Gap]"
 
    Clarity:
-   - "Is 'fast loading' quantified with specific timing thresholds? [Clarity, Spec §NFR-2]"
-   - "Are 'related episodes' selection criteria explicitly defined? [Clarity, Spec §FR-5]"
-   - "Is 'prominent' defined with measurable visual properties? [Ambiguity, Spec §FR-4]"
+   - "Is 'high performance' quantified with specific IOPS/bandwidth targets? [Clarity, Spec §NFR-2]"
+   - "Are 'critical workloads' classification criteria explicitly defined? [Clarity, Spec §FR-5]"
+   - "Is 'highly available' defined with measurable uptime SLOs? [Ambiguity, Spec §FR-4]"
 
    Consistency:
-   - "Do navigation requirements align across all pages? [Consistency, Spec §FR-10]"
-   - "Are card component requirements consistent between landing and detail pages? [Consistency]"
+   - "Do network security requirements align across all tiers? [Consistency, Spec §FR-10]"
+   - "Are tagging requirements consistent between production and non-production environments? [Consistency]"
 
    Coverage:
-   - "Are requirements defined for zero-state scenarios (no episodes)? [Coverage, Edge Case]"
-   - "Are concurrent user interaction scenarios addressed? [Coverage, Gap]"
-   - "Are requirements specified for partial data loading failures? [Coverage, Exception Flow]"
+   - "Are requirements defined for zero-capacity scenarios (no compute instances)? [Coverage, Edge Case]"
+   - "Are concurrent deployment scenarios addressed? [Coverage, Gap]"
+   - "Are requirements specified for partial infrastructure provisioning failures? [Coverage, Exception Flow]"
 
    Measurability:
-   - "Are visual hierarchy requirements measurable/testable? [Acceptance Criteria, Spec §FR-1]"
-   - "Can 'balanced visual weight' be objectively verified? [Measurability, Spec §FR-2]"
+   - "Are tier separation requirements measurable/testable? [Acceptance Criteria, Spec §FR-1]"
+   - "Can 'proper network isolation' be objectively verified? [Measurability, Spec §FR-2]"
 
    **Scenario Classification & Coverage** (Requirements Quality Focus):
    - Check if requirements exist for: Primary, Alternate, Exception/Error, Recovery, Non-Functional scenarios
@@ -224,26 +224,26 @@ To avoid clutter, use descriptive types and clean up obsolete checklists when do
 
 ## Example Checklist Types & Sample Items
 
-**UX Requirements Quality:** `ux.md`
+**Infrastructure Architecture Quality:** `architecture.md`
 
 Sample items (testing the requirements, NOT the implementation):
 
-- "Are visual hierarchy requirements defined with measurable criteria? [Clarity, Spec §FR-1]"
-- "Is the number and positioning of UI elements explicitly specified? [Completeness, Spec §FR-1]"
-- "Are interaction state requirements (hover, focus, active) consistently defined? [Consistency]"
-- "Are accessibility requirements specified for all interactive elements? [Coverage, Gap]"
-- "Is fallback behavior defined when images fail to load? [Edge Case, Gap]"
-- "Can 'prominent display' be objectively measured? [Measurability, Spec §FR-4]"
+- "Are tier separation requirements defined with measurable network isolation criteria? [Clarity, Spec §FR-1]"
+- "Is the number and distribution of availability zones explicitly specified? [Completeness, Spec §FR-1]"
+- "Are security group requirements consistently defined across all tiers? [Consistency]"
+- "Are disaster recovery requirements specified for all stateful resources? [Coverage, Gap]"
+- "Is failover behavior defined when a zone becomes unavailable? [Edge Case, Gap]"
+- "Can 'high availability' be objectively measured with RTO/RPO values? [Measurability, Spec §FR-4]"
 
-**API Requirements Quality:** `api.md`
+**Cloud Provider Integration Quality:** `cloud-api.md`
 
 Sample items:
 
-- "Are error response formats specified for all failure scenarios? [Completeness]"
-- "Are rate limiting requirements quantified with specific thresholds? [Clarity]"
-- "Are authentication requirements consistent across all endpoints? [Consistency]"
-- "Are retry/timeout requirements defined for external dependencies? [Coverage, Gap]"
-- "Is versioning strategy documented in requirements? [Gap]"
+- "Are cloud provider API quotas and limits documented for all services? [Completeness]"
+- "Are API timeout requirements quantified for infrastructure provisioning operations? [Clarity]"
+- "Are authentication methods consistent across all cloud provider integrations? [Consistency]"
+- "Are retry/backoff requirements defined for API throttling scenarios? [Coverage, Gap]"
+- "Is the cloud provider SDK version pinning strategy documented? [Gap]"
 
 **Performance Requirements Quality:** `performance.md`
 
@@ -270,21 +270,21 @@ Sample items:
 **❌ WRONG - These test implementation, not requirements:**
 
 ```markdown
-- [ ] CHK001 - Verify landing page displays 3 episode cards [Spec §FR-001]
-- [ ] CHK002 - Test hover states work correctly on desktop [Spec §FR-003]
-- [ ] CHK003 - Confirm logo click navigates to home page [Spec §FR-010]
-- [ ] CHK004 - Check that related episodes section shows 3-5 items [Spec §FR-005]
+- [ ] CHK001 - Verify VPC deploys with 3 subnets across zones [Spec §FR-001]
+- [ ] CHK002 - Test auto-scaling adds instances correctly under load [Spec §FR-003]
+- [ ] CHK003 - Confirm load balancer routes traffic to healthy targets [Spec §FR-010]
+- [ ] CHK004 - Check that monitoring dashboard shows 3-5 key metrics [Spec §FR-005]
 ```
 
 **✅ CORRECT - These test requirements quality:**
 
 ```markdown
-- [ ] CHK001 - Are the number and layout of featured episodes explicitly specified? [Completeness, Spec §FR-001]
-- [ ] CHK002 - Are hover state requirements consistently defined for all interactive elements? [Consistency, Spec §FR-003]
-- [ ] CHK003 - Are navigation requirements clear for all clickable brand elements? [Clarity, Spec §FR-010]
-- [ ] CHK004 - Is the selection criteria for related episodes documented? [Gap, Spec §FR-005]
-- [ ] CHK005 - Are loading state requirements defined for asynchronous episode data? [Gap]
-- [ ] CHK006 - Can "visual hierarchy" requirements be objectively measured? [Measurability, Spec §FR-001]
+- [ ] CHK001 - Are the number and zone distribution of subnets explicitly specified? [Completeness, Spec §FR-001]
+- [ ] CHK002 - Are security group requirements consistently defined for all tier boundaries? [Consistency, Spec §FR-003]
+- [ ] CHK003 - Are failover requirements clear for all stateful components? [Clarity, Spec §FR-010]
+- [ ] CHK004 - Is the selection criteria for availability zones documented? [Gap, Spec §FR-005]
+- [ ] CHK005 - Are provisioning timeout requirements defined for long-running resource creation? [Gap]
+- [ ] CHK006 - Can "high availability" requirements be objectively measured with RTO/RPO? [Measurability, Spec §FR-001]
 ```
 
 **Key Differences:**

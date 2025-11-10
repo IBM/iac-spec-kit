@@ -1,20 +1,9 @@
 ---
-description: Create or update the feature specification from a natural language feature description.
+description: Create or update the infrastructure specification from a natural language infrastructure description.
 scripts:
   sh: scripts/bash/create-new-feature.sh --json "{ARGS}"
   ps: scripts/powershell/create-new-feature.ps1 -Json "{ARGS}"
 ---
-
-## Infrastructure-as-Code Context
-
-**IMPORTANT**: This is the Infrastructure-as-Code (IaC) edition of Spec Kit, optimized for Terraform and cloud infrastructure workflows.
-
-When creating specifications:
-- **Focus on infrastructure resources**: VPCs, subnets, compute instances, storage, databases, networking, security groups, IAM policies
-- **Use cloud terminology**: regions, availability zones, CIDR blocks, security groups, load balancers, auto-scaling
-- **Think infrastructure capabilities**: "provision managed database", "configure network isolation", "implement auto-scaling", "set up monitoring"
-- **Stay technology-agnostic**: User stories describe infrastructure needs WITHOUT specifying cloud providers (AWS/Azure/GCP/IBM Cloud details go in plan.md)
-- **IaC-specific constraints**: State management, resource dependencies, configuration drift, multi-environment deployments
 
 ## User Input
 
@@ -31,16 +20,16 @@ The text the user typed after `/speckit.iac.specify` in the triggering message *
 Given that feature description, do this:
 
 1. **Generate a concise short name** (2-4 words) for the branch:
-   - Analyze the feature description and extract the most meaningful keywords
-   - Create a 2-4 word short name that captures the essence of the feature
-   - Use action-noun format when possible (e.g., "add-user-auth", "fix-payment-bug")
-   - Preserve technical terms and acronyms (OAuth2, API, JWT, etc.)
-   - Keep it concise but descriptive enough to understand the feature at a glance
+   - Analyze the infrastructure description and extract the most meaningful keywords
+   - Create a 2-4 word short name that captures the essence of the infrastructure
+   - Use action-noun format when possible (e.g., "deploy-vpc", "configure-database")
+   - Preserve technical terms and acronyms (VPC, RDS, K8s, etc.)
+   - Keep it concise but descriptive enough to understand the infrastructure at a glance
    - Examples:
-     - "I want to add user authentication" → "user-auth"
-     - "Implement OAuth2 integration for the API" → "oauth2-api-integration"
-     - "Create a dashboard for analytics" → "analytics-dashboard"
-     - "Fix payment processing timeout bug" → "fix-payment-timeout"
+     - "Deploy production VPC with public and private subnets" → "production-vpc"
+     - "Set up auto-scaling compute cluster with load balancing" → "autoscaling-compute"
+     - "Configure managed database with automated backups" → "managed-database"
+     - "Implement multi-region disaster recovery" → "multi-region-dr"
 
 2. **Check for existing branches before creating new one**:
    
@@ -60,9 +49,9 @@ Given that feature description, do this:
       - Use N+1 for the new branch number
    
    d. Run the script `{SCRIPT}` with the calculated number and short-name:
-      - Pass `--number N+1` and `--short-name "your-short-name"` along with the feature description
-      - Bash example: `{SCRIPT} --json --number 5 --short-name "user-auth" "Add user authentication"`
-      - PowerShell example: `{SCRIPT} -Json -Number 5 -ShortName "user-auth" "Add user authentication"`
+      - Pass `--number N+1` and `--short-name "your-short-name"` along with the infrastructure description
+      - Bash example: `{SCRIPT} --json --number 5 --short-name "production-vpc" "Deploy production VPC with public and private subnets"`
+      - PowerShell example: `{SCRIPT} -Json -Number 5 -ShortName "production-vpc" "Deploy production VPC with public and private subnets"`
    
    **IMPORTANT**:
    - Check all three sources (remote branches, local branches, specs directories) to find the highest number
@@ -78,70 +67,71 @@ Given that feature description, do this:
 4. Follow this execution flow:
 
     1. Parse user description from Input
-       If empty: ERROR "No feature description provided"
+       If empty: ERROR "No infrastructure description provided"
     2. Extract key concepts from description
-       Identify: actors, actions, data, constraints
+       Identify: infrastructure components, capabilities, requirements, constraints
     3. For unclear aspects:
        - Make informed guesses based on context and industry standards
        - Only mark with [NEEDS CLARIFICATION: specific question] if:
-         - The choice significantly impacts feature scope or user experience
+         - The choice significantly impacts infrastructure scope or requirements
          - Multiple reasonable interpretations exist with different implications
          - No reasonable default exists
        - **LIMIT: Maximum 3 [NEEDS CLARIFICATION] markers total**
-       - Prioritize clarifications by impact: scope > security/privacy > user experience > technical details
-    4. Fill User Scenarios & Testing section
-       If no clear user flow: ERROR "Cannot determine user scenarios"
+       - Prioritize clarifications by impact: scope > security/compliance > cost > technical details
+    4. Fill Infrastructure Requirements section
+       If no clear infrastructure capabilities: ERROR "Cannot determine infrastructure requirements"
     5. Generate Functional Requirements
        Each requirement must be testable
        Use reasonable defaults for unspecified details (document assumptions in Assumptions section)
     6. Define Success Criteria
        Create measurable, technology-agnostic outcomes
-       Include both quantitative metrics (time, performance, volume) and qualitative measures (user satisfaction, task completion)
+       Include both quantitative metrics (SLOs, cost, capacity) and qualitative measures (compliance, operational readiness)
        Each criterion must be verifiable without implementation details
-    7. Identify Key Entities (if data involved)
+    7. Document Cost Constraints and Compliance Requirements (if applicable)
     8. Return: SUCCESS (spec ready for planning)
 
-5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the feature description (arguments) while preserving section order and headings.
+5. Write the specification to SPEC_FILE using the template structure, replacing placeholders with concrete details derived from the infrastructure description (arguments) while preserving section order and headings.
 
 6. **Specification Quality Validation**: After writing the initial spec, validate it against quality criteria:
 
-   a. **Create Spec Quality Checklist**: Generate a checklist file at `FEATURE_DIR/checklists/requirements.md` using the checklist template structure with these validation items:
+   a. **Create Spec Quality Checklist**: Generate a checklist file at `INFRA_DIR/checklists/requirements.md` using the checklist template structure with these validation items:
 
       ```markdown
-      # Specification Quality Checklist: [FEATURE NAME]
-      
+      # Specification Quality Checklist: [INFRASTRUCTURE NAME]
+
       **Purpose**: Validate specification completeness and quality before proceeding to planning
       **Created**: [DATE]
-      **Feature**: [Link to spec.md]
+      **Infrastructure**: [Link to spec.md]
       
       ## Content Quality
-      
-      - [ ] No implementation details (languages, frameworks, APIs)
-      - [ ] Focused on user value and business needs
-      - [ ] Written for non-technical stakeholders
+
+      - [ ] No implementation details (cloud providers, specific tools)
+      - [ ] Focused on infrastructure capabilities and business needs
+      - [ ] Written for both technical and non-technical stakeholders
       - [ ] All mandatory sections completed
-      
+
       ## Requirement Completeness
-      
+
       - [ ] No [NEEDS CLARIFICATION] markers remain
       - [ ] Requirements are testable and unambiguous
       - [ ] Success criteria are measurable
-      - [ ] Success criteria are technology-agnostic (no implementation details)
-      - [ ] All acceptance scenarios are defined
-      - [ ] Edge cases are identified
+      - [ ] Success criteria are technology-agnostic (no cloud provider names)
+      - [ ] SLOs are clearly defined with measurement methods
+      - [ ] Cost constraints are documented
+      - [ ] Compliance requirements identified (if applicable)
       - [ ] Scope is clearly bounded
       - [ ] Dependencies and assumptions identified
-      
-      ## Feature Readiness
-      
-      - [ ] All functional requirements have clear acceptance criteria
-      - [ ] User scenarios cover primary flows
-      - [ ] Feature meets measurable outcomes defined in Success Criteria
+
+      ## Infrastructure Readiness
+
+      - [ ] All functional requirements have clear success criteria
+      - [ ] Non-functional requirements (performance, availability, security, scalability) defined
+      - [ ] Infrastructure meets measurable outcomes defined in Success Criteria
       - [ ] No implementation details leak into specification
-      
+
       ## Notes
-      
-      - Items marked incomplete require spec updates before `/speckit.iac.clarify` or `/speckit.iac.plan`
+
+      - Items marked incomplete require spec updates before `/iac.plan`
       ```
 
    b. **Run Validation Check**: Review the spec against each checklist item:
@@ -195,7 +185,7 @@ Given that feature description, do this:
 
    d. **Update Checklist**: After each validation iteration, update the checklist file with current pass/fail status
 
-7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/speckit.iac.clarify` or `/speckit.iac.plan`).
+7. Report completion with branch name, spec file path, checklist results, and readiness for the next phase (`/iac.plan`).
 
 **NOTE:** The script creates and checks out the new branch and initializes the spec file before writing.
 
@@ -203,41 +193,41 @@ Given that feature description, do this:
 
 ## Quick Guidelines
 
-- Focus on **WHAT** users need and **WHY**.
-- Avoid HOW to implement (no tech stack, APIs, code structure).
-- Written for business stakeholders, not developers.
+- Focus on **WHAT** infrastructure is needed and **WHY**.
+- Avoid HOW to implement (no cloud providers, specific tools, IaC syntax).
+- Written for both infrastructure and business stakeholders.
 - DO NOT create any checklists that are embedded in the spec. That will be a separate command.
 
 ### Section Requirements
 
-- **Mandatory sections**: Must be completed for every feature
-- **Optional sections**: Include only when relevant to the feature
+- **Mandatory sections**: Must be completed for every infrastructure specification
+- **Optional sections**: Include only when relevant to the infrastructure
 - When a section doesn't apply, remove it entirely (don't leave as "N/A")
 
 ### For AI Generation
 
 When creating this spec from a user prompt:
 
-1. **Make informed guesses**: Use context, industry standards, and common patterns to fill gaps
+1. **Make informed guesses**: Use context, industry standards, and common cloud patterns to fill gaps
 2. **Document assumptions**: Record reasonable defaults in the Assumptions section
 3. **Limit clarifications**: Maximum 3 [NEEDS CLARIFICATION] markers - use only for critical decisions that:
-   - Significantly impact feature scope or user experience
+   - Significantly impact infrastructure scope or requirements
    - Have multiple reasonable interpretations with different implications
    - Lack any reasonable default
-4. **Prioritize clarifications**: scope > security/privacy > user experience > technical details
-5. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
+4. **Prioritize clarifications**: scope > security/compliance > cost > technical details
+5. **Think like an infrastructure engineer**: Every vague requirement should fail the "testable and unambiguous" checklist item
 6. **Common areas needing clarification** (only if no reasonable default exists):
-   - Feature scope and boundaries (include/exclude specific use cases)
-   - User types and permissions (if multiple conflicting interpretations possible)
-   - Security/compliance requirements (when legally/financially significant)
+   - Infrastructure scope and boundaries (include/exclude specific components)
+   - Security and compliance requirements (when legally/financially significant)
+   - Cost constraints and budget limits (when significantly impacting design)
 
 **Examples of reasonable defaults** (don't ask about these):
 
-- Data retention: Industry-standard practices for the domain
-- Performance targets: Standard web/mobile app expectations unless specified
-- Error handling: User-friendly messages with appropriate fallbacks
-- Authentication method: Standard session-based or OAuth2 for web apps
-- Integration patterns: RESTful APIs unless specified otherwise
+- Environment type: Infer from context (dev, staging, prod) and adjust requirements accordingly
+- Availability targets: Match to environment purpose (dev: lower SLOs acceptable, prod: higher requirements)
+- Backup frequency: Align with data criticality and environment (dev: daily, prod: hourly/continuous)
+- Multi-region: Only assume if explicitly mentioned or clearly needed for compliance/DR
+- Scaling approach: Start with simple fixed capacity unless high traffic mentioned
 
 ### Success Criteria Guidelines
 
@@ -250,14 +240,14 @@ Success criteria must be:
 
 **Good examples**:
 
-- "Users can complete checkout in under 3 minutes"
-- "System supports 10,000 concurrent users"
-- "95% of searches return results in under 1 second"
-- "Task completion rate improves by 40%"
+- "Infrastructure deploys in under 15 minutes"
+- "System scales to handle 10,000 requests per second"
+- "99.9% uptime SLO for production workloads"
+- "Database failover completes in under 5 minutes"
 
 **Bad examples** (implementation-focused):
 
-- "API response time is under 200ms" (too technical, use "Users see results instantly")
-- "Database can handle 1000 TPS" (implementation detail, use user-facing metric)
-- "React components render efficiently" (framework-specific)
-- "Redis cache hit rate above 80%" (technology-specific)
+- "Terraform files are under 500 lines" (implementation detail, use outcome-based metric)
+- "Uses dedicated-cores database instances" (technology-specific, too prescriptive)
+- "IBM Cloud provider version 1.60" (version-specific, let plan phase decide)
+- "VPC has 3 subnets across zones" (architecture detail, belongs in plan phase)

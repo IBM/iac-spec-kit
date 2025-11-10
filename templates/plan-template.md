@@ -1,31 +1,32 @@
-# Implementation Plan: [FEATURE]
+# Architecture Plan: [INFRASTRUCTURE]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Branch**: `[###-infrastructure-name]` | **Date**: [DATE] | **Spec**: [link]
+**Input**: Infrastructure specification from `/specs/[###-infrastructure-name]/spec.md`
 
-**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/speckit.iac.plan` command. See `.specify/templates/commands/iac.plan.md` for the execution workflow.
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+[Extract from infrastructure spec: primary capability + technical approach from research]
 
 ## Technical Context
 
 <!--
   ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
+  for the infrastructure project. Mark any unknowns as "NEEDS CLARIFICATION" -
+  these will be resolved in Phase 0 research.
 -->
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Cloud Provider**: [e.g., AWS, Azure, GCP, IBM Cloud, Multi-cloud or NEEDS CLARIFICATION]
+**IaC Tool**: [e.g., Terraform 1.6+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
+**Provider Versions**: [e.g., AWS Provider ~> 5.0, Azure Provider ~> 3.0 or NEEDS CLARIFICATION]
+**State Backend**: [e.g., S3 + DynamoDB, Azure Blob, Terraform Cloud or NEEDS CLARIFICATION]
+**Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based or NEEDS CLARIFICATION]
+**Testing**: [e.g., Terratest, Kitchen-Terraform, terraform test or N/A]
+**Security Scanning**: [e.g., Checkov, tfsec, Snyk or NEEDS CLARIFICATION]
+**Cost Estimation**: [e.g., Infracost, Cloud provider calculators or N/A]
+**Target Environments**: [e.g., dev/staging/prod, dev/prod only, single environment or NEEDS CLARIFICATION]
+**Compliance**: [if applicable, e.g., SOC 2, HIPAA, PCI-DSS or N/A]
 
 ## Constitution Check
 
@@ -33,16 +34,15 @@
 
 [Gates determined based on constitution file]
 
-## Infrastructure Architecture *(infrastructure projects)*
+## Infrastructure Architecture
 
 <!--
-  This section is for INFRASTRUCTURE PROJECTS ONLY (e.g., Terraform, Pulumi, CloudFormation).
-  Application projects can skip this section entirely.
+  Use this section to document provider-specific infrastructure design.
+  The spec.md should remain technology-agnostic; cloud-specific details belong here.
 
-  Use this section to document cloud infrastructure requirements in a provider-specific way.
-  The spec.md should remain technology-agnostic; provider-specific details belong here.
+  During /speckit.iac.implement, AI agents will read this section to generate IaC files.
 
-  During /speckit.implement, AI agents will read this section to generate infrastructure-as-code files.
+  This content will be expanded into architecture.md in Phase 1.
 -->
 
 ### Compute Resources
@@ -54,23 +54,23 @@
   INFRASTRUCTURE PATTERN EXAMPLES:
 
   Web Application Infrastructure:
-  - Load Balancer: Application Load Balancer (ALB) with SSL/TLS termination, health checks
-  - Application Tier: ECS Fargate containers (2-10 tasks, auto-scaling based on CPU >70%)
+  - Load Balancer: VPC Load Balancer (Application Load Balancer) with SSL/TLS termination, health checks
+  - Application Tier: Code Engine applications (2-10 instances, auto-scaling based on CPU >70%)
   - Scaling Policy: Target tracking on CPU utilization, scale out at 70%, scale in at 30%
 
   API Service Infrastructure:
-  - API Gateway: REST API with request validation, throttling (10k req/s), API keys
-  - Compute: Lambda functions (Node.js 18, 512MB memory, 30s timeout) or ECS Fargate
+  - API Gateway: API Gateway with request validation, throttling (10k req/s), API keys
+  - Compute: Code Engine applications or Cloud Functions (Node.js 18, 512MB memory, 60s timeout)
   - Concurrency: Reserved concurrency per function, burst capacity configuration
 
   Data Processing Pipeline:
-  - Batch Processing: ECS tasks on EC2 (c5.xlarge spot instances), scheduled via EventBridge
-  - Orchestration: Step Functions for multi-stage workflows with error handling
-  - Auto-scaling: Scale based on SQS queue depth for parallel processing
+  - Batch Processing: Code Engine jobs (cx2-2x4 profile), scheduled via Event Notifications
+  - Orchestration: App Connect or custom workflow orchestration with error handling
+  - Auto-scaling: Scale based on message queue depth for parallel processing
 
   Static Website Hosting:
-  - CDN: CloudFront distribution with custom domain, SSL certificate, edge caching
-  - Origin: S3 bucket with static website hosting enabled
+  - CDN: Internet Services (CIS) with custom domain, SSL certificate, edge caching
+  - Origin: Cloud Object Storage bucket with static website hosting enabled
   - No compute resources needed (fully serverless)
 -->
 
@@ -85,26 +85,26 @@
   INFRASTRUCTURE PATTERN EXAMPLES:
 
   Web Application Infrastructure:
-  - Primary Database: RDS PostgreSQL 15.x (db.t3.medium, Multi-AZ, 100GB gp3 storage)
+  - Primary Database: IBM Cloud Databases for PostgreSQL 15.x (shared-cores or dedicated-cores, Multi-AZ, 20GB storage)
   - Backups: Automated daily backups, 7-day retention, point-in-time recovery enabled
-  - Cache: ElastiCache Redis 7.x (cache.t3.micro for dev, cache.r6g.large cluster for prod)
-  - Object Storage: S3 bucket for user uploads, versioning enabled, lifecycle to Glacier after 90 days
+  - Cache: IBM Cloud Databases for Redis 7.x (shared-cores for dev, dedicated high-memory for prod)
+  - Object Storage: Cloud Object Storage bucket for user uploads, versioning enabled, lifecycle to Archive after 90 days
 
   API Service Infrastructure:
-  - Database: DynamoDB with on-demand billing, point-in-time recovery, global tables
-  - Throughput: Provisioned capacity for predictable workloads, on-demand for variable loads
+  - Database: IBM Cloudant with standard plan, continuous replication, global distribution
+  - Throughput: Provisioned capacity for predictable workloads, standard capacity for variable loads
   - Backup: Continuous backups with 35-day retention, cross-region replication for DR
 
   Data Processing Pipeline:
-  - Raw Data: S3 bucket with intelligent tiering, event notifications for new objects
-  - Processed Data: S3 bucket with partitioned structure (year/month/day) for efficient querying
-  - Data Warehouse: Redshift cluster (dc2.large, 2 nodes) or Athena for serverless queries
-  - Metadata: DynamoDB table tracking processing status and lineage
+  - Raw Data: Cloud Object Storage bucket with smart tier, event notifications for new objects
+  - Processed Data: Cloud Object Storage bucket with partitioned structure (year/month/day) for efficient querying
+  - Data Warehouse: Db2 Warehouse (flex-one system, 2 nodes) or SQL Query for serverless queries
+  - Metadata: Cloudant database tracking processing status and lineage
 
   Static Website Hosting:
-  - Storage: S3 bucket with website hosting enabled, bucket policy for CloudFront access
+  - Storage: Cloud Object Storage bucket with website hosting enabled, bucket policy for CIS access
   - Versioning: Enabled for rollback capability
-  - Logging: Access logs to separate S3 bucket for analytics
+  - Logging: Access logs to separate COS bucket for analytics
 -->
 
 [Document data storage resources here]
@@ -116,12 +116,12 @@
   Include IP ranges, subnet configurations, and network security boundaries.
 
   Examples:
-  - VPC: 10.0.0.0/16 in primary region
-  - Public Subnets: 10.0.1.0/24 (AZ-a), 10.0.2.0/24 (AZ-b) - for load balancers
-  - Private Subnets: 10.0.10.0/24 (AZ-a), 10.0.11.0/24 (AZ-b) - for application tier
-  - NAT Gateway: One per availability zone for private subnet internet access
-  - DNS: Route53 hosted zone for custom domain with health checks
-  - CDN: CloudFront distribution for static assets and API caching
+  - VPC: 10.0.0.0/16 in primary region (us-south)
+  - Public Subnets: 10.0.1.0/24 (us-south-1), 10.0.2.0/24 (us-south-2) - for load balancers
+  - Private Subnets: 10.0.10.0/24 (us-south-1), 10.0.11.0/24 (us-south-2) - for application tier
+  - Public Gateway: One per zone for private subnet internet access
+  - DNS: Internet Services (CIS) DNS zones for custom domain with health checks
+  - CDN: Internet Services (CIS) with edge caching for static assets and API acceleration
 -->
 
 [Document networking configuration here]
@@ -134,16 +134,16 @@
 
   Examples:
   - Security Groups:
-    - ALB SG: Inbound 443 from 0.0.0.0/0, outbound to ECS SG
-    - ECS SG: Inbound from ALB SG, outbound to RDS SG and internet
-    - RDS SG: Inbound 5432 from ECS SG only
-  - IAM Roles:
-    - ECS Task Execution Role: Pull images, write logs to CloudWatch
-    - ECS Task Role: Access S3 buckets, read secrets from Secrets Manager
+    - Load Balancer SG: Inbound 443 from 0.0.0.0/0, outbound to application SG
+    - Application SG: Inbound from LB SG, outbound to database SG and internet
+    - Database SG: Inbound 5432 from application SG only
+  - IAM Access Groups:
+    - Code Engine Service Role: Pull images from Container Registry, write logs to Log Analysis
+    - Application Service Role: Access COS buckets, read secrets from Secrets Manager
   - Encryption:
-    - RDS: Encryption at rest with KMS, TLS in transit
-    - S3: AES-256 server-side encryption
-  - Secrets: AWS Secrets Manager for database credentials, API keys
+    - Databases: Encryption at rest with Key Protect, TLS in transit
+    - Cloud Object Storage: AES-256 server-side encryption with Key Protect integration
+  - Secrets: IBM Secrets Manager for database credentials, API keys, certificates
 -->
 
 [Document security configuration here]
@@ -159,6 +159,7 @@
   - AWS: Mature ecosystem, widest service selection, strong enterprise support
   - Azure: Best for Microsoft stack integration, hybrid cloud scenarios
   - GCP: Competitive pricing, strong data/ML services, Kubernetes-native
+  - IBM Cloud: Enterprise-grade services, strong compliance, hybrid cloud
   - Multi-cloud: Only if required by compliance or risk management needs
 
   Choose ONE provider for this project to minimize complexity.
@@ -211,11 +212,11 @@
   - Regular backups with retention policy (keep 30+ days for disaster recovery)
 
   Examples:
-  - Backend: S3 bucket (my-project-terraform-state) in us-east-1 with versioning enabled
-  - State Locking: DynamoDB table (terraform-state-lock) to prevent concurrent modifications
-  - Encryption: AES-256 server-side encryption (SSE-S3) or KMS for additional security
-  - Backup Strategy: S3 versioning + lifecycle policy (retain 30 days of versions, archive to Glacier after 90 days)
-  - Access Control: IAM policies restrict state bucket access to CI/CD role and authorized users only
+  - Backend: Cloud Object Storage bucket (my-project-terraform-state) in us-south with versioning enabled
+  - State Locking: COS object locking or Terraform Cloud state locking to prevent concurrent modifications
+  - Encryption: AES-256 server-side encryption with Key Protect for additional security
+  - Backup Strategy: COS versioning + lifecycle policy (retain 30 days of versions, archive to Archive tier after 90 days)
+  - Access Control: IAM policies restrict state bucket access to CI/CD service IDs and authorized users only
   - Workspace Usage: One state file per workspace (terraform workspace select dev/staging/prod)
   - State File Naming: terraform.tfstate for default workspace, terraform.tfstate.d/<workspace>/ for named workspaces
 -->
@@ -224,24 +225,24 @@
 
 ## Project Structure
 
-### Documentation (this feature)
+### Documentation (this infrastructure)
 
 ```text
-specs/[###-feature]/
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
+specs/[###-infrastructure]/
+├── spec.md              # Infrastructure specification (technology-agnostic)
+├── plan.md              # This file (/iac.plan command output)
+├── research.md          # Phase 0 output: technology decisions and best practices
+├── architecture.md      # Phase 1 output: detailed infrastructure design
+├── modules.md           # Phase 1 output: module specifications (if using modules)
+├── quickstart.md        # Phase 1 output: deployment guide
+└── tasks.md             # Phase 2 output (/iac.tasks command - NOT created by /iac.plan)
 ```
 
 ### Source Code (repository root)
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
+  for this infrastructure project. Delete unused options and expand the chosen structure with
+  real paths. The delivered plan must not include Option labels.
 
   FOR INFRASTRUCTURE PROJECTS:
   Place infrastructure code in an `iac/` (Infrastructure-as-Code) directory.
@@ -273,54 +274,54 @@ specs/[###-feature]/
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-
-# [REMOVE IF UNUSED] Option 4: Infrastructure project (Terraform, IaC)
+# [REMOVE IF UNUSED] Option 1: Terraform Infrastructure (DEFAULT for IaC)
 iac/
-├── backend.tf              # State backend (S3, Azure Storage, GCS)
-├── provider.tf             # Provider configuration (AWS, Azure, GCP)
+├── backend.tf              # State backend (IBM COS, S3, Azure Storage, GCS)
+├── provider.tf             # Provider configuration (IBM Cloud, AWS, Azure, GCP)
+├── versions.tf             # Terraform and provider version constraints
 ├── vpc.tf                  # Network infrastructure
 ├── security-groups.tf      # Security policies and firewall rules
 ├── compute.tf              # Compute resources
 ├── data.tf                 # Data storage resources
+├── loadbalancer.tf         # Load balancing resources
+├── dns.tf                  # DNS and domain management
+├── iam.tf                  # IAM roles and policies
+├── monitoring.tf           # Monitoring and logging
 ├── variables.tf            # Variable declarations
 ├── outputs.tf              # Output declarations
 ├── terraform.tfvars.dev    # Dev environment variables
 ├── terraform.tfvars.staging # Staging environment variables
 ├── terraform.tfvars.prod   # Production environment variables
+├── modules/                # Custom reusable modules (optional)
+│   ├── web-application/
+│   ├── database-cluster/
+│   └── vpc-networking/
 └── README.md               # Provisioning and usage instructions
+
+# [REMOVE IF UNUSED] Option 2: Pulumi Infrastructure
+iac/
+├── Pulumi.yaml             # Project definition
+├── Pulumi.dev.yaml         # Dev stack configuration
+├── Pulumi.staging.yaml     # Staging stack configuration
+├── Pulumi.prod.yaml        # Production stack configuration
+├── index.ts                # Main program entry point
+├── networking.ts           # VPC, subnets, security groups
+├── compute.ts              # Compute resources
+├── storage.ts              # Databases and object storage
+├── package.json            # Node.js dependencies
+└── README.md               # Deployment instructions
+
+# [REMOVE IF UNUSED] Option 3: CloudFormation Infrastructure (AWS)
+iac/
+├── main-stack.yaml         # Root stack template
+├── networking.yaml         # Nested stack: VPC, subnets
+├── compute.yaml            # Nested stack: Compute resources
+├── database.yaml           # Nested stack: Database resources
+├── parameters/
+│   ├── dev.json            # Dev environment parameters
+│   ├── staging.json        # Staging parameters
+│   └── prod.json           # Production parameters
+└── README.md               # Deployment guide
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real
@@ -332,5 +333,4 @@ directories captured above]
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| [e.g., Multi-cloud] | [current need] | [why single cloud insufficient] |
