@@ -1,3 +1,13 @@
+# Infrastructure as Code Specification-Driven Development (IAC-SDD)
+
+## Attribution
+
+This document is based on the original [Specification-Driven Development (SDD)](https://github.com/github/spec-kit/blob/main/spec-driven.md) methodology created by the GitHub Spec Kit team. We extend our gratitude to the original authors for their foundational work in spec-driven development patterns.
+
+**IAC Spec Kit** adapts these principles specifically for Infrastructure as Code workflows, adding infrastructure-specific templates, cloud resource specifications, and Terraform integration patterns.
+
+---
+
 # Specification-Driven Development (SDD)
 
 ## The Power Inversion
@@ -401,3 +411,91 @@ By embedding these principles into the specification and planning process, SDD e
 This isn't about replacing developers or automating creativity. It's about amplifying human capability by automating mechanical translation. It's about creating a tight feedback loop where specifications, research, and code evolve together, each iteration bringing deeper understanding and better alignment between intent and implementation.
 
 Software development needs better tools for maintaining alignment between intent and implementation. SDD provides the methodology for achieving this alignment through executable specifications that generate code rather than merely guiding it.
+
+---
+
+## Infrastructure as Code adaptations
+
+### IAC-specific workflow enhancements
+
+IAC Spec Kit extends the core SDD methodology with infrastructure-focused capabilities:
+
+#### Infrastructure command namespace
+
+All infrastructure commands use the `.iac` namespace to distinguish them from general software development commands:
+
+- `/speckit.iac.specify` - Create infrastructure specifications with cloud resource requirements
+- `/speckit.iac.plan` - Generate infrastructure implementation plans with Terraform modules
+- `/speckit.iac.tasks` - Create infrastructure deployment and validation task lists
+- `/speckit.iac.checklist` - Generate infrastructure compliance and security checklists
+- `/speckit.iac.implement` - Execute infrastructure provisioning with validation
+- `/speckit.iac.analyze` - Analyze infrastructure artifacts for consistency and compliance
+- `/speckit.iac.clarify` - Clarify infrastructure requirements and constraints
+- `/speckit.iac.constitution` - Review infrastructure development principles
+
+#### Infrastructure specification example
+
+Here's how IAC-SDD transforms traditional infrastructure development:
+
+**Traditional Infrastructure Approach:**
+```text
+1. Manual infrastructure requirements gathering (2-3 hours)
+2. Network and security diagram creation (2-3 hours)
+3. Manual Terraform project setup (30 minutes)
+4. Terraform configuration writing (4-6 hours)
+5. Testing and validation procedure creation (2 hours)
+Total: ~12-15 hours of infrastructure work
+```
+
+**IAC-SDD Approach:**
+```bash
+# Step 1: Create infrastructure specification (5 minutes)
+/speckit.iac.specify Multi-tier web application with VPC, load balancer, auto-scaling, and RDS database
+
+# Step 2: Generate infrastructure implementation plan (5 minutes)
+/speckit.iac.plan AWS VPC with public/private subnets, ALB, EC2 Auto Scaling, RDS MySQL
+
+# Step 3: Generate executable infrastructure tasks (5 minutes)
+/speckit.iac.tasks
+```
+
+This generates:
+- Complete infrastructure specification with resource requirements and compliance criteria
+- Detailed implementation plan with cloud service choices and architectural rationale
+- Terraform module contracts and resource schemas ready for infrastructure generation
+- Comprehensive validation scenarios for automated testing and manual verification
+- All documents properly versioned in a feature branch
+
+#### Infrastructure-specific constitutional principles
+
+IAC Spec Kit includes infrastructure-focused constitutional principles:
+
+**Cloud Resource Modularity**: Every infrastructure component must be designed as reusable Terraform modules with clear input/output contracts.
+
+**Infrastructure Validation**: All infrastructure specifications must include validation scenarios that can be executed with `terraform plan`, `terraform validate`, and cloud provider CLI tools.
+
+**Security by Design**: Infrastructure specifications must explicitly address security requirements, compliance standards, and access controls from the initial specification phase.
+
+**State Management**: Infrastructure plans must consider Terraform state management, remote backends, and state isolation strategies appropriate for the deployment environment.
+
+#### Integration with cloud ecosystems
+
+IAC Spec Kit integrates with major cloud provider toolchains:
+
+- **AWS**: Integration with AWS CLI, CloudFormation validation, and AWS Config rules
+- **Azure**: Integration with Azure CLI, ARM template validation, and Azure Policy
+- **Google Cloud**: Integration with gcloud CLI, Deployment Manager, and Cloud Asset Inventory
+- **IBM Cloud**: Integration with IBM Cloud CLI, Schematics, and Security and Compliance Center
+- **Multi-cloud**: Support for Terraform providers across multiple cloud platforms
+
+#### Infrastructure testing and validation
+
+IAC-SDD emphasizes infrastructure testing through:
+
+- **Contract Testing**: Terraform module interfaces validated before implementation
+- **Integration Testing**: Real cloud resource provisioning in isolated environments
+- **Compliance Testing**: Automated security and compliance validation
+- **Cost Validation**: Infrastructure cost estimation and budget compliance checks
+- **Performance Testing**: Infrastructure performance benchmarking and optimization
+
+This infrastructure-focused adaptation of SDD ensures that cloud resources are provisioned through the same rigorous specification-driven process that produces high-quality, maintainable, and compliant infrastructure at scale.
