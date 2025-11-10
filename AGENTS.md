@@ -1,12 +1,12 @@
 # AGENTS.md
 
-## About Spec Kit and Specify
+## About IAC Spec Kit and Specify
 
-**GitHub Spec Kit** is a comprehensive toolkit for implementing Spec-Driven Development (SDD) - a methodology that emphasizes creating clear specifications before implementation. The toolkit includes templates, scripts, and workflows that guide development teams through a structured approach to building software.
+**IAC Spec Kit** is a domain-specific implementation of the spec-driven development pattern optimized for Infrastructure as Code workflows. While the original [GitHub Spec Kit](https://github.com/github/spec-kit) focuses on software development, IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns.
 
-**Specify CLI** is the command-line interface that bootstraps projects with the Spec Kit framework. It sets up the necessary directory structures, templates, and AI agent integrations to support the Spec-Driven Development workflow.
+**Specify CLI** is the command-line interface that bootstraps projects with the IAC Spec Kit framework. It sets up the necessary directory structures, templates, and AI agent integrations to support the Spec-Driven Development workflow for infrastructure projects.
 
-The toolkit supports multiple AI coding assistants, allowing teams to use their preferred tools while maintaining consistent project structure and development practices.
+The toolkit supports multiple AI coding assistants, allowing teams to use their preferred tools while maintaining consistent project structure and development practices for infrastructure provisioning.
 
 ---
 
@@ -16,7 +16,7 @@ The toolkit supports multiple AI coding assistants, allowing teams to use their 
 
 ## Adding New Agent Support
 
-This section explains how to add support for new AI agents/assistants to the Specify CLI. Use this guide as a reference when integrating new AI tools into the Spec-Driven Development workflow.
+This section explains how to add support for new AI agents/assistants to the Specify CLI. Use this guide as a reference when integrating new AI tools into the Spec-Driven Development workflow for infrastructure projects.
 
 ### Overview
 
@@ -369,6 +369,7 @@ Different agents use different argument placeholders:
 3. **File generation**: Verify correct directory structure and files
 4. **Command validation**: Ensure generated commands work with the agent
 5. **Context update**: Test agent context update scripts
+6. **Infrastructure validation**: Test with infrastructure-specific commands (`/speckit.iac.*`)
 
 ## Common Pitfalls
 
@@ -378,16 +379,28 @@ Different agents use different argument placeholders:
 4. **Wrong argument format**: Use correct placeholder format for each agent type (`$ARGUMENTS` for Markdown, `{{args}}` for TOML).
 5. **Directory naming**: Follow agent-specific conventions exactly (check existing agents for patterns).
 6. **Help text inconsistency**: Update all user-facing text consistently (help strings, docstrings, README, error messages).
+7. **Infrastructure context**: Ensure agent commands work with infrastructure-specific workflows (Terraform validation, cloud provider CLIs).
 
 ## Future Considerations
 
 When adding new agents:
 
 - Consider the agent's native command/workflow patterns
-- Ensure compatibility with the Spec-Driven Development process
-- Document any special requirements or limitations
+- Ensure compatibility with the Spec-Driven Development process for infrastructure
+- Test with Terraform and cloud provider CLI tools
+- Document any special requirements or limitations for infrastructure projects
 - Update this guide with lessons learned
 - Verify the actual CLI tool name before adding to AGENT_CONFIG
+
+## Infrastructure-Specific Considerations
+
+When working with IAC Spec Kit:
+
+- **Command namespace**: All infrastructure commands use the `.iac` namespace (`/speckit.iac.specify`, `/speckit.iac.plan`, etc.)
+- **Terraform integration**: Agents should support Terraform validation commands (`terraform validate`, `terraform fmt`, `tflint`)
+- **Cloud provider CLIs**: Consider integration with cloud provider CLIs (AWS CLI, Azure CLI, gcloud, IBM Cloud CLI)
+- **State management**: Agents should understand Terraform state management concepts
+- **Infrastructure patterns**: Templates focus on cloud resources, networking, security, and compliance
 
 ---
 
