@@ -32,10 +32,8 @@ This implementation adds infrastructure-focused specializations:
 </p>
 
 <p align="center">
-    <a href="https://github.com/github/spec-kit/actions/workflows/release.yml"><img src="https://github.com/github/spec-kit/actions/workflows/release.yml/badge.svg" alt="Release"/></a>
-    <a href="https://github.com/github/spec-kit/stargazers"><img src="https://img.shields.io/github/stars/github/spec-kit?style=social" alt="GitHub stars"/></a>
-    <a href="https://github.com/github/spec-kit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/github/spec-kit" alt="License"/></a>
-    <a href="https://github.github.io/spec-kit/"><img src="https://img.shields.io/badge/docs-GitHub_Pages-blue" alt="Documentation"/></a>
+    <a href="https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml"><img src="https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml/badge.svg" alt="Release"/></a>
+    <a href="https://github.com/ibm/iac-spec-kit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ibm/iac-spec-kit" alt="License"/></a>
 </p>
 
 ---
@@ -47,7 +45,7 @@ This implementation adds infrastructure-focused specializations:
 - [📽️ Video Overview](#️-video-overview)
 - [🤖 Supported AI Agents](#-supported-ai-agents)
 - [🔧 Specify CLI Reference](#-specify-cli-reference)
-  - [Contributing to Spec Kit Templates](#contributing-to-spec-kit-templates)
+  - [Contributing to IAC Spec Kit Templates](#contributing-to-iac-spec-kit-templates)
   - [Infrastructure-as-Code Projects](#infrastructure-as-code-projects)
 - [📚 Core Philosophy](#-core-philosophy)
 - [🌟 Development Phases](#-development-phases)
@@ -78,7 +76,7 @@ Choose your preferred installation method:
 Install once and use everywhere:
 
 ```bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+uv tool install specify-cli --from git+https://github.com/ibm/iac-spec-kit.git
 ```
 
 Then use the tool directly:
@@ -99,7 +97,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 Run directly without installing:
 
 ```bash
-uvx --from git+https://github.com/github/spec-kit.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/ibm/iac-spec-kit.git specify init <PROJECT_NAME>
 ```
 
 **Benefits of persistent installation:**
@@ -145,10 +143,10 @@ Use **`/iac.tasks`** to create an actionable task list from your implementation 
 
 ### 6. Execute implementation
 
-Use **`/speckit.implement`** to execute all tasks and build your feature according to the plan.
+Use **`/iac.implement`** to execute all tasks and build your feature according to the plan.
 
 ```bash
-/speckit.implement
+/iac.implement
 ```
 
 For detailed step-by-step instructions, see our [IAC-specific guide](./iac-spec-driven.md).
@@ -258,7 +256,7 @@ Essential commands for the Spec-Driven Development workflow:
 | `/iac.specify`       | Define what you want to build (requirements and user stories)        |
 | `/iac.plan`          | Create technical implementation plans with your chosen tech stack     |
 | `/iac.tasks`         | Generate actionable task lists for implementation                     |
-| `/speckit.implement`     | Execute all tasks to build the feature according to the plan         |
+| `/iac.implement`     | Execute all tasks to build the feature according to the plan         |
 
 #### Optional Commands
 
@@ -308,7 +306,7 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 /iac.tasks
 
 # 4. Implement (AI generates Terraform .tf files)
-/speckit.implement
+/iac.implement
 ```
 
 **Important**: IAC Spec Kit generates and validates Terraform code. Actual provisioning (`terraform apply`) is a manual step you control.
@@ -444,7 +442,7 @@ Go to the project folder and run your AI agent. In our example, we're using `cla
 
 ![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
 
-You will know that things are configured correctly if you see the `/iac.constitution`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/speckit.implement` commands available.
+You will know that things are configured correctly if you see the `/iac.constitution`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
 
 The first step should be establishing your project's governing principles using the `/iac.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
@@ -605,17 +603,17 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Validation checkpoints** - Each component phase includes checkpoints to validate with `terraform validate`, `terraform fmt`, and `tflint`
 - **Checkpoint validation** - Each infrastructure component phase includes checkpoints to validate independent functionality
 
-The generated tasks.md provides a clear roadmap for the `/speckit.implement` command, ensuring systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
+The generated tasks.md provides a clear roadmap for the `/iac.implement` command, ensuring systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
 
 ### **STEP 7:** Implementation
 
-Once ready, use the `/speckit.implement` command to execute your implementation plan:
+Once ready, use the `/iac.implement` command to execute your implementation plan:
 
 ```text
-/speckit.implement
+/iac.implement
 ```
 
-The `/speckit.implement` command will:
+The `/iac.implement` command will:
 
 - Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`

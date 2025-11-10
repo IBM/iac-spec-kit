@@ -1,82 +1,152 @@
 # [PROJECT_NAME] Constitution
-<!-- Example: Infrastructure as Code Constitution, ACME Platform IaC Constitution, etc. -->
+<!-- Example: MyApp Infrastructure Constitution, Platform IaC Constitution, etc. -->
 
-## Core Principles
+## Cloud Architecture Principles
+<!-- Principles about the infrastructure resources that will be created from generated code.
+     Add or remove principles based on needs - the number is flexible.
+     Use Baseline/Enhanced pattern to scale complexity with use case. -->
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Infrastructure as Code Principle -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: All infrastructure MUST be defined as declarative code (Terraform/CloudFormation/Pulumi); Manual changes prohibited except emergency breakfix (backport within 24 hours); Infrastructure state traceable to version-controlled code; Drift detection runs hourly with automated remediation -->
+### [ARCHITECTURE_PRINCIPLE_1_NAME]
+<!-- Example: I. Security Defaults (NON-NEGOTIABLE) -->
+[ARCHITECTURE_PRINCIPLE_1_DESCRIPTION]
+<!-- Example: Infrastructure must be secure by default; Baseline: No hardcoded credentials, encryption in transit enabled, network access restricted to necessary sources; Enhanced: + Encryption at rest with managed keys, least-privilege access policies, private network placement, audit logging for privileged operations -->
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. Security-First Gate (NON-NEGOTIABLE) -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Encryption: AES-256 at rest, TLS 1.2+ in transit, KMS key management; Access Control: Least privilege IAM, no long-lived credentials, RBAC, MFA for privileged access; Network Security: Private subnets for workloads, no 0.0.0.0/0 ingress except load balancers, network segmentation; Audit Logging: All API calls logged, encrypted logs, 1-year retention minimum; Enforcement: Automated scanning (Checkov, tfsec, Snyk) with hard-fail on HIGH/CRITICAL findings -->
+### [ARCHITECTURE_PRINCIPLE_2_NAME]
+<!-- Example: II. Resource Identification -->
+[ARCHITECTURE_PRINCIPLE_2_DESCRIPTION]
+<!-- Example: All resources tagged/labeled consistently; Baseline: environment, owner, purpose; Enhanced: + cost_center, compliance_scope, data_classification; Naming: [project]-[resource-type]-[environment], include region/zone for multi-region -->
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-Before-Deploy Mandate -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Required testing phases: 1) Static analysis (terraform fmt, validate, tflint) 2) Security scanning (Checkov, tfsec, secrets detection) 3) Dry-run validation (terraform plan, cost estimation) 4) Integration testing (deploy to ephemeral environment, functional validation) 5) Approval gates (peer review required, manual approval for production) -->
+### [ARCHITECTURE_PRINCIPLE_3_NAME]
+<!-- Example: III. Network Architecture -->
+[ARCHITECTURE_PRINCIPLE_3_DESCRIPTION]
+<!-- Example: Network topology aligned with isolation needs; Baseline: Single network with security groups/firewall rules; Enhanced: Multi-tier with isolated subnets (public for load balancers, private for apps, isolated for data), NAT gateways, network ACLs + security groups -->
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. State Management Standards -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Remote state storage (IBM Cloud Object Storage/Terraform Cloud) with encryption; State locking enabled to prevent concurrent modifications; Separate state per environment and major component (minimize blast radius); State versioning enabled for rollback capability; Never commit state to version control -->
+### [ARCHITECTURE_PRINCIPLE_4_NAME]
+<!-- Example: IV. Data Storage -->
+[ARCHITECTURE_PRINCIPLE_4_DESCRIPTION]
+<!-- Example: Storage based on sensitivity and durability; Baseline: Standard storage, provider-managed encryption; Enhanced: + Encryption at rest, automated backups, versioning for objects, private endpoints, multi-zone replication for critical data -->
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Compliance and Audit Requirements -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Tag all resources: Environment, Owner, CostCenter, ComplianceScope; Data residency requirements respected (specify approved regions); Compliance validation automated in CI/CD; Architecture diagrams generated from deployed state; Change logs maintained with business justification -->
+### [ARCHITECTURE_PRINCIPLE_5_NAME]
+<!-- Example: V. Observability -->
+[ARCHITECTURE_PRINCIPLE_5_DESCRIPTION]
+<!-- Example: Monitoring resources included; Baseline: Default metrics, basic health checks; Enhanced: + Custom metrics/alarms, centralized logging, alerting channels, dashboards for KPIs -->
 
-### [PRINCIPLE_6_NAME]
-<!-- Example: VI. Cost Governance -->
-[PRINCIPLE_6_DESCRIPTION]
-<!-- Example: Budget defined per project/environment with alerts at 75%, 90%, 100%; Approved instance types/SKUs for each workload category; Pre-deployment cost estimation (Infracost) within ±10% of budget; Mandatory cost allocation tags for chargeback/showback -->
+### [ARCHITECTURE_PRINCIPLE_6_NAME]
+<!-- Example: VI. High Availability -->
+[ARCHITECTURE_PRINCIPLE_6_DESCRIPTION]
+<!-- Example: HA patterns scale with criticality; Baseline: Single zone with basic health checks; Enhanced: Multi-zone deployment, load balancers with health checks, auto-scaling, database replicas, cross-region backups, failover configs -->
 
-### [PRINCIPLE_7_NAME]
-<!-- Example: VII. Module Design Principles -->
-[PRINCIPLE_7_DESCRIPTION]
-<!-- Example: Single responsibility per module; Standard structure (HashiCorp/Pulumi patterns); Semantic versioning (pin exact versions, no ranges); Comprehensive testing (unit + integration); Auto-generated documentation -->
+### [ARCHITECTURE_PRINCIPLE_7_NAME]
+<!-- Example: VII. Disaster Recovery -->
+[ARCHITECTURE_PRINCIPLE_7_DESCRIPTION]
+<!-- Example: DR readiness scales with business needs; Baseline: Basic backups with retention; Enhanced: Cross-region replication, backup vaults, DR region resources, failover routing, RPO/RTO targets in comments -->
 
-## [SECTION_2_NAME]
-<!-- Example: Technology Stack and Platform Standards -->
+### [ARCHITECTURE_PRINCIPLE_8_NAME]
+<!-- Example: VIII. Compliance Controls -->
+[ARCHITECTURE_PRINCIPLE_8_DESCRIPTION]
+<!-- Example: Compliance controls based on regulatory requirements; Baseline: Basic audit logging; Enhanced: Encryption keys with rotation, audit logs to immutable storage, compliance tags, data residency controls, access logging, policy checks -->
 
-### [TECH_PRINCIPLE_1_NAME]
-<!-- Example: Cloud Platform Strategy -->
-[TECH_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Primary Cloud: IBM Cloud (us-south, us-east, eu-de); Secondary Cloud: AWS (us-east-1, us-west-2) for DR only; Prohibited: On-premises deployments without approval; Multi-cloud: Allowed only for DR and data sovereignty requirements; Region Strategy: Primary region us-south, DR region us-east, data residency per compliance -->
+### [ARCHITECTURE_PRINCIPLE_N_NAME]
+<!-- Add more principles as needed for your use case: Cost Optimization, Container Security, Database Standards, etc. -->
 
-### [TECH_PRINCIPLE_2_NAME]
-<!-- Example: Infrastructure as Code Technology -->
-[TECH_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Primary IaC: Terraform 1.6+ (required for all new infrastructure); Legacy Support: IBM Schematics (existing templates only, migrate by Q4); State Management: IBM Cloud Object Storage with locking, or Terraform Cloud with SSO; Provider Versions: IBM Provider ~> 1.60, Kubernetes Provider ~> 2.23, pin all versions; Module Sources: Private registry only, no public modules without security review -->
+## IaC Code Principles
+<!-- Principles about the infrastructure code itself: structure, testing, quality, etc.
+     Add or remove principles based on your needs - the number is flexible. -->
 
-### [TECH_PRINCIPLE_3_NAME]
-<!-- Example: CI/CD and Automation Platform -->
-[TECH_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: CI/CD Platform: GitHub Actions with OIDC (no long-lived credentials); Deployment Automation: Terraform Cloud runs or GitHub Actions workflows; Secret Management: IBM Secrets Manager or HashiCorp Vault only; Approval Workflow: PR reviews required, protected branches for main; Pipeline Requirements: Must include security scanning, cost estimation, policy checks -->
+### [CODE_PRINCIPLE_1_NAME]
+<!-- Example: I. Prefer Curated Modules -->
+[CODE_PRINCIPLE_1_DESCRIPTION]
+<!-- Example: Favor validated, well-maintained modules over direct provider resources; Terraform: Use terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules; Benefits: Best practices built-in, tested and maintained, consistent patterns, reduced boilerplate; When to use direct resources: Custom requirements not supported by modules, very simple single resources, modules add unnecessary complexity; Module selection: Verify module is actively maintained, check community usage and stars, review source code for security, pin to specific versions -->
 
-### [TECH_PRINCIPLE_4_NAME]
-<!-- Example: Security and Compliance Toolchain -->
-[TECH_PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Security Scanning: Checkov 3.0+, tfsec latest, mandatory pre-commit hooks; Policy Framework: Open Policy Agent (OPA) for policy-as-code; Compliance Scanning: IBM Cloud Security and Compliance Center, Cloud Custodian for multi-cloud; Secret Detection: git-secrets, truffleHog in CI pipeline; Vulnerability Management: Snyk for dependency scanning, Trivy for containers -->
+### [CODE_PRINCIPLE_2_NAME]
+<!-- Example: II. Module Structure and Organization -->
+[CODE_PRINCIPLE_2_DESCRIPTION]
+<!-- Example: Follow tool best practices; Terraform: HashiCorp Standard Module Structure; Other tools: equivalent patterns; Principles: Single responsibility per module, clear input/output contracts, versioning, comments explain intent, use locals for DRY -->
 
-### [TECH_PRINCIPLE_5_NAME]
-<!-- Example: Testing and Validation Tools -->
-[TECH_PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Testing Framework: Terratest (Go) for integration tests, required for all modules; Local Testing: IBM Cloud local development tools, container-based testing environments; Static Analysis: tflint with company ruleset, terraform validate; Cost Estimation: Infracost with 10% tolerance threshold; Performance Testing: k6 for load testing, resilience testing in non-prod environments -->
+### [CODE_PRINCIPLE_3_NAME]
+<!-- Example: III. Testing and Validation -->
+[CODE_PRINCIPLE_3_DESCRIPTION]
+<!-- Example: Code must be testable and validated; Baseline: Syntax validation (terraform validate), dry-run (terraform plan), basic linting; Enhanced: + Unit tests for modules if supported (terraform test, mocking with override files), integration tests for stacks, security scanning, cost estimation -->
 
-## [SECTION_3_NAME]
-<!-- Example: Governance and Enforcement, Amendment Procedures, Exception Process, etc. -->
+### [CODE_PRINCIPLE_4_NAME]
+<!-- Example: IV. Formatting and Style -->
+[CODE_PRINCIPLE_4_DESCRIPTION]
+<!-- Example: Properly formatted per tool standards; Consistent naming (snake_case recommended), logical grouping, consistent indentation, alphabetize arguments where helpful, meaningful names -->
 
-[SECTION_3_CONTENT]
-<!-- Example: Constitutional amendments require RFC document and platform team approval; Quarterly compliance audits with automated weekly drift reports; All changes must pass validation gates or trigger automatic rollback; Exceptions require business justification, risk assessment, and time-bound waiver (max 90 days) -->
+### [CODE_PRINCIPLE_5_NAME]
+<!-- Example: V. Documentation -->
+[CODE_PRINCIPLE_5_DESCRIPTION]
+<!-- Example: Documentation in and alongside code; In-code: Header comments with purpose, variable/output descriptions, complex logic explanations; Separate: README with prerequisites, usage examples, architecture decisions; Note provider-specific behaviors -->
+
+### [CODE_PRINCIPLE_6_NAME]
+<!-- Example: VI. Code Quality Standards -->
+[CODE_PRINCIPLE_6_DESCRIPTION]
+<!-- Example: Enforced quality gates; Include: Input validation rules, type constraints on variables, lifecycle rules where appropriate, dependency declarations (depends_on); Must pass: Syntax validation, plan execution, unit tests (if applicable), security scanning, cost estimates within expectations -->
+
+### [CODE_PRINCIPLE_7_NAME]
+<!-- Example: VII. Variable and Output Patterns -->
+[CODE_PRINCIPLE_7_DESCRIPTION]
+<!-- Example: Clear contracts; Variables: Type constraints, descriptions mandatory, sensitive flag for secrets, defaults for optional params, validation rules; Outputs: Resource IDs/endpoints/connection strings, mark sensitive, usage examples in descriptions -->
+
+### [CODE_PRINCIPLE_8_NAME]
+<!-- Example: VIII. Security in Code -->
+[CODE_PRINCIPLE_8_DESCRIPTION]
+<!-- Example: Secure coding practices; Secrets: Use variable references never hardcode; Rotation: Include key rotation policies; Access: Least-privilege IAM/RBAC; Network: Default-deny security groups; Encryption: Enable by default with KMS; TLS: Minimum version 1.2 -->
+
+### [CODE_PRINCIPLE_N_NAME]
+<!-- Add more principles as needed for your use case: Version Pinning, State Management, Provider Configuration, etc. -->
+
+## Implementation Approaches
+<!-- Cloud Architecture Principles = WHAT infrastructure resources to create
+     IaC Code Principles = HOW to write the infrastructure code
+     Implementation Approaches = WHEN to use different patterns and complexity levels
+
+     Add or remove approaches/scenarios based on needs - the number is flexible.
+     Include the strategies and environment types relevant to use case. -->
+
+### [APPROACH_1_NAME]
+<!-- Example: Progressive Complexity (Single Environment Evolution) -->
+[APPROACH_1_DESCRIPTION]
+<!-- Example: When: Single long-lived environment that matures over time; Pattern: Start simple, layer controls as needs grow; Code: Feature flags/variables to enable/disable advanced features, commented blocks for future enhancements, modular design allows incremental additions; Pros: Lower initial complexity, gradual learning; Cons: Careful change management needed -->
+
+### [APPROACH_2_NAME]
+<!-- Example: Separate Environments (Dev/Stage/Prod Isolation) -->
+[APPROACH_2_DESCRIPTION]
+<!-- Example: When: Need isolation between workload tiers; Pattern: Separate stacks per environment with different configs; Code: Environment-specific variable files, shared modules with env-specific settings, lower resource counts for dev/staging, full controls for prod; Pros: Clear boundaries, safer testing, production isolation; Cons: More infrastructure to manage -->
+
+### [APPROACH_3_NAME]
+<!-- Example: Hybrid Approach (Recommended) -->
+[APPROACH_3_DESCRIPTION]
+<!-- Example: When: Balance isolation and progressive enhancement; Pattern: Separate environments for different purposes, each can evolve independently; Code: Dev for rapid iteration (Baseline controls), Staging mirrors prod architecture, Production gets Enhanced controls from start; Recommended for most teams -->
+
+### [APPROACH_4_NAME]
+<!-- Example: POC / Demo / Learning -->
+[APPROACH_4_DESCRIPTION]
+<!-- Example: Characteristics: Short-lived (days-weeks), single user/small team, demonstration/learning, limited data sensitivity; Code: Baseline security only, simplified architecture (single-tier networking okay), minimal resources, cost-optimized sizes, auto-cleanup tags, single file okay for simple cases; Skip: HA, DR, extensive monitoring, backups -->
+
+### [APPROACH_5_NAME]
+<!-- Example: Development / Testing Environments -->
+[APPROACH_5_DESCRIPTION]
+<!-- Example: Characteristics: Ongoing use, shared team, integration testing, non-production data; Code: Baseline security, production-like architecture at reduced scale, modular structure, basic monitoring/logging, network isolation similar to prod, cost controls (auto-shutdown, smaller instances); Include: Variable-driven config, security scanning -->
+
+### [APPROACH_6_NAME]
+<!-- Example: Staging / Pre-Production -->
+[APPROACH_6_DESCRIPTION]
+<!-- Example: Characteristics: Production validation, performance testing, production-like data (anonymized); Code: Enhanced security controls, architecture mirrors production, full monitoring/alerting, separated modules, backup configs with shorter retention, multi-zone for HA testing; Must: All prod security controls, comprehensive tagging, logging/audit -->
+
+### [APPROACH_7_NAME]
+<!-- Example: Production Environments -->
+[APPROACH_7_DESCRIPTION]
+<!-- Example: Characteristics: Live workloads, customer data, SLAs, compliance; Code: All Enhanced security controls, HA config (multi-zone/region), separated modules, comprehensive monitoring/alerting/logging, auto-scaling, load balancing/health checks, DR resources, full backup/retention; Must: All security controls, compliance tags, audit logging, network isolation, encryption -->
+
+### [APPROACH_N_NAME]
+<!-- Add more approaches as needed: DR environments, Edge deployments, Multi-tenant scenarios, etc. -->
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+<!-- Example: Constitution supersedes all other practices; All changes must be backward compatible, Amendments require documentation, approval, migration plan -->
 
 [GOVERNANCE_RULES]
-<!-- Example: All infrastructure changes must verify constitutional compliance; Violations trigger automatic rollback; Use terraform.tfvars for runtime configuration; Infrastructure state reviewed weekly; Drift remediated within 24 hours -->
+<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified;s -->
 
 **Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 1.0.0 | Ratified: 2025-01-15 | Last Amended: 2025-01-15 -->
+<!-- Example: Version: 2.0.0 | Ratified: 2025-11-10 | Last Amended: 2025-11-10 -->

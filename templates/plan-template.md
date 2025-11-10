@@ -18,8 +18,9 @@
 -->
 
 **Cloud Provider**: [e.g., AWS, Azure, GCP, IBM Cloud, Multi-cloud or NEEDS CLARIFICATION]
-**IaC Tool**: [e.g., Terraform 1.6+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
+**IaC Tool**: [e.g., Terraform 1.12+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
 **Provider Versions**: [e.g., AWS Provider ~> 5.0, Azure Provider ~> 3.0 or NEEDS CLARIFICATION]
+**Curated Modules**: [e.g., terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules, Pulumi packages or NEEDS CLARIFICATION]
 **State Backend**: [e.g., S3 + DynamoDB, Azure Blob, Terraform Cloud or NEEDS CLARIFICATION]
 **Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based or NEEDS CLARIFICATION]
 **Testing**: [e.g., Terratest, Kitchen-Terraform, terraform test or N/A]
@@ -154,16 +155,6 @@
   Document environment-specific parameters: dev/staging/prod differences.
   Include variable files, workspace strategies, and environment isolation approaches.
 
-  CLOUD PROVIDER SELECTION GUIDANCE:
-  When choosing a cloud provider, document your rationale here:
-  - AWS: Mature ecosystem, widest service selection, strong enterprise support
-  - Azure: Best for Microsoft stack integration, hybrid cloud scenarios
-  - GCP: Competitive pricing, strong data/ML services, Kubernetes-native
-  - IBM Cloud: Enterprise-grade services, strong compliance, hybrid cloud
-  - Multi-cloud: Only if required by compliance or risk management needs
-
-  Choose ONE provider for this project to minimize complexity.
-
   MULTI-ENVIRONMENT CONFIGURATION GUIDANCE:
   Use variable files (.tfvars) to parameterize environment-specific values.
   Do not duplicate Terraform code across environments.
@@ -185,6 +176,41 @@
 -->
 
 [Document environment configuration here]
+
+### Complexity Level
+
+<!--
+  Document the complexity level (Baseline vs Enhanced) based on use case and environment type.
+  This guides which architecture principles to apply from the constitution.
+
+  BASELINE (POC/Demo/Dev environments):
+  - Purpose: Quick demos, learning, rapid iteration, short-lived experiments
+  - Architecture: Simplified (single-zone, single-tier networking acceptable)
+  - Resources: Minimal (smallest instance sizes, basic storage classes)
+  - Security: Basic controls (no hardcoded credentials, encryption in transit, restricted network access)
+  - Monitoring: Default metrics and basic health checks only
+  - Cost: Highly optimized (auto-shutdown schedules, smallest viable resources)
+  - HA/DR: Not required
+  - Examples: Single main.tf acceptable, local state okay for solo dev
+
+  ENHANCED (Staging/Production environments):
+  - Purpose: Production validation, live customer workloads, business-critical services
+  - Architecture: Production-grade (multi-zone, multi-tier networking with isolation)
+  - Resources: Right-sized based on performance requirements and load testing
+  - Security: Full controls (encryption at rest + transit, least-privilege IAM, private networks, audit logging, security scanning)
+  - Monitoring: Comprehensive (custom metrics, alerting, dashboards, centralized logging)
+  - Cost: Balanced with performance and availability requirements
+  - HA/DR: Multi-zone deployment, auto-scaling, load balancing, backup/restore, disaster recovery
+  - Examples: Organized file structure, remote state with locking, separate environments
+
+  Choose complexity level based on:
+  - Environment purpose (POC vs Development vs Staging vs Production)
+  - Data sensitivity and compliance requirements
+  - Availability and performance SLAs
+  - Team size and operational maturity
+-->
+
+[Document complexity level and rationale here]
 
 ### State Management
 
@@ -271,10 +297,43 @@ specs/[###-infrastructure]/
 
   For HYBRID PROJECTS (both application and infrastructure):
   Keep them separate - application code in src/, infrastructure in iac/
+
+  STRUCTURE SELECTION GUIDANCE:
+  Choose infrastructure code structure based on use case complexity, not arbitrary rules.
+
+  - POCs/Demos/Learning: Use Option 1 (Simple Terraform) - single main.tf is perfectly acceptable
+    * Characteristics: Short-lived, single user, demonstration or learning purpose
+    * Benefits: Minimal overhead, easy to understand, quick to iterate
+    * When to upgrade: When infrastructure exceeds ~100 lines or needs team collaboration
+
+  - Development/Testing: Use Option 2 (Terraform Infrastructure) - organized by resource type
+    * Characteristics: Ongoing use, shared team access, multiple resource types
+    * Benefits: Clear organization, easier to navigate, supports growth
+    * File separation: Logical grouping by concern (network, compute, data, security)
+
+  - Production: Use Option 2 with modules/ directory for reusable components
+    * Characteristics: Business-critical, compliance requirements, complex dependencies
+    * Benefits: Reusability, testing isolation, version control of infrastructure patterns
+    * Modules: Extract common patterns (e.g., standard VPC setup, standard app tier)
+
+  - Large/Complex Systems: Consider Option 2 with workspaces or directory-based environments
+    * Characteristics: Multiple teams, multiple environments, extensive infrastructure
+    * Benefits: Environment isolation, parallel development, clear boundaries
+    * Trade-off: More files to manage, requires discipline to avoid drift
+
+  Do NOT over-engineer structure for simple use cases. A single main.tf for a POC is appropriate.
 -->
 
 ```text
-# [REMOVE IF UNUSED] Option 1: Terraform Infrastructure (DEFAULT for IaC)
+# [REMOVE IF UNUSED] Option 1: Simple Terraform (POC/Demo/Single Resource)
+iac/
+├── main.tf                 # All resources in one file
+├── variables.tf            # Variable declarations
+├── outputs.tf              # Output declarations
+├── provider.tf             # Provider configuration
+└── README.md               # Provisioning instructions
+
+# [REMOVE IF UNUSED] Option 2: Terraform Infrastructure (DEFAULT for IaC)
 iac/
 ├── backend.tf              # State backend (IBM COS, S3, Azure Storage, GCS)
 ├── provider.tf             # Provider configuration (IBM Cloud, AWS, Azure, GCP)
@@ -298,7 +357,7 @@ iac/
 │   └── vpc-networking/
 └── README.md               # Provisioning and usage instructions
 
-# [REMOVE IF UNUSED] Option 2: Pulumi Infrastructure
+# [REMOVE IF UNUSED] Option 3: Pulumi Infrastructure
 iac/
 ├── Pulumi.yaml             # Project definition
 ├── Pulumi.dev.yaml         # Dev stack configuration
@@ -311,7 +370,7 @@ iac/
 ├── package.json            # Node.js dependencies
 └── README.md               # Deployment instructions
 
-# [REMOVE IF UNUSED] Option 3: CloudFormation Infrastructure (AWS)
+# [REMOVE IF UNUSED] Option 4: CloudFormation Infrastructure (AWS)
 iac/
 ├── main-stack.yaml         # Root stack template
 ├── networking.yaml         # Nested stack: VPC, subnets

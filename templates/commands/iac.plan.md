@@ -50,20 +50,38 @@ You **MUST** consider the user input before proceeding (if not empty).
    ```text
    For each unknown in Technical Context:
      Task: "Research {unknown} for {infrastructure context}"
-   For cloud provider selection:
-     Task: "Compare AWS vs Azure vs GCP vs IBM Cloud for {requirements}"
-   For IaC tool:
-     Task: "Best practices for {Terraform/Pulumi/CloudFormation} for {use case}"
+   For IaC tool (if not specified):
+     Task: "Best practices for {Terraform/Pulumi/CloudFormation} for {use case} on {cloud provider}"
+   For well-architected framework (MANDATORY REFERENCE):
+     Task: "Study {cloud provider} Well-Architected Framework and document applicable pillars/principles:
+       - AWS: 6 pillars (Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability)
+       - Azure: 5 pillars (Cost Optimization, Operational Excellence, Performance Efficiency, Reliability, Security)
+       - GCP: 5 principles (Operational Excellence, Security Privacy & Compliance, Reliability, Cost Optimization, Performance & Scalability)
+       - IBM Cloud: Framework for Financial Services & IBM Cloud best practices
+     Map framework recommendations to infrastructure requirements.
+     Identify which pillar applies to each component and document specific best practices to follow."
+   For curated modules (PREFERRED APPROACH):
+     Task: "Identify and recommend curated modules as the PRIMARY implementation approach:
+       - AWS: terraform-aws-modules (Terraform Registry verified)
+       - Azure: Azure Verified Modules (Microsoft official)
+       - IBM Cloud: terraform-ibm-modules (IBM official)
+       - GCP: terraform-google-modules (Google Cloud official)
+       - Pulumi: Official Pulumi packages for each cloud provider
+     Document specific modules for each infrastructure component (VPC, compute, database, etc.).
+     Only recommend direct provider resources when: custom requirements not supported by modules, very simple single resources, or modules add unnecessary complexity.
+     Provide rationale for any direct resource usage."
    For patterns:
-     Task: "Research {multi-region/DR/state-management/scaling} patterns"
+     Task: "Research {multi-region/DR/state-management/scaling} patterns on {cloud provider}"
    ```
 
 3. **Consolidate findings** in `research.md` using format:
    - Decision: [what was chosen - cloud provider, IaC tool, versions]
    - Rationale: [why chosen - cost, features, team expertise, ecosystem]
    - Alternatives considered: [what else evaluated and why rejected]
+   - Well-Architected Framework (MANDATORY): [applicable pillars/principles mapped to infrastructure components with specific best practices]
+   - Curated Modules (PRIMARY APPROACH): [specific modules/packages identified for each component with versions, rationale for any direct resource usage]
    - Best practices: [key patterns to follow]
-   - References: [documentation links, examples]
+   - References: [documentation links, examples, module registries]
 
 **Output**: `research.md` with all NEEDS CLARIFICATION resolved
 
