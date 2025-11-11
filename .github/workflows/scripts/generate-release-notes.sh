@@ -28,7 +28,7 @@ fi
 
 # Create release notes
 cat > release_notes.md << EOF
-This is the latest set of releases that you can use with your agent of choice. We recommend using the Specify CLI to scaffold your projects, however you can download these independently and manage them yourself.
+Use these releases with your preferred AI agent. We recommend the IaC-Specify CLI for project scaffolding, but you can download and unzip the templates in your project directory if needed.
 
 ## Changelog
 

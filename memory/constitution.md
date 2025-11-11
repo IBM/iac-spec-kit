@@ -7,7 +7,7 @@
      Use Baseline/Enhanced pattern to scale complexity with use case. -->
 
 ### [ARCHITECTURE_PRINCIPLE_1_NAME]
-<!-- Example: I. Security Defaults (NON-NEGOTIABLE) -->
+<!-- Example: I. Security Defaults -->
 [ARCHITECTURE_PRINCIPLE_1_DESCRIPTION]
 <!-- Example: Infrastructure must be secure by default; Baseline: No hardcoded credentials, encryption in transit enabled, network access restricted to necessary sources; Enhanced: + Encryption at rest with managed keys, least-privilege access policies, private network placement, audit logging for privileged operations -->
 
@@ -54,7 +54,7 @@
      Add or remove principles based on your needs - the number is flexible. -->
 
 ### [CODE_PRINCIPLE_1_NAME]
-<!-- Example: I. Prefer Curated Modules -->
+<!-- Example: I. Prefer Curated Modules (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_1_DESCRIPTION]
 <!-- Example: Favor validated, well-maintained modules over direct provider resources; Terraform: Use terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules; Benefits: Best practices built-in, tested and maintained, consistent patterns, reduced boilerplate; When to use direct resources: Custom requirements not supported by modules, very simple single resources, modules add unnecessary complexity; Module selection: Verify module is actively maintained, check community usage and stars, review source code for security, pin to specific versions -->
 

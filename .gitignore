@@ -39,7 +39,7 @@ env/
 .env.local
 *.lock
 
-# Spec Kit-specific files
+# build and speckit files
 .genreleases/
 *.zip
 sdd-*/
