@@ -7,6 +7,7 @@
 Specification-Driven Development (SDD) is an emerging methodology where detailed specifications are created before code. The specification becomes your single source of truth, guiding AI agents to generate implementation plans and production-ready code. This approach clarifies intent upfront, reduces misalignment, and enables iterative refinement through living documents that evolve with your project.
 
 **Key benefits for infrastructure:**
+
 - Start with high-level requirements; AI agents help generate detailed specifications
 - Write what you need (requirements) before how to build it (tech stack)
 - AI agents translate specs into IaC configurations (Terraform being the most popular)
@@ -30,7 +31,6 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 - **Infrastructure constitutional principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
 
 ---
-
 
 ## Table of Contents
 
@@ -75,7 +75,7 @@ iac-specify check
 To upgrade iac-specify run:
 
 ```bash
-uv tool install iac-specify-cli --force --from git+https://github.com/github/spec-kit.git
+uv tool install iac-specify-cli --force --from git+https://github.com/ibm/iac-spec-kit.git
 ```
 
 #### Option 2: One-time Usage
