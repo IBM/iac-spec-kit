@@ -68,7 +68,7 @@ check_feature_branch() {
 
     # For non-git repos, we can't enforce branch naming but still provide output
     if [[ "$has_git_repo" != "true" ]]; then
-        echo "[specify] Warning: Git repository not detected; skipped branch validation" >&2
+        echo "[iac-specify] Warning: Git repository not detected; skipped branch validation" >&2
         return 0
     fi
 
