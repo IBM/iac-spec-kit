@@ -10,7 +10,7 @@
 # ]
 # ///
 """
-IAC Specify CLI - Setup tool for IAC Specify projects
+IaC Specify CLI - Setup tool for IAC Specify projects
 
 Usage:
     uvx iac-specify-cli.py init <project-name>
@@ -66,6 +66,12 @@ def _github_auth_headers(cli_token: str | None = None) -> dict:
 
 # Agent configuration with name, folder, install URL, and CLI tool requirement
 AGENT_CONFIG = {
+    "bob": {
+        "name": "IBM Bob",
+        "folder": ".bob/",
+        "install_url": None,  # IDE-based
+        "requires_cli": False,
+    },
     "copilot": {
         "name": "GitHub Copilot",
         "folder": ".github/",
@@ -149,7 +155,7 @@ AGENT_CONFIG = {
         "folder": ".agents/",
         "install_url": "https://ampcode.com/manual#install",
         "requires_cli": True,
-    },
+    }
 }
 
 SCRIPT_TYPE_CHOICES = {"sh": "POSIX Shell (bash/zsh)", "ps": "PowerShell"}
@@ -157,15 +163,15 @@ SCRIPT_TYPE_CHOICES = {"sh": "POSIX Shell (bash/zsh)", "ps": "PowerShell"}
 CLAUDE_LOCAL_PATH = Path.home() / ".claude" / "local" / "claude"
 
 BANNER = """
-███████╗██████╗ ███████╗ ██████╗██╗███████╗██╗   ██╗
-██╔════╝██╔══██╗██╔════╝██╔════╝██║██╔════╝╚██╗ ██╔╝
-███████╗██████╔╝█████╗  ██║     ██║█████╗   ╚████╔╝ 
-╚════██║██╔═══╝ ██╔══╝  ██║     ██║██╔══╝    ╚██╔╝  
-███████║██║     ███████╗╚██████╗██║██║        ██║   
-╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝   
+██╗ █████╗  ██████╗      ███████╗██████╗ ███████╗ ██████╗██╗███████╗██╗   ██╗
+██║██╔══██╗██╔════╝      ██╔════╝██╔══██╗██╔════╝██╔════╝██║██╔════╝╚██╗ ██╔╝
+██║███████║██║     █████╗███████╗██████╔╝█████╗  ██║     ██║█████╗   ╚████╔╝ 
+██║██╔══██║██║     ╚════╝╚════██║██╔═══╝ ██╔══╝  ██║     ██║██╔══╝    ╚██╔╝  
+██║██║  ██║╚██████╗      ███████║██║     ███████╗╚██████╗██║██║        ██║   
+╚═╝╚═╝  ╚═╝ ╚═════╝      ╚══════╝╚═╝     ╚══════╝ ╚═════╝╚═╝╚═╝        ╚═╝   
 """
 
-TAGLINE = "IAC Spec Kit - Infrastructure as Code Spec-Driven Development Toolkit"
+TAGLINE = "IaC Spec Kit - Infrastructure as Code Spec-Driven Development Toolkit"
 class StepTracker:
     """Track and render hierarchical steps without emojis, similar to Claude Code tree output.
     Supports live auto-refresh via an attached refresh callback.
@@ -359,7 +365,7 @@ class BannerGroup(TyperGroup):
 
 app = typer.Typer(
     name="iac-specify",
-    help="Setup tool for IAC Specify spec-driven development projects",
+    help="Setup tool for IaC Specify spec-driven development projects",
     add_completion=False,
     invoke_without_command=True,
     cls=BannerGroup,
@@ -368,7 +374,7 @@ app = typer.Typer(
 def show_banner():
     """Display the ASCII art banner."""
     banner_lines = BANNER.strip().split('\n')
-    colors = ["bright_blue", "blue", "cyan", "bright_cyan", "white", "bright_white"]
+    colors = ["blue", "bright_blue", "cyan", "bright_cyan", "blue", "cyan"]
 
     styled_banner = Text()
     for i, line in enumerate(banner_lines):
@@ -864,7 +870,7 @@ def ensure_executable_scripts(project_path: Path, tracker: StepTracker | None = 
 @app.command()
 def init(
     project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
-    ai_assistant: str = typer.Option(None, "--ai", help="AI assistant to use: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, or q"),
+    ai_assistant: str = typer.Option(None, "--ai", help="AI assistant to use: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, q, or bob"),
     script_type: str = typer.Option(None, "--script", help="Script type to use: sh or ps"),
     ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="Skip checks for AI agent tools like Claude Code"),
     no_git: bool = typer.Option(False, "--no-git", help="Skip git repository initialization"),
@@ -875,7 +881,7 @@ def init(
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
 ):
     """
-    Initialize a new IAC Specify project from the latest template.
+    Initialize a new IaC Specify project from the latest template.
 
     This command will:
     1. Check that required tools are installed (git is optional)
@@ -973,7 +979,7 @@ def init(
         selected_ai = select_with_arrows(
             ai_choices, 
             "Choose your AI assistant:", 
-            "copilot"
+            "bob"
         )
 
     if not ignore_agent_tools:
@@ -1010,7 +1016,7 @@ def init(
     console.print(f"[cyan]Selected AI assistant:[/cyan] {selected_ai}")
     console.print(f"[cyan]Selected script type:[/cyan] {selected_script}")
 
-    tracker = StepTracker("Initialize IAC Specify Project")
+    tracker = StepTracker("Initialize IaC Specify Project")
 
     sys._specify_tracker_active = True
 
@@ -1206,7 +1212,7 @@ def check():
 
     console.print(tracker.render())
 
-    console.print("\n[bold green]IAC Specify CLI is ready to use![/bold green]")
+    console.print("\n[bold green]IaC Specify CLI is ready to use![/bold green]")
 
     if not git_ok:
         console.print("[dim]Tip: Install git for repository management[/dim]")

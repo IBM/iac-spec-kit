@@ -44,5 +44,7 @@ gh release create "$VERSION" \
   .genreleases/iac-spec-kit-template-amp-ps-"$VERSION".zip \
   .genreleases/iac-spec-kit-template-q-sh-"$VERSION".zip \
   .genreleases/iac-spec-kit-template-q-ps-"$VERSION".zip \
-  --title "IAC Spec Kit Templates - $VERSION_NO_V" \
+  .genreleases/iac-spec-kit-template-bob-sh-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-bob-ps-"$VERSION".zip \
+  --title "IaC Spec Kit Templates - $VERSION_NO_V" \
   --notes-file release_notes.md
