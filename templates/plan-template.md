@@ -3,7 +3,7 @@
 **Branch**: `[###-infrastructure-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Infrastructure specification from `/specs/[###-infrastructure-name]/spec.md`
 
-**Note**: This template is filled in by the `/iac.plan` command. See `.specify/templates/commands/iac.plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/iac.plan` command. See `iac.plan.md` for the execution workflow.
 
 ## Summary
 
