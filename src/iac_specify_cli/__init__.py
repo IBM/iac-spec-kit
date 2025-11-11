@@ -10,18 +10,18 @@
 # ]
 # ///
 """
-Specify CLI - Setup tool for Specify projects
+IAC Specify CLI - Setup tool for IAC Specify projects
 
 Usage:
-    uvx specify-cli.py init <project-name>
-    uvx specify-cli.py init .
-    uvx specify-cli.py init --here
+    uvx iac-specify-cli.py init <project-name>
+    uvx iac-specify-cli.py init .
+    uvx iac-specify-cli.py init --here
 
 Or install globally:
-    uv tool install --from specify-cli.py specify-cli
-    specify init <project-name>
-    specify init .
-    specify init --here
+    uv tool install --from iac-specify-cli.py iac-specify-cli
+    iac-specify init <project-name>
+    iac-specify init .
+    iac-specify init --here
 """
 
 import os
@@ -358,8 +358,8 @@ class BannerGroup(TyperGroup):
 
 
 app = typer.Typer(
-    name="specify",
-    help="Setup tool for Specify spec-driven development projects",
+    name="iac-specify",
+    help="Setup tool for IAC Specify spec-driven development projects",
     add_completion=False,
     invoke_without_command=True,
     cls=BannerGroup,
@@ -384,7 +384,7 @@ def callback(ctx: typer.Context):
     """Show banner when no subcommand is provided."""
     if ctx.invoked_subcommand is None and "--help" not in sys.argv and "-h" not in sys.argv:
         show_banner()
-        console.print(Align.center("[dim]Run 'specify --help' for usage information[/dim]"))
+        console.print(Align.center("[dim]Run 'iac-specify --help' for usage information[/dim]"))
         console.print()
 
 def run_command(cmd: list[str], check_return: bool = True, capture: bool = False, shell: bool = False) -> Optional[str]:
@@ -875,7 +875,7 @@ def init(
     github_token: str = typer.Option(None, "--github-token", help="GitHub token to use for API requests (or set GH_TOKEN or GITHUB_TOKEN environment variable)"),
 ):
     """
-    Initialize a new Specify project from the latest template.
+    Initialize a new IAC Specify project from the latest template.
 
     This command will:
     1. Check that required tools are installed (git is optional)
@@ -886,17 +886,17 @@ def init(
     6. Optionally set up AI assistant commands
 
     Examples:
-        specify init my-project
-        specify init my-project --ai claude
-        specify init my-project --ai copilot --no-git
-        specify init --ignore-agent-tools my-project
-        specify init . --ai claude         # Initialize in current directory
-        specify init .                     # Initialize in current directory (interactive AI selection)
-        specify init --here --ai claude    # Alternative syntax for current directory
-        specify init --here --ai codex
-        specify init --here --ai codebuddy
-        specify init --here
-        specify init --here --force  # Skip confirmation when current directory not empty
+        iac-specify init my-project
+        iac-specify init my-project --ai claude
+        iac-specify init my-project --ai copilot --no-git
+        iac-specify init --ignore-agent-tools my-project
+        iac-specify init . --ai claude         # Initialize in current directory
+        iac-specify init .                     # Initialize in current directory (interactive AI selection)
+        iac-specify init --here --ai claude    # Alternative syntax for current directory
+        iac-specify init --here --ai codex
+        iac-specify init --here --ai codebuddy
+        iac-specify init --here
+        iac-specify init --here --force  # Skip confirmation when current directory not empty
     """
 
     show_banner()
@@ -1010,7 +1010,7 @@ def init(
     console.print(f"[cyan]Selected AI assistant:[/cyan] {selected_ai}")
     console.print(f"[cyan]Selected script type:[/cyan] {selected_script}")
 
-    tracker = StepTracker("Initialize Specify Project")
+    tracker = StepTracker("Initialize IAC Specify Project")
 
     sys._specify_tracker_active = True
 
@@ -1206,7 +1206,7 @@ def check():
 
     console.print(tracker.render())
 
-    console.print("\n[bold green]Specify CLI is ready to use![/bold green]")
+    console.print("\n[bold green]IAC Specify CLI is ready to use![/bold green]")
 
     if not git_ok:
         console.print("[dim]Tip: Install git for repository management[/dim]")

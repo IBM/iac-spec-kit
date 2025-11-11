@@ -38,7 +38,7 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 - [About this project](#about-this-project)
 - [⚡ Get Started](#-get-started)
 - [🤖 Supported AI Agents](#-supported-ai-agents)
-- [🔧 Specify CLI Reference](#-specify-cli-reference)
+- [🔧 IAC Specify CLI Reference](#-iac-specify-cli-reference)
   - [Infrastructure-as-Code Projects](#infrastructure-as-code-projects)
 - [📚 Core philosophy](#-core-philosophy)
 - [🌟 Development Phases](#-development-phases)
@@ -62,20 +62,20 @@ Choose your preferred installation method:
 Install once and use everywhere:
 
 ```bash
-uv tool install specify-cli --from git+https://github.com/ibm/iac-spec-kit.git
+uv tool install iac-specify-cli --from git+https://github.com/ibm/iac-spec-kit.git
 ```
 
 Then use the tool directly:
 
 ```bash
-specify init <PROJECT_NAME>
-specify check
+iac-specify init <PROJECT_NAME>
+iac-specify check
 ```
 
-To upgrade specify run:
+To upgrade iac-specify run:
 
 ```bash
-uv tool install specify-cli --force --from git+https://github.com/github/spec-kit.git
+uv tool install iac-specify-cli --force --from git+https://github.com/github/spec-kit.git
 ```
 
 #### Option 2: One-time Usage
@@ -83,7 +83,7 @@ uv tool install specify-cli --force --from git+https://github.com/github/spec-ki
 Run directly without installing:
 
 ```bash
-uvx --from git+https://github.com/ibm/iac-spec-kit.git specify init <PROJECT_NAME>
+uvx --from git+https://github.com/ibm/iac-spec-kit.git iac-specify init <PROJECT_NAME>
 ```
 
 **Benefits of persistent installation:**
@@ -158,18 +158,18 @@ For the original Spec-Driven Development methodology, see the [GitHub Spec Kit d
 | [Amazon Q Developer CLI](https://aws.amazon.com/developer/learning/q-developer-cli/) | ⚠️ | Amazon Q Developer CLI [does not support](https://github.com/aws/amazon-q-developer-cli/issues/3064) custom arguments for slash commands. |
 | [Amp](https://ampcode.com/) | ✅ | |
 
-## 🔧 Specify CLI Reference
+## 🔧 IAC Specify CLI Reference
 
-The `specify` command supports the following options:
+The `iac-specify` command supports the following options:
 
 ### Commands
 
 | Command     | Description                                                    |
 |-------------|----------------------------------------------------------------|
-| `init`      | Initialize a new Specify project from the latest template      |
+| `init`      | Initialize a new IAC Specify project from the latest template      |
 | `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`) |
 
-### `specify init` Arguments & Options
+### `iac-specify init` Arguments & Options
 
 | Argument/Option        | Type     | Description                                                                  |
 |------------------------|----------|------------------------------------------------------------------------------|
@@ -188,49 +188,49 @@ The `specify` command supports the following options:
 
 ```bash
 # Basic project initialization
-specify init my-infrastructure
+iac-specify init my-infrastructure
 
 # Initialize with specific AI assistant
-specify init my-infrastructure --ai claude
+iac-specify init my-infrastructure --ai claude
 
 # Initialize with Cursor support
-specify init my-infrastructure --ai cursor-agent
+iac-specify init my-infrastructure --ai cursor-agent
 
 # Initialize with Windsurf support
-specify init my-infrastructure --ai windsurf
+iac-specify init my-infrastructure --ai windsurf
 
 # Initialize with Amp support
-specify init my-infrastructure --ai amp
+iac-specify init my-infrastructure --ai amp
 
 # Initialize with PowerShell scripts (Windows/cross-platform)
-specify init my-infrastructure --ai copilot --script ps
+iac-specify init my-infrastructure --ai copilot --script ps
 
 # Initialize in current directory
-specify init . --ai copilot
+iac-specify init . --ai copilot
 # or use the --here flag
-specify init --here --ai copilot
+iac-specify init --here --ai copilot
 
 # Force merge into current (non-empty) directory without confirmation
-specify init . --force --ai copilot
+iac-specify init . --force --ai copilot
 # or
-specify init --here --force --ai copilot
+iac-specify init --here --force --ai copilot
 
 # Skip git initialization
-specify init my-infrastructure --ai gemini --no-git
+iac-specify init my-infrastructure --ai gemini --no-git
 
 # Enable debug output for troubleshooting
-specify init my-infrastructure --ai claude --debug
+iac-specify init my-infrastructure --ai claude --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
-specify init my-infrastructure --ai claude --github-token ghp_your_token_here
+iac-specify init my-infrastructure --ai claude --github-token ghp_your_token_here
 
 # Check system requirements
-specify check
+iac-specify check
 ```
 
 ### Available Slash Commands
 
-After running `specify init`, your AI coding agent will have access to these slash commands for structured development:
+After running `iac-specify init`, your AI coding agent will have access to these slash commands for structured development:
 
 #### Core Commands
 
@@ -377,49 +377,47 @@ If you encounter issues with an agent, please open an issue so we can refine the
 You can use the Specify CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
 
 ```bash
-specify init <project_name>
+iac-specify init <project_name>
 ```
 
 Or initialize in the current directory:
 
 ```bash
-specify init .
+iac-specify init .
 # or use the --here flag
-specify init --here
+iac-specify init --here
 # Skip confirmation when the directory already has files
-specify init . --force
+iac-specify init . --force
 # or
-specify init --here --force
+iac-specify init --here --force
 ```
-
-![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
 
 You will be prompted to select the AI agent you are using. You can also proactively specify it directly in the terminal:
 
 ```bash
-specify init <project_name> --ai claude
-specify init <project_name> --ai gemini
-specify init <project_name> --ai copilot
+iac-specify init <project_name> --ai claude
+iac-specify init <project_name> --ai gemini
+iac-specify init <project_name> --ai copilot
 
 # Or in current directory:
-specify init . --ai claude
-specify init . --ai codex
+iac-specify init . --ai claude
+iac-specify init . --ai codex
 
 # or use --here flag
-specify init --here --ai claude
-specify init --here --ai codex
+iac-specify init --here --ai claude
+iac-specify init --here --ai codex
 
 # Force merge into a non-empty current directory
-specify init . --force --ai claude
+iac-specify init . --force --ai claude
 
 # or
-specify init --here --force --ai claude
+iac-specify init --here --force --ai claude
 ```
 
 The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, or Amazon Q Developer CLI installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
 
 ```bash
-specify init <project_name> --ai claude --ignore-agent-tools
+iac-specify init <project_name> --ai claude --ignore-agent-tools
 ```
 
 ### **STEP 1:** Establish project principles
