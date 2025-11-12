@@ -98,7 +98,7 @@ This command transforms a simple feature description (the user-prompt) into a co
 Once a feature specification exists, this command creates a comprehensive implementation plan:
 
 1. **Specification Analysis**: Reads and understands the feature requirements, user stories, and acceptance criteria
-2. **Constitutional Compliance**: Ensures alignment with project constitution and architectural principles
+2. **Principles Compliance**: Ensures alignment with project principles and architectural principles
 3. **Technical Translation**: Converts business requirements into technical architecture and implementation details
 4. **Detailed Documentation**: Generates supporting documents for data models, API contracts, and test scenarios
 5. **Quickstart Validation**: Produces a quickstart guide capturing key validation scenarios
@@ -212,7 +212,7 @@ The templates include comprehensive checklists that act as "unit tests" for the 
 
 These checklists force the LLM to self-review its output systematically, catching gaps that might otherwise slip through. It's like giving the LLM a quality assurance framework.
 
-#### 4. **Constitutional Compliance Through Gates**
+#### 4. **Principles Compliance Through Gates**
 
 The implementation plan template enforces architectural principles through phase gates:
 
@@ -276,13 +276,13 @@ These constraints work together to produce specifications that are:
 
 The templates transform the LLM from a creative writer into a disciplined specification engineer, channeling its capabilities toward producing consistently high-quality, executable specifications that truly drive development.
 
-## The Constitutional Foundation: Enforcing Architectural Discipline
+## The Foundational Principles: Enforcing Architectural Discipline
 
-At the heart of SDD lies a constitution—a set of immutable principles that govern how specifications become code. The constitution (`memory/constitution.md`) acts as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
+At the heart of SDD lies a principles—a set of immutable principles that govern how specifications become code. The principles (`memory/principles.md`) acts as the architectural DNA of the system, ensuring that every generated implementation maintains consistency, simplicity, and quality.
 
 ### The Nine Articles of Development
 
-The constitution defines nine articles that shape every aspect of the development process:
+The principles defines nine articles that shape every aspect of the development process:
 
 #### Article I: Library-First Principle
 
@@ -351,7 +351,7 @@ Tests MUST use realistic environments:
 
 This ensures generated code works in practice, not just in theory.
 
-### Constitutional Enforcement Through Templates
+### Principles Enforcement Through Templates
 
 The implementation plan template operationalizes these articles through concrete checkpoints:
 
@@ -374,37 +374,37 @@ These gates act as compile-time checks for architectural principles. The LLM can
 
 ### The Power of Immutable Principles
 
-The constitution's power lies in its immutability. While implementation details can evolve, the core principles remain constant. This provides:
+The principles's power lies in its immutability. While implementation details can evolve, the core principles remain constant. This provides:
 
 1. **Consistency Across Time**: Code generated today follows the same principles as code generated next year
 2. **Consistency Across LLMs**: Different AI models produce architecturally compatible code
 3. **Architectural Integrity**: Every feature reinforces rather than undermines the system design
 4. **Quality Guarantees**: Test-first, library-first, and simplicity principles ensure maintainable code
 
-### Constitutional Evolution
+### Principles Evolution
 
 While principles are immutable, their application can evolve:
 
 ```text
 Section 4.2: Amendment Process
-Modifications to this constitution require:
+Modifications to these principles require:
 - Explicit documentation of the rationale for change
 - Review and approval by project maintainers
 - Backwards compatibility assessment
 ```
 
-This allows the methodology to learn and improve while maintaining stability. The constitution shows its own evolution with dated amendments, demonstrating how principles can be refined based on real-world experience.
+This allows the methodology to learn and improve while maintaining stability. The principles shows its own evolution with dated amendments, demonstrating how principles can be refined based on real-world experience.
 
 ### Beyond Rules: A Development Philosophy
 
-The constitution isn't just a rulebook—it's a philosophy that shapes how LLMs think about code generation:
+The principles isn't just a rulebook—it's a philosophy that shapes how LLMs think about code generation:
 
 - **Observability Over Opacity**: Everything must be inspectable through CLI interfaces
 - **Simplicity Over Cleverness**: Start simple, add complexity only when proven necessary
 - **Integration Over Isolation**: Test in real environments, not artificial ones
 - **Modularity Over Monoliths**: Every feature is a library with clear boundaries
 
-By embedding these principles into the specification and planning process, SDD ensures that generated code isn't just functional—it's maintainable, testable, and architecturally sound. The constitution transforms AI from a code generator into an architectural partner that respects and reinforces system design principles.
+By embedding these principles into the specification and planning process, SDD ensures that generated code isn't just functional—it's maintainable, testable, and architecturally sound. The principles transforms AI from a code generator into an architectural partner that respects and reinforces system design principles.
 
 ## The Transformation
 
@@ -431,7 +431,7 @@ All infrastructure commands use the `.iac` namespace to distinguish them from ge
 - `/iac.implement` - Execute infrastructure provisioning with validation
 - `/iac.analyze` - Analyze infrastructure artifacts for consistency and compliance
 - `/iac.clarify` - Clarify infrastructure requirements and constraints
-- `/iac.constitution` - Review infrastructure development principles
+- `/iac.principles` - Review infrastructure development principles
 
 #### Infrastructure specification example
 
@@ -466,9 +466,9 @@ This generates:
 - Comprehensive validation scenarios for automated testing and manual verification
 - All documents properly versioned in a feature branch
 
-#### Infrastructure-specific constitutional principles
+#### Infrastructure-specific foundational principles
 
-IAC Spec Kit includes infrastructure-focused constitutional principles:
+IAC Spec Kit includes infrastructure-focused foundational principles:
 
 **Cloud Resource Modularity**: Every infrastructure component must be designed as reusable Terraform modules with clear input/output contracts.
 

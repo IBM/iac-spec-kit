@@ -135,7 +135,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Check that generated IaC code matches the specification and architecture design
    - Validate that syntax validation passes (e.g., `terraform validate`, `pulumi preview`)
    - Verify code formatting is applied and consistent
-   - Confirm the implementation follows the technical plan and constitutional requirements
+   - Confirm the implementation follows the technical plan and principles requirements
    - Report final status with summary of completed phases and generated files
 
 **CRITICAL: Code Generation vs Deployment**
@@ -146,7 +146,7 @@ This command generates infrastructure-as-code files ONLY. It does NOT deploy act
 - Generates .tf files (or equivalent IaC code) based on architecture plan
 - Applies code formatting and validates syntax
 - Creates documentation and deployment guides
-- Ensures code follows constitutional principles and best practices
+- Ensures code follows foundational principles and best practices
 
 **What this command does NOT do:**
 - Deploy/provision actual cloud resources (terraform apply, pulumi up, etc.)

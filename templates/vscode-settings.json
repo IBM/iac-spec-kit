@@ -1,6 +1,6 @@
 {
     "chat.promptFilesRecommendations": {
-        "iac.constitution": true,
+        "iac.principles": true,
         "iac.specify": true,
         "iac.plan": true,
         "iac.tasks": true,

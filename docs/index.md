@@ -55,7 +55,7 @@ Generate infrastructure for multiple cloud providers:
 ### Infrastructure Commands
 
 All commands use the `.iac` namespace for infrastructure workflows:
-- `/iac.constitution` - Define infrastructure governance principles
+- `/iac.principles` - Define infrastructure governance principles
 - `/iac.specify` - Create cloud-agnostic infrastructure specifications
 - `/iac.plan` - Generate architecture plans with cloud provider selection
 - `/iac.tasks` - Break down into dependency-ordered Terraform tasks
@@ -74,7 +74,7 @@ Built-in support for Terraform workflows:
 
 ### Infrastructure Governance
 
-Constitutional principles for infrastructure:
+Foundational principles for infrastructure:
 - **Security standards**: Encryption requirements, IAM policies, network isolation
 - **Compliance frameworks**: SOC 2, HIPAA, PCI-DSS, GDPR requirements
 - **Cost governance**: Budget alerts, approved instance types, cost estimation
@@ -110,7 +110,7 @@ Modernize existing infrastructure with IaC:
 
 **Cloud provider independence**: Infrastructure requirements shouldn't assume a specific cloud provider unless there's a compelling reason.
 
-**Governance through constitution**: Encode organizational infrastructure principles (security, compliance, cost management) that guide all infrastructure decisions.
+**Governance through principles**: Encode organizational infrastructure principles (security, compliance, cost management) that guide all infrastructure decisions.
 
 **Iterative refinement**: Infrastructure specifications go through clarification, planning, task breakdown, and consistency analysis before code generation.
 
@@ -134,13 +134,13 @@ Modernize existing infrastructure with IaC:
 - Living documentation of infrastructure decisions
 
 ### Support organizational governance
-- Constitutional principles encode infrastructure standards
+- Foundational principles encode infrastructure standards
 - Compliance requirements built into specifications
 - Audit trail of infrastructure decisions
 
 ## Attribution
 
-IaC Spec Kit builds upon the [Specification-Driven Development methodology](https://github.com/github/spec-kit) created by GitHub. The core methodology, workflow patterns, and constitutional principles were developed by the GitHub Spec Kit team. We are grateful for their foundational work.
+IaC Spec Kit builds upon the [Specification-Driven Development methodology](https://github.com/github/spec-kit) created by GitHub. The core methodology, workflow patterns, and foundational principles were developed by the GitHub Spec Kit team. We are grateful for their foundational work.
 
 For the complete Spec-Driven Development methodology, please refer to the [original GitHub Spec Kit documentation](https://github.com/github/spec-kit).
 
@@ -150,7 +150,7 @@ This implementation adds substantial infrastructure-focused capabilities:
 - Infrastructure command namespace (`.iac` prefix for all commands)
 - Terraform-centric templates for cloud resources, networking, security, and compliance
 - Cloud provider integration patterns for AWS, Azure, GCP, and IBM Cloud
-- Infrastructure constitutional principles for governance, security standards, and cost management
+- Infrastructure foundational principles for governance, security standards, and cost management
 - Terraform validation workflows with `terraform validate`, `terraform fmt`, and `tflint`
 - Cloud-agnostic specification patterns that work across providers
 - Infrastructure-specific quality gates and analysis tools

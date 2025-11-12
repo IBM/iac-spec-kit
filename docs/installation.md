@@ -74,7 +74,7 @@ After initialization, you should see the following commands available in your AI
 - `/iac.implement` - Execute implementation tasks
 
 **Quality and governance commands:**
-- `/iac.constitution` - Create/update project infrastructure governance principles
+- `/iac.principles` - Create/update project infrastructure governance principles
 - `/iac.clarify` - Clarify underspecified requirements (run before planning)
 - `/iac.analyze` - Validate cross-artifact consistency (run after tasks, before implementation)
 - `/iac.checklist` - Generate infrastructure quality validation checklists
