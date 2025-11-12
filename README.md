@@ -1,10 +1,12 @@
-# IaC Spec Kit - Cloud-Agnostic Infrastructure as Code Specification Kit
+# IaC Spec Kit - a cloud-agnostic infrastructure as code specification toolkit
 
 > Turn infrastructure requirements into production-ready IaC configurations through specification-driven development
 
 ## What is Specification-Driven Development?
 
 Specification-Driven Development (SDD) is an emerging methodology where detailed specifications are created before code. The specification becomes your single source of truth, guiding AI agents to generate implementation plans and production-ready code. This approach clarifies intent upfront, reduces misalignment, and enables iterative refinement through living documents that evolve with your project.
+
+**Learn more:** [Red Hat on SDD](https://developers.redhat.com/articles/2025/10/22/how-spec-driven-development-improves-ai-coding-quality) •  [Martin Fowler on SDD](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) • [ThoughtWorks Radar](https://www.thoughtworks.com/radar/techniques/spec-driven-development)
 
 **Key benefits for infrastructure:**
 
@@ -13,8 +15,6 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 - AI agents translate specs into IaC configurations (Terraform being the most popular)
 - Update specs to propagate changes through plans and code automatically
 - Maintain alignment across teams through explicit, reviewable specifications
-
-**Learn more:** [Red Hat on SDD](https://developers.redhat.com/articles/2025/10/22/how-spec-driven-development-improves-ai-coding-quality) •  [Martin Fowler on SDD](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) • [ThoughtWorks Radar](https://www.thoughtworks.com/radar/techniques/spec-driven-development)
 
 ## About this project
 
@@ -25,35 +25,16 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ### Infrastructure-specific features
 
-- **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.specify`, `/iac.plan`, `/iac.tasks`)
+- **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, `/iac.implement`)
 - **IaC-centric templates**: Templates designed for cloud resources, networking, security, and compliance. The toolkit is slightly geared towards Terraform, but you can use any IaC tool.
 - **Cloud provider integration**: Examples and patterns for IBM Cloud, AWS, Azure, GCP. The toolkit is cloud-agnostic, so you can use it with any cloud provider.
 - **Infrastructure principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
 
 ---
 
-## Table of Contents
+## Get Started
 
-- [What is Specification-Driven Development?](#what-is-specification-driven-development)
-- [About this project](#about-this-project)
-- [⚡ Get Started](#-get-started)
-- [🤖 Supported AI Agents](#-supported-ai-agents)
-- [🔧 IAC Specify CLI Reference](#-iac-specify-cli-reference)
-  - [Infrastructure-as-Code Projects](#infrastructure-as-code-projects)
-- [📚 Core philosophy](#-core-philosophy)
-- [🌟 Development Phases](#-development-phases)
-- [🎯 Experimental goals](#-experimental-goals)
-- [🔧 Prerequisites](#-prerequisites)
-- [📖 Learn more](#-learn-more)
-- [📋 Detailed Process](#-detailed-process)
-- [🔍 Troubleshooting](#-troubleshooting)
-- [💬 Support](#-support)
-- [🙏 Acknowledgements](#-acknowledgements)
-- [📄 License](#-license)
-
-## ⚡ Get Started
-
-### 1. Install Specify CLI
+### 1. Install IaC Specify CLI
 
 Choose your preferred installation method:
 
@@ -100,15 +81,15 @@ Launch your AI assistant in the project directory. The `/iac.*` commands are ava
 Use the **`/iac.principles`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```bash
-/iac.principles Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence requirements
+/iac.principles Generate principles suitable for a small production deployment on IBM Cloud. Start simple and progressively add more complexity to infrastructure. Use terraform, and target cloud is IBM Cloud.
 ```
 
 ### 3. Create the spec
 
-Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
+Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**. Do not provide details on the tech stack.
 
 ```bash
-/iac.specify Provision a multi-region AWS VPC infrastructure with public and private subnets across three availability zones. Include NAT gateways for private subnet internet access, VPC peering between regions for cross-region communication, and security groups configured for web tier, app tier, and database tier traffic isolation.
+/iac.specify Build the infrastructure to deploy Wordpress for a small production environment. Our budget is at most $500 per month.
 ```
 
 ### 4. Create a technical implementation plan
@@ -116,7 +97,7 @@ Use the **`/iac.specify`** command to describe what you want to build. Focus on 
 Use the **`/iac.plan`** command to provide your tech stack and architecture choices.
 
 ```bash
-/iac.plan Use Terraform 1.5+ with AWS provider. Store state in S3 with DynamoDB locking. Structure modules for networking (VPC, subnets, gateways), security (security groups, NACLs), and peering. Use Terraform workspaces for environment separation (dev, staging, prod). Output VPC IDs, subnet IDs, and security group IDs for downstream consumption.
+/iac.plan Use the official container images on docker hub.
 ```
 
 ### 5. Break down into tasks
@@ -191,42 +172,30 @@ The `iac-specify` command supports the following options:
 # Basic project initialization
 iac-specify init my-infrastructure
 
-# Initialize with specific AI assistant
-iac-specify init my-infrastructure --ai claude
-
-# Initialize with Cursor support
-iac-specify init my-infrastructure --ai cursor-agent
-
-# Initialize with Windsurf support
-iac-specify init my-infrastructure --ai windsurf
-
-# Initialize with Amp support
-iac-specify init my-infrastructure --ai amp
-
-# Initialize with IBM Bob support
-specify init my-project --ai bob
+# Initialize with specific AI assistant (example: IBM Bob)
+iac-specify init my-infrastructure --ai bob
 
 # Initialize with PowerShell scripts (Windows/cross-platform)
 iac-specify init my-infrastructure --ai copilot --script ps
 
 # Initialize in current directory
-iac-specify init . --ai copilot
+iac-specify init . --ai bob
 # or use the --here flag
-iac-specify init --here --ai copilot
+iac-specify init --here --ai bob
 
 # Force merge into current (non-empty) directory without confirmation
-iac-specify init . --force --ai copilot
+iac-specify init . --force --ai bob
 # or
-iac-specify init --here --force --ai copilot
+iac-specify init --here --force --ai bob
 
 # Skip git initialization
-iac-specify init my-infrastructure --ai gemini --no-git
+iac-specify init my-infrastructure --ai bob --no-git
 
 # Enable debug output for troubleshooting
-iac-specify init my-infrastructure --ai claude --debug
+iac-specify init my-infrastructure --ai bob --debug
 
 # Use GitHub token for API requests (helpful for corporate environments)
-iac-specify init my-infrastructure --ai claude --github-token ghp_your_token_here
+iac-specify init my-infrastructure --ai bob --github-token ghp_your_token_here
 
 # Check system requirements
 iac-specify check
@@ -258,20 +227,9 @@ Additional commands for enhanced quality and validation:
 | `/iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/iac.tasks`, before `/iac.implement`) |
 | `/iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
-### Infrastructure-as-Code Projects
 
-IAC Spec Kit specializes in infrastructure projects using Terraform with the same structured workflow as application development.
 
-#### Key Differences for Infrastructure Projects
-
-| Aspect | Application Project | Infrastructure Project |
-|--------|-------------------|----------------------|
-| **Specification** | User stories for features | User stories for infrastructure needs (technology-agnostic) |
-| **Planning** | Tech stack & architecture | Cloud provider selection + **Infrastructure Architecture section** |
-| **Implementation** | AI generates application code | AI generates Terraform configuration files (.tf) |
-| **Validation** | Run tests | Run `terraform validate`, `terraform fmt`, `tflint` |
-
-#### Infrastructure Architecture Section
+## Infrastructure Architecture Section
 
 When using `/iac.plan` for infrastructure projects, your `plan.md` will include an **Infrastructure Architecture** section with:
 
@@ -299,7 +257,7 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 /iac.implement
 ```
 
-**Important**: IAC Spec Kit generates and validates Terraform code. Actual provisioning (`terraform apply`) is a manual step you control.
+**Important**: IaC Spec Kit is designed to generate infrastructure as code (terraform, pulumi, ansible, kube manifest). Actual provisioning (`terraform apply`, `kubectl apply`) is a manual step you control and that is outside the scope of IaC Spec Kit.
 
 ### Environment Variables
 
@@ -350,7 +308,6 @@ As SDD is an emerging trend, this implementation explores several areas in the c
 
 ### Creative & iterative processes
 
-- Validate the concept of parallel implementation exploration
 - Provide robust iterative infrastructure development workflows
 - Extend processes to handle upgrades and modernization tasks
 
@@ -367,8 +324,6 @@ If you encounter issues with an agent, please open an issue so we can refine the
 ## 📖 Learn more
 
 - **[GitHub Spec Kit](https://github.com/github/spec-kit)** - Original Spec-Driven Development methodology and documentation
-- **[IAC Spec-Driven Development](./iac-spec-driven.md)** - Infrastructure-specific adaptations and examples
-- **[Agent Integration Guide](./AGENTS.md)** - How to add support for new AI agents
 - **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide for infrastructure projects
 
 ---
@@ -399,26 +354,26 @@ iac-specify init --here --force
 You will be prompted to select the AI agent you are using. You can also proactively specify it directly in the terminal:
 
 ```bash
+iac-specify init <project_name> --ai bob
 iac-specify init <project_name> --ai claude
-iac-specify init <project_name> --ai gemini
 iac-specify init <project_name> --ai copilot
 
 # Or in current directory:
-iac-specify init . --ai claude
+iac-specify init . --ai bob
 iac-specify init . --ai codex
 
 # or use --here flag
-iac-specify init --here --ai claude
+iac-specify init --here --ai bob
 iac-specify init --here --ai codex
 
 # Force merge into a non-empty current directory
-iac-specify init . --force --ai claude
+iac-specify init . --force --ai bob
 
 # or
-iac-specify init --here --force --ai claude
+iac-specify init --here --force --ai bob
 ```
 
-The CLI will check if you have Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, or Amazon Q Developer CLI installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
+The CLI will check if you have Bob, Claude Code, Gemini CLI, Cursor CLI, Qwen CLI, opencode, Codex CLI, or Amazon Q Developer CLI installed. If you do not, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
 
 ```bash
 iac-specify init <project_name> --ai claude --ignore-agent-tools
@@ -445,7 +400,7 @@ This step creates or updates the `.specify/memory/principles.md` file with your 
 With your project principles established, you can now create the functional specifications. Use the `/iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
 
 >[!IMPORTANT]
->Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
+>Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the describing the details the services or tech stack at this point**.
 
 An example prompt:
 
@@ -512,7 +467,7 @@ It's important to use the interaction with your AI agent as an opportunity to cl
 You can now be specific about the tech stack and other technical requirements. You can use the `/iac.plan` command that is built into the project template with a prompt like this:
 
 ```text
-We will use AWS as the cloud provider. For the Kubernetes cluster, use Amazon EKS with managed node groups. Database services will use Amazon RDS for PostgreSQL with Multi-AZ deployment. Object storage will use Amazon S3 with versioning enabled. Use CloudFront for the CDN. Implement infrastructure using Terraform 1.5+ with remote state stored in S3 with DynamoDB locking. Structure the code into reusable modules for networking, compute, database, and monitoring. Use AWS Systems Manager Parameter Store for secrets management.
+We will use IBM Cloud as the cloud provider. For the Kubernetes cluster, use IBM Cloud managed Openshift. Database services will use IBM Cloud managed PostgreSQL. Object storage will use COS with versioning enabled. Implement infrastructure using Terraform 1.10+ and will be run in Hashicorp Terraform Enterprise. Structure the code into reusable modules for networking, compute, database, and monitoring.
 ```
 
 The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
@@ -547,7 +502,7 @@ Check the `research.md` document to ensure that the right tech stack is used, ba
 Additionally, you might want to ask your AI agent to research details about the chosen tech stack if it's something that is rapidly changing (e.g., Kubernetes versions, Terraform provider versions), with a prompt like this:
 
 ```text
-I want you to go through the implementation plan and implementation details, looking for areas that could benefit from additional research as AWS EKS and Terraform providers are rapidly changing. For those areas that you identify that require further research, I want you to update the research document with additional details about the specific versions that we are going to be using in this infrastructure and spawn parallel research tasks to clarify any details using research from the web.
+I want you to go through the implementation plan and implementation details, looking for areas that could benefit from additional research as Openshift and Terraform providers are rapidly changing. For those areas that you identify that require further research, I want you to update the research document with additional details about the specific versions that we are going to be using in this infrastructure and spawn parallel research tasks to clarify any details using research from the web.
 ```
 
 During this process, you might find that your AI agent gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
@@ -588,7 +543,7 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Dependency management** - Tasks are ordered to respect dependencies between components (e.g., networking before compute, compute before databases)
 - **Parallel execution markers** - Tasks that can run in parallel are marked with `[P]` to optimize development workflow
 - **File path specifications** - Each task includes the exact file paths where Terraform configuration should be created
-- **Validation checkpoints** - Each component phase includes checkpoints to validate with `terraform validate`, `terraform fmt`, and `tflint`
+- **Validation checkpoints** - Each component phase includes checkpoints to validate (for example with `terraform validate`, `terraform fmt`, and `tflint`)
 - **Checkpoint validation** - Each infrastructure component phase includes checkpoints to validate independent functionality
 
 The generated tasks.md provides a clear roadmap for the `/iac.implement` command, ensuring systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
@@ -606,11 +561,11 @@ The `/iac.implement` command will:
 - Validate that all prerequisites are in place (principles, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`
 - Execute tasks in the correct order, respecting dependencies and parallel execution markers
-- Generate Terraform configuration files (.tf)
+- Generate IaC configuration, such as Terraform configuration files (.tf)
 - Provide progress updates and handle errors appropriately
 
 >[!IMPORTANT]
->The AI agent will execute local CLI commands (such as `terraform`, `aws`, etc.) - make sure you have the required tools installed on your machine.
+>The AI agent will execute local CLI commands (such as `terraform`, `ibmcloud`, `aws`, etc.) - make sure you have the required tools installed on your machine.
 
 Once the implementation is complete, review the generated Terraform code and run validation commands:
 
