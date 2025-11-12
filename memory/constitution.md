@@ -3,150 +3,131 @@
 
 ## Cloud Architecture Principles
 <!-- Principles about the infrastructure resources that will be created from generated code.
-     Add or remove principles based on needs - the number is flexible.
-     Use Baseline/Enhanced pattern to scale complexity with use case. -->
+     Start with 2-3 critical principles, then add more only if truly needed.
+     Use Baseline/Enhanced pattern to scale complexity with use case.
+
+     NOTE: Keep constitutions focused and manageable. Start with the principles that are
+     truly non-negotiable for your organization. Quality over quantity. -->
 
 ### [ARCHITECTURE_PRINCIPLE_1_NAME]
-<!-- Example: I. Security Defaults -->
+<!-- Example: I. Security Defaults (NON-NEGOTIABLE) -->
 [ARCHITECTURE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Infrastructure must be secure by default; Baseline: No hardcoded credentials, encryption in transit enabled, network access restricted to necessary sources; Enhanced: + Encryption at rest with managed keys, least-privilege access policies, private network placement, audit logging for privileged operations -->
+<!-- Example: Infrastructure must be secure by default; Baseline: Basic security controls; Enhanced: Additional hardening, managed encryption keys, private network placement, audit logging -->
 
 ### [ARCHITECTURE_PRINCIPLE_2_NAME]
 <!-- Example: II. Resource Identification -->
 [ARCHITECTURE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: All resources tagged/labeled consistently; Baseline: environment, owner, purpose; Enhanced: + cost_center, compliance_scope, data_classification; Naming: [project]-[resource-type]-[environment], include region/zone for multi-region -->
+<!-- Example: All resources tagged/labeled consistently; Baseline: Core tags; Enhanced: Extended tags for cost allocation and compliance; Naming convention includes resource type and environment -->
 
 ### [ARCHITECTURE_PRINCIPLE_3_NAME]
-<!-- Example: III. Network Architecture -->
+<!-- Example: III. Observability -->
 [ARCHITECTURE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Network topology aligned with isolation needs; Baseline: Single network with security groups/firewall rules; Enhanced: Multi-tier with isolated subnets (public for load balancers, private for apps, isolated for data), NAT gateways, network ACLs + security groups -->
+<!-- Example: Monitoring resources included; Baseline: Basic monitoring; Enhanced: Custom metrics, centralized logging, alerting -->
 
-### [ARCHITECTURE_PRINCIPLE_4_NAME]
-<!-- Example: IV. Data Storage -->
-[ARCHITECTURE_PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Storage based on sensitivity and durability; Baseline: Standard storage, provider-managed encryption; Enhanced: + Encryption at rest, automated backups, versioning for objects, private endpoints, multi-zone replication for critical data -->
+<!-- Add more architecture principles below as needed for your specific requirements.
+     Common additional principles to consider:
 
-### [ARCHITECTURE_PRINCIPLE_5_NAME]
-<!-- Example: V. Observability -->
-[ARCHITECTURE_PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Monitoring resources included; Baseline: Default metrics, basic health checks; Enhanced: + Custom metrics/alarms, centralized logging, alerting channels, dashboards for KPIs -->
+     Network Architecture: Network topology aligned with isolation needs; Baseline: Single network; Enhanced: Multi-tier isolated subnets, NAT gateways
 
-### [ARCHITECTURE_PRINCIPLE_6_NAME]
-<!-- Example: VI. High Availability -->
-[ARCHITECTURE_PRINCIPLE_6_DESCRIPTION]
-<!-- Example: HA patterns scale with criticality; Baseline: Single zone with basic health checks; Enhanced: Multi-zone deployment, load balancers with health checks, auto-scaling, database replicas, cross-region backups, failover configs -->
+     Data Storage: Storage based on sensitivity and durability; Baseline: Standard storage; Enhanced: Automated backups, versioning, private endpoints, multi-zone replication
 
-### [ARCHITECTURE_PRINCIPLE_7_NAME]
-<!-- Example: VII. Disaster Recovery -->
-[ARCHITECTURE_PRINCIPLE_7_DESCRIPTION]
-<!-- Example: DR readiness scales with business needs; Baseline: Basic backups with retention; Enhanced: Cross-region replication, backup vaults, DR region resources, failover routing, RPO/RTO targets in comments -->
+     High Availability: HA patterns scale with criticality; Baseline: Single zone; Enhanced: Multi-zone deployment, load balancers, auto-scaling, failover configs
 
-### [ARCHITECTURE_PRINCIPLE_8_NAME]
-<!-- Example: VIII. Compliance Controls -->
-[ARCHITECTURE_PRINCIPLE_8_DESCRIPTION]
-<!-- Example: Compliance controls based on regulatory requirements; Baseline: Basic audit logging; Enhanced: Encryption keys with rotation, audit logs to immutable storage, compliance tags, data residency controls, access logging, policy checks -->
+     Disaster Recovery: DR readiness scales with business needs; Baseline: Basic backups; Enhanced: Cross-region replication, backup vaults, DR region resources, RPO/RTO targets in comments
 
-### [ARCHITECTURE_PRINCIPLE_N_NAME]
-<!-- Add more principles as needed for your use case: Cost Optimization, Container Security, Database Standards, etc. -->
+     Compliance Controls: Compliance based on regulatory requirements; Baseline: Basic audit logging; Enhanced: Audit logs to immutable storage, data residency controls
+
+     Cost Optimization: Cost management appropriate to scale; Baseline: Right-sized resources; Enhanced: Reserved/spot instances, cost monitoring, resource lifecycle policies
+
+     Only add principles that are truly required for your use case. -->
 
 ## IaC Code Principles
 <!-- Principles about the infrastructure code itself: structure, testing, quality, etc.
-     Add or remove principles based on your needs - the number is flexible. -->
+     Start with 2-3 critical principles, then add more only if truly needed. -->
 
 ### [CODE_PRINCIPLE_1_NAME]
 <!-- Example: I. Prefer Curated Modules (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Favor validated, well-maintained modules over direct provider resources; Terraform: Use terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules; Benefits: Best practices built-in, tested and maintained, consistent patterns, reduced boilerplate; When to use direct resources: Custom requirements not supported by modules, very simple single resources, modules add unnecessary complexity; Module selection: Verify module is actively maintained, check community usage and stars, review source code for security, pin to specific versions -->
+<!-- Example: Favor validated, well-maintained modules over direct provider resources; Examples: Azure Verified Modules, terraform-ibm-modules; Use direct resources only for custom requirements or very simple cases; Pin to specific versions -->
 
 ### [CODE_PRINCIPLE_2_NAME]
-<!-- Example: II. Module Structure and Organization -->
+<!-- Example: II. Testing and Validation (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Follow tool best practices; Terraform: HashiCorp Standard Module Structure; Other tools: equivalent patterns; Principles: Single responsibility per module, clear input/output contracts, versioning, comments explain intent, use locals for DRY -->
+<!-- Example: Code must be testable and validated before deployment; Baseline: Syntax validation, dry-run, linting (tflint); Enhanced: Unit tests (terraform test, mocking with override files), integration tests, security scanning -->
 
 ### [CODE_PRINCIPLE_3_NAME]
-<!-- Example: III. Testing and Validation -->
+<!-- Example: III. Security in Code (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Code must be testable and validated; Baseline: Syntax validation (terraform validate), dry-run (terraform plan), basic linting; Enhanced: + Unit tests for modules if supported (terraform test, mocking with override files), integration tests for stacks, security scanning, cost estimation -->
+<!-- Example: Secure coding practices enforced; Never hardcode secrets; Include key rotation policies; Least-privilege access; Default-deny network rules; Enable encryption by default -->
 
-### [CODE_PRINCIPLE_4_NAME]
-<!-- Example: IV. Formatting and Style -->
-[CODE_PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Properly formatted per tool standards; Consistent naming (snake_case recommended), logical grouping, consistent indentation, alphabetize arguments where helpful, meaningful names -->
+<!-- Add more code principles below as needed for your specific requirements.
+     Common additional principles to consider:
 
-### [CODE_PRINCIPLE_5_NAME]
-<!-- Example: V. Documentation -->
-[CODE_PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Documentation in and alongside code; In-code: Header comments with purpose, variable/output descriptions, complex logic explanations; Separate: README with prerequisites, usage examples, architecture decisions; Note provider-specific behaviors -->
+     Module Structure: Follow tool best practices; Terraform: HashiCorp Standard Module Structure; Single responsibility, clear contracts, versioning
 
-### [CODE_PRINCIPLE_6_NAME]
-<!-- Example: VI. Code Quality Standards -->
-[CODE_PRINCIPLE_6_DESCRIPTION]
-<!-- Example: Enforced quality gates; Include: Input validation rules, type constraints on variables, lifecycle rules where appropriate, dependency declarations (depends_on); Must pass: Syntax validation, plan execution, unit tests (if applicable), security scanning, cost estimates within expectations -->
+     Formatting and Style: Properly formatted per tool standards; Consistent naming and organization
 
-### [CODE_PRINCIPLE_7_NAME]
-<!-- Example: VII. Variable and Output Patterns -->
-[CODE_PRINCIPLE_7_DESCRIPTION]
-<!-- Example: Clear contracts; Variables: Type constraints, descriptions mandatory, sensitive flag for secrets, defaults for optional params, validation rules; Outputs: Resource IDs/endpoints/connection strings, mark sensitive, usage examples in descriptions -->
+     Documentation: In-code comments and separate README; Include purpose, usage examples, architecture decisions
 
-### [CODE_PRINCIPLE_8_NAME]
-<!-- Example: VIII. Security in Code -->
-[CODE_PRINCIPLE_8_DESCRIPTION]
-<!-- Example: Secure coding practices; Secrets: Use variable references never hardcode; Rotation: Include key rotation policies; Access: Least-privilege IAM/RBAC; Network: Default-deny security groups; Encryption: Enable by default with KMS; TLS: Minimum version 1.2 -->
+     Code Quality Standards: Enforced quality gates; Type constraints on variables, lifecycle rules, dependency declarations (depends_on)
 
-### [CODE_PRINCIPLE_N_NAME]
-<!-- Add more principles as needed for your use case: Version Pinning, State Management, Provider Configuration, etc. -->
+     Variable and Output Patterns: Clear contracts; Descriptions mandatory, sensitive flag for secrets, validation rules
+
+     Version Pinning: Lock provider and module versions; Use version constraints appropriately
+
+     State Management: Remote state with locking; State isolation per environment; Sensitive data handling in state
+
+     Only add principles that are truly required for your use case. -->
 
 ## Implementation Approaches
 <!-- Cloud Architecture Principles = WHAT infrastructure resources to create
      IaC Code Principles = HOW to write the infrastructure code
      Implementation Approaches = WHEN to use different patterns and complexity levels
 
-     Add or remove approaches/scenarios based on needs - the number is flexible.
-     Include the strategies and environment types relevant to use case. -->
+     Start with 1-2 key approaches that match your use case, then add more only if needed. -->
 
 ### [APPROACH_1_NAME]
-<!-- Example: Progressive Complexity (Single Environment Evolution) -->
+<!-- Example: Progressive Complexity (Recommended for most use cases) -->
 [APPROACH_1_DESCRIPTION]
-<!-- Example: When: Single long-lived environment that matures over time; Pattern: Start simple, layer controls as needs grow; Code: Feature flags/variables to enable/disable advanced features, commented blocks for future enhancements, modular design allows incremental additions; Pros: Lower initial complexity, gradual learning; Cons: Careful change management needed -->
+<!-- Example: Start simple, layer controls as needs grow; Use Baseline controls initially, add Enhanced controls as requirements mature; Modular design allows incremental additions -->
 
 ### [APPROACH_2_NAME]
-<!-- Example: Separate Environments (Dev/Stage/Prod Isolation) -->
+<!-- Example: Environment-Based Complexity -->
 [APPROACH_2_DESCRIPTION]
-<!-- Example: When: Need isolation between workload tiers; Pattern: Separate stacks per environment with different configs; Code: Environment-specific variable files, shared modules with env-specific settings, lower resource counts for dev/staging, full controls for prod; Pros: Clear boundaries, safer testing, production isolation; Cons: More infrastructure to manage -->
+<!-- Example: Different environments have different complexity levels; Dev/Test use Baseline controls, Staging mirrors production, Production uses Enhanced controls from start; Shared modules with environment-specific configurations -->
 
-### [APPROACH_3_NAME]
-<!-- Example: Hybrid Approach (Recommended) -->
-[APPROACH_3_DESCRIPTION]
-<!-- Example: When: Balance isolation and progressive enhancement; Pattern: Separate environments for different purposes, each can evolve independently; Code: Dev for rapid iteration (Baseline controls), Staging mirrors prod architecture, Production gets Enhanced controls from start; Recommended for most teams -->
+<!-- Add more implementation approaches below as needed for your specific requirements.
+     Common additional approaches to consider:
 
-### [APPROACH_4_NAME]
-<!-- Example: POC / Demo / Learning -->
-[APPROACH_4_DESCRIPTION]
-<!-- Example: Characteristics: Short-lived (days-weeks), single user/small team, demonstration/learning, limited data sensitivity; Code: Baseline security only, simplified architecture (single-tier networking okay), minimal resources, cost-optimized sizes, auto-cleanup tags, single file okay for simple cases; Skip: HA, DR, extensive monitoring, backups -->
+     POC / Demo / Learning: Short-lived, limited data sensitivity; Baseline security only, simplified architecture, minimal resources, auto-cleanup tags
 
-### [APPROACH_5_NAME]
-<!-- Example: Development / Testing Environments -->
-[APPROACH_5_DESCRIPTION]
-<!-- Example: Characteristics: Ongoing use, shared team, integration testing, non-production data; Code: Baseline security, production-like architecture at reduced scale, modular structure, basic monitoring/logging, network isolation similar to prod, cost controls (auto-shutdown, smaller instances); Include: Variable-driven config, security scanning -->
+     Development Environments: Ongoing use, shared team, non-production data; Baseline security, production-like architecture at reduced scale, cost controls
 
-### [APPROACH_6_NAME]
-<!-- Example: Staging / Pre-Production -->
-[APPROACH_6_DESCRIPTION]
-<!-- Example: Characteristics: Production validation, performance testing, production-like data (anonymized); Code: Enhanced security controls, architecture mirrors production, full monitoring/alerting, separated modules, backup configs with shorter retention, multi-zone for HA testing; Must: All prod security controls, comprehensive tagging, logging/audit -->
+     Staging / Pre-Production: Production validation, performance testing; Enhanced security controls, architecture mirrors production, multi-zone for HA testing
 
-### [APPROACH_7_NAME]
-<!-- Example: Production Environments -->
-[APPROACH_7_DESCRIPTION]
-<!-- Example: Characteristics: Live workloads, customer data, SLAs, compliance; Code: All Enhanced security controls, HA config (multi-zone/region), separated modules, comprehensive monitoring/alerting/logging, auto-scaling, load balancing/health checks, DR resources, full backup/retention; Must: All security controls, compliance tags, audit logging, network isolation, encryption -->
+     Production Environments: Live workloads, customer data, SLAs, compliance; All Enhanced security controls, HA config (multi-zone/region), comprehensive monitoring, DR resources, full backup/retention
 
-### [APPROACH_N_NAME]
-<!-- Add more approaches as needed: DR environments, Edge deployments, Multi-tenant scenarios, etc. -->
+     Disaster Recovery Environments: Passive standby for production failover; Minimal running resources, data replication, automated failover procedures, balance cost vs RTO/RPO
+
+     Multi-Region Deployments: Global presence, data residency; Region-specific configurations, data replication strategies, traffic routing (active-active or active-passive)
+
+     Only add approaches that are truly required for your use case. -->
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; All changes must be backward compatible, Amendments require documentation, approval, migration plan -->
+<!-- How the constitution governs project development and evolution -->
 
 [GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified;s -->
+<!-- Example governance rules (add/remove/modify as needed):
+
+     Constitutional Authority: Constitution supersedes all other practices and guidelines
+
+     Compliance Enforcement: All specifications, plans, and implementations must demonstrate compliance with constitutional principles; All PRs/reviews must verify compliance
+
+     Complexity Justification: Architectural decisions beyond Baseline patterns require documented justification; Deviations from principles require explicit approval
+
+     Amendment Process: Changes to constitution require documentation, approval, and migration plan; Use semantic versioning (MAJOR/MINOR/PATCH)
+
+     Operational Guidance: Use [GUIDANCE_FILE] for detailed runtime development practices (separate from constitutional principles) -->
 
 **Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.0.0 | Ratified: 2025-11-10 | Last Amended: 2025-11-10 -->
+<!-- Example: Version: 1.0.0 | Ratified: 2025-11-10 | Last Amended: 2025-11-10 -->
