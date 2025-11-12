@@ -2,7 +2,7 @@
 
 ## About IAC Spec Kit and Specify
 
-**IAC Spec Kit** is a domain-specific implementation of the spec-driven development pattern optimized for Infrastructure as Code workflows. While the original [GitHub Spec Kit](https://github.com/github/spec-kit) focuses on software development, IAC Spec Kit provides infrastructure-specific templates, constitutional principles, cloud resource specifications, and Terraform patterns.
+**IAC Spec Kit** is a domain-specific implementation of the spec-driven development pattern optimized for Infrastructure as Code workflows. While the original [GitHub Spec Kit](https://github.com/github/spec-kit) focuses on software development, IAC Spec Kit provides infrastructure-specific templates, foundational principles, cloud resource specifications, and Terraform patterns.
 
 **IAC Specify CLI** is the command-line interface that bootstraps projects with the IAC Spec Kit framework. It sets up the necessary directory structures, templates, and AI agent integrations to support the Spec-Driven Development workflow for infrastructure projects.
 

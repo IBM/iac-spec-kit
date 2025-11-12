@@ -29,11 +29,11 @@
 **Target Environments**: [e.g., dev/staging/prod, dev/prod only, single environment or NEEDS CLARIFICATION]
 **Compliance**: [if applicable, e.g., SOC 2, HIPAA, PCI-DSS or N/A]
 
-## Constitution Check
+## Principles Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+[Gates determined based on principles file]
 
 ## Infrastructure Architecture
 
@@ -181,7 +181,7 @@
 
 <!--
   Document the complexity level (Baseline vs Enhanced) based on use case and environment type.
-  This guides which architecture principles to apply from the constitution.
+  This guides which architecture principles to apply from the project principles.
 
   BASELINE (POC/Demo/Dev environments):
   - Purpose: Quick demos, learning, rapid iteration, short-lived experiments
@@ -388,7 +388,7 @@ directories captured above]
 
 ## Complexity Tracking
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
+> **Fill ONLY if Principles Check has violations that must be justified**
 
 | Violation | Why Needed | Simpler Alternative Rejected Because |
 |-----------|------------|-------------------------------------|

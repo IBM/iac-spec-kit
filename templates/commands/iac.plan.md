@@ -20,16 +20,16 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for INFRA_SPEC, ARCH_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read INFRA_SPEC and `./specify/memory/constitution.md`. Load ARCH_PLAN template (already copied).
+2. **Load context**: Read INFRA_SPEC and `./specify/memory/principles.md`. Load ARCH_PLAN template (already copied).
 
 3. **Execute plan workflow**: Follow the structure in ARCH_PLAN template to:
    - Fill Technical Context (cloud provider, IaC tool, versions - mark unknowns as "NEEDS CLARIFICATION")
-   - Fill Constitution Check section from constitution (technology stack validation)
+   - Fill Principles Check section from principles (technology stack validation)
    - Evaluate gates (ERROR if violations unjustified)
    - Phase 0: Generate research.md (resolve cloud/tool selection, best practices)
    - Phase 1: Design Infrastructure Architecture (compute, storage, networking, security, state management)
    - Phase 1: Update agent context by running the agent script
-   - Re-evaluate Constitution Check post-design
+   - Re-evaluate Principles Check post-design
 
 4. **Stop and report**: Command ends after Phase 1 planning. Report branch, ARCH_PLAN path, and generated artifacts.
 
@@ -39,8 +39,8 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Extract unknowns from Technical Context** above:
    - For each NEEDS CLARIFICATION → research task
-   - Cloud provider selection (if not specified in constitution)
-   - IaC tool and version (if not specified in constitution)
+   - Cloud provider selection (if not specified in principles)
+   - IaC tool and version (if not specified in principles)
    - State management strategy
    - Multi-environment approach
    - Infrastructure patterns and best practices

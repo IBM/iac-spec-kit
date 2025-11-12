@@ -28,7 +28,7 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 - **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.specify`, `/iac.plan`, `/iac.tasks`)
 - **IaC-centric templates**: Templates designed for cloud resources, networking, security, and compliance. The toolkit is slightly geared towards Terraform, but you can use any IaC tool.
 - **Cloud provider integration**: Examples and patterns for IBM Cloud, AWS, Azure, GCP. The toolkit is cloud-agnostic, so you can use it with any cloud provider.
-- **Infrastructure constitutional principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
+- **Infrastructure principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
 
 ---
 
@@ -97,10 +97,10 @@ uvx --from git+https://github.com/ibm/iac-spec-kit.git iac-specify init <PROJECT
 
 Launch your AI assistant in the project directory. The `/iac.*` commands are available in the assistant.
 
-Use the **`/iac.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+Use the **`/iac.principles`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```bash
-/iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence requirements
+/iac.principles Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence requirements
 ```
 
 ### 3. Create the spec
@@ -242,7 +242,7 @@ Essential commands for the Spec-Driven Development workflow:
 
 | Command                  | Description                                                           |
 |--------------------------|-----------------------------------------------------------------------|
-| `/iac.constitution`  | Create or update project governing principles and development guidelines |
+| `/iac.principles`  | Create or update project governing principles and development guidelines |
 | `/iac.specify`       | Define what you want to build (requirements and user stories)        |
 | `/iac.plan`          | Create technical implementation plans with your chosen tech stack     |
 | `/iac.tasks`         | Generate actionable task lists for implementation                     |
@@ -430,15 +430,15 @@ Go to the project folder and run your AI agent. In our example, we're using `cla
 
 ![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
 
-You will know that things are configured correctly if you see the `/iac.constitution`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
+You will know that things are configured correctly if you see the `/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
 
-The first step should be establishing your project's governing principles using the `/iac.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+The first step should be establishing your project's governing principles using the `/iac.principles` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
 ```text
-/iac.constitution Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence. Include governance for how these principles should guide technical decisions and implementation choices.
+/iac.principles Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence. Include governance for how these principles should guide technical decisions and implementation choices.
 ```
 
-This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create project specifications
 
@@ -464,7 +464,7 @@ At this stage, your project folder contents should resemble the following:
 ```text
 └── .specify
     ├── memory
-    │  └── constitution.md
+    │  └── principles.md
     ├── scripts
     │  ├── check-prerequisites.sh
     │  ├── common.sh
@@ -520,7 +520,7 @@ The output of this step will include a number of implementation detail documents
 ```text
 .
 ├── memory
-│  └── constitution.md
+│  └── principles.md
 ├── scripts
 │  ├── check-prerequisites.sh
 │  ├── common.sh
@@ -572,7 +572,7 @@ This helps refine the implementation plan and helps you avoid potential blind sp
 You can also ask your AI agent (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
 
 >[!NOTE]
->Before you have the agent implement it, it's also worth prompting your AI agent to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask your AI agent to resolve them. Ensure that your AI agent follows the [constitution](memory/constitution.md) as the foundational piece that it must adhere to when establishing the plan.
+>Before you have the agent implement it, it's also worth prompting your AI agent to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask your AI agent to resolve them. Ensure that your AI agent follows the [principles](memory/principles.md) as the foundational piece that it must adhere to when establishing the plan.
 
 ### **STEP 6:** Generate task breakdown with /iac.tasks
 
@@ -603,7 +603,7 @@ Once ready, use the `/iac.implement` command to execute your implementation plan
 
 The `/iac.implement` command will:
 
-- Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
+- Validate that all prerequisites are in place (principles, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`
 - Execute tasks in the correct order, respecting dependencies and parallel execution markers
 - Generate Terraform configuration files (.tf)

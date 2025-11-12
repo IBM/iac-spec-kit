@@ -79,7 +79,7 @@ Complete workflow for deploying the IBM AI Agent for Loan Risk application with 
 **Step 1: Establish Project Principles**
 
 ```text
-/iac.constitution Create infrastructure principles focused on:
+/iac.principles Create infrastructure principles focused on:
 - Security: TLS 1.3, encryption at rest (AES-256), least-privilege IAM
 - Cost governance: Monthly budget alerts, approved instance types
 - Operational excellence: Automated backups, monitoring, disaster recovery
@@ -191,7 +191,7 @@ Complete workflow for production-grade 3-tier architecture on AWS.
 **Step 1: Establish Project Principles**
 
 ```text
-/iac.constitution Create infrastructure principles for enterprise web applications:
+/iac.principles Create infrastructure principles for enterprise web applications:
 - Security: WAF rules, encrypted databases, private subnets for app/data tiers
 - High availability: Multi-AZ deployment, auto-scaling, automated failover
 - Cost optimization: Reserved instances for baseline, spot instances for bursting
@@ -301,7 +301,7 @@ Complete workflow for AKS cluster with supporting infrastructure.
 **Step 1: Establish Project Principles**
 
 ```text
-/iac.constitution Create principles for cloud-native microservices:
+/iac.principles Create principles for cloud-native microservices:
 - Security: Azure AD integration, network policies, container scanning
 - Scalability: Horizontal pod autoscaling, cluster autoscaling
 - Observability: Centralized logging, distributed tracing, metrics collection
@@ -414,7 +414,7 @@ Complete workflow for serverless microservices on Google Cloud.
 **Step 1: Establish Project Principles**
 
 ```text
-/iac.constitution Create principles for serverless architecture:
+/iac.principles Create principles for serverless architecture:
 - Cost efficiency: Pay only for actual usage, automatic scale-to-zero
 - Developer experience: Minimal infrastructure management, fast deployments
 - Security: Service accounts with minimal permissions, VPC service controls
@@ -530,13 +530,13 @@ implement .specify/specs/004-gcp-serverless/plan.md
 - **Iterate and refine** your specifications before implementation using `/iac.clarify`
 - **Validate** the plan before infrastructure provisioning using `/iac.analyze`
 - **Let the AI agent handle** the Terraform code generation and cloud architecture decisions
-- **Use constitution** (`/iac.constitution`) to encode organizational infrastructure principles
+- **Use principles** (`/iac.principles`) to encode organizational infrastructure principles
 - **Validate infrastructure** with `terraform validate`, `terraform fmt`, and `tflint` before applying
 
 ## Workflow Summary
 
 ```
-1. /iac.constitution  → Define organizational principles (one-time setup)
+1. /iac.principles  → Define organizational principles (one-time setup)
 2. /iac.specify       → Create infrastructure specification (technology-agnostic)
 3. /iac.clarify       → Optional: Clarify underspecified areas
 4. /iac.plan          → Generate architecture plan with cloud provider choice
@@ -550,5 +550,5 @@ implement .specify/specs/004-gcp-serverless/plan.md
 
 - Review the [Installation Guide](installation.md) for setup instructions
 - Check the main [README](https://github.com/ibm/iac-spec-kit) for comprehensive documentation
-- Read about infrastructure constitutions in the project documentation
+- Read about infrastructure principles in the project documentation
 - Explore the [iac-spec-driven.md](https://github.com/ibm/iac-spec-kit/blob/main/iac-spec-driven.md) methodology guide

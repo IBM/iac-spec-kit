@@ -1,12 +1,12 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: MyApp Infrastructure Constitution, Platform IaC Constitution, etc. -->
+# [PROJECT_NAME] Principles
+<!-- Example: MyApp Infrastructure Principles, Platform IaC Principles, etc. -->
 
 ## Cloud Architecture Principles
 <!-- Principles about the infrastructure resources that will be created from generated code.
      Start with 2-3 critical principles, then add more only if truly needed.
      Use Baseline/Enhanced pattern to scale complexity with use case.
 
-     NOTE: Keep constitutions focused and manageable. Start with the principles that are
+     NOTE: Keep the set of principles focused and manageable. Start with the principles that are
      truly non-negotiable for your organization. Quality over quantity. -->
 
 ### [ARCHITECTURE_PRINCIPLE_1_NAME]
@@ -114,20 +114,20 @@
      Only add approaches that are truly required for your use case. -->
 
 ## Governance
-<!-- How the constitution governs project development and evolution -->
+<!-- How these principles govern project development and evolution -->
 
 [GOVERNANCE_RULES]
 <!-- Example governance rules (add/remove/modify as needed):
 
-     Constitutional Authority: Constitution supersedes all other practices and guidelines
+     Principles Authority: These principles supersede all other practices and guidelines
 
-     Compliance Enforcement: All specifications, plans, and implementations must demonstrate compliance with constitutional principles; All PRs/reviews must verify compliance
+     Compliance Enforcement: All specifications, plans, and implementations must demonstrate compliance with these principles; All PRs/reviews must verify compliance
 
      Complexity Justification: Architectural decisions beyond Baseline patterns require documented justification; Deviations from principles require explicit approval
 
-     Amendment Process: Changes to constitution require documentation, approval, and migration plan; Use semantic versioning (MAJOR/MINOR/PATCH)
+     Amendment Process: Changes to these principles require documentation, approval, and migration plan; Use semantic versioning (MAJOR/MINOR/PATCH)
 
-     Operational Guidance: Use [GUIDANCE_FILE] for detailed runtime development practices (separate from constitutional principles) -->
+     Operational Guidance: Use [GUIDANCE_FILE] for detailed runtime development practices (separate from these foundational principles) -->
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+**Version**: [PRINCIPLES_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
 <!-- Example: Version: 1.0.0 | Ratified: 2025-11-10 | Last Amended: 2025-11-10 -->
