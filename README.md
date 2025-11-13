@@ -27,8 +27,33 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 - **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, `/iac.implement`)
 - **IaC-centric templates**: Templates designed for cloud resources, networking, security, and compliance. The toolkit is slightly geared towards Terraform, but you can use any IaC tool.
-- **Cloud provider integration**: Examples and patterns for IBM Cloud, AWS, Azure, GCP. The toolkit is cloud-agnostic, so you can use it with any cloud provider.
+- **Multi-cloud support**: Works with any cloud provider - AWS, Azure, GCP, IBM Cloud, Oracle Cloud, and more
 - **Infrastructure principles**: Governance frameworks for cloud infrastructure, security standards, and cost management
+
+### Multi-Cloud Infrastructure Support
+
+IaC Spec Kit works with **any cloud provider**. The methodology separates cloud-agnostic requirements (what you need) from cloud-specific implementation (how to build it):
+
+- **Principles and Specifications** are cloud-agnostic - they describe your infrastructure requirements using generic terms like "managed database" and "object storage"
+- **Plans and Implementation** are cloud-specific - they translate requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
+
+This separation means you can:
+- Switch cloud providers by re-running `/iac.plan` with a different cloud
+- Deploy the same specification to multiple clouds
+- Compare cloud provider options before committing
+
+**Get started with your cloud provider:**
+
+| Cloud Provider | Quick Start Guide | Example Workflows |
+|----------------|-------------------|-------------------|
+| **AWS** | [Install AWS CLI](https://aws.amazon.com/cli/) | [WordPress on AWS](./examples/03-wordpress/cloud-workflows/aws.md) |
+| **Azure** | [Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) | [WordPress on Azure](./examples/03-wordpress/cloud-workflows/azure.md) |
+| **GCP** | [Install gcloud CLI](https://cloud.google.com/sdk/docs/install) | [WordPress on GCP](./examples/03-wordpress/cloud-workflows/gcp.md) |
+| **IBM Cloud** | [Install IBM Cloud CLI](https://cloud.ibm.com/docs/cli) | [WordPress on IBM Cloud](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) |
+
+**Explore examples:** See [examples/](./examples/) for complete workflows showing how the same requirements deploy to different cloud providers.
+
+**Learn more:** Read [Writing Tech-Agnostic Infrastructure Specifications](./docs/writing-tech-agnostic-specs.md) to understand how to balance cloud-agnostic requirements with infrastructure-specific needs.
 
 ---
 
@@ -116,7 +141,7 @@ Use **`/iac.implement`** to execute all tasks and build your feature according t
 /iac.implement
 ```
 
-For detailed step-by-step instructions, see our [IAC-specific guide](./iac-spec-driven.md).
+For detailed step-by-step instructions, see our [IaC-specific guide](./iac-spec-driven.md).
 
 For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
 
@@ -140,7 +165,7 @@ For the original Spec-Driven Development methodology, see the [GitHub Spec Kit d
 | [Amp](https://ampcode.com/) | ✅ | |
 | [IBM Bob](https://www.ibm.com/products/bob) | ✅ | IDE-based agent with slash command support |
 
-## 🔧 IAC Specify CLI Reference
+## 🔧 IaC Specify CLI Reference
 
 The `iac-specify` command supports the following options:
 
@@ -148,7 +173,7 @@ The `iac-specify` command supports the following options:
 
 | Command     | Description                                                    |
 |-------------|----------------------------------------------------------------|
-| `init`      | Initialize a new IAC Specify project from the latest template      |
+| `init`      | Initialize a new IaC Specify project from the latest template      |
 | `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`) |
 
 ### `iac-specify init` Arguments & Options
@@ -269,7 +294,7 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 
 Specification-Driven Development emphasizes intent-driven development, rich specification creation, and multi-step refinement. **For the complete philosophy, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).**
 
-IAC Spec Kit applies these principles to infrastructure provisioning with additional focus on:
+IaC Spec Kit applies these principles to infrastructure provisioning with additional focus on:
 
 - **Cloud resource specifications**: Technology-agnostic infrastructure requirements
 - **Terraform module design**: Reusable, composable infrastructure components
