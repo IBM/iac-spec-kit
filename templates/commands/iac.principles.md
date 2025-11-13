@@ -11,7 +11,7 @@ $ARGUMENTS
 You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
-
+j
 You are updating the project principles at `.specify/memory/principles.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[CODE_PRINCIPLE_1_NAME]`, ...). Your job is to (a) collect and/or derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.
 
 Follow this execution flow:

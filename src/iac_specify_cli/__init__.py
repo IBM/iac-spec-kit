@@ -10,7 +10,7 @@
 # ]
 # ///
 """
-IaC Specify CLI - Setup tool for IAC Specify projects
+IaC Specify CLI - Setup tool for IaC Specify projects
 
 Usage:
     uvx iac-specify-cli.py init <project-name>
