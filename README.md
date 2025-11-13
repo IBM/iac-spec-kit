@@ -44,12 +44,12 @@ This separation means you can:
 
 **Get started with your cloud provider:**
 
-| Cloud Provider | Quick Start Guide | Example Workflows |
-|----------------|-------------------|-------------------|
-| **AWS** | [Install AWS CLI](https://aws.amazon.com/cli/) | [WordPress on AWS](./examples/03-wordpress/cloud-workflows/aws.md) |
-| **Azure** | [Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) | [WordPress on Azure](./examples/03-wordpress/cloud-workflows/azure.md) |
-| **GCP** | [Install gcloud CLI](https://cloud.google.com/sdk/docs/install) | [WordPress on GCP](./examples/03-wordpress/cloud-workflows/gcp.md) |
-| **IBM Cloud** | [Install IBM Cloud CLI](https://cloud.ibm.com/docs/cli) | [WordPress on IBM Cloud](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) |
+| Cloud Provider | Example Workflows |
+|----------------|-------------------|
+| **IBM Cloud** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/ibm-cloud.md) • [Static Website](./examples/02-static-website/cloud-workflows/ibm-cloud.md) • [WordPress](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/ibm-cloud.md) |
+| **AWS** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/aws.md) • [Static Website](./examples/02-static-website/cloud-workflows/aws.md) • [WordPress](./examples/03-wordpress/cloud-workflows/aws.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/aws.md) |
+| **Azure** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/azure.md) • [Static Website](./examples/02-static-website/cloud-workflows/azure.md) • [WordPress](./examples/03-wordpress/cloud-workflows/azure.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/azure.md) |
+| **GCP** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/gcp.md) • [Static Website](./examples/02-static-website/cloud-workflows/gcp.md) • [WordPress](./examples/03-wordpress/cloud-workflows/gcp.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/gcp.md) |
 
 **Explore examples:** See [examples/](./examples/) for complete workflows showing how the same requirements deploy to different cloud providers.
 
@@ -105,31 +105,31 @@ Launch your AI assistant in the project directory. The `/iac.*` commands are ava
 
 Use the **`/iac.principles`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
-```bash
-/iac.principles Generate principles suitable for a small production deployment on IBM Cloud. Start simple and progressively add more complexity to infrastructure. Use terraform, and target cloud is IBM Cloud.
+```
+/iac.principles I'm building small production infrastructure on IBM Cloud. Start simple, keep costs down, use Terraform.
 ```
 
 ### 3. Create the spec
 
 Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**. Do not provide details on the tech stack.
 
-```bash
-/iac.specify Build the infrastructure to deploy Wordpress for a small production environment. Our budget is at most $500 per month.
+```
+/iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month. Use the official WordPress Docker image.
 ```
 
 ### 4. Create a technical implementation plan
 
 Use the **`/iac.plan`** command to provide your tech stack and architecture choices.
 
-```bash
-/iac.plan Use the official container images on docker hub.
+```
+/iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
 ```
 
 ### 5. Break down into tasks
 
 Use **`/iac.tasks`** to create an actionable task list from your implementation plan.
 
-```bash
+```
 /iac.tasks
 ```
 
@@ -137,13 +137,66 @@ Use **`/iac.tasks`** to create an actionable task list from your implementation 
 
 Use **`/iac.implement`** to execute all tasks and build your feature according to the plan.
 
-```bash
+```
 /iac.implement
 ```
 
 For detailed step-by-step instructions, see our [IaC-specific guide](./iac-spec-driven.md).
 
 For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
+
+## 💡 Tips for Best Results
+
+### Use frontier AI models
+
+Better results are obtained with the latest frontier models from leading AI providers. These models have improved reasoning capabilities, better understanding of infrastructure patterns, and more accurate code generation. When configuring your AI assistant, select the most advanced model available.
+
+### Configure MCP servers in advance
+
+For optimal results, configure your AI tool with appropriate Model Context Protocol (MCP) servers before starting your project. MCP servers provide your AI assistant with direct access to cloud provider APIs, Terraform registries, and other infrastructure tools, significantly improving accuracy and reducing hallucinations.
+
+**Recommended MCP servers by cloud provider:**
+
+#### IBM Cloud
+- **[TIM (Terraform IBM Modules) MCP Server](https://github.com/terraform-ibm-modules/tim-mcp)** - Focused on IBM Cloud module discovery and intelligent IaC generation
+
+#### AWS
+- **[AWS Terraform MCP Server](https://awslabs.github.io/mcp/servers/terraform-mcp-server)** - Prioritizes AWSCC provider with security scanning and best-practice automation
+
+#### Azure
+- **[Azure Terraform MCP Server](https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/tools/azure-terraform-best-practices)** - Best-practices guidance with built-in validation for Azure resources
+- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Multi-cloud support with Terraform Registry integration
+
+#### Google Cloud
+- **[GCP Tools MCP Server](https://lobehub.com/mcp/gcp-tools-mcp)** - Automates Google Cloud Platform infrastructure setup via gcloud and Terraform
+- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Multi-cloud support with Terraform Registry integration
+
+#### Multi-Cloud
+- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Open-source, supports major providers via registry introspection and policy checks
+
+### Add search capabilities
+
+For AI tools that do not currently support web search (no built-in research agent), we strongly recommend adding a search MCP server such as [Brave Search MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search). This makes a significant difference during the `/iac.plan` phase when the AI needs to research current cloud services, Terraform provider versions, and best practices.
+
+Without search capabilities, AI tools tend to rely on inherent knowledge from their training data, which can lead to hallucinations or outdated information. Search-enabled agents can verify current service offerings, pricing, and technical specifications in real-time.
+
+### Start fresh between commands
+
+You can start a new chat with an empty context between slash commands to save tokens and reduce costs. The IaC Spec Kit approach of storing outputs as markdown files (principles.md, spec.md, plan.md, tasks.md) acts as persistent memory that subsequent chats can pull from. The AI assistant reads these files as needed, so you don't need to maintain long conversation histories.
+
+This is particularly useful for:
+- Long-running projects where context windows become expensive
+- Switching between different aspects of your infrastructure
+- Collaborating with team members who can start fresh with the same context files
+
+### Configure custom modes
+
+If your AI agent supports custom modes or configurations, create one that enables all necessary tools for infrastructure work. At minimum, ensure your mode allows:
+- **File read/write operations** - Essential for creating and updating specification files
+- **MCP server calls** - Required for cloud provider and Terraform integrations
+- **Command execution** - Needed for running Terraform validation commands
+
+For example, in agents like Claude Code or IBM Bob, you can create a custom "Infrastructure" mode that pre-enables these capabilities, streamlining your workflow and reducing the need to grant permissions repeatedly.
 
 ## 🤖 Supported AI Agents
 
@@ -174,7 +227,7 @@ The `iac-specify` command supports the following options:
 | Command     | Description                                                    |
 |-------------|----------------------------------------------------------------|
 | `init`      | Initialize a new IaC Specify project from the latest template      |
-| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`) |
+| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `bob`) |
 
 ### `iac-specify init` Arguments & Options
 
@@ -268,17 +321,20 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 
 #### Quick Example
 
-```bash
-# 1. Create infrastructure specification (technology-agnostic)
-/iac.specify Build production web app infrastructure with database, caching, and auto-scaling
+```
+# 1. Establish principles
+/iac.principles I'm building small production infrastructure on IBM Cloud. Start simple, keep costs down, use Terraform.
 
-# 2. Create technical plan (specify AWS, document Infrastructure Architecture)
-/iac.plan We'll use AWS with ECS Fargate, RDS PostgreSQL, ElastiCache Redis, and Application Load Balancer
+# 2. Create infrastructure specification (technology-agnostic)
+/iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month.
 
-# 3. Generate tasks (includes terraform validation checkpoints)
+# 3. Create technical plan (specify cloud provider and services)
+/iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
+
+# 4. Generate tasks (includes terraform validation checkpoints)
 /iac.tasks
 
-# 4. Implement (AI generates Terraform .tf files)
+# 5. Implement (AI generates Terraform .tf files)
 /iac.implement
 ```
 
@@ -406,16 +462,14 @@ iac-specify init <project_name> --ai claude --ignore-agent-tools
 
 ### **STEP 1:** Establish project principles
 
-Go to the project folder and run your AI agent. In our example, we're using `claude`.
-
-![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
+Go to the project folder and run your AI agent. In our example, we're using `bob`.
 
 You will know that things are configured correctly if you see the `/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
 
 The first step should be establishing your project's governing principles using the `/iac.principles` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
 ```text
-/iac.principles Create principles focused on infrastructure security, compliance standards, cost governance, and operational excellence. Include governance for how these principles should guide technical decisions and implementation choices.
+/iac.principles I'm building an enterprise cloud landing zone on IBM Cloud for a regulated industry. Security and compliance are critical. Multiple environments need isolation. Use Terraform with terraform-ibm-modules.
 ```
 
 This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
@@ -425,17 +479,17 @@ This step creates or updates the `.specify/memory/principles.md` file with your 
 With your project principles established, you can now create the functional specifications. Use the `/iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
 
 >[!IMPORTANT]
->Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the describing the details the services or tech stack at this point**.
+>Be as explicit as possible about *what* you are trying to build and *why*. For best results, **do not focus on the describing the details the cloud services at this point**.
 
 An example prompt:
 
 ```text
-Provision a production-grade Kubernetes cluster infrastructure with high availability and disaster recovery capabilities. The infrastructure should support a microservices architecture with separate environments for development, staging, and production. Include managed database services with automated backups, object storage for application assets, a content delivery network for static content, and comprehensive monitoring and logging. The infrastructure must meet SOC 2 compliance requirements and support auto-scaling based on demand. Initial capacity should handle 10,000 concurrent users with the ability to scale to 100,000 users.
+/iac.specify I need an enterprise landing zone for our organization. Requirements: separate account groups for production, staging, development, and shared services. Centralized networking with hub-and-spoke topology. All logs aggregated to security account. Policy-based guardrails to enforce compliance. Cost tracking by environment. We need to comply with SOC 2 and Financial Services Cloud requirements.
 ```
 
 After this prompt is entered, you should see your AI agent kick off the planning and spec drafting process. The agent will also trigger some of the built-in scripts to set up the repository.
 
-Once this step is completed, you should have a new branch created (e.g., `001-k8s-infrastructure`), as well as a new specification in the `specs/001-k8s-infrastructure` directory.
+Once this step is completed, you should have a new branch created (e.g., `001-landing-zone`), as well as a new specification in the `specs/001-landing-zone` directory.
 
 The produced specification should contain a set of infrastructure requirements and functional requirements, as defined in the template.
 
@@ -452,7 +506,7 @@ At this stage, your project folder contents should resemble the following:
     │  ├── setup-plan.sh
     │  └── update-agent-context.sh
     ├── specs
-    │  └── 001-k8s-infrastructure
+    │  └── 001-landing-zone
     │      └── spec.md
     └── templates
         ├── plan-template.md
@@ -492,7 +546,7 @@ It's important to use the interaction with your AI agent as an opportunity to cl
 You can now be specific about the tech stack and other technical requirements. You can use the `/iac.plan` command that is built into the project template with a prompt like this:
 
 ```text
-We will use IBM Cloud as the cloud provider. For the Kubernetes cluster, use IBM Cloud managed Openshift. Database services will use IBM Cloud managed PostgreSQL. Object storage will use COS with versioning enabled. Implement infrastructure using Terraform 1.10+ and will be run in Hashicorp Terraform Enterprise. Structure the code into reusable modules for networking, compute, database, and monitoring.
+/iac.plan We'll use IBM Cloud Enterprise account groups. Transit Gateway for networking. Security and Compliance Center for compliance. Activity Tracker and Log Analysis for centralized logging.
 ```
 
 The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
@@ -508,7 +562,7 @@ The output of this step will include a number of implementation detail documents
 │  ├── setup-plan.sh
 │  └── update-agent-context.sh
 ├── specs
-│  └── 001-k8s-infrastructure
+│  └── 001-landing-zone
 │      ├── contracts
 │      │  └── terraform-outputs.md
 │      ├── data-model.md
@@ -527,13 +581,13 @@ Check the `research.md` document to ensure that the right tech stack is used, ba
 Additionally, you might want to ask your AI agent to research details about the chosen tech stack if it's something that is rapidly changing (e.g., Kubernetes versions, Terraform provider versions), with a prompt like this:
 
 ```text
-I want you to go through the implementation plan and implementation details, looking for areas that could benefit from additional research as Openshift and Terraform providers are rapidly changing. For those areas that you identify that require further research, I want you to update the research document with additional details about the specific versions that we are going to be using in this infrastructure and spawn parallel research tasks to clarify any details using research from the web.
+I want you to go through the implementation plan and implementation details, looking for areas that could benefit from additional research as IBM Cloud services and Terraform providers are rapidly changing. For those areas that you identify that require further research, I want you to update the research document with additional details about the specific versions that we are going to be using in this infrastructure and spawn parallel research tasks to clarify any details using research from the web.
 ```
 
 During this process, you might find that your AI agent gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
 
 ```text
-I think we need to break this down into a series of steps. First, identify a list of tasks that you would need to do during implementation that you're not sure of or would benefit from further research. Write down a list of those tasks. And then for each one of these tasks, I want you to spin up a separate research task so that the net result is we are researching all of those very specific tasks in parallel. What I saw you doing was it looks like you were researching AWS EKS in general and I don't think that's gonna do much for us in this case. That's way too untargeted research. The research needs to help you solve a specific targeted question.
+I think we need to break this down into a series of steps. First, identify a list of tasks that you would need to do during implementation that you're not sure of or would benefit from further research. Write down a list of those tasks. And then for each one of these tasks, I want you to spin up a separate research task so that the net result is we are researching all of those very specific tasks in parallel. What I saw you doing was it looks like you were researching IBM Cloud services in general and I don't think that's gonna do much for us in this case. That's way too untargeted research. The research needs to help you solve a specific targeted question.
 ```
 
 >[!NOTE]
@@ -606,25 +660,6 @@ Resolve any validation errors by providing feedback to your AI agent. Remember t
 </details>
 
 ---
-
-## 🔍 Troubleshooting
-
-### Git Credential Manager on Linux
-
-If you're having issues with Git authentication on Linux, you can install Git Credential Manager:
-
-```bash
-#!/usr/bin/env bash
-set -e
-echo "Downloading Git Credential Manager v2.6.1..."
-wget https://github.com/git-ecosystem/git-credential-manager/releases/download/v2.6.1/gcm-linux_amd64.2.6.1.deb
-echo "Installing Git Credential Manager..."
-sudo dpkg -i gcm-linux_amd64.2.6.1.deb
-echo "Configuring Git to use GCM..."
-git config --global credential.helper manager
-echo "Cleaning up..."
-rm gcm-linux_amd64.2.6.1.deb
-```
 
 ## 💬 Support
 

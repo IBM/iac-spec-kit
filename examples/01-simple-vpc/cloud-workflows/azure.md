@@ -7,7 +7,6 @@ This guide shows the commands and prompts to deploy a simple Virtual Network on 
 ## Prerequisites
 
 - Azure subscription with appropriate permissions
-- Azure CLI installed and configured (`az login`)
 - IaC Spec Kit installed (`iac-specify check`)
 - Terraform installed
 - AI coding assistant running in your project directory

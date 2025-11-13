@@ -38,7 +38,6 @@ This example teaches you:
 ## Prerequisites
 
 - Cloud account with organization/management group permissions
-- Cloud CLI installed and configured
 - IaC Spec Kit installed (`iac-specify check`)
 - Terraform installed
 - AI coding assistant running in your project directory

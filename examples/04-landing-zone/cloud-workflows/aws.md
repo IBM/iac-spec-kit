@@ -7,7 +7,6 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 ## Prerequisites
 
 - AWS Organization with management account access
-- AWS CLI configured with organization permissions
 - IaC Spec Kit installed
 - Terraform installed
 - AI coding assistant running
