@@ -14,7 +14,7 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm building an enterprise cloud landing zone on IBM Cloud for a regulated industry. Security and compliance are critical. Multiple environments need isolation. Use Terraform with terraform-ibm-modules.
+/iac.principles This is an enterprise landing zone for a regulated industry. Security and compliance are critical. Multiple environments need strong isolation. Use Terraform.
 ```
 
 **Generates**: `.specify/memory/principles.md`

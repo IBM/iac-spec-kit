@@ -84,9 +84,9 @@ Given that feature description, do this:
        Each requirement must be testable
        Use reasonable defaults for unspecified details (document assumptions in Assumptions section)
     6. Define Success Criteria
-       Create measurable, technology-agnostic outcomes
+       Create measurable outcomes using generic infrastructure terms
        Include both quantitative metrics (SLOs, cost, capacity) and qualitative measures (compliance, operational readiness)
-       Each criterion must be verifiable without implementation details
+       Each criterion must be verifiable without cloud-specific service names
     7. Document Cost Constraints and Compliance Requirements (if applicable)
     8. Return: SUCCESS (spec ready for planning)
 
@@ -115,7 +115,7 @@ Given that feature description, do this:
       - [ ] No [NEEDS CLARIFICATION] markers remain
       - [ ] Requirements are testable and unambiguous
       - [ ] Success criteria are measurable
-      - [ ] Success criteria are technology-agnostic (no cloud provider names)
+      - [ ] Success criteria use generic infrastructure terms (no cloud-specific service names)
       - [ ] SLOs are clearly defined with measurement methods
       - [ ] Cost constraints are documented
       - [ ] Compliance requirements identified (if applicable)

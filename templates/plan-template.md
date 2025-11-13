@@ -39,7 +39,7 @@
 
 <!--
   Use this section to document provider-specific infrastructure design.
-  The spec.md should remain technology-agnostic; cloud-specific details belong here.
+  The spec.md uses generic infrastructure terms; this file translates them to cloud-specific services.
 
   During /iac.implement, AI agents will read this section to generate IaC files.
 

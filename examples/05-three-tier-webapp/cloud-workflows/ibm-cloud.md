@@ -5,7 +5,7 @@
 ### Steps 1-2: Principles and Specify
 
 ```
-/iac.principles I'm building a production web application on IBM Cloud. Need high availability, auto-scaling, and cost optimization. Use Terraform.
+/iac.principles This is a production web application. High availability and auto-scaling are important. Balance reliability with cost efficiency. Use Terraform.
 /iac.specify I need infrastructure for a three-tier web application. Load balancer to distribute traffic, auto-scaling application servers, managed PostgreSQL database with automated backups and read replicas, Redis cache for session storage. Expected traffic: 10,000-100,000 requests/day. Need 99.9% uptime.
 ```
 

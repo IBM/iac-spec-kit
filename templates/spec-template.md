@@ -44,7 +44,7 @@
 
 <!--
   Define WHAT infrastructure capabilities are needed, not HOW to implement.
-  Keep technology-agnostic - no cloud provider names (AWS/IBM Cloud/Oracle/Azure/GCP).
+  Use generic infrastructure terms - avoid cloud-specific service names (e.g., use "object storage" not "S3" or "Cloud Storage", "managed database" not "RDS" or "Cloud SQL", "encryption key management" not "Key Protect" or "KMS").
 
   Example Infrastructure Requirements:
   - Virtual private network with public and private subnets

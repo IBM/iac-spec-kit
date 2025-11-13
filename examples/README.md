@@ -56,10 +56,10 @@ Each example follows this structure:
 These examples demonstrate:
 
 - **Simple Command-Based Workflow**: Just run slash commands with simple prompts—the framework generates all the specs, plans, and tasks
-- **Cloud-Agnostic Principles**: Governance rules (security, testing, progressive complexity) stay the same across clouds
-- **Cloud-Agnostic Specifications**: Requirements use generic terms ("managed database", "object storage", "serverless compute") not cloud-specific services
-- **Cloud-Specific Implementation**: The `/iac.plan` step is where you specify AWS, Azure, GCP, or IBM Cloud and the framework generates cloud-specific architectures
-- **Progressive Complexity**: Examples show the Baseline vs Enhanced pattern for scaling infrastructure based on environment needs
+- **Generic Infrastructure Principles**: Governance rules (security, testing, progressive complexity) apply regardless of cloud provider
+- **Generic Infrastructure Terms**: Specifications use generic terms ("managed database", "object storage", "encryption key management") instead of cloud-specific service names ("RDS", "S3", "Key Protect")
+- **Cloud-Specific Implementation**: The `/iac.plan` step is where you specify your cloud and services, translating generic terms into specific services (e.g., "object storage" → S3, Cloud Storage, or COS)
+- **Progressive Complexity**: Examples show the Baseline vs Enhanced pattern for scaling infrastructure based on environment needs (Baseline = minimal production-ready controls, Enhanced = additional enterprise-grade controls for security, HA, DR)
 
 ## Getting Started
 
@@ -76,8 +76,8 @@ Then progress to more complex examples as you become comfortable with the framew
 When you run the workflow commands, the framework automatically generates:
 
 - **principles.md** - Your project's governance rules and decision-making framework
-- **spec.md** - Technology-agnostic infrastructure requirements
-- **plan.md** - Cloud-specific implementation plan and architecture
+- **spec.md** - Infrastructure requirements using generic terms (no cloud-specific service names)
+- **plan.md** - Cloud-specific implementation plan translating generic terms to actual services
 - **tasks.md** - Detailed task breakdown for implementation
 - **Terraform files** - Actual infrastructure as code (when you run `/iac.implement`)
 

@@ -18,7 +18,7 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 Principles define your project's governance rules and guide all subsequent development decisions.
 
 ```
-/iac.principles I'm building small production infrastructure on AWS. Start simple, keep costs down, use Terraform.
+/iac.principles This is a small business production website. Keep it simple but include security and automated backups. Keep costs reasonable. Use Terraform.
 ```
 
 **What this does**: The AI will interview you briefly (if needed) to understand your environment, then generate governance rules covering:

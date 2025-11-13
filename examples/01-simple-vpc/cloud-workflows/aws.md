@@ -16,7 +16,7 @@ This guide shows the commands and prompts to deploy a simple VPC on AWS using Ia
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm building basic networking infrastructure on AWS. Start simple, keep costs down, use Terraform.
+/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
 **What this does**: The AI will interview you briefly (if needed) to understand your environment, then generate governance rules covering architecture principles, code principles, implementation approaches, and governance rules.

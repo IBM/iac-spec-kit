@@ -5,7 +5,7 @@
 ### Steps 1-2: Principles and Specify
 
 ```
-/iac.principles I'm building a cloud-native microservices platform on IBM Cloud. Need container orchestration, service mesh, comprehensive observability, and high availability. Use Terraform.
+/iac.principles This is a production microservices platform. Comprehensive observability and high availability are critical. Focus on operational excellence. Use Terraform.
 /iac.specify I need infrastructure for a microservices platform. Container orchestration for 10-50 services, service mesh for secure service-to-service communication, API gateway for external traffic, service discovery, distributed tracing, centralized logging, metrics monitoring, message queue for async communication. Services will use different databases. Expected: 100K-1M requests/day. Need 99.95% uptime.
 ```
 

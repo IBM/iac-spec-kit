@@ -49,22 +49,13 @@ Choose your cloud provider and follow the corresponding workflow guide:
 
 ## What You'll Learn
 
-1. **How principles work**: You'll see that governance rules (security defaults, progressive complexity, testing requirements) are the same across all clouds—only the curated module library preference changes
+1. **How principles work**: You'll see that governance rules (security defaults, progressive complexity, testing requirements) apply across clouds—only cloud-specific preferences (like curated module libraries) change
 
-2. **Tech-agnostic specifications**: The `/iac.specify` prompt and generated spec.md use generic terms like "managed database service" and "object storage" rather than "RDS" or "S3"
+2. **Generic infrastructure terms**: The `/iac.specify` prompt and generated spec.md use generic terms like "managed database service" and "object storage" instead of cloud-specific service names like "RDS", "S3", or "Cloud SQL"
 
-3. **Cloud-specific planning**: The `/iac.plan` step is where you specify your cloud provider and preferred services, and the framework generates cloud-specific architecture
+3. **Cloud-specific planning**: The `/iac.plan` step translates generic requirements into specific cloud services. For example, "object storage" becomes S3 on AWS, Blob Storage on Azure, Cloud Storage on GCP, or COS on IBM Cloud
 
 4. **Simple prompts, powerful results**: You only need to provide 1-2 line prompts to each slash command—the framework generates comprehensive documentation and code
-
-## Expected Costs
-
-- **AWS**: ~$150-250/month (Fargate + RDS + S3 + ALB)
-- **Azure**: ~$150-250/month (Container Instances + Azure Database + Storage + App Gateway)
-- **GCP**: ~$120-200/month (Cloud Run + Cloud SQL + Storage + Load Balancing)
-- **IBM Cloud**: ~$150-250/month (Code Engine + Database + COS + ALB)
-
-Actual costs depend on traffic, storage usage, and regional pricing.
 
 ## Next Steps
 

@@ -16,7 +16,7 @@ This guide shows the commands and prompts to deploy a simple VPC on IBM Cloud us
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm building basic networking infrastructure on IBM Cloud. Start simple, keep costs down, use Terraform.
+/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
 **What this does**: The AI generates governance rules for your project covering architecture principles, code principles, and implementation approaches.
