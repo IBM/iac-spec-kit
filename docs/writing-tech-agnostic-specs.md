@@ -1,6 +1,6 @@
 # Writing Tech-Agnostic Infrastructure Specifications
 
-This guide helps you write effective, cloud-agnostic infrastructure specifications using IaC Spec Kit.
+This guide helps you write effective infrastructure specifications using generic terms rather than cloud-specific service names.
 
 ## The Challenge
 
@@ -8,6 +8,10 @@ Infrastructure specifications face a unique challenge compared to application de
 
 - **Application specs** can often be completely tech-agnostic: "Users need to see their data in real-time" doesn't assume React, Vue, or any specific framework
 - **Infrastructure specs** need some technical context: decisions like "managed vs self-managed database" or "serverless vs VMs" affect costs, operations, and feasibility
+
+The key principle: **Use generic infrastructure terms in specifications, translate to cloud-specific services in plans.**
+
+You might already know your cloud provider (e.g., IBM Cloud or AWS), but your spec should describe requirements using generic terms like "managed database" or "object storage" instead of cloud-specific service names like "RDS", "S3", or "Cloud SQL".
 
 The question is: **How much technical detail belongs in the specification vs the plan?**
 

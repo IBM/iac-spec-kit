@@ -17,7 +17,7 @@ This guide shows the commands and prompts to deploy a static website on AWS usin
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm deploying a simple marketing website on AWS. Keep costs low, use managed services, use Terraform.
+/iac.principles This is a simple marketing website. Keep it simple and cost-effective. Focus on security and reliability. Use Terraform.
 ```
 
 **Generates**: `.specify/memory/principles.md`

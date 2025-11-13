@@ -32,10 +32,10 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ### Multi-Cloud Infrastructure Support
 
-IaC Spec Kit works with **any cloud provider**. The methodology separates cloud-agnostic requirements (what you need) from cloud-specific implementation (how to build it):
+IaC Spec Kit works with **any cloud provider**. The methodology separates generic infrastructure requirements (what you need) from cloud-specific implementation (how to build it):
 
-- **Principles and Specifications** are cloud-agnostic - they describe your infrastructure requirements using generic terms like "managed database" and "object storage"
-- **Plans and Implementation** are cloud-specific - they translate requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
+- **Principles and Specifications** use generic infrastructure terms - they describe requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
+- **Plans and Implementation** are cloud-specific - they translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
 
 This separation means you can:
 - Switch cloud providers by re-running `/iac.plan` with a different cloud
@@ -46,20 +46,30 @@ This separation means you can:
 
 | Cloud Provider | Example Workflows |
 |----------------|-------------------|
-| **IBM Cloud** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/ibm-cloud.md) • [Static Website](./examples/02-static-website/cloud-workflows/ibm-cloud.md) • [WordPress](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/ibm-cloud.md) |
-| **AWS** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/aws.md) • [Static Website](./examples/02-static-website/cloud-workflows/aws.md) • [WordPress](./examples/03-wordpress/cloud-workflows/aws.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/aws.md) |
-| **Azure** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/azure.md) • [Static Website](./examples/02-static-website/cloud-workflows/azure.md) • [WordPress](./examples/03-wordpress/cloud-workflows/azure.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/azure.md) |
-| **GCP** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/gcp.md) • [Static Website](./examples/02-static-website/cloud-workflows/gcp.md) • [WordPress](./examples/03-wordpress/cloud-workflows/gcp.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/gcp.md) |
+| **IBM Cloud** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/ibm-cloud.md) • [Static Website](./examples/02-static-website/cloud-workflows/ibm-cloud.md) • [WordPress](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/ibm-cloud.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/ibm-cloud.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/ibm-cloud.md) • [Microservices](./examples/07-microservices/cloud-workflows/ibm-cloud.md) |
+| **AWS** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/aws.md) • [Static Website](./examples/02-static-website/cloud-workflows/aws.md) • [WordPress](./examples/03-wordpress/cloud-workflows/aws.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/aws.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/aws.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/aws.md) • [Microservices](./examples/07-microservices/cloud-workflows/aws.md) |
+| **Azure** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/azure.md) • [Static Website](./examples/02-static-website/cloud-workflows/azure.md) • [WordPress](./examples/03-wordpress/cloud-workflows/azure.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/azure.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/azure.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/azure.md) • [Microservices](./examples/07-microservices/cloud-workflows/azure.md) |
+| **GCP** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/gcp.md) • [Static Website](./examples/02-static-website/cloud-workflows/gcp.md) • [WordPress](./examples/03-wordpress/cloud-workflows/gcp.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/gcp.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/gcp.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/gcp.md) • [Microservices](./examples/07-microservices/cloud-workflows/gcp.md) |
 
 **Explore examples:** See [examples/](./examples/) for complete workflows showing how the same requirements deploy to different cloud providers.
 
-**Learn more:** Read [Writing Tech-Agnostic Infrastructure Specifications](./docs/writing-tech-agnostic-specs.md) to understand how to balance cloud-agnostic requirements with infrastructure-specific needs.
+**Learn more:** Read [Writing Tech-Agnostic Infrastructure Specifications](./docs/writing-tech-agnostic-specs.md) to understand how to write specifications using generic infrastructure terms instead of cloud-specific service names.
 
 ---
 
 ## Get Started
 
 ### 1. Install IaC Specify CLI
+
+**Prerequisites:** This CLI tool requires [uv](https://docs.astral.sh/uv/) - a fast Python package installer. If you don't have it yet, install it with:
+
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 Choose your preferred installation method:
 
@@ -106,7 +116,7 @@ Launch your AI assistant in the project directory. The `/iac.*` commands are ava
 Use the **`/iac.principles`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```
-/iac.principles I'm building small production infrastructure on IBM Cloud. Start simple, keep costs down, use Terraform.
+/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
 ### 3. Create the spec
@@ -140,8 +150,6 @@ Use **`/iac.implement`** to execute all tasks and build your feature according t
 ```
 /iac.implement
 ```
-
-For detailed step-by-step instructions, see our [IaC-specific guide](./iac-spec-driven.md).
 
 For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
 
@@ -301,7 +309,7 @@ Additional commands for enhanced quality and validation:
 
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
-| `/iac.clarify`   | Clarify underspecified areas (recommended before `/iac.plan`; formerly `/quizme`) |
+| `/iac.clarify`   | Clarify underspecified areas (recommended before `/iac.plan`) |
 | `/iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/iac.tasks`, before `/iac.implement`) |
 | `/iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
@@ -323,9 +331,9 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 
 ```
 # 1. Establish principles
-/iac.principles I'm building small production infrastructure on IBM Cloud. Start simple, keep costs down, use Terraform.
+/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 
-# 2. Create infrastructure specification (technology-agnostic)
+# 2. Create infrastructure specification (using generic infrastructure terms)
 /iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month.
 
 # 3. Create technical plan (specify cloud provider and services)
@@ -352,7 +360,7 @@ Specification-Driven Development emphasizes intent-driven development, rich spec
 
 IaC Spec Kit applies these principles to infrastructure provisioning with additional focus on:
 
-- **Cloud resource specifications**: Technology-agnostic infrastructure requirements
+- **Cloud resource specifications**: Infrastructure requirements using generic terms (avoid cloud-specific service names)
 - **Terraform module design**: Reusable, composable infrastructure components
 - **Security and compliance**: Built-in governance and policy validation
 - **Multi-cloud patterns**: Portable infrastructure specifications across cloud providers
@@ -364,7 +372,7 @@ IaC Spec Kit applies these principles to infrastructure provisioning with additi
 | **0-to-1 Development** ("Greenfield") | Generate from scratch | <ul><li>Start with high-level requirements</li><li>Generate specifications</li><li>Plan implementation steps</li><li>Build production-ready infrastructure</li></ul> |
 | **Creative Exploration** | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple cloud providers & architectures</li><li>Experiment with infrastructure patterns</li></ul> |
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add infrastructure iteratively</li><li>Modernize legacy infrastructure</li><li>Adapt processes</li></ul> |
-| **Infrastructure-as-Code** | Infrastructure provisioning | <ul><li>Specify cloud resources technology-agnostically</li><li>Document Infrastructure Architecture</li><li>Generate Terraform configurations</li><li>Validate with terraform validate/fmt/tflint</li></ul> |
+| **Infrastructure-as-Code** | Infrastructure provisioning | <ul><li>Specify cloud resources using cloud-agnostic terms</li><li>Document Infrastructure Architecture</li><li>Generate Terraform configurations</li><li>Validate with terraform validate/fmt/tflint</li></ul> |
 
 ## 🎯 Experimental goals
 
@@ -469,7 +477,7 @@ You will know that things are configured correctly if you see the `/iac.principl
 The first step should be establishing your project's governing principles using the `/iac.principles` command. This helps ensure consistent decision-making throughout all subsequent development phases:
 
 ```text
-/iac.principles I'm building an enterprise cloud landing zone on IBM Cloud for a regulated industry. Security and compliance are critical. Multiple environments need isolation. Use Terraform with terraform-ibm-modules.
+/iac.principles This is an enterprise landing zone for a regulated industry. Security and compliance are critical. Multiple environments need strong isolation. Use Terraform.
 ```
 
 This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.

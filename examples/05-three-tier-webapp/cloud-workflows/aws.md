@@ -14,7 +14,7 @@ This guide shows the commands to deploy a three-tier web application on AWS usin
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm building a production web application on AWS. Need high availability, auto-scaling, and cost optimization. Use Terraform.
+/iac.principles This is a production web application. High availability and auto-scaling are important. Balance reliability with cost efficiency. Use Terraform.
 ```
 
 **Generates**: `.specify/memory/principles.md`

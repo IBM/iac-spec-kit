@@ -11,7 +11,7 @@ $ARGUMENTS
 You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
-j
+
 You are updating the project principles at `.specify/memory/principles.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[CODE_PRINCIPLE_1_NAME]`, ...). Your job is to (a) collect and/or derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.
 
 Follow this execution flow:
@@ -23,7 +23,9 @@ Follow this execution flow:
 2. Collect/derive values for placeholders:
    - If user input (conversation) supplies a value, use it.
    - Otherwise infer from existing repo context (README, docs, prior principles versions if embedded).
-   - If the user inputs, and the repo context does not provide sufficient details, ask a few simple and scoped questions to derive as many values as possible - e.g: what type of environment (dev/stage/prod), which cloud?, what overall development approach (start simple and add complexity iteratively, complex upfront?, etc). Do NOT ask questions such as which of the X principles from the template do you want. Instead derive those values from briefly interviewing the user.
+   - If the user inputs and the repo context do not provide sufficient details, ask a few simple and scoped questions to derive values - **IMPORTANT**: Environment type (dev/staging/production) is critical for principle selection: dev environments typically need Simplicity + Security (Baseline) only, skipping observability managed services/HA/DR/compliance; staging adds Observability and mirrors production security; production adds Reliability, Identity, and potentially Compliance. Also ask: which cloud?, what overall development approach (start simple and add complexity iteratively, or complex upfront?).
+   - **DO NOT ask** "which of the X principles from the template do you want." Instead derive principle selection from environment type and brief user interview.
+   - **IMPORTANT**: Create charter-style principles (high-level tenets like AWS Well-Architected Framework), NOT technical implementation checklists. Focus on WHAT outcomes and WHY they matter, not tactical HOW (specific tools, commands, or managed services). Principles should be tool-agnostic and outcomes-focused.
    - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown ask or mark TODO), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.
    - `PRINCIPLES_VERSION` must increment according to semantic versioning rules:
      - MAJOR: Backward incompatible governance/principle removals or redefinitions.
@@ -34,7 +36,8 @@ Follow this execution flow:
 3. Draft the updated principles content:
    - Replace every placeholder with concrete text (no bracketed tokens left except intentionally retained template slots that the project has chosen not to define yet—explicitly justify any left).
    - Preserve heading hierarchy and comments can be removed once replaced unless they still add clarifying guidance.
-   - Ensure each Principle section: succinct name line, paragraph (or bullet list) capturing non‑negotiable rules, explicit rationale if not obvious.
+   - Ensure each Principle follows charter-style format: action-oriented title (e.g., "Design for Simplicity"), rationale explaining WHY it matters, and how Baseline/Enhanced scale the philosophy across environments (dev/staging/production).
+   - **AVOID technical implementation details** like specific tools (tflint, terraform test), service names (NAT gateways, private endpoints), or tactical commands. Keep principles at strategic level - focus on outcomes and philosophy.
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 4. Consistency propagation checklist (convert prior checklist into active validations):
@@ -57,6 +60,7 @@ Follow this execution flow:
    - Version line matches report.
    - Dates ISO format YYYY-MM-DD.
    - Principles are declarative, testable, and free of vague language ("should" → replace with MUST/SHOULD rationale where appropriate).
+   - Principles follow charter-style: high-level tenets, not technical checklists. No specific tool names, service names, or implementation commands in principle descriptions.
 
 7. Write the completed principles back to `.specify/memory/principles.md` (overwrite).
 

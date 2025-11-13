@@ -16,7 +16,7 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 ### Step 1: Establish Project Principles
 
 ```
-/iac.principles I'm building small production infrastructure on Azure. Start simple, keep costs down, use Terraform.
+/iac.principles This is a small business production website. Keep it simple but include security and automated backups. Keep costs reasonable. Use Terraform.
 ```
 
 **What this does**: The AI generates governance rules for your project covering architecture principles, code principles, and implementation approaches.

@@ -5,7 +5,7 @@
 ### Steps 1-2: Principles and Specify
 
 ```
-/iac.principles I'm building a scalable data pipeline on Azure. Serverless-first, event-driven, cost-effective. Use Terraform.
+/iac.principles This is a production data pipeline. Prefer serverless and event-driven patterns. Keep it scalable and cost-effective. Use Terraform.
 /iac.specify I need a data pipeline to process application events and logs. Ingest from multiple sources, queue for buffering, serverless processing, store raw and processed data in data lake, load into data warehouse for analytics. Expected: 1M events/day growing to 10M. Need data partitioned by date. Budget: under $1000/month.
 ```
 
