@@ -4,7 +4,10 @@ This guide shows the commands to deploy a three-tier web application on AWS usin
 
 ## Prerequisites
 
-- AWS account, AWS CLI, IaC Spec Kit, Terraform, AI assistant
+- AWS account with IAM permissions
+- IaC Spec Kit installed
+- Terraform installed
+- AI coding assistant running
 
 ## Commands
 

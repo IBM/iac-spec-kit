@@ -7,7 +7,6 @@ This guide shows the commands and prompts to deploy a simple VPC Network on Goog
 ## Prerequisites
 
 - GCP project with billing enabled
-- gcloud CLI installed and configured (`gcloud init`)
 - IaC Spec Kit installed (`iac-specify check`)
 - Terraform installed
 - AI coding assistant running in your project directory

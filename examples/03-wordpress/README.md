@@ -35,7 +35,6 @@ Before starting, ensure you have:
 
 - IaC Spec Kit installed
 - Your chosen cloud provider account with appropriate permissions
-- Cloud provider CLI installed and configured (AWS CLI, Azure CLI, gcloud, or IBM Cloud CLI)
 - Terraform installed (or your preferred IaC tool)
 - An AI coding assistant with IaC Spec Kit commands available
 

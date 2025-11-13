@@ -5,9 +5,9 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 ## Prerequisites
 
 - GCP Organization with admin permissions
-- gcloud CLI configured
 - IaC Spec Kit installed
 - Terraform installed
+- AI coding assistant running
 
 ## Commands
 

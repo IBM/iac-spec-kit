@@ -7,7 +7,6 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 ## Prerequisites
 
 - AWS account with IAM permissions
-- AWS CLI installed and configured (`aws configure`)
 - IaC Spec Kit installed (`iac-specify check`)
 - Terraform installed
 - AI coding assistant running in your project directory
