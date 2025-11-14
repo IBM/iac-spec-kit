@@ -2,6 +2,44 @@
 
 > Turn infrastructure requirements into production-ready IaC configurations through specification-driven development
 
+## Table of Contents
+
+- [What is Specification-Driven Development?](#what-is-specification-driven-development)
+- [About this project](#about-this-project)
+  - [Infrastructure-specific features](#infrastructure-specific-features)
+  - [Multi-Cloud Infrastructure Support](#multi-cloud-infrastructure-support)
+- [Get Started](#get-started)
+  - [1. Install IaC Specify CLI](#1-install-iac-specify-cli)
+  - [2. Establish project principles](#2-establish-project-principles)
+  - [3. Create the spec](#3-create-the-spec)
+  - [4. Create a technical implementation plan](#4-create-a-technical-implementation-plan)
+  - [5. Break down into tasks](#5-break-down-into-tasks)
+  - [6. Execute implementation](#6-execute-implementation)
+- [Cloud Provider Examples](#cloud-provider-examples)
+- [Tips for Best Results](#tips-for-best-results)
+  - [Use frontier AI models](#use-frontier-ai-models)
+  - [Configure MCP servers in advance](#configure-mcp-servers-in-advance)
+  - [Add search capabilities](#add-search-capabilities)
+  - [Start fresh between commands](#start-fresh-between-commands)
+  - [Configure custom modes](#configure-custom-modes)
+- [Supported AI Agents](#supported-ai-agents)
+- [IaC Specify CLI Reference](#iac-specify-cli-reference)
+  - [Commands](#commands)
+  - [`iac-specify init` Arguments & Options](#iac-specify-init-arguments--options)
+  - [Examples](#examples)
+  - [Available Slash Commands](#available-slash-commands)
+- [Infrastructure Architecture Section](#infrastructure-architecture-section)
+- [Environment Variables](#environment-variables)
+- [Core Philosophy](#core-philosophy)
+- [Development Phases](#development-phases)
+- [Experimental Goals](#experimental-goals)
+- [Prerequisites](#prerequisites)
+- [Learn More](#learn-more)
+- [Detailed Process](#detailed-process)
+- [Support](#support)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
+
 ## What is Specification-Driven Development?
 
 Specification-Driven Development (SDD) is an emerging methodology where detailed specifications are created before code. The specification becomes your single source of truth, guiding AI agents to generate implementation plans and production-ready code. This approach clarifies intent upfront, reduces misalignment, and enables iterative refinement through living documents that evolve with your project.
@@ -16,10 +54,12 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 - Update specs to propagate changes through plans and code automatically
 - Maintain alignment across teams through explicit, reviewable specifications
 
+
+
 ## About this project
 
 [![Release](https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml/badge.svg)](https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml)
-[![License](https://img.shields.io/github/license/ibm/iac-spec-kit)](https://github.com/ibm/iac-spec-kit/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/IBM/iac-spec-kit)](https://github.com/IBM/iac-spec-kit/blob/main/LICENSE)
 
 **IaC Spec Kit** is a specialized implementation of the [GitHub Spec Kit](https://github.com/github/spec-kit) toolkit, adapted for Infrastructure as Code workflows with Terraform and cloud providers. As SDD is an emerging trend, this project explores how specification-driven approaches can improve infrastructure development—an experimental field where we're discovering what's possible with AI-assisted infrastructure provisioning.
 
@@ -43,20 +83,6 @@ This separation means you can:
 - Switch cloud providers by re-running `/iac.plan` with a different cloud
 - Deploy the same specification to multiple clouds
 - Compare cloud provider options before committing
-
-
-**Get started with your cloud provider:**
-
-| Cloud Provider | Example Workflows |
-|----------------|-------------------|
-| **IBM Cloud** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/ibm-cloud.md) • [Static Website](./examples/02-static-website/cloud-workflows/ibm-cloud.md) • [WordPress](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/ibm-cloud.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/ibm-cloud.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/ibm-cloud.md) • [Microservices](./examples/07-microservices/cloud-workflows/ibm-cloud.md) |
-| **AWS** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/aws.md) • [Static Website](./examples/02-static-website/cloud-workflows/aws.md) • [WordPress](./examples/03-wordpress/cloud-workflows/aws.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/aws.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/aws.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/aws.md) • [Microservices](./examples/07-microservices/cloud-workflows/aws.md) |
-| **Azure** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/azure.md) • [Static Website](./examples/02-static-website/cloud-workflows/azure.md) • [WordPress](./examples/03-wordpress/cloud-workflows/azure.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/azure.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/azure.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/azure.md) • [Microservices](./examples/07-microservices/cloud-workflows/azure.md) |
-| **GCP** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/gcp.md) • [Static Website](./examples/02-static-website/cloud-workflows/gcp.md) • [WordPress](./examples/03-wordpress/cloud-workflows/gcp.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/gcp.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/gcp.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/gcp.md) • [Microservices](./examples/07-microservices/cloud-workflows/gcp.md) |
-
-**Explore examples:** See [examples/](./examples/) for complete workflows showing how the same requirements deploy to different cloud providers.
-
-**Learn more:** Read [Writing Tech-Agnostic Infrastructure Specifications](./docs/writing-tech-agnostic-specs.md) to understand how to write specifications using generic infrastructure terms instead of cloud-specific service names.
 
 ---
 
@@ -156,7 +182,26 @@ Use **`/iac.implement`** to execute all tasks and build your feature according t
 
 For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
 
-## 💡 Tips for Best Results
+---
+
+## Cloud Provider Examples
+
+**Get started with your cloud provider:**
+
+| Cloud Provider | Example Workflows |
+|----------------|-------------------|
+| **IBM Cloud** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/ibm-cloud.md) • [Static Website](./examples/02-static-website/cloud-workflows/ibm-cloud.md) • [WordPress](./examples/03-wordpress/cloud-workflows/ibm-cloud.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/ibm-cloud.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/ibm-cloud.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/ibm-cloud.md) • [Microservices](./examples/07-microservices/cloud-workflows/ibm-cloud.md) |
+| **AWS** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/aws.md) • [Static Website](./examples/02-static-website/cloud-workflows/aws.md) • [WordPress](./examples/03-wordpress/cloud-workflows/aws.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/aws.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/aws.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/aws.md) • [Microservices](./examples/07-microservices/cloud-workflows/aws.md) |
+| **Azure** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/azure.md) • [Static Website](./examples/02-static-website/cloud-workflows/azure.md) • [WordPress](./examples/03-wordpress/cloud-workflows/azure.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/azure.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/azure.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/azure.md) • [Microservices](./examples/07-microservices/cloud-workflows/azure.md) |
+| **GCP** | [Simple VPC](./examples/01-simple-vpc/cloud-workflows/gcp.md) • [Static Website](./examples/02-static-website/cloud-workflows/gcp.md) • [WordPress](./examples/03-wordpress/cloud-workflows/gcp.md) • [Landing Zone](./examples/04-landing-zone/cloud-workflows/gcp.md) • [Three-Tier Web App](./examples/05-three-tier-webapp/cloud-workflows/gcp.md) • [Data Pipeline](./examples/06-data-pipeline/cloud-workflows/gcp.md) • [Microservices](./examples/07-microservices/cloud-workflows/gcp.md) |
+
+**Explore examples:** See [examples/](./examples/) for complete workflows showing how the same requirements deploy to different cloud providers.
+
+**Learn more:** Read [Writing Tech-Agnostic Infrastructure Specifications](./docs/writing-tech-agnostic-specs.md) to understand how to write specifications using generic infrastructure terms instead of cloud-specific service names.
+
+---
+
+## Tips for Best Results
 
 ### Use frontier AI models
 
@@ -168,22 +213,15 @@ For optimal results, configure your AI tool with appropriate Model Context Proto
 
 **Recommended MCP servers by cloud provider:**
 
-#### IBM Cloud
-- **[TIM (Terraform IBM Modules) MCP Server](https://github.com/terraform-ibm-modules/tim-mcp)** - Focused on IBM Cloud module discovery and intelligent IaC generation
-
-#### AWS
-- **[AWS Terraform MCP Server](https://awslabs.github.io/mcp/servers/terraform-mcp-server)** - Prioritizes AWSCC provider with security scanning and best-practice automation
-
-#### Azure
-- **[Azure Terraform MCP Server](https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/tools/azure-terraform-best-practices)** - Best-practices guidance with built-in validation for Azure resources
-- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Multi-cloud support with Terraform Registry integration
-
-#### Google Cloud
-- **[GCP Tools MCP Server](https://lobehub.com/mcp/gcp-tools-mcp)** - Automates Google Cloud Platform infrastructure setup via gcloud and Terraform
-- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Multi-cloud support with Terraform Registry integration
-
-#### Multi-Cloud
-- **[HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server)** - Open-source, supports major providers via registry introspection and policy checks
+| Cloud Provider | MCP Server | Description |
+|----------------|------------|-------------|
+| **IBM Cloud** | [TIM (Terraform IBM Modules)](https://github.com/terraform-ibm-modules/tim-mcp) | Focused on IBM Cloud module discovery and intelligent IaC generation |
+| **AWS** | [AWS Terraform MCP Server](https://awslabs.github.io/mcp/servers/terraform-mcp-server) | Prioritizes AWSCC provider with security scanning and best-practice automation |
+| **Azure** | [Azure Terraform MCP Server](https://learn.microsoft.com/en-us/azure/developer/azure-mcp-server/tools/azure-terraform-best-practices) | Best-practices guidance with built-in validation for Azure resources |
+| **Azure** | [HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server) | Multi-cloud support with Terraform Registry integration |
+| **Google Cloud** | [GCP Tools MCP Server](https://lobehub.com/mcp/gcp-tools-mcp) | Automates Google Cloud Platform infrastructure setup via gcloud and Terraform |
+| **Google Cloud** | [HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server) | Multi-cloud support with Terraform Registry integration |
+| **Multi-Cloud** | [HashiCorp Terraform MCP Server](https://developer.hashicorp.com/terraform/mcp-server) | Open-source, supports major providers via registry introspection and policy checks |
 
 ### Add search capabilities
 
@@ -209,7 +247,7 @@ If your AI agent supports custom modes or configurations, create one that enable
 
 For example, in agents like Claude Code or IBM Bob, you can create a custom "Infrastructure" mode that pre-enables these capabilities, streamlining your workflow and reducing the need to grant permissions repeatedly.
 
-## 🤖 Supported AI Agents
+## Supported AI Agents
 
 | Agent                                                     | Support | Notes                                             |
 |-----------------------------------------------------------|---------|---------------------------------------------------|
@@ -229,7 +267,7 @@ For example, in agents like Claude Code or IBM Bob, you can create a custom "Inf
 | [Amp](https://ampcode.com/) | ✅ | |
 | [IBM Bob](https://www.ibm.com/products/bob) | ✅ | IDE-based agent with slash command support |
 
-## 🔧 IaC Specify CLI Reference
+## IaC Specify CLI Reference
 
 The `iac-specify` command supports the following options:
 
@@ -357,7 +395,7 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 |------------------|------------------------------------------------------------------------------------------------|
 | `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
 
-## 📚 Core philosophy
+## Core Philosophy
 
 Specification-Driven Development emphasizes intent-driven development, rich specification creation, and multi-step refinement. **For the complete philosophy, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).**
 
@@ -368,7 +406,7 @@ IaC Spec Kit applies these principles to infrastructure provisioning with additi
 - **Security and compliance**: Built-in governance and policy validation
 - **Multi-cloud patterns**: Portable infrastructure specifications across cloud providers
 
-## 🌟 Development Phases
+## Development Phases
 
 | Phase | Focus | Key Activities |
 |-------|-------|----------------|
@@ -377,7 +415,7 @@ IaC Spec Kit applies these principles to infrastructure provisioning with additi
 | **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add infrastructure iteratively</li><li>Modernize legacy infrastructure</li><li>Adapt processes</li></ul> |
 | **Infrastructure-as-Code** | Infrastructure provisioning | <ul><li>Specify cloud resources using cloud-agnostic terms</li><li>Document Infrastructure Architecture</li><li>Generate Terraform configurations</li><li>Validate with terraform validate/fmt/tflint</li></ul> |
 
-## 🎯 Experimental goals
+## Experimental Goals
 
 As SDD is an emerging trend, this implementation explores several areas in the context of Infrastructure as Code:
 
@@ -403,7 +441,7 @@ As SDD is an emerging trend, this implementation explores several areas in the c
 - Provide robust iterative infrastructure development workflows
 - Extend processes to handle upgrades and modernization tasks
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - **Linux/macOS/Windows**
 - [Supported](#-supported-ai-agents) AI coding agent.
@@ -413,14 +451,14 @@ As SDD is an emerging trend, this implementation explores several areas in the c
 
 If you encounter issues with an agent, please open an issue so we can refine the integration.
 
-## 📖 Learn more
+## Learn More
 
 - **[GitHub Spec Kit](https://github.com/github/spec-kit)** - Original Spec-Driven Development methodology and documentation
 - **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide for infrastructure projects
 
 ---
 
-## 📋 Detailed Process
+## Detailed Process
 
 <details>
 <summary>Click to expand the detailed step-by-step walkthrough</summary>
@@ -672,11 +710,11 @@ Resolve any validation errors by providing feedback to your AI agent. Remember t
 
 ---
 
-## 💬 Support
+## Support
 
 For support, please open a [GitHub issue](https://github.com/ibm/iac-spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development for Infrastructure as Code.
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 This project is built upon the [GitHub Spec Kit](https://github.com/github/spec-kit) toolkit created by:
 - [John Lam](https://github.com/jflam)
@@ -685,6 +723,6 @@ This project is built upon the [GitHub Spec Kit](https://github.com/github/spec-
 
 We are grateful for their foundational work in creating tools and patterns for Specification-Driven Development. This implementation adapts their toolkit specifically for Infrastructure as Code workflows.
 
-## 📄 License
+## License
 
 This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
