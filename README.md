@@ -10,9 +10,9 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 **Key benefits for infrastructure:**
 
-- Start with high-level requirements; AI agents help generate detailed specifications
-- Write what you need (requirements) before how to build it (tech stack)
-- AI agents translate specs into IaC configurations (Terraform being the most popular)
+- Start with high-level requirements; IaC Spec Kit guides AI agents to generate detailed specifications
+- Write what you need (requirements) before how to build it (specific cloud services)
+- IaC Spec Kit helps AI agents translate specs into IaC configurations (Terraform being the most popular)
 - Update specs to propagate changes through plans and code automatically
 - Maintain alignment across teams through explicit, reviewable specifications
 
@@ -32,15 +32,22 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ### Multi-Cloud Infrastructure Support
 
-IaC Spec Kit works with **any cloud provider**. The methodology separates generic infrastructure requirements (what you need) from cloud-specific implementation (how to build it):
+IaC Spec Kit works with **any cloud provider**. IaC Spec Kit guides AI agents to separate generic infrastructure requirements (what you need) from cloud-specific implementation (how to build it):
 
+- **Principles and Specifications** use generic infrastructure terms - IaC Spec Kit encourages describing requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
+- **Plans and Implementation** are cloud-specific - IaC Spec Kit helps AI agents translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
+
+```markdown
 - **Principles and Specifications** use generic infrastructure terms - they describe requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
 - **Plans and Implementation** are cloud-specific - they translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
 
 This separation means you can:
+- Focus on *what* you need rather than *how* to build it, letting IaC Spec Kit guide AI agents through cloud-specific implementation details
+- Enable team members less familiar with a specific cloud provider to read and contribute to specifications
 - Switch cloud providers by re-running `/iac.plan` with a different cloud
 - Deploy the same specification to multiple clouds
 - Compare cloud provider options before committing
+
 
 **Get started with your cloud provider:**
 
@@ -113,7 +120,7 @@ uvx --from git+https://github.com/ibm/iac-spec-kit.git iac-specify init <PROJECT
 
 Launch your AI assistant in the project directory. The `/iac.*` commands are available in the assistant.
 
-Use the **`/iac.principles`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
+Use the **`/iac.principles`** command to create your project's governing principles and development guidelines. IaC Spec Kit uses these principles to guide AI agents through all subsequent development phases.
 
 ```
 /iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
@@ -121,7 +128,7 @@ Use the **`/iac.principles`** command to create your project's governing princip
 
 ### 3. Create the spec
 
-Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**. Do not provide details on the tech stack.
+Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**. IaC Spec Kit guides AI agents to avoid tech stack details at this stage.
 
 ```
 /iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month. Use the official WordPress Docker image.
@@ -129,7 +136,7 @@ Use the **`/iac.specify`** command to describe what you want to build. Focus on 
 
 ### 4. Create a technical implementation plan
 
-Use the **`/iac.plan`** command to provide your tech stack and architecture choices.
+Use the **`/iac.plan`** command to provide your tech stack and architecture choices. IaC Spec Kit helps AI agents translate your generic requirements into cloud-specific services.
 
 ```
 /iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
@@ -474,20 +481,20 @@ Go to the project folder and run your AI agent. In our example, we're using `bob
 
 You will know that things are configured correctly if you see the `/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
 
-The first step should be establishing your project's governing principles using the `/iac.principles` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+The first step should be establishing your project's governing principles using the `/iac.principles` command. IaC Spec Kit uses these principles to guide AI agents toward consistent decision-making throughout all subsequent development phases:
 
 ```text
 /iac.principles This is an enterprise landing zone for a regulated industry. Security and compliance are critical. Multiple environments need strong isolation. Use Terraform.
 ```
 
-This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines that the AI agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines. IaC Spec Kit helps AI agents reference these principles during specification, planning, and implementation phases.
 
 ### **STEP 2:** Create project specifications
 
 With your project principles established, you can now create the functional specifications. Use the `/iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
 
 >[!IMPORTANT]
->Be as explicit as possible about *what* you are trying to build and *why*. For best results, **do not focus on the describing the details the cloud services at this point**.
+>Be as explicit as possible about *what* you are trying to build and *why*. For best results, **do not focus on describing the details of cloud services at this point**. IaC Spec Kit guides AI agents to use generic infrastructure terms instead.
 
 An example prompt:
 
@@ -495,7 +502,7 @@ An example prompt:
 /iac.specify I need an enterprise landing zone for our organization. Requirements: separate account groups for production, staging, development, and shared services. Centralized networking with hub-and-spoke topology. All logs aggregated to security account. Policy-based guardrails to enforce compliance. Cost tracking by environment. We need to comply with SOC 2 and Financial Services Cloud requirements.
 ```
 
-After this prompt is entered, you should see your AI agent kick off the planning and spec drafting process. The agent will also trigger some of the built-in scripts to set up the repository.
+After this prompt is entered, you should see your AI agent kick off the planning and spec drafting process. IaC Spec Kit's commands and templates guide the agent through this process, and the agent will also trigger some of the built-in scripts to set up the repository.
 
 Once this step is completed, you should have a new branch created (e.g., `001-landing-zone`), as well as a new specification in the `specs/001-landing-zone` directory.
 
@@ -618,7 +625,7 @@ You can also ask your AI agent (if you have the [GitHub CLI](https://docs.github
 
 ### **STEP 6:** Generate task breakdown with /iac.tasks
 
-With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/iac.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
+With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/iac.tasks` command to have IaC Spec Kit guide AI agents in generating a detailed task breakdown from your implementation plan:
 
 ```text
 /iac.tasks
@@ -633,7 +640,7 @@ This step creates a `tasks.md` file in your feature specification directory that
 - **Validation checkpoints** - Each component phase includes checkpoints to validate (for example with `terraform validate`, `terraform fmt`, and `tflint`)
 - **Checkpoint validation** - Each infrastructure component phase includes checkpoints to validate independent functionality
 
-The generated tasks.md provides a clear roadmap for the `/iac.implement` command, ensuring systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
+The generated tasks.md provides a clear roadmap for the `/iac.implement` command. IaC Spec Kit helps AI agents ensure systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
 
 ### **STEP 7:** Implementation
 
@@ -643,7 +650,7 @@ Once ready, use the `/iac.implement` command to execute your implementation plan
 /iac.implement
 ```
 
-The `/iac.implement` command will:
+The `/iac.implement` command helps AI agents:
 
 - Validate that all prerequisites are in place (principles, spec, plan, and tasks)
 - Parse the task breakdown from `tasks.md`

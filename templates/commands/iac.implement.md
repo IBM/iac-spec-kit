@@ -13,6 +13,33 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## CRITICAL: Code Generation vs Deployment
+
+**This command generates infrastructure-as-code files ONLY. It does NOT deploy actual cloud resources.**
+
+Understanding this distinction is essential before proceeding with implementation.
+
+### What this command DOES:
+- Generates .tf files (or equivalent IaC code) based on architecture plan
+- Applies code formatting and validates syntax
+- Creates documentation and deployment guides
+- Ensures code follows foundational principles and best practices
+
+### What this command does NOT do:
+- Deploy/provision actual cloud resources (terraform apply, pulumi up, etc.)
+- Manage Terraform state or infrastructure lifecycle
+- Handle operational concerns (monitoring, incident response, day-2 operations)
+- Execute actual infrastructure changes in your cloud account
+
+### Next steps after code generation:
+1. Review generated code for correctness and completeness
+2. Run validation: `terraform plan` (or `pulumi preview`, `cloudformation validate-template`)
+3. Review plan output to understand what will be created
+4. Deploy infrastructure: `terraform apply` (or equivalent) - YOUR responsibility, outside this framework
+5. Manage infrastructure lifecycle using your preferred deployment workflow
+
+---
+
 ## Outline
 
 1. Run `{SCRIPT}` from repo root and parse INFRA_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
@@ -138,28 +165,5 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Confirm the implementation follows the technical plan and principles requirements
    - Report final status with summary of completed phases and generated files
 
-**CRITICAL: Code Generation vs Deployment**
-
-This command generates infrastructure-as-code files ONLY. It does NOT deploy actual cloud resources.
-
-**What this command DOES:**
-- Generates .tf files (or equivalent IaC code) based on architecture plan
-- Applies code formatting and validates syntax
-- Creates documentation and deployment guides
-- Ensures code follows foundational principles and best practices
-
-**What this command does NOT do:**
-- Deploy/provision actual cloud resources (terraform apply, pulumi up, etc.)
-- Manage Terraform state or infrastructure lifecycle
-- Handle operational concerns (monitoring, incident response, day-2 operations)
-- Execute actual infrastructure changes in your cloud account
-
-**Next steps after code generation:**
-1. Review generated code for correctness and completeness
-2. Run validation: `terraform plan` (or `pulumi preview`, `cloudformation validate-template`)
-3. Review plan output to understand what will be created
-4. Deploy infrastructure: `terraform apply` (or equivalent) - YOUR responsibility, outside this framework
-5. Manage infrastructure lifecycle using your preferred deployment workflow
-
-Note: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/iac.tasks` first to regenerate the task list.
+**Note**: This command assumes a complete task breakdown exists in tasks.md. If tasks are incomplete or missing, suggest running `/iac.tasks` first to regenerate the task list.
 

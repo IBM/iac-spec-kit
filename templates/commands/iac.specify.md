@@ -15,9 +15,9 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-The text the user typed after `/iac.specify` in the triggering message **is** the feature description. Assume you always have it available in this conversation even if `{ARGS}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
+The text the user typed after `/iac.specify` in the triggering message **is** the infrastructure description. Assume you always have it available in this conversation even if `{ARGS}` appears literally below. Do not ask the user to repeat it unless they provided an empty command.
 
-Given that feature description, do this:
+Given that infrastructure description, do this:
 
 1. **Generate a concise short name** (2-4 words) for the branch:
    - Analyze the infrastructure description and extract the most meaningful keywords
@@ -38,7 +38,7 @@ Given that feature description, do this:
       git fetch --all --prune
       ```
    
-   b. Find the highest feature number across all sources for the short-name:
+   b. Find the highest infrastructure number across all sources for the short-name:
       - Remote branches: `git ls-remote --heads origin | grep -E 'refs/heads/[0-9]+-<short-name>$'`
       - Local branches: `git branch | grep -E '^[* ]*[0-9]+-<short-name>$'`
       - Specs directories: Check for directories matching `specs/[0-9]+-<short-name>`
@@ -57,7 +57,7 @@ Given that feature description, do this:
    - Check all three sources (remote branches, local branches, specs directories) to find the highest number
    - Only match branches/directories with the exact short-name pattern
    - If no existing branches/directories found with this short-name, start with number 1
-   - You must only ever run this script once per feature
+   - You must only ever run this script once per infrastructure component
    - The JSON is provided in the terminal as output - always refer to it to get the actual content you're looking for
    - The JSON output will contain BRANCH_NAME and SPEC_FILE paths
    - For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot")
@@ -164,9 +164,9 @@ Given that feature description, do this:
            
            | Option | Answer | Implications |
            |--------|--------|--------------|
-           | A      | [First suggested answer] | [What this means for the feature] |
-           | B      | [Second suggested answer] | [What this means for the feature] |
-           | C      | [Third suggested answer] | [What this means for the feature] |
+           | A      | [First suggested answer] | [What this means for the infrastructure] |
+           | B      | [Second suggested answer] | [What this means for the infrastructure] |
+           | C      | [Third suggested answer] | [What this means for the infrastructure] |
            | Custom | Provide your own answer | [Explain how to provide custom input] |
            
            **Your choice**: _[Wait for user response]_
@@ -194,6 +194,15 @@ Given that feature description, do this:
 ## Quick Guidelines
 
 - Focus on **WHAT** infrastructure is needed and **WHY**.
+- **CRITICAL: Use ONLY generic infrastructure terms** - NO cloud-specific service names:
+  - ✅ "managed database service" NOT ❌ "RDS", "Cloud SQL", "Azure Database"
+  - ✅ "object storage" NOT ❌ "S3", "Azure Blob", "Cloud Storage"
+  - ✅ "serverless compute" NOT ❌ "Lambda", "Cloud Functions", "Azure Functions"
+  - ✅ "container orchestration" NOT ❌ "EKS", "AKS", "GKE"
+  - ✅ "load balancer" NOT ❌ "ALB", "Application Gateway", "Cloud Load Balancing"
+  - ✅ "content delivery network" NOT ❌ "CloudFront", "Azure CDN", "Cloud CDN"
+  - ✅ "managed relational database" NOT ❌ "RDS", "Azure SQL Database", "Cloud SQL"
+  - ✅ "virtual private network" NOT ❌ "VPC", "VNet", "Virtual Network"
 - Avoid HOW to implement (no cloud providers, specific tools, IaC syntax).
 - Written for both infrastructure and business stakeholders.
 - DO NOT create any checklists that are embedded in the spec. That will be a separate command.
@@ -231,23 +240,12 @@ When creating this spec from a user prompt:
 
 ### Success Criteria Guidelines
 
-Success criteria must be:
+Follow the detailed guidance in the Success Criteria section of `templates/spec-template.md`.
 
-1. **Measurable**: Include specific metrics (time, percentage, count, rate)
-2. **Technology-agnostic**: No mention of frameworks, languages, databases, or tools
-3. **User-focused**: Describe outcomes from user/business perspective, not system internals
-4. **Verifiable**: Can be tested/validated without knowing implementation details
+**Key reminders:**
+- Use generic infrastructure terms (no cloud-specific service names like "RDS", "S3", "Lambda")
+- Focus on measurable outcomes (time, percentage, count, rate)
+- Describe from business/operational perspective, not system internals
+- Must be verifiable without knowing implementation details
 
-**Good examples**:
-
-- "Infrastructure deploys in under 15 minutes"
-- "System scales to handle 10,000 requests per second"
-- "99.9% uptime SLO for production workloads"
-- "Database failover completes in under 5 minutes"
-
-**Bad examples** (implementation-focused):
-
-- "Terraform files are under 500 lines" (implementation detail, use outcome-based metric)
-- "Uses dedicated-cores database instances" (technology-specific, too prescriptive)
-- "IBM Cloud provider version 1.60" (version-specific, let plan phase decide)
-- "VPC has 3 subnets across zones" (architecture detail, belongs in plan phase)
+The spec template provides complete examples of good vs bad success criteria.

@@ -268,6 +268,47 @@ Note: Your infrastructure may need more or fewer phases depending on complexity
 - Separate VPCs or separate applications can execute in parallel
 - Unrelated infrastructure stacks can be deployed simultaneously
 
+### When Tasks CANNOT Be Parallel
+
+**CRITICAL: Tasks CANNOT run in parallel when:**
+
+1. **Same File Modification**:
+   - ❌ Two tasks both modifying `iac/vpc.tf`
+   - ✅ One task on `iac/vpc.tf`, another on `iac/security-groups.tf`
+
+2. **Resource Dependencies**:
+   - ❌ Creating compute instances BEFORE VPC exists
+   - ❌ Attaching security groups BEFORE they're defined
+   - ❌ Configuring load balancer pools BEFORE load balancer exists
+   - ✅ Creating multiple independent security groups (different files, no dependencies)
+
+3. **Cross-Tier Dependencies**:
+   - ❌ Any Compute/Data tier task running before Network tier completes
+   - ❌ Application tier DNS configuration before compute resources exist
+   - ✅ Within Network tier: subnets, security groups, IAM roles (if in different files)
+
+4. **Sequential Configuration**:
+   - ❌ Configuring database backups BEFORE database is created
+   - ❌ Attaching policies to IAM roles BEFORE roles exist
+   - ❌ Registering targets with load balancer BEFORE targets exist
+   - ✅ Creating multiple databases in parallel (if no dependencies between them)
+
+5. **Validation Checkpoints**:
+   - ❌ Starting next tier BEFORE validation checkpoint passes
+   - ❌ Running `terraform plan` BEFORE all tier resources defined
+   - ✅ Running validation commands in sequence at tier boundaries
+
+**Infrastructure-Specific Dependency Examples:**
+
+- **VPC → Subnets → Resources**: Must create VPC, then subnets, then place resources in subnets
+- **Security Groups → Compute**: Define security groups before launching instances that reference them
+- **IAM Roles → Resources**: Create IAM roles before resources that assume those roles
+- **Load Balancer → Pools → Targets**: Create LB, then pools, then register targets
+- **Network → Database**: Network infrastructure must exist before database placement
+- **Secrets Manager → Application**: Secrets must exist before applications reference them
+
+**Rule of Thumb**: If task B needs output/ID from task A, they CANNOT be parallel. Mark task B without [P] and ensure it comes after task A in the sequence.
+
 ---
 
 ## Implementation Strategy
