@@ -106,11 +106,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 3. **Create deployment guide** → `quickstart.md`:
    - Prerequisites (tools, accounts, credentials)
-   - State backend setup
-   - Variable configuration per environment
+   - State backend setup if any (no state backend setup if using local, or managed iac service such as HashiCorp terraform or IBM Cloud Schematics)
    - Deployment commands (init, plan, apply)
-   - Validation steps
+   - Manual validation steps
    - Rollback procedures
+   **IMPORTANT**: ❌ Do NOT include IaC code, e.g: terraform code in this file. The IaC code will be generated in next phase by /iac.implement command.
 
 4. **Agent context update**:
    - Run `{AGENT_SCRIPT}`
