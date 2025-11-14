@@ -53,11 +53,11 @@ You **MUST** consider the user input before proceeding (if not empty).
    For IaC tool (if not specified):
      Task: "Best practices for {Terraform/Pulumi/CloudFormation} for {use case} on {cloud provider}"
    For well-architected framework (MANDATORY REFERENCE):
-     Task: "Study {cloud provider} Well-Architected Framework and document applicable pillars/principles:
+     Task: "Study {cloud provider} Well-Architected Framework / Best practices and document applicable pillars/principles:
        - AWS: 6 pillars (Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability)
        - Azure: 5 pillars (Cost Optimization, Operational Excellence, Performance Efficiency, Reliability, Security)
        - GCP: 5 principles (Operational Excellence, Security Privacy & Compliance, Reliability, Cost Optimization, Performance & Scalability)
-       - IBM Cloud: Framework for Financial Services & IBM Cloud best practices
+       - IBM Cloud: Use the Framework for Financial Services and IBM Cloud best practices
      Map framework recommendations to infrastructure requirements.
      Identify which pillar applies to each component and document specific best practices to follow."
    For curated modules (PREFERRED APPROACH):
