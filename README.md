@@ -37,10 +37,6 @@ IaC Spec Kit works with **any cloud provider**. IaC Spec Kit guides AI agents to
 - **Principles and Specifications** use generic infrastructure terms - IaC Spec Kit encourages describing requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
 - **Plans and Implementation** are cloud-specific - IaC Spec Kit helps AI agents translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
 
-```markdown
-- **Principles and Specifications** use generic infrastructure terms - they describe requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
-- **Plans and Implementation** are cloud-specific - they translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
-
 This separation means you can:
 - Focus on *what* you need rather than *how* to build it, letting IaC Spec Kit guide AI agents through cloud-specific implementation details
 - Enable team members less familiar with a specific cloud provider to read and contribute to specifications
