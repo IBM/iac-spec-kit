@@ -21,8 +21,8 @@
 **IaC Tool**: [e.g., Terraform 1.12+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
 **Provider Versions**: [e.g., AWS Provider ~> 5.0, Azure Provider ~> 3.0 or NEEDS CLARIFICATION]
 **Curated Modules**: [e.g., terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules, Pulumi packages or NEEDS CLARIFICATION]
-**State Backend**: [e.g., S3 + DynamoDB, Azure Blob, Terraform Cloud or NEEDS CLARIFICATION]
-**Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based or NEEDS CLARIFICATION]
+**State Backend**: [e.g., Local, Managed (Schematics, Terraform enterprise / Cloud), AWS S3 + DynamoDB, Azure Blob or NEEDS CLARIFICATION]
+**Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based, Terragrunt or NEEDS CLARIFICATION]
 **Testing**: [e.g., Terratest, Kitchen-Terraform, terraform test or N/A]
 **Security Scanning**: [e.g., Checkov, tfsec, Snyk or NEEDS CLARIFICATION]
 **Cost Estimation**: [e.g., Infracost, Cloud provider calculators or N/A]
@@ -334,9 +334,13 @@ specs/[###-infrastructure]/
   Do NOT over-engineer structure for simple use cases. A single main.tf for a POC is appropriate.
 -->
 
-```text
+# Note: Files can be placed at repository root OR in a subdirectory depending on project type:
+# - Dedicated infrastructure repos (POC/demo): Place at root for simplicity
+# - Hybrid repos with app + infrastructure: Use subdirectory (iac/, infra/, terraform/)
+# - Multi-environment production: Use subdirectory for clear separation
+
 # [REMOVE IF UNUSED] Option 1: Simple Terraform (POC/Demo/Single Resource)
-iac/
+# Typical placement: Repository root (for dedicated infrastructure repos)
 ├── main.tf                 # All resources in one file
 ├── variables.tf            # Variable declarations
 ├── outputs.tf              # Output declarations
@@ -344,7 +348,7 @@ iac/
 └── README.md               # Provisioning instructions
 
 # [REMOVE IF UNUSED] Option 2: Terraform Infrastructure (DEFAULT for IaC)
-iac/
+# Typical placement: iac/ subdirectory (for hybrid repos or organized infrastructure)
 ├── backend.tf              # State backend (IBM COS, S3, Azure Storage, GCS)
 ├── provider.tf             # Provider configuration (IBM Cloud, AWS, Azure, GCP)
 ├── versions.tf             # Terraform and provider version constraints
@@ -368,7 +372,7 @@ iac/
 └── README.md               # Provisioning and usage instructions
 
 # [REMOVE IF UNUSED] Option 3: Pulumi Infrastructure
-iac/
+# Typical placement: iac/ subdirectory (for hybrid repos or organized infrastructure)
 ├── Pulumi.yaml             # Project definition
 ├── Pulumi.dev.yaml         # Dev stack configuration
 ├── Pulumi.staging.yaml     # Staging stack configuration
@@ -381,7 +385,7 @@ iac/
 └── README.md               # Deployment instructions
 
 # [REMOVE IF UNUSED] Option 4: CloudFormation Infrastructure (AWS)
-iac/
+# Typical placement: iac/ subdirectory (for hybrid repos or organized infrastructure)
 ├── main-stack.yaml         # Root stack template
 ├── networking.yaml         # Nested stack: VPC, subnets
 ├── compute.yaml            # Nested stack: Compute resources
