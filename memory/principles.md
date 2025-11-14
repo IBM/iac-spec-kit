@@ -34,17 +34,33 @@
 ### [ARCHITECTURE_PRINCIPLE_1_NAME]
 <!-- Example: I. Design for Simplicity (NON-NEGOTIABLE) -->
 [ARCHITECTURE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Infrastructure should be as simple as necessary for the use case, avoiding over-engineering and unnecessary complexity. Simple infrastructure is easier to understand, maintain, secure, and troubleshoot. Complexity should serve clear requirements, not emerge by default. Dev environments prioritize minimal viable infrastructure; staging mirrors production architecture at appropriate scale; production adds capabilities only when workload requirements justify the added complexity. -->
+<!-- Example: Infrastructure should be as simple as necessary for the use case, avoiding over-engineering and unnecessary complexity. Simple infrastructure is easier to understand, maintain, secure, and troubleshoot. Complexity should serve clear requirements, not emerge by default. Dev environments prioritize minimal viable infrastructure; staging mirrors production architecture at appropriate scale; production adds capabilities only when workload requirements justify the added complexity.
+
+     Infrastructure-specific examples:
+     - Baseline (Dev): Single-zone deployment, basic networking, minimal resource types
+     - Enhanced (Production): Multi-zone deployment with load balancing, layered network security, comprehensive resource coverage
+     - Avoid: Multi-region active-active unless business continuity requires it; service mesh unless microservices complexity demands it; complex networking topologies unless security/compliance mandates it -->
 
 ### [ARCHITECTURE_PRINCIPLE_2_NAME]
 <!-- Example: II. Design for Security (NON-NEGOTIABLE) -->
 [ARCHITECTURE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Security must be built into infrastructure from inception, not added as an afterthought. Every resource implements appropriate security controls that scale with the criticality and sensitivity of the workload. Dev environments use Baseline security (basic controls, no sensitive data); staging environments mirror production security posture; production environments implement Enhanced security including defense-in-depth, comprehensive access controls, encryption, and network isolation appropriate to data sensitivity and risk profile. -->
+<!-- Example: Security must be built into infrastructure from inception, not added as an afterthought. Every resource implements appropriate security controls that scale with the criticality and sensitivity of the workload. Dev environments use Baseline security (basic controls, no sensitive data); staging environments mirror production security posture; production environments implement Enhanced security including defense-in-depth, comprehensive access controls, encryption, and network isolation appropriate to data sensitivity and risk profile.
+
+     Infrastructure-specific examples:
+     - Baseline (Dev): Restrictive security groups/firewalls, TLS in transit, IAM roles with appropriate permissions
+     - Enhanced (Production): Private subnets for compute/data, encryption at rest and in transit, secrets management service, least-privilege IAM with MFA, network isolation between tiers
+     - Always: No public database endpoints, no overly permissive security groups (0.0.0.0/0 on sensitive ports), no hardcoded credentials -->
 
 ### [ARCHITECTURE_PRINCIPLE_3_NAME]
 <!-- Example: III. Build in Observability (SITUATIONAL - Staging/Production) -->
 [ARCHITECTURE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Infrastructure must provide insight into its health, performance, and behavior to enable operational awareness and issue resolution. Dev environments typically rely on local logs and basic troubleshooting without managed observability services; staging environments implement production-like monitoring to validate observability patterns; production environments require comprehensive telemetry, centralized logging, alerting, and dashboards appropriate to operational complexity and business criticality. -->
+<!-- Example: Infrastructure must provide insight into its health, performance, and behavior to enable operational awareness and issue resolution. Dev environments typically rely on local logs and basic troubleshooting without managed observability services; staging environments implement production-like monitoring to validate observability patterns; production environments require comprehensive telemetry, centralized logging, alerting, and dashboards appropriate to operational complexity and business criticality.
+
+     Infrastructure-specific examples:
+     - Baseline (Dev): Default cloud provider metrics, basic health checks, local log inspection
+     - Enhanced (Staging): Centralized logging service, monitoring dashboards, health check endpoints, log retention (7-30 days)
+     - Enhanced (Production): Comprehensive monitoring service, custom metrics, alerting with on-call integration, distributed tracing, log aggregation with long retention (90+ days), infrastructure dashboards
+     - Skip for dev: Managed monitoring services, alerting infrastructure, log aggregation (unless testing observability features) -->
 
 <!-- Add more architecture principles below ONLY if your use case truly requires them.
 
@@ -73,17 +89,35 @@
 ### [CODE_PRINCIPLE_1_NAME]
 <!-- Example: I. Leverage Proven, Maintained Modules (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Infrastructure code must build on validated, well-maintained modules rather than proliferating custom implementations. Curated modules reduce risk, improve consistency, and accelerate delivery. Use direct provider resources only when modules don't exist or requirements are truly unique. Baseline uses stable community modules; Enhanced requires formally verified or enterprise-supported modules. -->
+<!-- Example: Infrastructure code must build on validated, well-maintained modules rather than proliferating custom implementations. Curated modules reduce risk, improve consistency, and accelerate delivery. Use direct provider resources only when modules don't exist or requirements are truly unique. Baseline uses stable community modules; Enhanced requires formally verified or enterprise-supported modules.
+
+     Infrastructure code examples:
+     - Prefer: terraform-aws-modules/vpc/aws, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules
+     - Use direct resources only when: Very simple single resources, custom requirements not supported by modules, modules add unnecessary complexity
+     - Baseline: Community modules with 1M+ downloads, active maintenance, clear documentation
+     - Enhanced: Verified/official modules, enterprise-supported modules, modules with security scanning -->
 
 ### [CODE_PRINCIPLE_2_NAME]
 <!-- Example: II. Validate Before Deploying (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Infrastructure code must be validated before deployment to prevent failures and security vulnerabilities. Testing catches errors early, reduces deployment risk, and builds confidence in changes. Baseline ensures syntax validation and linting; Enhanced implements comprehensive testing including mocked deployments, security scanning, and policy validation. -->
+<!-- Example: Infrastructure code must be validated before deployment to prevent failures and security vulnerabilities. Testing catches errors early, reduces deployment risk, and builds confidence in changes. Baseline ensures syntax validation and linting; Enhanced implements comprehensive testing including mocked deployments, security scanning, and policy validation.
+
+     Infrastructure code validation examples:
+     - Baseline: terraform validate, terraform fmt, basic linting (tflint)
+     - Enhanced: Security scanning (Checkov, tfsec, Snyk), cost estimation (Infracost), policy validation (OPA, Sentinel), terraform plan review
+     - Always: Validate syntax before commit, format code consistently, catch common errors early
+     - Production: Require plan approval, automated security checks in CI/CD, cost impact analysis -->
 
 ### [CODE_PRINCIPLE_3_NAME]
 <!-- Example: III. Write Secure Code by Default (NON-NEGOTIABLE) -->
 [CODE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Security must be inherent in infrastructure code, not retrofitted afterward. Secure coding practices prevent vulnerabilities before resources are deployed. Code never contains hardcoded credentials, implements least-privilege access patterns, and defaults to secure configurations. This principle applies universally regardless of environment or complexity level. -->
+<!-- Example: Security must be inherent in infrastructure code, not retrofitted afterward. Secure coding practices prevent vulnerabilities before resources are deployed. Code never contains hardcoded credentials, implements least-privilege access patterns, and defaults to secure configurations. This principle applies universally regardless of environment or complexity level.
+
+     Infrastructure code security examples:
+     - Never: Hardcoded credentials, API keys, passwords in code or version control
+     - Always: Use secrets management (AWS Secrets Manager, Azure Key Vault, IBM Secrets Manager), environment variables for sensitive data, least-privilege IAM roles
+     - Default secure: Encryption enabled, private subnets for data/compute, restrictive security groups, TLS/HTTPS only
+     - Code review: Check for exposed secrets, overly permissive policies, public resources that should be private -->
 
 <!-- Add more code principles below as needed for your specific requirements.
      Common additional principles to consider (expressed as charter-style tenets):
@@ -115,12 +149,24 @@
 ### [APPROACH_1_NAME]
 <!-- Example: Progressive Complexity (Recommended for most use cases) -->
 [APPROACH_1_DESCRIPTION]
-<!-- Example: Infrastructure should start simple and add complexity only as requirements emerge. This approach minimizes initial investment while maintaining a clear path to enhanced capabilities. Begin with Baseline controls and patterns appropriate for dev/testing; introduce Enhanced controls as environments progress toward staging and production or when workload maturity, sensitivity, or compliance requirements demand them. Modular design enables incremental capability additions without disruptive refactoring. -->
+<!-- Example: Infrastructure should start simple and add complexity only as requirements emerge. This approach minimizes initial investment while maintaining a clear path to enhanced capabilities. Begin with Baseline controls and patterns appropriate for dev/testing; introduce Enhanced controls as environments progress toward staging and production or when workload maturity, sensitivity, or compliance requirements demand them. Modular design enables incremental capability additions without disruptive refactoring.
+
+     Infrastructure progression example:
+     - Phase 1 (Dev): Single-zone VPC, basic compute, simple database
+     - Phase 2 (Staging): Multi-zone VPC, auto-scaling compute, managed database with backups
+     - Phase 3 (Production): Add monitoring/alerting, encryption at rest, secrets management, disaster recovery
+     - Phase 4 (Mature Production): Add compliance controls, advanced networking, multi-region if needed -->
 
 ### [APPROACH_2_NAME]
 <!-- Example: Environment-Appropriate Complexity -->
 [APPROACH_2_DESCRIPTION]
-<!-- Example: Infrastructure complexity should match the operational characteristics and risk profile of each environment. Development environments benefit from Baseline simplicity (minimal services, basic security, local troubleshooting); staging environments mirror production architecture with Enhanced controls to validate operational patterns; production environments implement comprehensive Enhanced controls from inception (HA, centralized observability, full security). This approach balances cost efficiency in lower environments with robustness in critical environments while maintaining architectural consistency through shared modules and progressive enhancement. -->
+<!-- Example: Infrastructure complexity should match the operational characteristics and risk profile of each environment. Development environments benefit from Baseline simplicity (minimal services, basic security, local troubleshooting); staging environments mirror production architecture with Enhanced controls to validate operational patterns; production environments implement comprehensive Enhanced controls from inception (HA, centralized observability, full security). This approach balances cost efficiency in lower environments with robustness in critical environments while maintaining architectural consistency through shared modules and progressive enhancement.
+
+     Environment-specific infrastructure examples:
+     - Dev: Smallest instance sizes, single-zone, basic security groups, minimal monitoring, auto-shutdown schedules
+     - Staging: Medium instance sizes, multi-zone, production-like security, centralized logging, basic monitoring, mirrors production architecture
+     - Production: Right-sized instances, multi-zone with auto-scaling, comprehensive security, full monitoring/alerting, encryption, disaster recovery
+     - Cost optimization: Dev uses smallest viable resources and auto-shutdown; Production balances performance with reserved capacity -->
 
 <!-- Add more implementation approaches below as needed for your specific requirements.
 

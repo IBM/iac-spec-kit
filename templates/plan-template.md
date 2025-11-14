@@ -38,11 +38,21 @@
 ## Infrastructure Architecture
 
 <!--
-  Use this section to document provider-specific infrastructure design.
-  The spec.md uses generic infrastructure terms; this file translates them to cloud-specific services.
-
+  **CRITICAL TRANSITION POINT**: This is where generic requirements become cloud-specific.
+  
+  The spec.md uses ONLY generic infrastructure terms (e.g., "managed database", "object storage").
+  THIS file (plan.md) translates them to cloud-specific services (e.g., "RDS PostgreSQL", "S3").
+  
+  Translation Examples:
+  - spec.md: "managed relational database" → plan.md: "AWS RDS PostgreSQL 15.x" or "IBM Cloud Databases for PostgreSQL 15.x"
+  - spec.md: "object storage" → plan.md: "S3 bucket with versioning" or "Cloud Object Storage bucket"
+  - spec.md: "serverless compute" → plan.md: "Lambda functions (Node.js 18)" or "Code Engine applications"
+  - spec.md: "container orchestration" → plan.md: "EKS cluster v1.28" or "IBM Cloud Kubernetes Service"
+  - spec.md: "load balancer" → plan.md: "Application Load Balancer" or "VPC Load Balancer"
+  - spec.md: "virtual private network" → plan.md: "AWS VPC" or "IBM Cloud VPC"
+  
   During /iac.implement, AI agents will read this section to generate IaC files.
-
+  
   This content will be expanded into architecture.md in Phase 1.
 -->
 
