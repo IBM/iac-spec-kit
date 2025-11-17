@@ -26,7 +26,7 @@ Follow this execution flow:
    - If the user inputs and the repo context do not provide sufficient details, ask a few simple and scoped questions to derive values - **IMPORTANT**: Environment type (dev/staging/production) is critical for principle selection: dev environments typically need Simplicity + Security (Baseline) only, skipping observability managed services/HA/DR/compliance; staging adds Observability and mirrors production security; production adds Reliability, Identity, and potentially Compliance. Also ask: which cloud?, what overall development approach (start simple and add complexity iteratively, or complex upfront?).
    - **DO NOT ask** "which of the X principles from the template do you want." Instead derive principle selection from environment type and brief user interview.
    - **IMPORTANT**: Create charter-style principles (high-level tenets like AWS Well-Architected Framework), NOT technical implementation checklists. Focus on WHAT outcomes and WHY they matter, not tactical HOW (specific tools, commands, or managed services). Principles should be tool-agnostic and outcomes-focused.
-   - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown ask or mark TODO), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.
+   - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown choose current date), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.
    - `PRINCIPLES_VERSION` must increment according to semantic versioning rules:
      - MAJOR: Backward incompatible governance/principle removals or redefinitions.
      - MINOR: New principle/section added or materially expanded guidance.
@@ -41,10 +41,19 @@ Follow this execution flow:
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 4. Consistency propagation checklist (convert prior checklist into active validations):
-   - Read `/templates/plan-template.md` and ensure any "Principles Check" or rules align with updated principles.
-   - Read `/templates/spec-template.md` for scope/requirements alignment—update if the principles add/remove mandatory sections or constraints.
-   - Read `/templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
-   - Read each command file in `iac.*.md` (including this one) to verify no outdated references remain when generic guidance is required.
+   - Read `.specify/templates/plan-template.md` and ensure any "Principles Check" or rules align with updated principles.
+   - Read `.specify/templates/spec-template.md` for scope/requirements alignment—update if the principles add/remove mandatory sections or constraints.
+   - Read `.specify/templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
+   - Read each command file matching `iac.*.md` pattern (including this one) to verify no outdated references remain when generic guidance is required. Known command files include:
+     - `iac.analyze.md` - Infrastructure analysis and assessment
+     - `iac.checklist.md` - Checklist generation and validation
+     - `iac.clarify.md` - Requirements clarification
+     - `iac.implement.md` - Implementation guidance
+     - `iac.plan.md` - Planning and architecture
+     - `iac.principles.md` - This file (principles management)
+     - `iac.specify.md` - Specification creation
+     - `iac.tasks.md` - Task breakdown and management
+   - If additional `iac.*.md` files exist, search for them using the pattern `iac.*.md` to ensure complete coverage.
    - Read any runtime guidance docs (e.g., `README.md`, `docs/quickstart.md`, or agent-specific guidance files if present). Update references to principles changed.
 
 5. Produce a Sync Impact Report (prepend as an HTML comment at top of the principles file after update):
