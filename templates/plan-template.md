@@ -19,9 +19,9 @@
 
 **Cloud Provider**: [e.g., AWS, Azure, GCP, IBM Cloud, Multi-cloud or NEEDS CLARIFICATION]
 **IaC Tool**: [e.g., Terraform 1.12+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
-**Provider Versions**: [e.g., AWS Provider ~> 5.0, Azure Provider ~> 3.0 or NEEDS CLARIFICATION]
+**Provider Versions**: [e.g., AWS Provider >= 5.0, Azure Provider >= 3.0 | **Module Versions**: vpc-module = 1.2.3 (pin exact versions) or NEEDS CLARIFICATION]
 **Curated Modules**: [e.g., terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules, Pulumi packages or NEEDS CLARIFICATION]
-**State Backend**: [e.g., Local, Managed (Schematics, Terraform enterprise / Cloud), AWS S3 + DynamoDB, Azure Blob or NEEDS CLARIFICATION]
+**State Backend**: [e.g., Managed (Terraform Cloud, IBM Cloud Schematics) - PREFERRED, Local (dev only), or manual backends (S3+DynamoDB, Azure Blob, GCS) if required, or NEEDS CLARIFICATION]
 **Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based, Terragrunt or NEEDS CLARIFICATION]
 **Testing**: [e.g., Terratest, Kitchen-Terraform, terraform test or N/A]
 **Security Scanning**: [e.g., Checkov, tfsec, Snyk or NEEDS CLARIFICATION]
@@ -232,12 +232,16 @@
   - Local State: Only for solo development, prototyping, or learning. NOT for production.
   - Remote State: Required for team collaboration and production infrastructure.
 
-  Remote Backend Options:
-  - S3 + DynamoDB (AWS): Most common, reliable, cost-effective
-  - Azure Blob Storage + Storage Account Lock (Azure): Native Azure integration
-  - GCS (GCP): Native GCP integration, good performance
-  - Terraform Cloud: Managed service, includes remote execution, policy as code
-  - Consul: For multi-cloud or hybrid scenarios
+  PREFERRED: Managed State Services (simplifies state management, locking, and security)
+  - Terraform Cloud/Enterprise: Managed service with remote execution, policy as code, built-in locking
+  - IBM Cloud Schematics: Fully managed Terraform service with state management and locking
+  - Other cloud-native managed services with state management capabilities
+
+  Manual Remote Backends (use only when managed services aren't available or have specific limitations):
+  - S3 + DynamoDB (AWS): Requires manual setup of locking, versioning, encryption
+  - Azure Blob Storage + Lock (Azure): Manual configuration for locking and security
+  - GCS (GCP): Manual setup required for locking mechanism
+  - Consul: For multi-cloud or hybrid scenarios requiring custom configuration
 
   Best Practices:
   - Enable versioning on backend storage for rollback capability
@@ -247,14 +251,17 @@
   - Separate state files per environment (never share state across dev/staging/prod)
   - Regular backups with retention policy (keep 30+ days for disaster recovery)
 
-  Examples:
-  - Backend: Cloud Object Storage bucket (my-project-terraform-state) in us-south with versioning enabled
-  - State Locking: COS object locking or Terraform Cloud state locking to prevent concurrent modifications
-  - Encryption: AES-256 server-side encryption with Key Protect for additional security
-  - Backup Strategy: COS versioning + lifecycle policy (retain 30 days of versions, archive to Archive tier after 90 days)
-  - Access Control: IAM policies restrict state bucket access to CI/CD service IDs and authorized users only
+  Managed Service Examples (PREFERRED):
+  - IBM Cloud Schematics: Workspace per environment (dev/staging/prod), built-in state management, locking, and encryption
+  - Terraform Cloud: Workspace per environment, built-in versioning, locking, access controls, and audit logging
+
+  Manual Backend Examples (if managed services not used):
+  - Backend: Cloud Object Storage bucket (my-project-terraform-state) with versioning enabled
+  - State Locking: Manual configuration required (COS object locking, DynamoDB table, etc.)
+  - Encryption: AES-256 server-side encryption with Key Protect or equivalent
+  - Backup Strategy: Versioning + lifecycle policy (retain 30 days, archive old versions)
+  - Access Control: IAM policies restricting access to CI/CD service accounts and authorized users only
   - Workspace Usage: One state file per workspace (terraform workspace select dev/staging/prod)
-  - State File Naming: terraform.tfstate for default workspace, terraform.tfstate.d/<workspace>/ for named workspaces
 -->
 
 [Document state management strategy here]

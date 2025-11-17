@@ -52,14 +52,13 @@ You **MUST** consider the user input before proceeding (if not empty).
      Task: "Research {unknown} for {infrastructure context}"
    For IaC tool (if not specified):
      Task: "Best practices for {Terraform/Pulumi/CloudFormation} for {use case} on {cloud provider}"
-   For well-architected framework (MANDATORY REFERENCE):
-     Task: "Study {cloud provider} Well-Architected Framework / Best practices and document applicable pillars/principles:
+   For well-architected framework (RECOMMENDED):
+     Task: "Review {cloud provider} Well-Architected Framework / Best practices and consider applicable pillars/principles:
        - AWS: 6 pillars (Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, Sustainability)
        - Azure: 5 pillars (Cost Optimization, Operational Excellence, Performance Efficiency, Reliability, Security)
        - GCP: 5 principles (Operational Excellence, Security Privacy & Compliance, Reliability, Cost Optimization, Performance & Scalability)
-       - IBM Cloud: Use the Framework for Financial Services and IBM Cloud best practices
-     Map framework recommendations to infrastructure requirements.
-     Identify which pillar applies to each component and document specific best practices to follow."
+       - IBM Cloud: Framework for Financial Services and IBM Cloud best practices
+     Consider relevant framework recommendations for the infrastructure requirements."
    For curated modules (PREFERRED APPROACH):
      Task: "Identify and recommend curated modules as the PRIMARY implementation approach:
        - AWS: terraform-aws-modules (Terraform Registry verified)
@@ -78,7 +77,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Decision: [what was chosen - cloud provider, IaC tool, versions]
    - Rationale: [why chosen - cost, features, team expertise, ecosystem]
    - Alternatives considered: [what else evaluated and why rejected]
-   - Well-Architected Framework (MANDATORY): [applicable pillars/principles mapped to infrastructure components with specific best practices]
+   - Well-Architected Framework: [relevant pillars/principles for the infrastructure requirements]
    - Curated Modules (PRIMARY APPROACH): [specific modules/packages identified for each component with versions, rationale for any direct resource usage]
    - Best practices: [key patterns to follow]
    - References: [documentation links, examples, module registries]

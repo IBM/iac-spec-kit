@@ -37,8 +37,8 @@
 <!-- Example: Infrastructure should be as simple as necessary for the use case, avoiding over-engineering and unnecessary complexity. Simple infrastructure is easier to understand, maintain, secure, and troubleshoot. Complexity should serve clear requirements, not emerge by default. Dev environments prioritize minimal viable infrastructure; staging mirrors production architecture at appropriate scale; production adds capabilities only when workload requirements justify the added complexity.
 
      Infrastructure-specific examples:
-     - Baseline (Dev): Single-zone deployment, basic networking, minimal resource types
-     - Enhanced (Production): Multi-zone deployment with load balancing, layered network security, comprehensive resource coverage
+     - Baseline (Dev): basic networking, minimal resource types
+     - Enhanced (Production): layered network security, comprehensive resource coverage
      - Avoid: Multi-region active-active unless business continuity requires it; service mesh unless microservices complexity demands it; complex networking topologies unless security/compliance mandates it -->
 
 ### [ARCHITECTURE_PRINCIPLE_2_NAME]
