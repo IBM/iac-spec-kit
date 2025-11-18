@@ -184,6 +184,10 @@ For the original Spec-Driven Development methodology, see the [GitHub Spec Kit d
 
 ---
 
+## Generated Example
+
+**See what IaC Spec Kit generates:** [wordpress-ibm-cloud](https://github.com/vburckhardt/wordpress-ibm-cloud) - A complete WordPress deployment on IBM Cloud created using the workflow below, showing the generated specifications, plans, tasks, and Terraform code.
+
 ## Cloud Provider Examples
 
 **Get started with your cloud provider:**

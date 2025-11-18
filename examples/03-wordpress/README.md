@@ -2,6 +2,8 @@
 
 This example demonstrates how to deploy a WordPress infrastructure using IaC Spec Kit. It shows how the framework handles real-world, non-technical requirements like "I want to deploy WordPress".
 
+**See a complete generated example:** [wordpress-ibm-cloud](https://github.com/vburckhardt/wordpress-ibm-cloud) - A full WordPress deployment on IBM Cloud generated using this workflow.
+
 ## Learning Objectives
 
 - Handle non-technical user requirements and translate them into proper infrastructure specifications
