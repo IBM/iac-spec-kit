@@ -6,7 +6,7 @@
 
 ## Overview
 
-This example shows how to deploy a static website using cloud object storage and a content delivery network (CDN). Perfect for marketing sites, documentation, portfolios, or any content that doesn't require server-side processing.
+This example shows how to deploy a static website using cloud object storage and a content delivery network (CDN). Suitable for marketing sites, documentation, portfolios, or any content that doesn't require server-side processing.
 
 ## What You'll Build
 

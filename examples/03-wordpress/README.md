@@ -1,6 +1,6 @@
 # WordPress Deployment Example
 
-This example demonstrates how to deploy a production-ready WordPress infrastructure using IaC Spec Kit. It's perfect for showing how the framework handles real-world, non-technical requirements like "I want to deploy WordPress".
+This example demonstrates how to deploy a WordPress infrastructure using IaC Spec Kit. It shows how the framework handles real-world, non-technical requirements like "I want to deploy WordPress".
 
 ## Learning Objectives
 
@@ -55,7 +55,7 @@ Choose your cloud provider and follow the corresponding workflow guide:
 
 3. **Cloud-specific planning**: The `/iac.plan` step translates generic requirements into specific cloud services. For example, "object storage" becomes S3 on AWS, Blob Storage on Azure, Cloud Storage on GCP, or COS on IBM Cloud
 
-4. **Simple prompts, powerful results**: You only need to provide 1-2 line prompts to each slash command—the framework generates comprehensive documentation and code
+4. **Simple prompts generate structured output**: You provide 1-2 line prompts to each slash command and the framework generates comprehensive documentation and code
 
 ## Next Steps
 

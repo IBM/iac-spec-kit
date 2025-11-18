@@ -10,7 +10,7 @@ This example demonstrates a complete microservices platform with container orche
 
 ## What You'll Build
 
-A production-grade microservices platform:
+A microservices platform with:
 
 - **Container Orchestration**: Kubernetes or managed container service
 - **Service Mesh**: Service-to-service communication, traffic management, security

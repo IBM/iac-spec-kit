@@ -4,7 +4,7 @@ This directory contains real-world examples demonstrating how to use the IaC Spe
 
 ## Multi-Cloud Support
 
-All examples in this directory work with **any cloud provider**. Each example shows the exact commands and prompts to use with:
+All examples in this directory are designed to work with any cloud provider. Each example shows the commands and prompts to use with:
 
 - AWS
 - Azure
@@ -17,8 +17,8 @@ The workflow commands (`/iac.principles`, `/iac.specify`, `/iac.plan`, etc.) rem
 
 | Example | Complexity | Time | Description |
 |---------|------------|------|-------------|
-| [01-simple-vpc](./01-simple-vpc/) | Low | 15-20 min | Basic virtual private network with public/private subnets and bastion host. Great for learning the framework. |
-| [02-static-website](./02-static-website/) | Low | 20-30 min | Static website hosting with object storage, CDN, and custom domain. Perfect for marketing teams. |
+| [01-simple-vpc](./01-simple-vpc/) | Low | 15-20 min | Basic virtual private network with public/private subnets and bastion host. Useful for learning the framework. |
+| [02-static-website](./02-static-website/) | Low | 20-30 min | Static website hosting with object storage, CDN, and custom domain. Suitable for marketing teams. |
 | [03-wordpress](./03-wordpress/) | Medium | 45-60 min | WordPress deployment with compute, managed database, object storage, and load balancer. Demonstrates how to handle non-technical requirements like "I want to deploy WordPress". |
 | [04-landing-zone](./04-landing-zone/) | Medium-High | 1-2 hours | Enterprise-grade landing zone with multi-account/subscription setup, networking hub, identity management, security baseline, and centralized logging. Shows governance controls and compliance. |
 | [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | 1-2 hours | Three-tier web application with load balancer, web tier, app tier, database tier, and caching. Standard architecture for web applications. |
@@ -55,7 +55,7 @@ Each example follows this structure:
 
 These examples demonstrate:
 
-- **Simple Command-Based Workflow**: Just run slash commands with simple prompts—the framework generates all the specs, plans, and tasks
+- **Simple Command-Based Workflow**: Run slash commands with prompts to have the framework generate specs, plans, and tasks
 - **Generic Infrastructure Principles**: Governance rules (security, testing, progressive complexity) apply regardless of cloud provider
 - **Generic Infrastructure Terms**: Specifications use generic terms ("managed database", "object storage", "encryption key management") instead of cloud-specific service names ("RDS", "S3", "Key Protect")
 - **Cloud-Specific Implementation**: The `/iac.plan` step is where you specify your cloud and services, translating generic terms into specific services (e.g., "object storage" → S3, Cloud Storage, or COS)
@@ -73,7 +73,7 @@ Then progress to more complex examples as you become comfortable with the framew
 
 ## What Gets Generated
 
-When you run the workflow commands, the framework automatically generates:
+When you run the workflow commands, the framework generates:
 
 - **principles.md** - Your project's governance rules and decision-making framework
 - **spec.md** - Infrastructure requirements using generic terms (no cloud-specific service names)
@@ -81,4 +81,4 @@ When you run the workflow commands, the framework automatically generates:
 - **tasks.md** - Detailed task breakdown for implementation
 - **Terraform files** - Actual infrastructure as code (when you run `/iac.implement`)
 
-You just provide simple prompts to the slash commands—the framework does the heavy lifting.
+You provide prompts to the slash commands and the framework generates the structured artifacts.

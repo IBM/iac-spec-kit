@@ -1,6 +1,6 @@
 # IaC Spec Kit - a cloud-agnostic infrastructure as code specification toolkit
 
-> Turn infrastructure requirements into production-ready IaC configurations through specification-driven development
+> Structured workflows for translating business requirements into infrastructure code
 
 ## Table of Contents
 
@@ -46,13 +46,13 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 **Learn more:** [Red Hat on SDD](https://developers.redhat.com/articles/2025/10/22/how-spec-driven-development-improves-ai-coding-quality) •  [Martin Fowler on SDD](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html) • [ThoughtWorks Radar](https://www.thoughtworks.com/radar/techniques/spec-driven-development)
 
-**Key benefits for infrastructure:**
+**Potential benefits for infrastructure:**
 
-- Start with high-level requirements; IaC Spec Kit guides AI agents to generate detailed specifications
-- Write what you need (requirements) before how to build it (specific cloud services)
-- IaC Spec Kit helps AI agents translate specs into IaC configurations (Terraform being the most popular)
-- Update specs to propagate changes through plans and code automatically
-- Maintain alignment across teams through explicit, reviewable specifications
+- Supports starting with high-level requirements that AI agents can use to generate detailed specifications
+- Encourages separating requirements (what you need) from implementation details (specific cloud services)
+- Provides templates and commands to help AI agents translate specs into IaC configurations
+- Enables specification updates that can inform changes to plans and code
+- Facilitates team alignment through explicit, reviewable specifications
 
 
 
@@ -72,17 +72,17 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ### Multi-Cloud Infrastructure Support
 
-IaC Spec Kit works with **any cloud provider**. IaC Spec Kit guides AI agents to separate generic infrastructure requirements (what you need) from cloud-specific implementation (how to build it):
+IaC Spec Kit is designed to work with any cloud provider. The toolkit encourages AI agents to separate generic infrastructure requirements (what you need) from cloud-specific implementation (how to build it):
 
 - **Principles and Specifications** use generic infrastructure terms - IaC Spec Kit encourages describing requirements using terms like "managed database", "object storage", "encryption key management" rather than cloud-specific service names
 - **Plans and Implementation** are cloud-specific - IaC Spec Kit helps AI agents translate generic requirements into specific services like AWS RDS, Azure Database, Cloud SQL, or IBM Databases for MySQL
 
-This separation means you can:
-- Focus on *what* you need rather than *how* to build it, letting IaC Spec Kit guide AI agents through cloud-specific implementation details
-- Enable team members less familiar with a specific cloud provider to read and contribute to specifications
-- Switch cloud providers by re-running `/iac.plan` with a different cloud
-- Deploy the same specification to multiple clouds
-- Compare cloud provider options before committing
+This separation is intended to:
+- Help you focus on *what* you need rather than *how* to build it, with templates that guide AI agents through cloud-specific implementation details
+- Make specifications more accessible to team members less familiar with a specific cloud provider
+- Support switching cloud providers by re-running `/iac.plan` with a different cloud
+- Enable deploying the same specification to multiple clouds
+- Facilitate comparing cloud provider options before committing
 
 ---
 
@@ -205,11 +205,11 @@ For the original Spec-Driven Development methodology, see the [GitHub Spec Kit d
 
 ### Use frontier AI models
 
-Better results are obtained with the latest frontier models from leading AI providers. These models have improved reasoning capabilities, better understanding of infrastructure patterns, and more accurate code generation. When configuring your AI assistant, select the most advanced model available.
+The latest frontier models from leading AI providers typically offer improved reasoning capabilities and better understanding of infrastructure patterns. When configuring your AI assistant, consider selecting the most advanced model available for your use case.
 
 ### Configure MCP servers in advance
 
-For optimal results, configure your AI tool with appropriate Model Context Protocol (MCP) servers before starting your project. MCP servers provide your AI assistant with direct access to cloud provider APIs, Terraform registries, and other infrastructure tools, significantly improving accuracy and reducing hallucinations.
+For optimal results, configure your AI tool with appropriate Model Context Protocol (MCP) servers before starting your project. MCP servers provide your AI assistant with direct access to cloud provider APIs, Terraform registries, and other infrastructure tools, which can help improve accuracy and reduce hallucinations by providing real-time, verified information.
 
 **Recommended MCP servers by cloud provider:**
 
@@ -225,7 +225,7 @@ For optimal results, configure your AI tool with appropriate Model Context Proto
 
 ### Add search capabilities
 
-For AI tools that do not currently support web search (no built-in research agent), we strongly recommend adding a search MCP server such as [Brave Search MCP](https://github.com/brave/brave-search-mcp-server) or Perplexity MCP . This makes a significant difference during the `/iac.plan` phase when the AI needs to research current cloud services, Terraform provider versions, and best practices.
+For AI tools that do not currently support web search (no built-in research agent), we strongly recommend adding a search MCP server such as [Brave Search MCP](https://github.com/brave/brave-search-mcp-server) or Perplexity MCP. This can be particularly helpful during the `/iac.plan` phase when the AI needs to research current cloud services, Terraform provider versions, and best practices.
 
 Without search capabilities, AI tools tend to rely on inherent knowledge from their training data, which can lead to hallucinations or outdated information. Search-enabled agents can verify current service offerings, pricing, and technical specifications in real-time.
 
