@@ -1,6 +1,6 @@
 # IaC Spec Kit - a cloud-agnostic infrastructure as code specification toolkit
 
-> Structured workflows for translating business requirements into infrastructure code
+> AI-assisted workflows for translating business requirements into infrastructure code
 
 ## Table of Contents
 
