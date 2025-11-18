@@ -23,7 +23,7 @@ Follow this execution flow:
 2. Collect/derive values for placeholders:
    - If user input (conversation) supplies a value, use it.
    - Otherwise infer from existing repo context (README, docs, prior principles versions if embedded).
-   - If the user inputs and the repo context do not provide sufficient details, ask a few simple and scoped questions to derive values.
+   - If the user inputs and the repo context do not provide sufficient details, ask a few simple and scoped questions to derive values - **IMPORTANT**: Environment type (dev/staging/production) is critical for principle selection: dev environments typically need Simplicity + Security (Baseline) only, skipping observability managed services/HA/DR/compliance; staging adds Observability and mirrors production security; production adds Reliability, Identity, and potentially Compliance. Also ask: which cloud?, what overall development approach (start simple and add complexity iteratively, or complex upfront?).
    - **DO NOT ask** "which of the X principles from the template do you want." Instead derive principle selection from environment type and brief user interview.
    - **IMPORTANT**: Create charter-style principles (high-level tenets like AWS Well-Architected Framework), NOT technical implementation checklists. Focus on WHAT outcomes and WHY they matter, not tactical HOW (specific tools, commands, or managed services). Principles should be tool-agnostic and outcomes-focused.
    - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown choose current date), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.

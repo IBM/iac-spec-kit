@@ -225,7 +225,7 @@ For optimal results, configure your AI tool with appropriate Model Context Proto
 
 ### Add search capabilities
 
-For AI tools that do not currently support web search (no built-in research agent), we strongly recommend adding a search MCP server such as [Brave Search MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search). This makes a significant difference during the `/iac.plan` phase when the AI needs to research current cloud services, Terraform provider versions, and best practices.
+For AI tools that do not currently support web search (no built-in research agent), we strongly recommend adding a search MCP server such as [Brave Search MCP](https://github.com/brave/brave-search-mcp-server) or Perplexity MCP . This makes a significant difference during the `/iac.plan` phase when the AI needs to research current cloud services, Terraform provider versions, and best practices.
 
 Without search capabilities, AI tools tend to rely on inherent knowledge from their training data, which can lead to hallucinations or outdated information. Search-enabled agents can verify current service offerings, pricing, and technical specifications in real-time.
 
