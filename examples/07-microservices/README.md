@@ -1,7 +1,6 @@
 # Example: Microservices Platform
 
 **Complexity**: High
-**Estimated Time**: 3-4 hours
 **Best For**: Cloud-native applications, DevOps teams, distributed systems engineers
 
 ## Overview

@@ -1,7 +1,6 @@
 # Example: Simple VPC
 
 **Complexity**: Low
-**Estimated Time**: 15-20 minutes
 **Best For**: Learning the IaC Spec Kit workflow
 
 ## Overview

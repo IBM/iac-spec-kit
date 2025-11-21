@@ -1,7 +1,6 @@
 # Example: Data Processing Pipeline
 
 **Complexity**: High
-**Estimated Time**: 2-3 hours
 **Best For**: Data engineering teams, analytics teams, data-driven organizations
 
 ## Overview

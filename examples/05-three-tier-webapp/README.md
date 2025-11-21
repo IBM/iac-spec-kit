@@ -1,7 +1,6 @@
 # Example: Three-Tier Web Application
 
 **Complexity**: Medium
-**Estimated Time**: 1-2 hours
 **Best For**: Web application teams, full-stack developers, standard business applications
 
 ## Overview

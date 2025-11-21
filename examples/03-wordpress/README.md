@@ -27,7 +27,7 @@ This example demonstrates how to deploy a WordPress infrastructure using IaC Spe
 
 ## Complexity Level
 
-**Medium** (45-60 minutes)
+**Medium**
 
 This example uses **Baseline** complexity for cost optimization while maintaining production-grade security and reliability suitable for a small WordPress site.
 

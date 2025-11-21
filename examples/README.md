@@ -2,6 +2,8 @@
 
 This directory contains real-world examples demonstrating how to use the IaC Spec Kit for various infrastructure use cases, ranging from simple to complex scenarios.
 
+**See a complete generated example:** [wordpress-ibm-cloud](https://github.com/vburckhardt/wordpress-ibm-cloud) - A full WordPress deployment on IBM Cloud generated using this workflow.
+
 ## Multi-Cloud Support
 
 All examples in this directory are designed to work with any cloud provider. Each example shows the commands and prompts to use with:
@@ -15,15 +17,15 @@ The workflow commands (`/iac.principles`, `/iac.specify`, `/iac.plan`, etc.) rem
 
 ## Available Examples
 
-| Example | Complexity | Time | Description |
-|---------|------------|------|-------------|
-| [01-simple-vpc](./01-simple-vpc/) | Low | 15-20 min | Basic virtual private network with public/private subnets and bastion host. Useful for learning the framework. |
-| [02-static-website](./02-static-website/) | Low | 20-30 min | Static website hosting with object storage, CDN, and custom domain. Suitable for marketing teams. |
-| [03-wordpress](./03-wordpress/) | Medium | 45-60 min | WordPress deployment with compute, managed database, object storage, and load balancer. Demonstrates how to handle non-technical requirements like "I want to deploy WordPress". |
-| [04-landing-zone](./04-landing-zone/) | Medium-High | 1-2 hours | Enterprise-grade landing zone with multi-account/subscription setup, networking hub, identity management, security baseline, and centralized logging. Shows governance controls and compliance. |
-| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | 1-2 hours | Three-tier web application with load balancer, web tier, app tier, database tier, and caching. Standard architecture for web applications. |
-| [06-data-pipeline](./06-data-pipeline/) | High | 2-3 hours | Multi-region data processing pipeline with serverless compute, message queues, data lakes, and orchestration. For data engineering teams. |
-| [07-microservices](./07-microservices/) | High | 3-4 hours | Microservices platform with container orchestration, service mesh, API gateway, and comprehensive observability. For cloud-native applications. |
+| Example | Complexity | Description |
+|---------|------------|-------------|
+| [01-simple-vpc](./01-simple-vpc/) | Low | Basic virtual private network with public/private subnets and bastion host. Useful for learning the framework. |
+| [02-static-website](./02-static-website/) | Low | Static website hosting with object storage, CDN, and custom domain. Suitable for marketing teams. |
+| [03-wordpress](./03-wordpress/) | Medium | WordPress deployment with compute, managed database, object storage, and load balancer. Demonstrates how to handle non-technical requirements like "I want to deploy WordPress". |
+| [04-landing-zone](./04-landing-zone/) | Medium-High | Enterprise-grade landing zone with multi-account/subscription setup, networking hub, identity management, security baseline, and centralized logging. Shows governance controls and compliance. |
+| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Three-tier web application with load balancer, web tier, app tier, database tier, and caching. Standard architecture for web applications. |
+| [06-data-pipeline](./06-data-pipeline/) | High | Multi-region data processing pipeline with serverless compute, message queues, data lakes, and orchestration. For data engineering teams. |
+| [07-microservices](./07-microservices/) | High | Microservices platform with container orchestration, service mesh, API gateway, and comprehensive observability. For cloud-native applications. |
 
 ## How to Use These Examples
 

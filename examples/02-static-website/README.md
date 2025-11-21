@@ -1,7 +1,6 @@
 # Example: Static Website
 
 **Complexity**: Low
-**Estimated Time**: 20-30 minutes
 **Best For**: Marketing teams, content creators, simple web projects
 
 ## Overview

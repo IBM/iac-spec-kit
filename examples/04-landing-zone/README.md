@@ -1,7 +1,6 @@
 # Example: Enterprise Landing Zone
 
 **Complexity**: Medium-High
-**Estimated Time**: 1-2 hours
 **Best For**: Enterprise teams, cloud platform teams, governance-focused organizations
 
 ## Overview

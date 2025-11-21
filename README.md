@@ -86,6 +86,16 @@ This separation is intended to:
 
 ---
 
+## Visual Walkthrough
+
+See the complete workflow in action (2 minutes):
+
+[![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/maxresdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
+
+This visual guide shows the end-to-end process of using IaC Spec Kit to generate infrastructure specifications, plans, and Terraform code for a WordPress deployment on IBM Cloud.
+
+---
+
 ## Get Started
 
 ### 1. Install IaC Specify CLI
