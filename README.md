@@ -65,7 +65,7 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ### Visual Walkthrough
 
-See the complete workflow in action:
+See the complete workflow in action (2 minutes):
 
 [![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/hqdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
 
