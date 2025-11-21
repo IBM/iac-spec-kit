@@ -17,15 +17,15 @@ The workflow commands (`/iac.principles`, `/iac.specify`, `/iac.plan`, etc.) rem
 
 ## Available Examples
 
-| Example | Complexity | Description |
-|---------|------------|-------------|
-| [01-simple-vpc](./01-simple-vpc/) | Low | Basic virtual private network with public/private subnets and bastion host. Useful for learning the framework. |
-| [02-static-website](./02-static-website/) | Low | Static website hosting with object storage, CDN, and custom domain. Suitable for marketing teams. |
-| [03-wordpress](./03-wordpress/) | Medium | WordPress deployment with compute, managed database, object storage, and load balancer. Demonstrates how to handle non-technical requirements like "I want to deploy WordPress". |
-| [04-landing-zone](./04-landing-zone/) | Medium-High | Enterprise-grade landing zone with multi-account/subscription setup, networking hub, identity management, security baseline, and centralized logging. Shows governance controls and compliance. |
-| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Three-tier web application with load balancer, web tier, app tier, database tier, and caching. Standard architecture for web applications. |
-| [06-data-pipeline](./06-data-pipeline/) | High | Multi-region data processing pipeline with serverless compute, message queues, data lakes, and orchestration. For data engineering teams. |
-| [07-microservices](./07-microservices/) | High | Microservices platform with container orchestration, service mesh, API gateway, and comprehensive observability. For cloud-native applications. |
+| Example | Complexity | What You'll Learn |
+|---------|------------|-------------------|
+| [01-simple-vpc](./01-simple-vpc/) | Low | Basic IaC Spec Kit workflow using a simple VPC example. Learn the six core commands and how to describe networking requirements generically. |
+| [02-static-website](./02-static-website/) | Low | How to specify storage and CDN requirements without cloud-specific terms. Practice translating "I need a website" into proper infrastructure specs. |
+| [03-wordpress](./03-wordpress/) | Medium | Handling non-technical requirements and the Baseline vs Enhanced complexity pattern. See how the same spec deploys to different clouds. |
+| [04-landing-zone](./04-landing-zone/) | Medium-High | Enterprise governance patterns, multi-account strategies, and compliance requirements. Learn to express regulatory needs generically. |
+| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Multi-tier architecture specifications, auto-scaling requirements, and security layers. Practice describing layered applications. |
+| [06-data-pipeline](./06-data-pipeline/) | High | Event-driven architecture patterns, serverless compute specs, and data governance. Learn to specify complex data flows generically. |
+| [07-microservices](./07-microservices/) | High | Distributed systems patterns, service mesh concepts, and comprehensive observability. Practice specifying container orchestration needs. |
 
 ## How to Use These Examples
 

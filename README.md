@@ -63,6 +63,14 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 **IaC Spec Kit** is a specialized implementation of the [GitHub Spec Kit](https://github.com/github/spec-kit) toolkit, adapted for Infrastructure as Code workflows with Terraform and cloud providers. As SDD is an emerging trend, this project explores how specification-driven approaches can improve infrastructure development—an experimental field where we're discovering what's possible with AI-assisted infrastructure provisioning.
 
+### Visual Walkthrough
+
+See the complete workflow in action (2 minutes):
+
+[![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/hqdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
+
+This visual guide shows the end-to-end process of using IaC Spec Kit to generate infrastructure specifications, plans, and Terraform code for a WordPress deployment on IBM Cloud.
+
 ### Infrastructure-specific features
 
 - **Infrastructure command namespace**: All commands use `.iac` prefix (`/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, `/iac.implement`)
@@ -83,16 +91,6 @@ This separation is intended to:
 - Support switching cloud providers by re-running `/iac.plan` with a different cloud
 - Enable deploying the same specification to multiple clouds
 - Facilitate comparing cloud provider options before committing
-
----
-
-## Visual Walkthrough
-
-See the complete workflow in action (2 minutes):
-
-[![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/maxresdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
-
-This visual guide shows the end-to-end process of using IaC Spec Kit to generate infrastructure specifications, plans, and Terraform code for a WordPress deployment on IBM Cloud.
 
 ---
 
