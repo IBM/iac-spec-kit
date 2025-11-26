@@ -42,62 +42,7 @@
 
 ## Infrastructure Requirements *(mandatory)*
 
-<!--
-  Define WHAT infrastructure capabilities are needed, not HOW to implement.
-  Use generic infrastructure terms - avoid cloud-specific service names.
-  
-  CRITICAL EXAMPLES - Generic Terms (✅) vs Cloud-Specific (❌):
-  
-  Compute:
-  - ✅ "Serverless compute for event-driven processing"
-  - ❌ "AWS Lambda functions" or "Azure Functions" or "Cloud Functions"
-  - ✅ "Container orchestration platform with auto-scaling"
-  - ❌ "EKS cluster" or "AKS" or "GKE"
-  - ✅ "Virtual machine instances with auto-scaling"
-  - ❌ "EC2 instances" or "Azure VMs" or "Compute Engine"
-  
-  Storage:
-  - ✅ "Object storage with lifecycle management"
-  - ❌ "S3 buckets" or "Azure Blob Storage" or "Cloud Storage"
-  - ✅ "Block storage for persistent data"
-  - ❌ "EBS volumes" or "Azure Disks" or "Persistent Disks"
-  
-  Database:
-  - ✅ "Managed relational database (PostgreSQL-compatible)"
-  - ❌ "RDS PostgreSQL" or "Azure Database for PostgreSQL" or "Cloud SQL"
-  - ✅ "NoSQL document database with global replication"
-  - ❌ "DynamoDB" or "Cosmos DB" or "Firestore"
-  
-  Networking:
-  - ✅ "Virtual private network with network segmentation"
-  - ❌ "AWS VPC" or "Azure VNet" or "GCP VPC"
-  - ✅ "Load balancer with SSL termination"
-  - ❌ "ALB" or "Application Gateway" or "Cloud Load Balancing"
-  - ✅ "Content delivery network for static assets"
-  - ❌ "CloudFront" or "Azure CDN" or "Cloud CDN"
-  
-  Security:
-  - ✅ "Encryption key management service"
-  - ❌ "KMS" or "Key Vault" or "Cloud KMS"
-  - ✅ "Secrets management for credentials"
-  - ❌ "Secrets Manager" or "Key Vault" or "Secret Manager"
-  
-  Example Infrastructure Requirements:
-  - Virtual private network with public and private subnets
-  - Compute instances with auto-scaling groups
-  - Load balancer for traffic distribution
-  - Managed relational database with automated backups
-  - Object storage for static files and backups
-  - Container orchestration platform with auto-scaling
-  - Security groups and network access control lists
-  - Identity and access management policies
-  - Content delivery network for static assets
-  - Message queue for asynchronous processing
-  - Monitoring and logging infrastructure
-  - Secrets management service
-  - DNS and domain management
-  - VPN or private connectivity to on-premises
--->
+<!-- Use generic infrastructure terms (e.g., "managed database", "object storage") - avoid cloud-specific names (e.g., "RDS", "S3"). See iac.specify.md for detailed examples. -->
 
 ### Functional Requirements
 
@@ -211,36 +156,13 @@
 
 ## Success Criteria *(mandatory)*
 
-<!--
-  ACTION REQUIRED: Define measurable and verifiable criteria for successful deployment.
-  Infrastructure is considered successfully deployed when these criteria are met.
-  
-  SUCCESS CRITERIA MUST BE:
-  1. **Measurable**: Include specific metrics (time, percentage, count, rate)
-  2. **Technology-agnostic**: Use generic infrastructure terms (no cloud-specific service names)
-  3. **Outcome-focused**: Describe results from business/operational perspective, not system internals
-  4. **Verifiable**: Can be tested/validated without knowing implementation details
-  
-  GOOD EXAMPLES (measurable, generic, outcome-focused):
-  - "Infrastructure deploys in under 15 minutes"
-  - "System scales to handle 10,000 requests per second"
-  - "99.9% uptime SLO for production workloads"
-  - "Database failover completes in under 5 minutes with zero data loss"
-  - "All resources deployed in correct regions with required tags"
-  - "Security scans show zero HIGH/CRITICAL findings"
-  
-  BAD EXAMPLES (implementation-focused, cloud-specific):
-  - "Terraform files are under 500 lines" (implementation detail)
-  - "Uses RDS db.r5.large instances" (cloud-specific, too prescriptive)
-  - "VPC has 3 subnets across zones" (architecture detail, belongs in plan)
-  - "IBM Cloud provider version 1.60" (version-specific, let plan phase decide)
--->
+<!-- Define measurable, technology-agnostic, outcome-focused criteria. See iac.specify.md for examples. -->
 
-### Deployment Validation
+### Code Validation
 
-- [ ] [Deployment validation criterion, e.g., "All resources deployed in correct regions"]
-- [ ] [Deployment validation criterion, e.g., "Zero drift from IaC definitions"]
-- [ ] [Deployment validation criterion, e.g., "Required tags applied to all resources"]
+- [ ] [Code validation criterion, e.g., "All resources defined in correct regions"]
+- [ ] [Code validation criterion, e.g., "Code passes terraform validate/lint checks"]
+- [ ] [Code validation criterion, e.g., "Required tags defined for all resources"]
 
 ### Security Validation
 
