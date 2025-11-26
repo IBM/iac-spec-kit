@@ -23,9 +23,10 @@ Follow this execution flow:
 2. Collect/derive values for placeholders:
    - If user input (conversation) supplies a value, use it.
    - Otherwise infer from existing repo context (README, docs, prior principles versions if embedded).
-   - If the user inputs and the repo context do not provide sufficient details, ask a few simple and scoped questions to derive values - **IMPORTANT**: Environment type (dev/staging/production) is critical for principle selection: dev environments typically need Simplicity + Security (Baseline) only, skipping observability managed services/HA/DR/compliance; staging adds Observability and mirrors production security; production adds Reliability, Identity, and potentially Compliance. Also ask: which cloud?, what overall development approach (start simple and add complexity iteratively, or complex upfront?).
+   - If the user inputs and the repo context do not provide sufficient details, you MUST ask clarifying questions before proceeding. Ask about: the specific infrastructure being built, key constraints or requirements, what "simplicity" or "security" means for THIS project, environment type (dev/staging/production), which cloud provider, and overall development approach. Do not skip this step.
    - **DO NOT ask** "which of the X principles from the template do you want." Instead derive principle selection from environment type and brief user interview.
-   - **IMPORTANT**: Create charter-style principles (high-level tenets like AWS Well-Architected Framework), NOT technical implementation checklists. Focus on WHAT outcomes and WHY they matter, not tactical HOW (specific tools, commands, or managed services). Principles should be tool-agnostic and outcomes-focused.
+   - **IMPORTANT**: Create charter-style principles (high-level tenets like AWS Well-Architected Framework), NOT technical implementation checklists. Focus on WHAT outcomes and WHY they matter.
+   - **CRITICAL**: Do NOT copy the example text from the template comments verbatim. The examples show STRUCTURE and FORMAT only. Your principles must reflect the specific infrastructure project. Adapt examples to the user's chosen cloud provider and IaC tool.
    - For governance dates: `RATIFICATION_DATE` is the original adoption date (if unknown choose current date), `LAST_AMENDED_DATE` is today if changes are made, otherwise keep previous.
    - `PRINCIPLES_VERSION` must increment according to semantic versioning rules:
      - MAJOR: Backward incompatible governance/principle removals or redefinitions.
@@ -36,8 +37,9 @@ Follow this execution flow:
 3. Draft the updated principles content:
    - Replace every placeholder with concrete text (no bracketed tokens left except intentionally retained template slots that the project has chosen not to define yet—explicitly justify any left).
    - Preserve heading hierarchy and comments can be removed once replaced unless they still add clarifying guidance.
-   - Ensure each Principle follows charter-style format: action-oriented title (e.g., "Design for Simplicity"), rationale explaining WHY it matters, and how Baseline/Enhanced scale the philosophy across environments (dev/staging/production).
-   - **AVOID technical implementation details** like specific tools (tflint, terraform test), service names (NAT gateways, private endpoints), or tactical commands. Keep principles at strategic level - focus on outcomes and philosophy.
+   - Ensure each Principle follows charter-style format: action-oriented title (e.g., "Design for Simplicity"), rationale explaining WHY it matters FOR THIS SPECIFIC PROJECT, and how Baseline/Enhanced scale the philosophy. Examples must be specific to the infrastructure being built - never copy generic examples from the template.
+   - **Architecture Principles**: Keep cloud-agnostic - focus on outcomes and philosophy, avoid specific service names.
+   - **IaC Code Principles**: CAN include tech-specific examples (module registries, validation tools) to reinforce concepts like "use modules over resources" - but adapt to the user's chosen cloud/tool, don't copy generic lists.
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 4. Consistency propagation checklist (convert prior checklist into active validations):
@@ -69,7 +71,8 @@ Follow this execution flow:
    - Version line matches report.
    - Dates ISO format YYYY-MM-DD.
    - Principles are declarative, testable, and free of vague language ("should" → replace with MUST/SHOULD rationale where appropriate).
-   - Principles follow charter-style: high-level tenets, not technical checklists. No specific tool names, service names, or implementation commands in principle descriptions.
+   - Architecture Principles follow charter-style: high-level tenets, cloud-agnostic outcomes.
+   - IaC Code Principles may include tech-specific examples adapted to the user's chosen cloud/tool.
 
 7. Write the completed principles back to `.specify/memory/principles.md` (overwrite).
 

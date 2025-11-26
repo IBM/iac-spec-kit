@@ -19,7 +19,8 @@
 
 **Cloud Provider**: [e.g., AWS, Azure, GCP, IBM Cloud, Multi-cloud or NEEDS CLARIFICATION]
 **IaC Tool**: [e.g., Terraform 1.12+, Pulumi 3.x, CloudFormation or NEEDS CLARIFICATION]
-**Provider Versions**: [e.g., AWS Provider ~> 5.0, Azure Provider ~> 3.0 or NEEDS CLARIFICATION]
+**Provider Versions**: [e.g., AWS Provider >= 5.0, < 6.0 or >= 5.80 for production stability, or NEEDS CLARIFICATION]
+**Module Versions**: [e.g., terraform-aws-modules/vpc/aws = 5.8.1 - use exact pinning (= X.Y.Z) for reproducibility since modules are NOT captured in .terraform.lock.hcl, or NEEDS CLARIFICATION]
 **Curated Modules**: [e.g., terraform-aws-modules, Azure Verified Modules, terraform-ibm-modules, terraform-google-modules, Pulumi packages or NEEDS CLARIFICATION]
 **State Backend**: [e.g., Local, Managed (Schematics, Terraform enterprise / Cloud), AWS S3 + DynamoDB, Azure Blob or NEEDS CLARIFICATION]
 **Environment Strategy**: [e.g., Workspaces, Separate state files, Directory-based, Terragrunt or NEEDS CLARIFICATION]
@@ -270,7 +271,7 @@ specs/[###-infrastructure]/
 ├── research.md          # Phase 0 output: technology decisions and best practices
 ├── architecture.md      # Phase 1 output: detailed infrastructure design
 ├── modules.md           # Phase 1 output: module specifications (if using modules)
-├── quickstart.md        # Phase 1 output: deployment guide
+├── quickstart.md        # Phase 1 output: provisioning guide
 └── tasks.md             # Phase 2 output (/iac.tasks command - NOT created by /iac.plan)
 ```
 
@@ -382,7 +383,7 @@ specs/[###-infrastructure]/
 ├── compute.ts              # Compute resources
 ├── storage.ts              # Databases and object storage
 ├── package.json            # Node.js dependencies
-└── README.md               # Deployment instructions
+└── README.md               # Provisioning instructions
 
 # [REMOVE IF UNUSED] Option 4: CloudFormation Infrastructure (AWS)
 # Typical placement: iac/ subdirectory (for hybrid repos or organized infrastructure)
@@ -394,7 +395,7 @@ specs/[###-infrastructure]/
 │   ├── dev.json            # Dev environment parameters
 │   ├── staging.json        # Staging parameters
 │   └── prod.json           # Production parameters
-└── README.md               # Deployment guide
+└── README.md               # Provisioning guide
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real
