@@ -68,6 +68,8 @@ You **MUST** consider the user input before proceeding (if not empty).
        - GCP: terraform-google-modules (Google Cloud official)
        - Pulumi: Official Pulumi packages for each cloud provider
      Document specific modules for each infrastructure component (VPC, compute, database, etc.).
+     For production stability: Recommend exact version pinning (= X.Y.Z) for modules since they are NOT captured in .terraform.lock.hcl.
+     For development: ~> X.Y allows flexibility for testing minor updates.
      Only recommend direct provider resources when: custom requirements not supported by modules, very simple single resources, or modules add unnecessary complexity.
      Provide rationale for any direct resource usage."
    For patterns:
@@ -83,7 +85,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Best practices: [key patterns to follow]
    - References: [documentation links, examples, module registries]
 
-**Output**: `research.md` with all NEEDS CLARIFICATION resolved
+**Output**: `research.md` with all NEEDS CLARIFICATION resolved. This single file consolidates ALL research findings - do not create separate files for module research, provider analysis, or other research topics.
 
 ### Phase 1: Infrastructure Architecture Design
 
@@ -104,10 +106,10 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Dependencies between modules
    - Testing strategy
 
-3. **Create deployment guide** → `quickstart.md`:
+3. **Create provisioning guide** → `quickstart.md`:
    - Prerequisites (tools, accounts, credentials)
    - State backend setup if any (no state backend setup if using local, or managed iac service such as HashiCorp terraform or IBM Cloud Schematics)
-   - Deployment commands (init, plan, apply)
+   - Provisioning commands (init, plan, apply)
    - Manual validation steps
    - Rollback procedures
    **IMPORTANT**: ❌ Do NOT include IaC code, e.g: terraform code in this file. The IaC code will be generated in next phase by /iac.implement command.
@@ -119,7 +121,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Add cloud provider and IaC tool to technology stack
    - Preserve manual additions between markers
 
-**Output**: `architecture.md`, `modules.md`, `quickstart.md`, agent-specific file updated
+**Output**: `architecture.md`, `modules.md`, `quickstart.md`, agent-specific file updated. Generate only these specified files - all prior research remains consolidated in research.md.
 
 ## Key rules
 

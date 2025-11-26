@@ -35,12 +35,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 4. **Generate tasks.md**: Use `.specify/templates/tasks-template.md` as structure, fill with:
    - Correct infrastructure name from plan.md
-   - Phase 1: Setup tasks (IaC project initialization, backend configuration)
-   - Phase 2: Foundation tier (state backend, provider configuration)
-   - Phase 3: Network tier (VPC, subnets, security groups, routing)
-   - Phase 4: Compute & Data tier (instances, databases, storage, load balancers)
-   - Phase 5: Application tier (DNS, monitoring, application configuration)
-   - Final Phase: Validation & documentation
+   - Phase 1: Setup (IaC project initialization, backend configuration, provider setup)
+   - Phase 2: Network tier (VPC, subnets, security groups, routing)
+   - Phase 3: Compute & Data tier (instances, databases, storage, load balancers)
+   - Phase 4: Application tier (DNS, monitoring, application configuration)
+   - Phase N: Polish & validation (formatting, documentation, final checks)
    - All tasks must follow the strict checklist format (see Task Generation Rules below)
    - Clear file paths for each task (iac/vpc.tf, iac/compute.tf, etc.)
    - Dependencies section showing infrastructure provisioning order
@@ -52,7 +51,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Task count per infrastructure tier
    - Parallel opportunities identified
    - Validation checkpoints defined
-   - Deployment order (dev → staging → prod)
+   - Environment order (dev → staging → prod)
    - Format validation: Confirm ALL tasks follow the checklist format (checkbox, ID, labels, file paths)
 
 Context for task generation: {ARGS}
@@ -77,7 +76,7 @@ Every task MUST strictly follow this format:
 
 1. **Checkbox**: ALWAYS start with `- [ ]` (markdown checkbox)
 2. **Task ID**: Sequential number (T001, T002, T003...) in execution order
-3. **[P] marker**: Include ONLY if task is parallelizable (different files, no dependencies on incomplete tasks)
+3. **[P] marker**: Include ONLY if task can run in parallel with other [P] tasks in same phase (operates on different files, has no data dependencies on other tasks in same phase, does not create resources referenced by other [P] tasks)
 4. **Description**: Clear action with exact file path and infrastructure component
 
 **Examples**:
@@ -110,18 +109,16 @@ Every task MUST strictly follow this format:
    - Module dependencies → ensure parent resources exist first
 
 4. **Infrastructure Tier Organization**:
-   - **Setup (Phase 1)**: IaC project initialization, directory structure
-   - **Foundation (Phase 2)**: State backend, provider configuration, version constraints
-   - **Network (Phase 3)**: VPC, subnets, routing, security groups, NAT gateways, IAM roles
-   - **Compute & Data (Phase 4)**: Instances, databases, storage buckets, load balancers, caching
-   - **Application (Phase 5)**: DNS, CDN, monitoring, alerting, application-specific config
-   - **Validation (Final)**: Documentation, formatting, linting, final validation
+   - **Setup (Phase 1)**: IaC project initialization, backend configuration, provider setup
+   - **Network (Phase 2)**: VPC, subnets, routing, security groups, NAT gateways, IAM roles
+   - **Compute & Data (Phase 3)**: Instances, databases, storage buckets, load balancers, caching
+   - **Application (Phase 4)**: DNS, CDN, monitoring, alerting, application-specific config
+   - **Polish (Phase N)**: Documentation, formatting, linting, final validation
 
 ### Phase Structure
 
-- **Phase 1**: Setup (IaC project initialization, directory structure)
-- **Phase 2**: Foundation (state backend, provider configuration - MUST complete before infrastructure)
-- **Phase 3**: Network Tier (VPC, subnets, security groups, routing - BLOCKS compute resources)
-- **Phase 4**: Compute & Data Tier (instances, databases, storage, load balancers - depends on Network)
-- **Phase 5**: Application Tier (DNS, monitoring, application configuration - depends on Compute & Data)
-- **Final Phase**: Validation & Documentation (formatting, linting, validation, documentation)
+- **Phase 1**: Setup (IaC project initialization, backend configuration, provider setup)
+- **Phase 2**: Network Tier (VPC, subnets, security groups, routing - BLOCKS compute resources)
+- **Phase 3**: Compute & Data Tier (instances, databases, storage, load balancers - depends on Network)
+- **Phase 4**: Application Tier (DNS, monitoring, application configuration - depends on Compute & Data)
+- **Phase N**: Polish & Validation (formatting, linting, documentation, final checks)
