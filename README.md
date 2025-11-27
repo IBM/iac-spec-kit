@@ -58,8 +58,11 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ## About this project
 
-[![Release](https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml/badge.svg)](https://github.com/ibm/iac-spec-kit/actions/workflows/release.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/IBM/iac-spec-kit?color=blue)](https://github.com/IBM/iac-spec-kit/releases)
 [![License](https://img.shields.io/github/license/IBM/iac-spec-kit)](https://github.com/IBM/iac-spec-kit/blob/main/LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org/downloads/)
+[![Last Commit](https://img.shields.io/github/last-commit/IBM/iac-spec-kit)](https://github.com/IBM/iac-spec-kit/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/IBM/iac-spec-kit/pulls)
 
 **IaC Spec Kit** is a specialized implementation of the [GitHub Spec Kit](https://github.com/github/spec-kit) toolkit, adapted for Infrastructure as Code workflows with Terraform and cloud providers. As SDD is an emerging trend, this project explores how specification-driven approaches can improve infrastructure development—an experimental field where we're discovering what's possible with AI-assisted infrastructure provisioning.
 
@@ -67,7 +70,9 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 See the complete workflow in action (2 minutes):
 
-[![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/hqdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
+<a href="https://www.youtube.com/watch?v=al1Yx0BG7Wo">
+  <img src="./media/iac-spec-kit-thumbnail.png" alt="IaC Spec Kit Walkthrough" width="600">
+</a>
 
 This visual guide shows the end-to-end process of using IaC Spec Kit to generate infrastructure specifications, plans, and Terraform code for a WordPress deployment on IBM Cloud.
 
