@@ -32,40 +32,19 @@
      FORMAT: Action-oriented title → WHY it matters → HOW it applies across environments -->
 
 ### [ARCHITECTURE_PRINCIPLE_1_NAME]
-<!-- Example: I. Design for Simplicity (NON-NEGOTIABLE) -->
+<!-- Format: [Action] for [Outcome] - e.g., "Design for Simplicity", "Optimize for Cost", "Plan for Failure" -->
 [ARCHITECTURE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Infrastructure should be as simple as necessary for the use case, avoiding over-engineering and unnecessary complexity. Simple infrastructure is easier to understand, maintain, secure, and troubleshoot. Complexity should serve clear requirements, not emerge by default.
-
-     IMPORTANT: Create YOUR OWN project-specific examples. Do not copy these verbatim - adapt to YOUR infrastructure.
-
-     Brief examples for FORMAT reference (adapt to what you're building):
-     - Baseline: Single-zone, minimal resources appropriate for dev/learning
-     - Enhanced: Multi-zone, right-sized resources, comprehensive controls for production
-     - Avoid: Over-engineering unless requirements justify complexity -->
+<!-- Format: [WHY this matters] + [HOW it applies with Baseline/Enhanced patterns]. Create your own based on your infrastructure needs. -->
 
 ### [ARCHITECTURE_PRINCIPLE_2_NAME]
-<!-- Example: II. Design for Security (NON-NEGOTIABLE) -->
+<!-- Format: [Action] for [Outcome] - e.g., "Design for Security", "Build for Resilience", "Prepare for Recovery" -->
 [ARCHITECTURE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Security must be built into infrastructure from inception, not added as an afterthought. Every resource implements appropriate security controls that scale with the criticality and sensitivity of the workload.
-
-     IMPORTANT: Create YOUR OWN project-specific examples. Do not copy these verbatim - adapt to YOUR infrastructure.
-
-     Brief examples for FORMAT reference:
-     - Baseline: Restrictive network policies, encryption in transit, appropriate IAM
-     - Enhanced: Network isolation, encryption at rest, secrets management, least-privilege access
-     - Always: No public database endpoints, no hardcoded credentials -->
+<!-- Format: [WHY this matters] + [HOW it applies with Baseline/Enhanced patterns]. Create your own based on your infrastructure needs. -->
 
 ### [ARCHITECTURE_PRINCIPLE_3_NAME]
-<!-- Example: III. Build in Observability (SITUATIONAL - Staging/Production) -->
+<!-- Format: [Action] for [Outcome] - e.g., "Instrument for Observability", "Design for Debuggability", "Optimize for Performance" -->
 [ARCHITECTURE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Infrastructure must provide insight into its health, performance, and behavior to enable operational awareness and issue resolution.
-
-     IMPORTANT: Create YOUR OWN project-specific examples. Do not copy these verbatim - adapt to YOUR infrastructure.
-
-     Brief examples for FORMAT reference:
-     - Baseline: Default metrics, basic health checks, local logs
-     - Enhanced: Centralized logging, monitoring dashboards, alerting, custom metrics
-     - Skip for dev: Managed observability services unless testing those features -->
+<!-- Format: [WHY this matters] + [HOW it applies with Baseline/Enhanced patterns]. Create your own based on your infrastructure needs. -->
 
 <!-- Add more architecture principles below ONLY if your use case truly requires them.
 
@@ -97,38 +76,19 @@
      FORMAT: Action-oriented title → WHY it matters → Progressive application -->
 
 ### [CODE_PRINCIPLE_1_NAME]
-<!-- Example: I. Leverage Proven, Maintained Modules (NON-NEGOTIABLE) -->
+<!-- Format: [Action] [Object/Modifier] - e.g., "Leverage Verified Modules", "Prefer Official Packages", "Reuse Before Building" -->
 [CODE_PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Infrastructure code must build on validated, well-maintained modules rather than proliferating custom implementations. Curated modules reduce risk, improve consistency, and accelerate delivery. Use direct provider resources only when modules don't exist or requirements are truly unique.
-
-     IMPORTANT: Adapt examples to YOUR chosen cloud provider's module registry.
-
-     Brief examples for FORMAT reference:
-     - Prefer: Official/verified modules for your cloud (e.g., terraform-aws-modules for AWS, Azure Verified Modules for Azure, terraform-ibm-modules for IBM Cloud)
-     - Use direct resources only when: Very simple single resources, or modules add unnecessary complexity
-     - Baseline: Well-maintained community modules; Enhanced: Verified/official modules -->
+<!-- Format: [WHY this matters] + [HOW to apply]. Create your own based on your IaC tool and cloud provider. -->
 
 ### [CODE_PRINCIPLE_2_NAME]
-<!-- Example: II. Validate During Generation (NON-NEGOTIABLE) -->
+<!-- Format: [Action] [Object/Modifier] - e.g., "Validate During Generation", "Test Before Commit", "Enforce Code Quality" -->
 [CODE_PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Infrastructure code must be validated during generation to catch errors early. Testing prevents failures and security vulnerabilities before code is committed. Baseline ensures syntax validation and linting; Enhanced implements comprehensive testing including security scanning and policy validation.
-
-     IMPORTANT: Adapt validation tools to YOUR chosen IaC tool.
-
-     Brief examples for FORMAT reference:
-     - Baseline: Syntax validation, code formatting, basic linting
-     - Enhanced: Security scanning, cost estimation, policy validation
-     - Always: Validate and format before commit, catch errors early -->
+<!-- Format: [WHY this matters] + [HOW to apply]. Adapt validation tools to YOUR chosen IaC tool. -->
 
 ### [CODE_PRINCIPLE_3_NAME]
-<!-- Example: III. Write Secure Code by Default (NON-NEGOTIABLE) -->
+<!-- Format: [Action] [Object/Modifier] - e.g., "Write Secure Code", "Protect Sensitive Data", "Structure for Clarity" -->
 [CODE_PRINCIPLE_3_DESCRIPTION]
-<!-- Example: Security must be inherent in infrastructure code, not retrofitted afterward. Secure coding practices prevent vulnerabilities in generated code. Code never contains hardcoded credentials, implements least-privilege access patterns, and defaults to secure configurations.
-
-     Brief examples for FORMAT reference:
-     - Never: Hardcoded credentials, API keys, passwords in code or version control
-     - Always: Use secrets management, environment variables for sensitive data, least-privilege IAM
-     - Default secure: Encryption enabled, private subnets for data, restrictive network policies -->
+<!-- Format: [WHY this matters] + [HOW to apply]. Create your own based on your IaC tool and cloud provider. -->
 
 <!-- Add more code principles below as needed for your specific requirements.
      Common additional principles to consider (expressed as charter-style tenets):
@@ -158,28 +118,14 @@
      FORMAT: Approach name → Decision framework → When to apply -->
 
 ### [APPROACH_1_NAME]
-<!-- Example: Progressive Complexity (Recommended for most use cases) -->
+<!-- Format: [Descriptor] [Focus] - e.g., "Progressive Complexity", "Environment-First Design", "Incremental Maturity" -->
 [APPROACH_1_DESCRIPTION]
-<!-- Example: Infrastructure should start simple and add complexity only as requirements emerge. Begin with Baseline controls; introduce Enhanced controls as environments mature or requirements demand.
-
-     IMPORTANT: Create YOUR OWN progression specific to YOUR infrastructure.
-
-     Brief example for FORMAT reference:
-     - Phase 1: Minimal infrastructure for dev/learning
-     - Phase 2: Add production-readiness features (backups, monitoring)
-     - Phase 3: Add compliance, advanced features as needed -->
+<!-- Format: [Decision framework] + [When to apply]. Create YOUR OWN progression specific to YOUR infrastructure. -->
 
 ### [APPROACH_2_NAME]
-<!-- Example: Environment-Appropriate Complexity -->
+<!-- Format: [Descriptor] [Focus] - e.g., "Environment-Appropriate Complexity", "Risk-Based Controls", "Cost-Optimized Scaling" -->
 [APPROACH_2_DESCRIPTION]
-<!-- Example: Infrastructure complexity should match the operational characteristics and risk profile of each environment. Dev environments use Baseline simplicity; production implements Enhanced controls.
-
-     IMPORTANT: Create YOUR OWN environment descriptions specific to YOUR project.
-
-     Brief example for FORMAT reference:
-     - Dev: Minimal resources, basic security, simple architecture
-     - Staging: Production-like architecture for validation
-     - Production: Right-sized, comprehensive security, full monitoring -->
+<!-- Format: [Decision framework] + [When to apply]. Create YOUR OWN environment descriptions specific to YOUR project. -->
 
 <!-- Add more implementation approaches below as needed for your specific requirements.
 
