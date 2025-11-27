@@ -17,6 +17,17 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.4] - 2025-11-27
+
+### Fixed
+
+- Abstracted principle name examples in templates to prevent verbatim copying by AI agents
+- Updated principles template with improved version guidance and clearer instructions
+- Trimmed verbose boilerplate comments from specification template for better readability
+- Replaced deployment terminology with provision/environment terminology in commands for consistency
+
+---
+
 ## [0.0.3] - 2025-11-21
 
 ### Fixed
