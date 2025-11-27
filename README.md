@@ -67,7 +67,9 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 See the complete workflow in action (2 minutes):
 
-[![IaC Spec Kit Walkthrough](https://img.youtube.com/vi/al1Yx0BG7Wo/hqdefault.jpg)](https://www.youtube.com/watch?v=al1Yx0BG7Wo)
+<a href="https://www.youtube.com/watch?v=al1Yx0BG7Wo">
+  <img src="./media/iac-spec-kit-thumbnail.png" alt="IaC Spec Kit Walkthrough" width="600">
+</a>
 
 This visual guide shows the end-to-end process of using IaC Spec Kit to generate infrastructure specifications, plans, and Terraform code for a WordPress deployment on IBM Cloud.
 
