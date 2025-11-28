@@ -31,10 +31,19 @@ mkdir -p "$GENRELEASES_DIR"
 rm -rf "$GENRELEASES_DIR"/* || true
 
 rewrite_paths() {
+  # Protect existing correct paths using temporary tokens, rewrite generic paths,
+  # then restore the protected paths. This prevents double-rewriting of already
+  # correctly prefixed paths like .specify/memory/ -> .specify/.specify/memory/
   sed -E \
+    -e 's@\.specify/memory/@__SPEC_MEM__@g' \
+    -e 's@\.specify/scripts/@__SPEC_SCR__@g' \
+    -e 's@\.specify/templates/@__SPEC_TMP__@g' \
     -e 's@(/?)memory/@.specify/memory/@g' \
     -e 's@(/?)scripts/@.specify/scripts/@g' \
-    -e 's@(/?)templates/@.specify/templates/@g'
+    -e 's@(/?)templates/@.specify/templates/@g' \
+    -e 's@__SPEC_MEM__@.specify/memory/@g' \
+    -e 's@__SPEC_SCR__@.specify/scripts/@g' \
+    -e 's@__SPEC_TMP__@.specify/templates/@g'
 }
 
 generate_commands() {
