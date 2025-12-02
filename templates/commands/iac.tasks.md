@@ -33,7 +33,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Create parallel execution examples for independent resources
    - Validate task completeness (proper dependency ordering, validation checkpoints)
 
-4. **Generate tasks.md**: Use `.specify/templates/tasks-template.md` as structure, fill with:
+4. **Generate tasks.md**: Use `templates/tasks-template.md` as structure, fill with:
    - Correct infrastructure name from plan.md
    - Phase 1: Setup (IaC project initialization, backend configuration, provider setup)
    - Phase 2: Network tier (VPC, subnets, security groups, routing)

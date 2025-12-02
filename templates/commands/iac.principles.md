@@ -12,11 +12,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 ## Outline
 
-You are updating the project principles at `.specify/memory/principles.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[CODE_PRINCIPLE_1_NAME]`, ...). Your job is to (a) collect and/or derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.
+You are updating the project principles at `memory/principles.md`. This file is a TEMPLATE containing placeholder tokens in square brackets (e.g. `[PROJECT_NAME]`, `[CODE_PRINCIPLE_1_NAME]`, ...). Your job is to (a) collect and/or derive concrete values, (b) fill the template precisely, and (c) propagate any amendments across dependent artifacts.
 
 Follow this execution flow:
 
-1. Load the existing principles template at `.specify/memory/principles.md`.
+1. Load the existing principles template at `memory/principles.md`.
    - Identify every placeholder token of the form `[ALL_CAPS_IDENTIFIER]`.
    **IMPORTANT**: The user might require less or more principles than the ones used in the template. If a number is specified, respect that - follow the general template. You will update the doc accordingly.
 
@@ -43,9 +43,9 @@ Follow this execution flow:
    - Ensure Governance section lists amendment procedure, versioning policy, and compliance review expectations.
 
 4. Consistency propagation checklist (convert prior checklist into active validations):
-   - Read `.specify/templates/plan-template.md` and ensure any "Principles Check" or rules align with updated principles.
-   - Read `.specify/templates/spec-template.md` for scope/requirements alignment—update if the principles add/remove mandatory sections or constraints.
-   - Read `.specify/templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
+   - Read `templates/plan-template.md` and ensure any "Principles Check" or rules align with updated principles.
+   - Read `templates/spec-template.md` for scope/requirements alignment—update if the principles add/remove mandatory sections or constraints.
+   - Read `templates/tasks-template.md` and ensure task categorization reflects new or removed principle-driven task types (e.g., observability, versioning, testing discipline).
    - Read each command file matching `iac.*.md` pattern (including this one) to verify no outdated references remain when generic guidance is required. Known command files include:
      - `iac.analyze.md` - Infrastructure analysis and assessment
      - `iac.checklist.md` - Checklist generation and validation
@@ -74,7 +74,7 @@ Follow this execution flow:
    - Architecture Principles follow charter-style: high-level tenets, cloud-agnostic outcomes.
    - IaC Code Principles may include tech-specific examples adapted to the user's chosen cloud/tool.
 
-7. Write the completed principles back to `.specify/memory/principles.md` (overwrite).
+7. Write the completed principles back to `memory/principles.md` (overwrite).
 
 8. Output a final summary to the user with:
    - New version and bump rationale.
@@ -92,4 +92,4 @@ If the user supplies partial updates (e.g., only one principle revision), still 
 
 If critical info missing (e.g., ratification date truly unknown), insert `TODO(<FIELD_NAME>): explanation` and include in the Sync Impact Report under deferred items.
 
-Do not create a new template; always operate on the existing `.specify/memory/principles.md` file.
+Do not create a new template; always operate on the existing `memory/principles.md` file.
