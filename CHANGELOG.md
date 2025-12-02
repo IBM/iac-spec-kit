@@ -17,6 +17,14 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.5] - 2025-12-02
+
+### Fixed
+
+- Issue where some paths had double .specify/.specify in generated release bundles
+
+---
+
 ## [0.0.4] - 2025-11-27
 
 ### Fixed
