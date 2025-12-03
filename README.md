@@ -36,6 +36,8 @@
 - [Prerequisites](#prerequisites)
 - [Learn More](#learn-more)
 - [Detailed Process](#detailed-process)
+- [Contributing](#contributing)
+- [Future Ideas](#future-ideas)
 - [Support](#support)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -96,6 +98,10 @@ This separation is intended to:
 - Support switching cloud providers by re-running `/iac.plan` with a different cloud
 - Enable deploying the same specification to multiple clouds
 - Facilitate comparing cloud provider options before committing
+
+## Contributing and future ideas
+
+IaC Spec Kit is an experimental project exploring how Specification-Driven Development can improve infrastructure as code workflows. Contributions help refine templates, expand compatibility, and discover what works best with AI-assisted infrastructure provisioning. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to participate, and [IDEAS.md](IDEAS.md) for potential areas to explore.
 
 ---
 
@@ -727,9 +733,19 @@ Resolve any validation errors by providing feedback to your AI agent. Remember t
 
 ---
 
+## Contributing
+
+IaC Spec Kit is an experimental project exploring how Specification-Driven Development improves infrastructure as code workflows with AI assistance. Contributions are welcome in any area—template refinement, documentation, examples, validation improvements, cloud provider support, AI agent compatibility, or entirely new ideas.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on development setup, testing workflow, and PR submission.
+
+### Future ideas
+
+Potential areas for exploration include template refinement, validation improvements, AI agent compatibility, automation tooling, extensibility mechanisms, and patterns for other infrastructure domains. See [IDEAS.md](IDEAS.md) for the complete list. All ideas are open for anyone to pick up and explore.
+
 ## Support
 
-For support, please open a [GitHub issue](https://github.com/ibm/iac-spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development for Infrastructure as Code.
+For support, please open a [GitHub issue](https://github.com/ibm/iac-spec-kit/issues/new). Bug reports, feature requests, and questions about using Spec-Driven Development for Infrastructure as Code are welcome.
 
 ## Acknowledgements
 
