@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Got an idea? Share it! Even rough ideas help shape what gets built. Don't worry about having everything figured out.
+        Got an idea? Share it! Even rough ideas help shape what gets built. Don't worry about having everything figured out. You may also be interested in opening a PR with the feature.
 
   - type: textarea
     id: idea
