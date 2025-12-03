@@ -1,0 +1,138 @@
+name: Bug Report
+description: Found something broken? Let's get it fixed
+title: "[Bug]: "
+labels: ["bug", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Found something broken? Share what happened and it'll get looked at. Even partial details help!
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the bug
+      placeholder: When I tried to...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ai-agent
+    attributes:
+      label: Which AI agent?
+      description: Pick the one you're using
+      options:
+        - Claude Code
+        - GitHub Copilot
+        - Gemini CLI
+        - Cursor
+        - Qwen Code
+        - opencode
+        - Windsurf
+        - Kilo Code
+        - Auggie CLI
+        - CodeBuddy CLI
+        - Roo Code
+        - Codex CLI
+        - Amazon Q Developer CLI
+        - Amp
+        - IBM Bob
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce (if you know them)
+      description: How can this be reproduced?
+      placeholder: |
+        1. Run `iac-specify init my-project --ai bob`
+        2. Try to...
+        3. Error appears
+    validations:
+      required: false
+
+  - type: dropdown
+    id: command
+    attributes:
+      label: Which command?
+      description: Select if relevant
+      options:
+        - iac-specify init
+        - iac-specify check
+        - /iac.principles
+        - /iac.specify
+        - /iac.clarify
+        - /iac.plan
+        - /iac.tasks
+        - /iac.implement
+        - /iac.analyze
+        - /iac.checklist
+        - Other
+    validations:
+      required: false
+
+  - type: dropdown
+    id: cloud-provider
+    attributes:
+      label: Cloud provider (if relevant)
+      options:
+        - AWS
+        - Azure
+        - GCP
+        - IBM Cloud
+        - Oracle Cloud
+        - Multi-cloud
+        - Not applicable
+        - Other
+    validations:
+      required: false
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Linux
+        - Windows (WSL)
+        - Windows (native)
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Version (if you know it)
+      placeholder: "0.0.5"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      render: shell
+      placeholder: Paste any error output here...
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      placeholder: Screenshots, config files, whatever might help...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Quick check
+      options:
+        - label: I searched existing issues for duplicates
+          required: false
+        - label: I'll be respectful and constructive
+          required: true

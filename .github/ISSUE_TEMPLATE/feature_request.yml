@@ -1,0 +1,101 @@
+name: Feature Request
+description: Got an idea? Share it!
+title: "[Feature]: "
+labels: ["enhancement", "needs-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Got an idea? Share it! Even rough ideas help shape what gets built. Don't worry about having everything figured out.
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What's your idea?
+      description: Describe what you'd like to see
+      placeholder: It would be cool if...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-area
+    attributes:
+      label: What area does this relate to?
+      options:
+        - CLI tool
+        - Slash commands
+        - Templates
+        - AI agent support
+        - Documentation
+        - Not sure
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: Currently it's hard to...
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: How might it work?
+      placeholder: Maybe it could...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: cloud-provider
+    attributes:
+      label: Cloud provider specific?
+      options:
+        - AWS
+        - Azure
+        - GCP
+        - IBM Cloud
+        - Oracle Cloud
+        - All clouds
+        - Not cloud-specific
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Example (if you have one)
+      render: shell
+      placeholder: |
+        $ iac-specify something...
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      placeholder: Related to...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Want to help?
+      options:
+        - label: I'd be interested in working on this
+          required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Quick check
+      options:
+        - label: I searched existing issues
+          required: false
+        - label: I'll be respectful and constructive
+          required: true
