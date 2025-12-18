@@ -108,8 +108,10 @@ if ($RequireTasks -and -not (Test-Path $paths.TASKS -PathType Leaf)) {
 # Build list of available documents
 $docs = @()
 
-# Always check these optional docs
+# Always check these optional docs (enrichplan artifacts)
 if (Test-Path $paths.RESEARCH) { $docs += 'research.md' }
+if (Test-Path $paths.MODULES) { $docs += 'modules.md' }
+if (Test-Path $paths.ARCHITECTURE) { $docs += 'architecture.md' }
 if (Test-Path $paths.DATA_MODEL) { $docs += 'data-model.md' }
 
 # Check contracts directory (only if it exists and has files)
@@ -136,8 +138,10 @@ if ($Json) {
     Write-Output "FEATURE_DIR:$($paths.FEATURE_DIR)"
     Write-Output "AVAILABLE_DOCS:"
     
-    # Show status of each potential document
+    # Show status of each potential document (enrichplan artifacts first)
     Test-FileExists -Path $paths.RESEARCH -Description 'research.md' | Out-Null
+    Test-FileExists -Path $paths.MODULES -Description 'modules.md' | Out-Null
+    Test-FileExists -Path $paths.ARCHITECTURE -Description 'architecture.md' | Out-Null
     Test-FileExists -Path $paths.DATA_MODEL -Description 'data-model.md' | Out-Null
     Test-DirHasFiles -Path $paths.CONTRACTS_DIR -Description 'contracts/' | Out-Null
     Test-FileExists -Path $paths.QUICKSTART -Description 'quickstart.md' | Out-Null

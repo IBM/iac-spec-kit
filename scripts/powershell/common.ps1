@@ -107,6 +107,8 @@ function Get-FeaturePathsEnv {
         IMPL_PLAN     = Join-Path $featureDir 'plan.md'
         TASKS         = Join-Path $featureDir 'tasks.md'
         RESEARCH      = Join-Path $featureDir 'research.md'
+        MODULES       = Join-Path $featureDir 'modules.md'
+        ARCHITECTURE  = Join-Path $featureDir 'architecture.md'
         DATA_MODEL    = Join-Path $featureDir 'data-model.md'
         QUICKSTART    = Join-Path $featureDir 'quickstart.md'
         CONTRACTS_DIR = Join-Path $featureDir 'contracts'

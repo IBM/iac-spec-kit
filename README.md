@@ -177,10 +177,16 @@ Use the **`/iac.specify`** command to describe what you want to build. Focus on 
 
 ### 4. Create a technical implementation plan
 
-Use the **`/iac.plan`** command to provide your tech stack and architecture choices. IaC Spec Kit helps AI agents translate your generic requirements into cloud-specific services.
+Use the **`/iac.plan`** command to create an architecture plan. This outputs a single `plan.md` file with your technology decisions and infrastructure architecture.
 
 ```
 /iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
+```
+
+**Optional enrichment**: For comprehensive projects, run **`/iac.enrichplan`** after planning to generate deep research (Well-Architected Framework analysis, curated modules), module specifications, and a provisioning quickstart guide.
+
+```
+/iac.enrichplan
 ```
 
 ### 5. Break down into tasks
@@ -363,7 +369,7 @@ Essential commands for the Spec-Driven Development workflow:
 |--------------------------|-----------------------------------------------------------------------|
 | `/iac.principles`  | Create or update project governing principles and development guidelines |
 | `/iac.specify`       | Define what you want to build (requirements and user stories)        |
-| `/iac.plan`          | Create technical implementation plans with your chosen tech stack     |
+| `/iac.plan`          | Create architecture plan with technology decisions (outputs `plan.md`)     |
 | `/iac.tasks`         | Generate actionable task lists for implementation                     |
 | `/iac.implement`     | Execute all tasks to build the feature according to the plan         |
 
@@ -374,6 +380,7 @@ Additional commands for enhanced quality and validation:
 | Command              | Description                                                           |
 |----------------------|-----------------------------------------------------------------------|
 | `/iac.clarify`   | Clarify underspecified areas (recommended before `/iac.plan`) |
+| `/iac.enrichplan` | Deep research, module specs, and quickstart guide (run after `/iac.plan`) |
 | `/iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/iac.tasks`, before `/iac.implement`) |
 | `/iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
@@ -390,6 +397,11 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 - **Security**: IAM roles, encryption, secrets management
 - **Environment Configuration**: Development, staging, production settings
 - **State Management**: Terraform backend configuration, workspace strategy
+
+**For comprehensive projects**, use `/iac.enrichplan` after planning to generate additional artifacts:
+- **research.md**: Deep research including Well-Architected Framework analysis and curated module recommendations
+- **modules.md**: Custom module specifications (if using modules)
+- **quickstart.md**: Step-by-step provisioning guide
 
 #### Quick Example
 

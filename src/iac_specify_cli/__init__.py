@@ -1159,7 +1159,7 @@ def init(
 
     steps_lines.append("   2.1 [cyan]/iac.principles[/] - Establish project governing principles and development guidelines")
     steps_lines.append("   2.2 [cyan]/iac.specify[/] - Create baseline specification")
-    steps_lines.append("   2.3 [cyan]/iac.plan[/] - Create implementation plan")
+    steps_lines.append("   2.3 [cyan]/iac.plan[/] - Create architecture plan")
     steps_lines.append("   2.4 [cyan]/iac.tasks[/] - Generate actionable tasks")
     steps_lines.append("   2.5 [cyan]/iac.implement[/] - Execute implementation")
 
@@ -1171,6 +1171,7 @@ def init(
         "Optional commands that you can use for your specs [bright_black](improve quality & confidence)[/bright_black]",
         "",
         f"○ [cyan]/iac.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/iac.plan[/] if used)",
+        f"○ [cyan]/iac.enrichplan[/] [bright_black](optional)[/bright_black] - Deep research, module specs, and quickstart guide (run after [cyan]/iac.plan[/])",
         f"○ [cyan]/iac.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/iac.tasks[/], before [cyan]/iac.implement[/])",
         f"○ [cyan]/iac.checklist[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/iac.plan[/])"
     ]

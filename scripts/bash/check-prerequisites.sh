@@ -122,8 +122,10 @@ fi
 # Build list of available documents
 docs=()
 
-# Always check these optional docs
+# Always check these optional docs (enrichplan artifacts)
 [[ -f "$RESEARCH" ]] && docs+=("research.md")
+[[ -f "$MODULES" ]] && docs+=("modules.md")
+[[ -f "$ARCHITECTURE" ]] && docs+=("architecture.md")
 [[ -f "$DATA_MODEL" ]] && docs+=("data-model.md")
 
 # Check contracts directory (only if it exists and has files)
@@ -154,8 +156,10 @@ else
     echo "FEATURE_DIR:$FEATURE_DIR"
     echo "AVAILABLE_DOCS:"
     
-    # Show status of each potential document
+    # Show status of each potential document (enrichplan artifacts first)
     check_file "$RESEARCH" "research.md"
+    check_file "$MODULES" "modules.md"
+    check_file "$ARCHITECTURE" "architecture.md"
     check_file "$DATA_MODEL" "data-model.md"
     check_dir "$CONTRACTS_DIR" "contracts/"
     check_file "$QUICKSTART" "quickstart.md"

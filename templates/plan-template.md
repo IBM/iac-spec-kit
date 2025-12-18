@@ -3,7 +3,7 @@
 **Branch**: `[###-infrastructure-name]` | **Date**: [DATE] | **Spec**: [link]
 **Input**: Infrastructure specification from `/specs/[###-infrastructure-name]/spec.md`
 
-**Note**: This template is filled in by the `/iac.plan` command. See `iac.plan.md` for the execution workflow.
+**Note**: This template is filled in by the `/iac.plan` command. For deep research, module specs, and quickstart guide, run `/iac.enrichplan` after planning.
 
 ## Summary
 
@@ -32,9 +32,17 @@
 
 ## Principles Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+<!--
+  If memory/principles.md is configured (no template placeholders):
+  - Apply principles as gates - plan must satisfy them
+  - Document how this plan aligns with each principle
+  
+  If memory/principles.md still has placeholders:
+  - Skip this section (no gates to check)
+  - Note: "Principles not configured"
+-->
 
-[Gates determined based on principles file]
+[Gates determined from principles file, or "Principles not configured - run /iac.principles first"]
 
 ## Infrastructure Architecture
 
@@ -53,8 +61,6 @@
   - spec.md: "virtual private network" → plan.md: "AWS VPC" or "IBM Cloud VPC"
   
   During /iac.implement, AI agents will read this section to generate IaC files.
-  
-  This content will be expanded into architecture.md in Phase 1.
 -->
 
 ### Compute Resources
@@ -266,13 +272,15 @@
 
 ```text
 specs/[###-infrastructure]/
-├── spec.md              # Infrastructure specification (technology-agnostic)
-├── plan.md              # This file (/iac.plan command output)
-├── research.md          # Phase 0 output: technology decisions and best practices
-├── architecture.md      # Phase 1 output: detailed infrastructure design
-├── modules.md           # Phase 1 output: module specifications (if using modules)
-├── quickstart.md        # Phase 1 output: provisioning guide
-└── tasks.md             # Phase 2 output (/iac.tasks command - NOT created by /iac.plan)
+├── spec.md              # Infrastructure specification (technology-agnostic) - /iac.specify
+├── plan.md              # This file - architecture plan - /iac.plan
+├── tasks.md             # Implementation tasks - /iac.tasks
+│
+│   # Optional enrichment artifacts (run /iac.enrichplan if needed):
+├── research.md          # Deep research: Well-Architected Framework, curated modules
+├── architecture.md      # Detailed infrastructure architecture design
+├── modules.md           # Module specifications (if using custom modules)
+└── quickstart.md        # Step-by-step provisioning guide
 ```
 
 ### Source Code (repository root)
