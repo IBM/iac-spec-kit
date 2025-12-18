@@ -647,9 +647,6 @@ The output of this step will include a number of implementation detail documents
 │  └── update-agent-context.sh
 ├── specs
 │  └── 001-landing-zone
-│      ├── contracts
-│      │  └── terraform-outputs.md
-│      ├── data-model.md
 │      ├── plan.md
 │      ├── quickstart.md
 │      ├── research.md

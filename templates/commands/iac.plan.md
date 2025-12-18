@@ -22,7 +22,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 2. **Load context**: Read INFRA_SPEC and load ARCH_PLAN template (already copied by script).
 
-3. **Check principles** (Option B logic):
+3. **Check principles**:
    - Read `memory/principles.md`
    - If file contains `[ARCHITECTURE_PRINCIPLE_` or `[PROJECT_NAME]` placeholders → principles NOT configured, skip Principles Check section
    - If placeholders are filled → apply principles to plan, fill Principles Check section
