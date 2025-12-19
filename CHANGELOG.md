@@ -17,6 +17,31 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.6] - 2025-12-19
+
+### Changed
+
+- Streamlined workflow with faster, more focused commands:
+  - `/iac.plan` now uses lightweight research by default for quicker iteration
+  - Added optional `/iac.enrichplan` command for deep research and architecture exploration when needed
+  - `/iac.principles` is now optional, recognizing that IaC repositories typically focus on single infrastructure specifications rather than multiple application components requiring governance
+
+### Fixed
+
+- Issue where plan.md file was overridden during workflow execution
+- Removed unused references to data-model and contracts md files
+
+### Documentation
+
+- Updated documentation to reflect streamlined workflow with optional commands
+- Added list of ideas for future work and contribution guide
+
+### Infrastructure
+
+- Added issue templates for GitHub
+
+---
+
 ## [0.0.5] - 2025-12-02
 
 ### Fixed
