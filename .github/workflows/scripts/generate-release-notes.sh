@@ -28,7 +28,7 @@ fi
 
 # Create release notes
 cat > release_notes.md << EOF
-Use these releases with your preferred AI agent. We recommend the IaC-Specify CLI for project scaffolding, but you can download and unzip the templates in your project directory if needed.
+Use these releases with your preferred AI agent. We recommend the IaC-Specify CLI for project scaffolding, but you can download and unzip the templates in your project directory if needed. Note: If manually extracting on Linux or Mac, run `chmod +x .specify/scripts/bash/*.sh` to set execute permissions on bash scripts.
 
 ## Changelog
 
