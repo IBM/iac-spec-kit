@@ -11,23 +11,21 @@ This guide shows the commands and prompts to deploy a simple VPC on AWS using Ia
 - Terraform installed
 - AI coding assistant running in your project directory
 
-## Commands
+## Optional: Add Principles First
 
-### Step 1: Establish Project Principles
+For long-running projects where you'll incrementally add capabilities (running `/iac.specify` multiple times), establish governance rules BEFORE starting:
 
 ```
 /iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
-**What this does**: The AI will interview you briefly (if needed) to understand your environment, then generate governance rules covering architecture principles, code principles, implementation approaches, and governance rules.
-
-**Generates**: `.specify/memory/principles.md`
-
-**principles.md** contains versioned governance rules including architecture principles (like security defaults, resource tagging), code principles (like prefer curated modules, testing requirements), implementation approaches (like progressive complexity), and amendment procedures. Specific principles and their wording vary by AI tool and LLM model.
+Principles act as memory across all capabilities, avoiding repetition and ensuring consistency. Also useful for team collaboration.
 
 ---
 
-### Step 2: Describe What You Want
+## Commands
+
+### Step 1: Describe What You Want
 
 ```
 /iac.specify I need a basic virtual private network with public and private subnets. Should include a bastion host for secure access to private resources. This is for a development environment, so keep it simple and cost-effective.
@@ -52,7 +50,7 @@ Uses generic terms rather than cloud-specific services (e.g., "NAT gateway" not 
 
 ---
 
-### Step 3: Clarify Requirements (Optional)
+### Step 2: Clarify Requirements (Optional)
 
 Run structured clarification to resolve any ambiguities before planning.
 
@@ -73,7 +71,7 @@ You can skip this step if you're confident the spec captures everything.
 
 ---
 
-### Step 4: Create Implementation Plan
+### Step 3: Create Implementation Plan
 
 Now you specify your cloud provider and architectural preferences. The AI will research best practices and design the AWS-specific architecture.
 
@@ -92,15 +90,9 @@ Now you specify your cloud provider and architectural preferences. The AI will r
 /iac.plan Deploy in us-east-1. Use a single NAT Gateway to keep costs down.
 ```
 
-**What this does**: The AI researches AWS best practices, well-architected framework pillars, and terraform-aws-modules. It then designs the complete network architecture, checks it against your principles, and generates multiple planning documents.
+**What this does**: The AI researches AWS best practices, well-architected framework pillars, and terraform-aws-modules. It then designs the complete network architecture and checks it against your principles.
 
-**Generates**:
-- `plan.md` - Main architecture plan
-- `research.md` - Technology decisions and justifications
-- `architecture.md` - Detailed component specifications
-- `modules.md` - Terraform module specifications (if using modules)
-- `quickstart.md` - Deployment procedures
-- Updates agent-specific context files
+**Generates**: `plan.md` - Main architecture plan with inline research
 
 **plan.md** contains the main architecture plan including technical context (AWS, Terraform, state backend), principles validation, and infrastructure architecture. For example:
 - Networking: VPC with CIDR block, public/private subnets across availability zones
@@ -110,23 +102,11 @@ Now you specify your cloud provider and architectural preferences. The AI will r
 
 Specific services and implementation details vary by AI tool and LLM model.
 
-**research.md** contains technology decisions and justifications. May include:
-- Cloud provider rationale
-- Well-Architected Framework mappings (e.g., Security → network isolation, Cost Optimization → single NAT Gateway)
-- Curated modules identified (terraform-aws-modules/vpc)
-- Best practices and patterns
-
-Content and depth vary by AI tool and LLM model.
-
-**architecture.md** contains detailed component specifications, resource dependencies, configuration parameters, and possibly network topology diagrams. Level of detail varies by AI tool and LLM model.
-
-**modules.md** (if generated) contains module specifications with input/output variables and dependencies. Whether this file is created and its content vary by AI tool and LLM model.
-
-**quickstart.md** contains deployment procedures including prerequisites, initialization steps, and deployment commands. Specific steps and detail level vary by AI tool and LLM model.
+**Optional**: For comprehensive documentation, run `/iac.enrichplan` after this step to generate `research.md`, `architecture.md`, `modules.md`, and `quickstart.md`.
 
 ---
 
-### Step 5: Generate Task Breakdown
+### Step 4: Generate Task Breakdown
 
 Break down the architecture plan into ordered, actionable tasks.
 
@@ -150,7 +130,7 @@ Specific tasks and organization vary by AI tool and LLM model.
 
 ---
 
-### Step 6: Implement Infrastructure Code
+### Step 5: Implement Infrastructure Code
 
 Execute all tasks to generate the Terraform configuration files.
 
@@ -227,9 +207,10 @@ After `/iac.implement` completes, you have production-ready Terraform code. The 
 
 | Command | Files Created | Purpose |
 |---------|---------------|---------|
-| `/iac.principles` | `principles.md` | Project governance rules and decision-making framework |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Cloud-agnostic infrastructure requirements and validation checklist |
-| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities through structured questions |
-| `/iac.plan` | `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | AWS-specific architecture and implementation strategy |
+| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities through structured questions (optional) |
+| `/iac.plan` | `plan.md` | AWS-specific architecture with inline research |
 | `/iac.tasks` | `tasks.md` | Ordered task breakdown by infrastructure tier with dependencies |
 | `/iac.implement` | `*.tf` files in `iac/` directory | Terraform code ready for review and deployment |
+| `/iac.principles` (optional) | `principles.md` | Project governance rules |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Comprehensive documentation |

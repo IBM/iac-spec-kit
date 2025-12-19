@@ -11,23 +11,21 @@ This guide shows the commands and prompts to deploy a simple VPC on IBM Cloud us
 - Terraform installed
 - AI coding assistant running in your project directory
 
-## Commands
+## Optional: Add Principles First
 
-### Step 1: Establish Project Principles
+For long-running projects where you'll incrementally add capabilities (running `/iac.specify` multiple times), establish governance rules BEFORE starting:
 
 ```
 /iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
-**What this does**: The AI generates governance rules for your project covering architecture principles, code principles, and implementation approaches.
-
-**Generates**: `.specify/memory/principles.md`
-
-**principles.md** contains versioned governance rules including architecture principles (like security defaults, resource tagging), code principles (like prefer curated modules, testing requirements), implementation approaches (like progressive complexity), and amendment procedures. Specific principles and their wording vary by AI tool and LLM model.
+Principles act as memory across all capabilities, avoiding repetition and ensuring consistency. Also useful for team collaboration.
 
 ---
 
-### Step 2: Describe What You Want
+## Commands
+
+### Step 1: Describe What You Want
 
 ```
 /iac.specify I need a basic virtual private network with public and private subnets. Should include a bastion host for secure access to private resources. This is for a development environment, so keep it simple and cost-effective.
@@ -52,7 +50,7 @@ Uses generic terms rather than cloud-specific services (e.g., "NAT gateway" not 
 
 ---
 
-### Step 3: Clarify Requirements (Optional)
+### Step 2: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
@@ -64,7 +62,7 @@ Uses generic terms rather than cloud-specific services (e.g., "NAT gateway" not 
 
 ---
 
-### Step 4: Create Implementation Plan
+### Step 3: Create Implementation Plan
 
 **Option A - Minimal**:
 ```
@@ -81,15 +79,9 @@ Uses generic terms rather than cloud-specific services (e.g., "NAT gateway" not 
 /iac.plan Deploy in us-south. Use Public Gateway for private subnet outbound access.
 ```
 
-**What this does**: The AI researches IBM Cloud best practices, Framework for Financial Services, and terraform-ibm-modules. It then designs the complete network architecture and generates planning documents.
+**What this does**: The AI researches IBM Cloud best practices and terraform-ibm-modules, then designs the network architecture.
 
-**Generates**:
-- `plan.md` - Main architecture plan
-- `research.md` - Technology decisions and justifications
-- `architecture.md` - Detailed component specifications
-- `modules.md` - Terraform module specifications (if using modules)
-- `quickstart.md` - Deployment procedures
-- Updates agent-specific context files
+**Generates**: `plan.md` - Main architecture plan with inline research
 
 **plan.md** contains the main architecture plan including technical context (IBM Cloud, Terraform, state backend), principles validation, and infrastructure architecture. For example:
 - Networking: VPC with address prefixes, public/private subnets across zones
@@ -99,23 +91,11 @@ Uses generic terms rather than cloud-specific services (e.g., "NAT gateway" not 
 
 Specific services and implementation details vary by AI tool and LLM model.
 
-**research.md** contains technology decisions and justifications. May include:
-- Cloud provider rationale
-- Framework for Financial Services mappings (e.g., Security → network isolation, Operational Excellence → monitoring)
-- Curated modules identified (terraform-ibm-modules)
-- Best practices and patterns
-
-Content and depth vary by AI tool and LLM model.
-
-**architecture.md** contains detailed component specifications, resource dependencies, configuration parameters, and possibly network topology diagrams. Level of detail varies by AI tool and LLM model.
-
-**modules.md** (if generated) contains module specifications with input/output variables and dependencies. Whether this file is created and its content vary by AI tool and LLM model.
-
-**quickstart.md** contains deployment procedures including prerequisites, initialization steps, and deployment commands. Specific steps and detail level vary by AI tool and LLM model.
+**Optional**: For comprehensive documentation, run `/iac.enrichplan` after this step to generate `research.md`, `architecture.md`, `modules.md`, and `quickstart.md`.
 
 ---
 
-### Step 5: Generate Task Breakdown
+### Step 4: Generate Task Breakdown
 
 ```
 /iac.tasks
@@ -137,7 +117,7 @@ Specific tasks and organization vary by AI tool and LLM model.
 
 ---
 
-### Step 6: Implement Infrastructure Code
+### Step 5: Implement Infrastructure Code
 
 ```
 /iac.implement
@@ -189,9 +169,9 @@ After `/iac.implement` completes, you have production-ready Terraform code. The 
 
 | Command | Files Created | Purpose |
 |---------|---------------|---------|
-| `/iac.principles` | `principles.md` | Project governance rules |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Cloud-agnostic requirements |
-| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities |
-| `/iac.plan` | `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | IBM Cloud-specific architecture |
+| `/iac.plan` | `plan.md` | IBM Cloud-specific architecture with inline research |
 | `/iac.tasks` | `tasks.md` | Ordered task breakdown |
 | `/iac.implement` | `*.tf` files | Terraform code ready for deployment |
+| `/iac.principles` (optional) | `principles.md` | Project governance rules |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Comprehensive documentation |

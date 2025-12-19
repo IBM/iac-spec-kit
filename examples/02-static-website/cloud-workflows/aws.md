@@ -14,7 +14,9 @@ This guide shows the commands and prompts to deploy a static website on AWS usin
 
 ## Commands
 
-### Step 1: Establish Project Principles
+### Optional: Establish Project Principles
+
+If you're building multiple capabilities or want governance rules that persist across features, establish principles first. This acts as memory for the AI across multiple `/iac.specify` runs.
 
 ```
 /iac.principles This is a simple marketing website. Keep it simple and cost-effective. Focus on security and reliability. Use Terraform.
@@ -24,7 +26,7 @@ This guide shows the commands and prompts to deploy a static website on AWS usin
 
 ---
 
-### Step 2: Describe What You Want
+### Step 1: Describe What You Want
 
 ```
 /iac.specify I need to host a static marketing website with HTML, CSS, and JavaScript files. Should load fast globally using a CDN. Need HTTPS support and ideally a custom domain. Budget is minimal, under $10/month for low to moderate traffic.
@@ -46,7 +48,7 @@ Uses generic terms rather than cloud-specific services. Specific sections and de
 
 ---
 
-### Step 3: Clarify Requirements (Optional)
+### Step 2: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
@@ -56,7 +58,7 @@ Uses generic terms rather than cloud-specific services. Specific sections and de
 
 ---
 
-### Step 4: Create Implementation Plan
+### Step 3: Create Implementation Plan
 
 **Option A - Minimal**:
 ```
@@ -68,22 +70,27 @@ Uses generic terms rather than cloud-specific services. Specific sections and de
 /iac.plan I have the domain example.com registered. Use CloudFront and S3.
 ```
 
-**Generates**:
-- `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
+**Generates**: `plan.md`
 
-**plan.md** example architecture:
+**plan.md** contains AWS-specific architecture with inline research. Example architecture:
 - Storage: S3 bucket with static website hosting enabled
 - CDN: CloudFront distribution with edge locations worldwide
 - SSL: ACM certificate for HTTPS
 - DNS: Route 53 hosted zone for custom domain (if applicable)
 
-Specific services vary by AI tool and LLM model.
+Content and depth vary by AI tool and LLM model.
 
-**research.md** may include Well-Architected Framework mappings and terraform-aws-modules. Content varies by AI tool and LLM model.
+**Optional enrichment**: For comprehensive projects, run `/iac.enrichplan` after planning to generate deep research (Well-Architected Framework analysis, terraform-aws-modules), detailed architecture specs, module specifications, and a provisioning quickstart guide.
+
+```
+/iac.enrichplan
+```
+
+**Generates** (when using enrichplan): `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
 
 ---
 
-### Step 5: Generate Task Breakdown
+### Step 4: Generate Task Breakdown
 
 ```
 /iac.tasks
@@ -102,7 +109,7 @@ Specific tasks vary by AI tool and LLM model.
 
 ---
 
-### Step 6: Implement Infrastructure Code
+### Step 5: Implement Infrastructure Code
 
 ```
 /iac.implement
@@ -143,9 +150,10 @@ After `/iac.implement`:
 
 | Command | Files Created | Purpose |
 |---------|---------------|---------|
-| `/iac.principles` | `principles.md` | Project governance rules |
+| `/iac.principles` (optional) | `principles.md` | Project governance rules |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Cloud-agnostic requirements |
-| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities |
-| `/iac.plan` | `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | AWS-specific architecture |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | AWS-specific architecture with inline research |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
 | `/iac.tasks` | `tasks.md` | Ordered task breakdown |
 | `/iac.implement` | `*.tf` files | Terraform code ready for deployment |

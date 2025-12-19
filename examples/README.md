@@ -17,15 +17,15 @@ The workflow commands (`/iac.principles`, `/iac.specify`, `/iac.plan`, etc.) rem
 
 ## Available Examples
 
-| Example | Complexity | What You'll Learn |
-|---------|------------|-------------------|
-| [01-simple-vpc](./01-simple-vpc/) | Low | Basic IaC Spec Kit workflow using a simple VPC example. Learn the six core commands and how to describe networking requirements generically. |
-| [02-static-website](./02-static-website/) | Low | How to specify storage and CDN requirements without cloud-specific terms. Practice translating "I need a website" into proper infrastructure specs. |
-| [03-wordpress](./03-wordpress/) | Medium | Handling non-technical requirements and the Baseline vs Enhanced complexity pattern. See how the same spec deploys to different clouds. |
-| [04-landing-zone](./04-landing-zone/) | Medium-High | Enterprise governance patterns, multi-account strategies, and compliance requirements. Learn to express regulatory needs generically. |
-| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Multi-tier architecture specifications, auto-scaling requirements, and security layers. Practice describing layered applications. |
-| [06-data-pipeline](./06-data-pipeline/) | High | Event-driven architecture patterns, serverless compute specs, and data governance. Learn to specify complex data flows generically. |
-| [07-microservices](./07-microservices/) | High | Distributed systems patterns, service mesh concepts, and comprehensive observability. Practice specifying container orchestration needs. |
+| Example | Complexity | Recommended Flow | What You'll Learn |
+|---------|------------|------------------|-------------------|
+| [01-simple-vpc](./01-simple-vpc/) | Low | Minimal (4 steps) | Basic workflow, networking requirements. Optional: Add principles for team projects. |
+| [02-static-website](./02-static-website/) | Low | Minimal (4 steps) | Storage and CDN specs. Optional: Add principles for multi-site projects. |
+| [03-wordpress](./03-wordpress/) | Medium | Minimal or Enriched | Non-technical requirements, Baseline vs Enhanced. Use enrichplan for production. |
+| [04-landing-zone](./04-landing-zone/) | Medium-High | Enriched (with principles) | Enterprise governance, compliance. Principles essential for consistency. Enrichplan recommended. |
+| [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Minimal or Enriched | Multi-tier architecture, security layers. Use enrichplan for production-grade implementations. |
+| [06-data-pipeline](./06-data-pipeline/) | High | Enriched (with principles) | Event-driven patterns, data governance. Enrichplan recommended for complex data flows. |
+| [07-microservices](./07-microservices/) | High | Enriched (with principles) | Distributed systems, service mesh. Principles essential. Enrichplan critical for quality. |
 
 ## How to Use These Examples
 
@@ -75,12 +75,12 @@ Then progress to more complex examples as you become comfortable with the framew
 
 ## What Gets Generated
 
-When you run the workflow commands, the framework generates:
+Minimal workflow (4 steps):
+- **spec.md** (`/iac.specify`) - Infrastructure requirements using generic terms
+- **plan.md** (`/iac.plan`) - Cloud-specific implementation plan with inline research
+- **tasks.md** (`/iac.tasks`) - Detailed task breakdown
+- **Terraform files** (`/iac.implement`) - Actual infrastructure as code
 
-- **principles.md** - Your project's governance rules and decision-making framework
-- **spec.md** - Infrastructure requirements using generic terms (no cloud-specific service names)
-- **plan.md** - Cloud-specific implementation plan translating generic terms to actual services
-- **tasks.md** - Detailed task breakdown for implementation
-- **Terraform files** - Actual infrastructure as code (when you run `/iac.implement`)
-
-You provide prompts to the slash commands and the framework generates the structured artifacts.
+Optional enhancements:
+- **principles.md** (`/iac.principles`) - Project governance rules (cross-capability memory for multi-feature projects)
+- **research.md, architecture.md, modules.md, quickstart.md** (`/iac.enrichplan`) - Deep research and comprehensive documentation (improves quality for complex/production projects)

@@ -157,17 +157,9 @@ uvx --from git+https://github.com/ibm/iac-spec-kit.git iac-specify init <PROJECT
 - Better tool management with `uv tool list`, `uv tool upgrade`, `uv tool uninstall`
 - Cleaner shell configuration
 
-### 2. Establish project principles
+### 2. Create the spec
 
 Launch your AI assistant in the project directory. The `/iac.*` commands are available in the assistant.
-
-Use the **`/iac.principles`** command to create your project's governing principles and development guidelines. IaC Spec Kit uses these principles to guide AI agents through all subsequent development phases.
-
-```
-/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
-```
-
-### 3. Create the spec
 
 Use the **`/iac.specify`** command to describe what you want to build. Focus on the **what** and **why**. IaC Spec Kit guides AI agents to avoid tech stack details at this stage.
 
@@ -175,21 +167,21 @@ Use the **`/iac.specify`** command to describe what you want to build. Focus on 
 /iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month. Use the official WordPress Docker image.
 ```
 
-### 4. Create a technical implementation plan
+### 3. Create a technical implementation plan
 
-Use the **`/iac.plan`** command to create an architecture plan. This outputs a single `plan.md` file with your technology decisions and infrastructure architecture.
+Use the **`/iac.plan`** command to create an architecture plan. This outputs a single `plan.md` file with inline research.
 
 ```
 /iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
 ```
 
-**Optional enrichment**: For comprehensive projects, run **`/iac.enrichplan`** after planning to generate deep research (Well-Architected Framework analysis, curated modules), module specifications, and a provisioning quickstart guide.
+**Optional enrichment**: For quality-critical or complex projects, run **`/iac.enrichplan`** to generate deep research (Well-Architected Framework analysis, curated modules), detailed architecture, module specifications, and a provisioning quickstart guide.
 
 ```
 /iac.enrichplan
 ```
 
-### 5. Break down into tasks
+### 4. Break down into tasks
 
 Use **`/iac.tasks`** to create an actionable task list from your implementation plan.
 
@@ -197,12 +189,24 @@ Use **`/iac.tasks`** to create an actionable task list from your implementation 
 /iac.tasks
 ```
 
-### 6. Execute implementation
+### 5. Execute implementation
 
 Use **`/iac.implement`** to execute all tasks and build your feature according to the plan.
 
 ```
 /iac.implement
+```
+
+---
+
+**Optional: Add project principles** - For multi-capability projects or team collaboration, use **`/iac.principles`** before `/iac.specify` to establish a set of principles that apply across multiple capabilities. This creates a `principles.md` file that is referenced by all other commands.
+
+```
+/iac.principles This is a production environment. Security and compliance are critical. Use Terraform with curated modules.
+```
+
+```
+/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
 ```
 
 For the original Spec-Driven Development methodology, see the [GitHub Spec Kit documentation](https://github.com/github/spec-kit).
@@ -361,28 +365,24 @@ iac-specify check
 
 After running `iac-specify init`, your AI coding agent will have access to these slash commands for structured development:
 
-#### Core Commands
+#### Core Workflow Commands
 
-Essential commands for the Spec-Driven Development workflow:
+| Command | Description |
+|---------|-------------|
+| `/iac.specify` | Define what you want to build (requirements) |
+| `/iac.plan` | Create architecture plan with technology decisions (outputs `plan.md` with inline research) |
+| `/iac.tasks` | Generate actionable task lists for implementation |
+| `/iac.implement` | Execute all tasks to build the feature according to the plan |
 
-| Command                  | Description                                                           |
-|--------------------------|-----------------------------------------------------------------------|
-| `/iac.principles`  | Create or update project governing principles and development guidelines |
-| `/iac.specify`       | Define what you want to build (requirements and user stories)        |
-| `/iac.plan`          | Create architecture plan with technology decisions (outputs `plan.md`)     |
-| `/iac.tasks`         | Generate actionable task lists for implementation                     |
-| `/iac.implement`     | Execute all tasks to build the feature according to the plan         |
+#### Optional Enhancement Commands
 
-#### Optional Commands
-
-Additional commands for enhanced quality and validation:
-
-| Command              | Description                                                           |
-|----------------------|-----------------------------------------------------------------------|
-| `/iac.clarify`   | Clarify underspecified areas (recommended before `/iac.plan`) |
-| `/iac.enrichplan` | Deep research, module specs, and quickstart guide (run after `/iac.plan`) |
-| `/iac.analyze`   | Cross-artifact consistency & coverage analysis (run after `/iac.tasks`, before `/iac.implement`) |
-| `/iac.checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
+| Command | Description | When to Use |
+|---------|-------------|-------------|
+| `/iac.principles` | Create project governing principles | Before `/iac.specify` - for multi-capability projects or team collaboration |
+| `/iac.enrichplan` | Deep research, architecture details, module specs, quickstart guide | After `/iac.plan` - for quality-critical or complex projects |
+| `/iac.clarify` | Clarify underspecified areas | Before `/iac.plan` - reduces rework downstream |
+| `/iac.analyze` | Cross-artifact consistency analysis | After `/iac.tasks`, before `/iac.implement` |
+| `/iac.checklist` | Generate custom quality checklists | Anytime - validates requirements completeness |
 
 
 
@@ -398,22 +398,23 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 - **Environment Configuration**: Development, staging, production settings
 - **State Management**: Terraform backend configuration, workspace strategy
 
-**For comprehensive projects**, use `/iac.enrichplan` after planning to generate additional artifacts:
+**For quality-critical or complex projects**, use `/iac.enrichplan` after planning to generate:
 - **research.md**: Deep research including Well-Architected Framework analysis and curated module recommendations
+- **architecture.md**: Detailed component specifications
 - **modules.md**: Custom module specifications (if using modules)
-- **quickstart.md**: Step-by-step provisioning guide
+- **quickstart.md**: Step-by-step provisioning guide (documentation-first approach improves implementation quality)
 
 #### Quick Example
 
 ```
-# 1. Establish principles
-/iac.principles This is a development environment. Keep it simple, focus on basic security, and keep costs low. Use Terraform.
-
-# 2. Create infrastructure specification (using generic infrastructure terms)
+# 1. Create infrastructure specification (using generic infrastructure terms)
 /iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month.
 
-# 3. Create technical plan (specify cloud provider and services)
+# 2. Create technical plan (specify cloud provider and services)
 /iac.plan Deploy in us-south. Use Code Engine for containers, Databases for MySQL, Cloud Object Storage for media.
+
+# 3. Optional: Enrich plan for production (generates research.md, architecture.md, modules.md, quickstart.md)
+/iac.enrichplan
 
 # 4. Generate tasks (includes terraform validation checkpoints)
 /iac.tasks
@@ -421,6 +422,8 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 # 5. Implement (AI generates Terraform .tf files)
 /iac.implement
 ```
+
+**Note**: For multi-capability projects, add `/iac.principles` before step 1 to establish governance rules.
 
 **Important**: IaC Spec Kit is designed to generate infrastructure as code (terraform, pulumi, ansible, kube manifest). Actual provisioning (`terraform apply`, `kubectl apply`) is a manual step you control and that is outside the scope of IaC Spec Kit.
 
@@ -544,23 +547,15 @@ The CLI will check if you have Bob, Claude Code, Gemini CLI, Cursor CLI, Qwen CL
 iac-specify init <project_name> --ai claude --ignore-agent-tools
 ```
 
-### **STEP 1:** Establish project principles
+### **STEP 1:** Create project specifications
 
 Go to the project folder and run your AI agent. In our example, we're using `bob`.
 
-You will know that things are configured correctly if you see the `/iac.principles`, `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available.
+You will know that things are configured correctly if you see the `/iac.specify`, `/iac.plan`, `/iac.tasks`, and `/iac.implement` commands available (plus optional commands like `/iac.principles`, `/iac.enrichplan`, `/iac.clarify`).
 
-The first step should be establishing your project's governing principles using the `/iac.principles` command. IaC Spec Kit uses these principles to guide AI agents toward consistent decision-making throughout all subsequent development phases:
+**Optional: Establish principles first** - For enterprise or multi-capability projects, you may want to run `/iac.principles` before `/iac.specify` to establish governance rules. See the "Optional: Add project principles" section above for details.
 
-```text
-/iac.principles This is an enterprise landing zone for a regulated industry. Security and compliance are critical. Multiple environments need strong isolation. Use Terraform.
-```
-
-This step creates or updates the `.specify/memory/principles.md` file with your project's foundational guidelines. IaC Spec Kit helps AI agents reference these principles during specification, planning, and implementation phases.
-
-### **STEP 2:** Create project specifications
-
-With your project principles established, you can now create the functional specifications. Use the `/iac.specify` command and then provide the concrete requirements for the infrastructure you want to develop.
+Use the `/iac.specify` command to describe the infrastructure you want to develop.
 
 >[!IMPORTANT]
 >Be as explicit as possible about *what* you are trying to build and *why*. For best results, **do not focus on describing the details of cloud services at this point**. IaC Spec Kit guides AI agents to use generic infrastructure terms instead.
@@ -598,7 +593,7 @@ At this stage, your project folder contents should resemble the following:
         └── tasks-template.md
 ```
 
-### **STEP 3:** Functional specification clarification (required before planning)
+### **STEP 2:** Functional specification clarification (optional but recommended)
 
 With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt.
 
@@ -625,7 +620,7 @@ Read the review and acceptance checklist, and check off each item in the checkli
 
 It's important to use the interaction with your AI agent as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
-### **STEP 4:** Generate a plan
+### **STEP 3:** Generate a plan
 
 You can now be specific about the tech stack and other technical requirements. You can use the `/iac.plan` command that is built into the project template with a prompt like this:
 
@@ -633,7 +628,7 @@ You can now be specific about the tech stack and other technical requirements. Y
 /iac.plan We'll use IBM Cloud Enterprise account groups. Transit Gateway for networking. Security and Compliance Center for compliance. Activity Tracker and Log Analysis for centralized logging.
 ```
 
-The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
+The output of this step will be a `plan.md` file with inline research. Your directory tree will resemble this:
 
 ```text
 .
@@ -648,8 +643,6 @@ The output of this step will include a number of implementation detail documents
 ├── specs
 │  └── 001-landing-zone
 │      ├── plan.md
-│      ├── quickstart.md
-│      ├── research.md
 │      └── spec.md
 └── templates
     ├── plan-template.md
@@ -657,7 +650,26 @@ The output of this step will include a number of implementation detail documents
     └── tasks-template.md
 ```
 
-Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask your AI agent to refine it if any of the components stand out, or even have it check the locally-installed version of Terraform or cloud provider CLI tools.
+**Optional: Enrich your plan** - For quality-critical or complex projects, run `/iac.enrichplan` to generate comprehensive documentation:
+
+```text
+/iac.enrichplan
+```
+
+This generates additional files: `research.md`, `architecture.md`, `modules.md`, and `quickstart.md`. Your directory tree will then include:
+
+```text
+├── specs
+│  └── 001-landing-zone
+│      ├── architecture.md
+│      ├── modules.md
+│      ├── plan.md
+│      ├── quickstart.md
+│      ├── research.md
+│      └── spec.md
+```
+
+If you ran `/iac.enrichplan`, check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask your AI agent to refine it if any of the components stand out, or even have it check the locally-installed version of Terraform or cloud provider CLI tools.
 
 Additionally, you might want to ask your AI agent to research details about the chosen tech stack if it's something that is rapidly changing (e.g., Kubernetes versions, Terraform provider versions), with a prompt like this:
 
@@ -674,7 +686,7 @@ I think we need to break this down into a series of steps. First, identify a lis
 >[!NOTE]
 >Your AI agent might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
 
-### **STEP 5:** Have your AI agent validate the plan
+### **STEP 4:** Validate the plan
 
 With the plan in place, you should have your AI agent run through it to make sure that there are no missing pieces. You can use a prompt like this:
 
@@ -689,7 +701,7 @@ You can also ask your AI agent (if you have the [GitHub CLI](https://docs.github
 >[!NOTE]
 >Before you have the agent implement it, it's also worth prompting your AI agent to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask your AI agent to resolve them. Ensure that your AI agent follows the [principles](memory/principles.md) as the foundational piece that it must adhere to when establishing the plan.
 
-### **STEP 6:** Generate task breakdown with /iac.tasks
+### **STEP 5:** Generate task breakdown with /iac.tasks
 
 With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/iac.tasks` command to have IaC Spec Kit guide AI agents in generating a detailed task breakdown from your implementation plan:
 
@@ -708,7 +720,7 @@ This step creates a `tasks.md` file in your feature specification directory that
 
 The generated tasks.md provides a clear roadmap for the `/iac.implement` command. IaC Spec Kit helps AI agents ensure systematic implementation that maintains infrastructure quality and allows for incremental delivery of infrastructure components.
 
-### **STEP 7:** Implementation
+### **STEP 6:** Implementation
 
 Once ready, use the `/iac.implement` command to execute your implementation plan:
 

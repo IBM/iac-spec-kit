@@ -13,7 +13,9 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 
 ## Commands
 
-### Step 1: Establish Project Principles
+### Optional: Establish Project Principles
+
+If you're building multiple capabilities or want governance rules that persist across features, establish principles first. This acts as memory for the AI across multiple `/iac.specify` runs.
 
 ```
 /iac.principles This is a small business production website. Keep it simple but include security and automated backups. Keep costs reasonable. Use Terraform.
@@ -27,7 +29,7 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 
 ---
 
-### Step 2: Describe What You Want
+### Step 1: Describe What You Want
 
 ```
 /iac.specify I need to deploy WordPress for my small business website. Should handle a few thousand visitors per day, needs to be secure with automated backups. Budget is around $500/month. Use the official WordPress Docker image.
@@ -50,7 +52,7 @@ Uses generic terms rather than cloud-specific services (e.g., "managed database"
 
 ---
 
-### Step 3: Clarify Requirements (Optional)
+### Step 2: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
@@ -62,7 +64,7 @@ Uses generic terms rather than cloud-specific services (e.g., "managed database"
 
 ---
 
-### Step 4: Create Implementation Plan
+### Step 3: Create Implementation Plan
 
 **You can provide varying levels of detail.** The framework already knows from your principles and spec that you want Azure, cost-effective setup, containerized WordPress, etc. Only add details if you have specific requirements not already captured.
 
@@ -91,9 +93,15 @@ Uses generic terms rather than cloud-specific services (e.g., "managed database"
 /iac.plan Deploy in East US. Use Azure Container Instances for WordPress with Application Gateway. Azure Database for MySQL Flexible Server with automated backups. Blob Storage for media with CDN. Virtual Network with subnets. Use Azure Verified Modules.
 ```
 
-**What this does**: The AI researches Azure best practices, well-architected framework pillars, and Azure Verified Modules. It then designs the complete infrastructure architecture and generates planning documents.
+**What this does**: The AI researches Azure best practices, well-architected framework pillars, and Azure Verified Modules. It then designs the complete infrastructure architecture.
 
-**Generates**:
+**Minimal workflow**: Generates `plan.md` with inline research.
+
+**Enriched workflow** (recommended for production): Run `/iac.enrichplan` after `/iac.plan` to generate comprehensive documentation including deep research, detailed architecture specs, module specifications, and deployment procedures.
+
+**Generates** (minimal): `plan.md`
+
+**Generates** (enriched, after running `/iac.enrichplan`):
 - `plan.md` - Main architecture plan
 - `research.md` - Technology decisions and justifications
 - `architecture.md` - Detailed component specifications
@@ -124,7 +132,7 @@ Content and depth vary by AI tool and LLM model.
 
 ---
 
-### Step 5: Generate Task Breakdown
+### Step 4: Generate Task Breakdown
 
 ```
 /iac.tasks
@@ -143,7 +151,7 @@ Specific tasks and organization vary by AI tool and LLM model.
 
 ---
 
-### Step 6: Implement Infrastructure Code
+### Step 5: Implement Infrastructure Code
 
 ```
 /iac.implement
@@ -194,9 +202,10 @@ After `/iac.implement` completes, you have production-ready Terraform code. The 
 
 | Command | Files Created | Purpose |
 |---------|---------------|---------|
-| `/iac.principles` | `principles.md` | Project governance rules |
+| `/iac.principles` (optional) | `principles.md` | Project governance rules |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Cloud-agnostic requirements |
-| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities |
-| `/iac.plan` | `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Azure-specific architecture |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` (minimal) or `plan.md` + enriched docs | Azure-specific architecture |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
 | `/iac.tasks` | `tasks.md` | Ordered task breakdown |
 | `/iac.implement` | `*.tf` files | Terraform code ready for deployment |

@@ -207,26 +207,43 @@ IaC Spec Kit encourages AI assistants to generate success criteria that are meas
 
 Understanding where technical decisions happen helps you know what to expect at each stage. IaC Spec Kit guides AI assistants through a progression from generic to specific:
 
-```
-1. /iac.principles
-   → Project governance rules (cloud-agnostic)
-   → Example: "Prefer managed services", "Progressive complexity"
+### Minimal Workflow (4-5 steps)
 
-2. /iac.specify
+```
+1. /iac.specify
    → Requirements specification (cloud-agnostic with high-level technical decisions)
    → Example: "Managed database service", "Serverless compute"
 
-3. /iac.clarify
+2. /iac.clarify (optional)
    → Resolve ambiguities (still cloud-agnostic)
    → Example: Clarify "managed database" → PostgreSQL vs MySQL
 
-4. /iac.plan
+3. /iac.plan
    → Cloud provider and specific services (cloud-specific)
    → Example: AWS → RDS PostgreSQL, GCP → Cloud SQL PostgreSQL
+   → Generates: plan.md with inline research
+
+4. /iac.tasks
+   → Generate actionable task breakdown
+   → Example: Phased implementation with validation checkpoints
 
 5. /iac.implement
    → Generate IaC code (provider-specific)
    → Example: Terraform with terraform-aws-modules
+```
+
+### Enriched Workflow (adds principles and deep research)
+
+For enterprise or complex projects, add these optional steps:
+
+```
+0. /iac.principles (before /iac.specify)
+   → Project governance rules (cloud-agnostic)
+   → Example: "Prefer managed services", "Progressive complexity"
+
+3.5. /iac.enrichplan (after /iac.plan)
+   → Deep research and comprehensive documentation
+   → Generates: research.md, architecture.md, modules.md, quickstart.md
 ```
 
 **Key insight:** Technical decisions progressively refine from general (managed database) to specific (RDS PostgreSQL db.r5.large) as you move through the workflow. IaC Spec Kit helps AI assistants manage this progression—you guide it with your requirements.

@@ -11,7 +11,7 @@ This guide shows the commands to deploy a three-tier web application on AWS usin
 
 ## Commands
 
-### Step 1: Establish Project Principles
+### Optional: Establish Project Principles
 
 ```
 /iac.principles This is a production web application. High availability and auto-scaling are important. Balance reliability with cost efficiency. Use Terraform.
@@ -21,7 +21,7 @@ This guide shows the commands to deploy a three-tier web application on AWS usin
 
 ---
 
-### Step 2: Describe What You Want
+### Step 1: Describe What You Want
 
 ```
 /iac.specify I need infrastructure for a three-tier web application. Load balancer to distribute traffic, auto-scaling application servers (containers or VMs), managed PostgreSQL database with automated backups and read replicas, Redis cache for session storage and performance. Expected traffic: 10,000-100,000 requests/day with peaks during business hours. Need 99.9% uptime.
@@ -33,12 +33,29 @@ Spec includes cloud-agnostic requirements for load balancing, auto-scaling compu
 
 ---
 
-### Steps 3-4: Clarify and Plan
+### Step 2: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
+```
+
+---
+
+### Step 3: Create Implementation Plan
+
+```
 /iac.plan Deploy in us-east-1. Use Application Load Balancer, ECS Fargate for containers, RDS PostgreSQL Multi-AZ, ElastiCache Redis.
 ```
+
+**Generates**: `plan.md` with inline research
+
+**Optional enrichment**: For quality-critical or complex projects, run `/iac.enrichplan` after `/iac.plan`.
+
+```
+/iac.enrichplan
+```
+
+**Generates** (enriched): `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
 
 **plan.md** example:
 - Load Balancing: ALB with SSL termination, health checks
@@ -50,7 +67,17 @@ Spec includes cloud-agnostic requirements for load balancing, auto-scaling compu
 
 ---
 
-### Steps 5-6: Tasks and Implementation
+### Step 4: Generate Task Breakdown
+
+```
+/iac.tasks
+```
+
+**Generates**: `tasks.md`
+
+---
+
+### Step 5: Implement Infrastructure Code
 
 ```
 /iac.tasks
@@ -71,8 +98,10 @@ After `terraform apply`, deploy application container to ECR, update ECS task de
 
 | Command | Files | Purpose |
 |---------|-------|---------|
-| `/iac.principles` | `principles.md` | Project governance |
-| `/iac.specify` | `spec.md`, checklists | Requirements |
-| `/iac.plan` | `plan.md`, etc. | AWS architecture |
-| `/iac.tasks` | `tasks.md` | Tasks |
+| `/iac.principles` (optional) | `principles.md` | Project governance |
+| `/iac.specify` | `spec.md`, `checklists/requirements.md` | Requirements |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | AWS-specific architecture with inline research |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
+| `/iac.tasks` | `tasks.md` | Implementation tasks |
 | `/iac.implement` | `*.tf` files | Terraform code |

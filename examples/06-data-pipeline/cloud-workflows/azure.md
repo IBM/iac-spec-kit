@@ -37,4 +37,10 @@
 
 | Command | Files | Purpose |
 |---------|-------|---------|
-| All commands | Standard set | Azure data pipeline infrastructure |
+| `/iac.principles` | `principles.md` | Project governance |
+| `/iac.specify` | `spec.md`, `checklists/requirements.md` | Requirements |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | Azure-specific architecture with inline research |
+| `/iac.enrichplan` (recommended) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
+| `/iac.tasks` | `tasks.md` | Implementation tasks |
+| `/iac.implement` | `*.tf` files | Terraform code |

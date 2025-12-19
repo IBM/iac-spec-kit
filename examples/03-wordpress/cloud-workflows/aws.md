@@ -13,9 +13,9 @@ This guide shows the commands and prompts to deploy WordPress infrastructure on 
 
 ## Commands
 
-### Step 1: Establish Project Principles
+### Optional: Establish Project Principles
 
-Principles define your project's governance rules and guide all subsequent development decisions.
+If you're building multiple capabilities or want governance rules that persist across features, establish principles first. This acts as memory for the AI across multiple `/iac.specify` runs.
 
 ```
 /iac.principles This is a small business production website. Keep it simple but include security and automated backups. Keep costs reasonable. Use Terraform.
@@ -33,7 +33,7 @@ Principles define your project's governance rules and guide all subsequent devel
 
 ---
 
-### Step 2: Describe What You Want
+### Step 1: Describe What You Want
 
 Create a technology-agnostic specification describing WHAT infrastructure you need and WHY, without specifying HOW to build it.
 
@@ -58,7 +58,7 @@ Uses generic terms rather than cloud-specific services (e.g., "managed database"
 
 ---
 
-### Step 3: Clarify Requirements (Optional)
+### Step 2: Clarify Requirements (Optional)
 
 Run structured clarification to resolve any ambiguities before planning. This reduces rework later.
 
@@ -79,7 +79,7 @@ You can skip this step if you're confident the spec captures everything, or you 
 
 ---
 
-### Step 4: Create Implementation Plan
+### Step 3: Create Implementation Plan
 
 Now you specify your cloud provider and architectural preferences. The AI will research best practices and design the AWS-specific architecture.
 
@@ -115,9 +115,15 @@ Directs specific AWS service choices.
 ```
 Provides complete architecture direction.
 
-**What this does**: The AI researches AWS best practices, well-architected framework pillars (Security, Reliability, Performance Efficiency, Cost Optimization, Operational Excellence), and terraform-aws-modules. It then designs the complete infrastructure architecture, checks it against your principles, and generates multiple planning documents.
+**What this does**: The AI researches AWS best practices, well-architected framework pillars (Security, Reliability, Performance Efficiency, Cost Optimization, Operational Excellence), and terraform-aws-modules. It then designs the complete infrastructure architecture and checks it against your principles.
 
-**Generates**:
+**Minimal workflow**: Generates `plan.md` with inline research.
+
+**Enriched workflow** (recommended for production): Run `/iac.enrichplan` after `/iac.plan` to generate comprehensive documentation including deep research, detailed architecture specs, module specifications, and deployment procedures.
+
+**Generates** (minimal): `plan.md`
+
+**Generates** (enriched, after running `/iac.enrichplan`):
 - `plan.md` - Main architecture plan
 - `research.md` - Technology decisions and justifications
 - `architecture.md` - Detailed component specifications
@@ -148,7 +154,7 @@ Content and depth vary by AI tool and LLM model.
 
 ---
 
-### Step 5: Generate Task Breakdown
+### Step 4: Generate Task Breakdown
 
 Break down the architecture plan into ordered, actionable tasks organized by infrastructure tiers.
 
@@ -195,7 +201,7 @@ Phase 4: Compute & Data Tier
 
 ---
 
-### Step 6: Implement Infrastructure Code
+### Step 5: Implement Infrastructure Code
 
 Execute all tasks to generate the Terraform configuration files.
 
@@ -274,9 +280,10 @@ After `/iac.implement` completes, you have production-ready Terraform code. The 
 
 | Command | Files Created | Purpose |
 |---------|---------------|---------|
-| `/iac.principles` | `principles.md` | Project governance rules and decision-making framework |
+| `/iac.principles` (optional) | `principles.md` | Project governance rules and decision-making framework |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Cloud-agnostic infrastructure requirements and validation checklist |
-| `/iac.clarify` | Updates `spec.md` | Resolves ambiguities through structured questions |
-| `/iac.plan` | `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | AWS-specific architecture and implementation strategy |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities through structured questions |
+| `/iac.plan` | `plan.md` (minimal) or `plan.md` + enriched docs | AWS-specific architecture and implementation strategy |
+| `/iac.enrichplan` (optional) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
 | `/iac.tasks` | `tasks.md` | Ordered task breakdown by infrastructure tier with dependencies |
 | `/iac.implement` | `*.tf` files in `iac/` directory | Terraform code ready for review and deployment |

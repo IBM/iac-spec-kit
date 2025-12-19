@@ -84,11 +84,23 @@ The key templates that guide AI agents are located in:
    <launch-your-ai-agent>
    ```
 3. Run through the complete SDD workflow:
-   - `/iac.principles` - Create principles
+   
+   **Minimal workflow (test this first):**
    - `/iac.specify` - Create specification
-   - `/iac.plan` - Generate plan
+   - `/iac.clarify` (optional) - Resolve ambiguities
+   - `/iac.plan` - Generate plan with inline research
    - `/iac.tasks` - Create task list
    - `/iac.implement` - Execute implementation
+   
+   **Enriched workflow (test for complex scenarios):**
+   - `/iac.principles` - Create principles (before `/iac.specify`)
+   - `/iac.specify` - Create specification
+   - `/iac.clarify` (optional) - Resolve ambiguities
+   - `/iac.plan` - Generate plan
+   - `/iac.enrichplan` - Generate deep research and comprehensive docs
+   - `/iac.tasks` - Create task list
+   - `/iac.implement` - Execute implementation
+
 4. Verify generated outputs and IaC quality
 
 ## Contribution workflow

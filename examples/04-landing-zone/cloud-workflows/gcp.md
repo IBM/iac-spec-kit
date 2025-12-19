@@ -31,12 +31,29 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 
 ---
 
-### Step 3-4: Clarify and Plan
+### Step 3: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
+```
+
+---
+
+### Step 4: Create Implementation Plan
+
+```
 /iac.plan We'll use GCP Organization hierarchy with folders. Shared VPC for hub-spoke networking. Organization Policy constraints. Cloud Logging and Cloud Audit Logs. Security Command Center.
 ```
+
+**Generates**: `plan.md` with inline research
+
+**Enriched workflow** (recommended): Run `/iac.enrichplan` after `/iac.plan` for comprehensive documentation.
+
+```
+/iac.enrichplan
+```
+
+**Generates** (enriched): `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
 
 **plan.md** example architecture:
 - Organization with folders (Production, Non-Production, Shared)
@@ -47,7 +64,17 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 
 ---
 
-### Steps 5-6: Tasks and Implementation
+### Step 5: Generate Task Breakdown
+
+```
+/iac.tasks
+```
+
+**Generates**: `tasks.md` with phased implementation
+
+---
+
+### Step 6: Implement Infrastructure Code
 
 ```
 /iac.tasks
@@ -64,6 +91,8 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 |---------|-------|---------|
 | `/iac.principles` | `principles.md` | Enterprise governance |
 | `/iac.specify` | `spec.md`, `checklists/requirements.md` | Requirements |
-| `/iac.plan` | `plan.md`, etc. | GCP-specific architecture |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | GCP-specific architecture with inline research |
+| `/iac.enrichplan` (recommended) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
 | `/iac.tasks` | `tasks.md` | Implementation tasks |
 | `/iac.implement` | `*.tf` files | Terraform code |

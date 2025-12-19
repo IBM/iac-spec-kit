@@ -4,23 +4,49 @@ This guide shows the commands to deploy a microservices platform on AWS using Ia
 
 ## Commands
 
-### Steps 1-2: Principles and Specify
+### Step 1: Establish Project Principles
 
 ```
 /iac.principles This is a production microservices platform. Comprehensive observability and high availability are critical. Focus on operational excellence. Use Terraform.
-/iac.specify I need infrastructure for a microservices platform. Container orchestration for 10-50 services, service mesh for secure service-to-service communication, API gateway for external traffic, service discovery, distributed tracing, centralized logging, metrics monitoring, message queue for async communication. Services will use different databases (PostgreSQL, MongoDB, Redis). Expected: 100K-1M requests/day. Need 99.95% uptime with fault isolation.
 ```
 
-**Generates**: `spec.md` with requirements for container orchestration, service mesh, API gateway, observability, databases, messaging
+**Generates**: `.specify/memory/principles.md`
 
 ---
 
-### Steps 3-4: Clarify and Plan
+### Step 2: Describe What You Want
+
+```
+/iac.specify I need infrastructure for a microservices platform. Container orchestration for 10-50 services, service mesh for secure service-to-service communication, API gateway for external traffic, service discovery, distributed tracing, centralized logging, metrics monitoring, message queue for async communication. Services will use different databases (PostgreSQL, MongoDB, Redis). Expected: 100K-1M requests/day. Need 99.95% uptime with fault isolation.
+```
+
+**Generates**: `spec.md`, `checklists/requirements.md`
+
+---
+
+### Step 3: Clarify Requirements (Optional)
 
 ```
 /iac.clarify
+```
+
+---
+
+### Step 4: Create Implementation Plan
+
+```
 /iac.plan Use EKS for Kubernetes, AWS App Mesh for service mesh, API Gateway for external traffic, CloudWatch for logs and metrics, X-Ray for tracing, RDS PostgreSQL and DocumentDB for databases, ElastiCache Redis, SQS/SNS for messaging.
 ```
+
+**Generates**: `plan.md` with inline research
+
+**Enriched workflow** (recommended): Run `/iac.enrichplan` after `/iac.plan` for comprehensive documentation.
+
+```
+/iac.enrichplan
+```
+
+**Generates** (enriched): `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
 
 **plan.md** example:
 - Orchestration: EKS cluster with managed node groups, auto-scaling
@@ -35,7 +61,17 @@ This guide shows the commands to deploy a microservices platform on AWS using Ia
 
 ---
 
-### Steps 5-6: Tasks and Implementation
+### Step 5: Generate Task Breakdown
+
+```
+/iac.tasks
+```
+
+**Generates**: `tasks.md` with phased implementation
+
+---
+
+### Step 6: Implement Infrastructure Code
 
 ```
 /iac.tasks
@@ -60,4 +96,10 @@ After infrastructure is deployed:
 
 | Command | Files | Purpose |
 |---------|-------|---------|
-| All commands | Standard set | AWS microservices platform infrastructure |
+| `/iac.principles` | `principles.md` | Project governance |
+| `/iac.specify` | `spec.md`, `checklists/requirements.md` | Requirements |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | AWS-specific architecture with inline research |
+| `/iac.enrichplan` (recommended) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
+| `/iac.tasks` | `tasks.md` | Implementation tasks |
+| `/iac.implement` | `*.tf` files | Terraform code |

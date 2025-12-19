@@ -58,7 +58,15 @@ This guide shows the commands and prompts to deploy an enterprise landing zone o
 /iac.plan We'll use AWS Control Tower for account management. Transit Gateway for networking. Security Hub for compliance. CloudTrail and Config for audit logs. GuardDuty for threat detection.
 ```
 
-**Generates**: `plan.md`, `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
+**Generates**: `plan.md` with inline research
+
+**Enriched workflow** (recommended): Run `/iac.enrichplan` after `/iac.plan` for comprehensive documentation.
+
+```
+/iac.enrichplan
+```
+
+**Generates** (enriched): `research.md`, `architecture.md`, `modules.md`, `quickstart.md`
 
 **plan.md** example architecture:
 - Accounts: AWS Organizations with 4 OUs (Production, Staging, Development, Security)
@@ -94,6 +102,20 @@ Research includes Well-Architected Framework mappings and terraform-aws-modules 
 - identity/sso.tf, compliance/config.tf
 
 **Important**: Landing zones require careful sequencing. Review generated task order before applying.
+
+---
+
+## Files Generated Summary
+
+| Command | Files | Purpose |
+|---------|-------|---------|
+| `/iac.principles` | `principles.md` | Enterprise governance |
+| `/iac.specify` | `spec.md`, `checklists/requirements.md` | Requirements |
+| `/iac.clarify` (optional) | Updates `spec.md` | Resolves ambiguities |
+| `/iac.plan` | `plan.md` | AWS-specific architecture with inline research |
+| `/iac.enrichplan` (recommended) | `research.md`, `architecture.md`, `modules.md`, `quickstart.md` | Deep research and detailed specs |
+| `/iac.tasks` | `tasks.md` | Implementation tasks |
+| `/iac.implement` | `*.tf` files | Terraform code |
 
 ---
 
