@@ -299,6 +299,10 @@ For example, in agents like Claude Code or IBM Bob, you can create a custom "Inf
 | [Amazon Q Developer CLI](https://aws.amazon.com/developer/learning/q-developer-cli/) | ⚠️ | Amazon Q Developer CLI [does not support](https://github.com/aws/amazon-q-developer-cli/issues/3064) custom arguments for slash commands. |
 | [Amp](https://ampcode.com/) | ✅ | |
 | [IBM Bob](https://www.ibm.com/products/bob) | ✅ | IDE-based agent with slash command support |
+| [SHAI](https://github.com/ovh/shai) | ✅ | OVHcloud CLI agent |
+| [Antigravity](https://antigravity.dev/) | ✅ | IDE-based agent |
+| [Qoder CLI](https://qoder.com/cli) | ✅ | |
+| Generic (bring your own agent) | ✅ | Use with `--ai-commands-dir` to specify custom commands directory |
 
 ## IaC Specify CLI Reference
 
@@ -309,14 +313,16 @@ The `iac-specify` command supports the following options:
 | Command     | Description                                                    |
 |-------------|----------------------------------------------------------------|
 | `init`      | Initialize a new IaC Specify project from the latest template      |
-| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `bob`) |
+| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `auggie`, `codebuddy`, `qodercli`, `shai`, `amp`, `q`, `bob`) |
+| `version`   | Display the installed version of IaC Specify CLI                   |
+| `extension` | Manage extensions (subcommands: `list`, `add`, `remove`, `search`, `info`, `update`, `enable`, `disable`) |
 
 ### `iac-specify init` Arguments & Options
 
 | Argument/Option        | Type     | Description                                                                  |
 |------------------------|----------|------------------------------------------------------------------------------|
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
-| `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `q`, or `bob` |
+| `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `q`, `bob`, `shai`, `agy`, `qodercli`, or `generic` |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
 | `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                             |
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
@@ -325,6 +331,8 @@ The `iac-specify` command supports the following options:
 | `--skip-tls`           | Flag     | Skip SSL/TLS verification (not recommended)                                 |
 | `--debug`              | Flag     | Enable detailed debug output for troubleshooting                            |
 | `--github-token`       | Option   | GitHub token for API requests (or set GH_TOKEN/GITHUB_TOKEN env variable)  |
+| `--ai-commands-dir`    | Option   | Custom commands directory for generic or non-standard agent layouts         |
+| `--ai-skills`          | Flag     | Download and install AI skills/extensions during initialization             |
 
 ### Examples
 
@@ -359,6 +367,18 @@ iac-specify init my-infrastructure --ai bob --github-token ghp_your_token_here
 
 # Check system requirements
 iac-specify check
+
+# Display installed version
+iac-specify version
+
+# List installed extensions
+iac-specify extension list
+
+# Initialize with a generic/custom agent
+iac-specify init my-infrastructure --ai generic --ai-commands-dir .myagent/commands
+
+# Initialize with AI skills download
+iac-specify init my-infrastructure --ai claude --ai-skills
 ```
 
 ### Available Slash Commands

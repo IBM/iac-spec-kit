@@ -73,6 +73,9 @@ CODEBUDDY_FILE="$REPO_ROOT/CODEBUDDY.md"
 AMP_FILE="$REPO_ROOT/AGENTS.md"
 Q_FILE="$REPO_ROOT/AGENTS.md"
 BOB_FILE="$REPO_ROOT/AGENTS.md"
+SHAI_FILE="$REPO_ROOT/.shai/SHAI.md"
+AGY_FILE="$REPO_ROOT/AGENTS.md"
+QODERCLI_FILE="$REPO_ROOT/AGENTS.md"
 
 # Template file
 TEMPLATE_FILE="$REPO_ROOT/.specify/templates/agent-file-template.md"
@@ -625,9 +628,18 @@ update_specific_agent() {
         bob)
             update_agent_file "$BOB_FILE" "IBM Bob"
             ;;
+        shai)
+            update_agent_file "$SHAI_FILE" "SHAI"
+            ;;
+        agy)
+            update_agent_file "$AGY_FILE" "Antigravity"
+            ;;
+        qodercli)
+            update_agent_file "$QODERCLI_FILE" "Qoder CLI"
+            ;;
         *)
             log_error "Unknown agent type '$agent_type'"
-            log_error "Expected: claude|gemini|copilot|cursor-agent|qwen|opencode|codex|windsurf|kilocode|auggie|roo|amp|q|bob"
+            log_error "Expected: claude|gemini|copilot|cursor-agent|qwen|opencode|codex|windsurf|kilocode|auggie|roo|amp|q|bob|shai|agy|qodercli"
             exit 1
             ;;
     esac
@@ -702,6 +714,21 @@ update_all_existing_agents() {
         found_agent=true
     fi
     
+    if [[ -f "$SHAI_FILE" ]]; then
+        update_agent_file "$SHAI_FILE" "SHAI"
+        found_agent=true
+    fi
+    
+    if [[ -f "$AGY_FILE" ]]; then
+        update_agent_file "$AGY_FILE" "Antigravity"
+        found_agent=true
+    fi
+    
+    if [[ -f "$QODERCLI_FILE" ]]; then
+        update_agent_file "$QODERCLI_FILE" "Qoder CLI"
+        found_agent=true
+    fi
+    
     # If no agent files exist, create a default Claude file
     if [[ "$found_agent" == false ]]; then
         log_info "No existing agent files found, creating default Claude file..."
@@ -726,7 +753,7 @@ print_summary() {
     
     echo
 
-    log_info "Usage: $0 [claude|gemini|copilot|cursor-agent|qwen|opencode|codex|windsurf|kilocode|auggie|codebuddy|q|bob]"
+    log_info "Usage: $0 [claude|gemini|copilot|cursor-agent|qwen|opencode|codex|windsurf|kilocode|auggie|codebuddy|q|bob|shai|agy|qodercli]"
 }
 
 #==============================================================================

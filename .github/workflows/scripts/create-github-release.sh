@@ -46,5 +46,13 @@ gh release create "$VERSION" \
   .genreleases/iac-spec-kit-template-q-ps-"$VERSION".zip \
   .genreleases/iac-spec-kit-template-bob-sh-"$VERSION".zip \
   .genreleases/iac-spec-kit-template-bob-ps-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-shai-sh-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-shai-ps-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-agy-sh-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-agy-ps-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-qodercli-sh-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-qodercli-ps-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-generic-sh-"$VERSION".zip \
+  .genreleases/iac-spec-kit-template-generic-ps-"$VERSION".zip \
   --title "IaC Spec Kit Templates - $VERSION_NO_V" \
   --notes-file release_notes.md
