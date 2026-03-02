@@ -17,6 +17,40 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.7] - 2025-07-11
+
+> This release syncs the installer with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.1.6](https://github.com/github/spec-kit/releases/tag/v0.1.6) (upstream, 2026-02-23). There is no change to the IaC templates.
+
+### Added (from upstream)
+
+- **Extension system**: New `iac-specify extension` command group for managing modular extension packages (`list`, `add`, `remove`, `search`, `info`, `update`, `enable`, `disable`) — ported from upstream `specify extension`
+- **Version command**: `iac-specify version` shows CLI version, latest template version, and system info — ported from upstream `specify version`
+- **New agents**: Added support for SHAI/OVHcloud (`shai`), Antigravity (`agy`), Qoder CLI (`qodercli`), and Generic/bring-your-own-agent (`generic`) — from upstream agent additions
+- **Generic agent support**: `--ai-commands-dir` option allows specifying a custom commands directory for any AI agent — from upstream
+- **AI skills installation**: New `--ai-skills` option in `init` command to install AI agent skills alongside project setup — from upstream
+- **Principles setup**: Projects now get a `.specify/memory/principles.md` from the principles template during initialization — adapted from upstream constitution setup
+- **Rate-limit error handling**: Improved error messages when GitHub API rate limits are hit, with guidance on authentication — from upstream
+- New `extensions.py` module providing `ExtensionManifest`, `ExtensionRegistry`, `ExtensionManager`, `CommandRegistrar`, `ExtensionCatalog`, `ConfigManager`, and `HookExecutor` classes — ported from upstream `specify_cli/extensions.py`
+
+### Changed (from upstream)
+
+- Updated all agent configurations with `commands_subdir` field for more flexible directory structures
+- Copilot agent now uses `.github/agents` directory (was `.github/prompts`)
+- Added `pyyaml>=6.0`, `packaging>=23.0`, `click>=8.1` to dependencies
+
+### Changed (IaC-specific)
+
+- Updated release packaging to include all 19 agent variants (was 15)
+- Release workflow now triggers on `src/**` path changes
+- Updated bash and PowerShell agent context scripts with new agent support
+
+### Infrastructure
+
+- Updated `create-release-packages.sh` with new agent build variants and `rewrite_paths` dedup fix
+- Updated `create-github-release.sh` with new agent ZIP entries
+
+---
+
 ## [0.0.6] - 2025-12-19
 
 ### Changed
