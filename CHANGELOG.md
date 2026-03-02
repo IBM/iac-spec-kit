@@ -17,7 +17,7 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
-## [0.0.7] - 2025-07-11
+## [0.0.7] - 2026-03-02
 
 > This release syncs the installer with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.1.6](https://github.com/github/spec-kit/releases/tag/v0.1.6) (upstream, 2026-02-23). There is no change to the IaC templates.
 
