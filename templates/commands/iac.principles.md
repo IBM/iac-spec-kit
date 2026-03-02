@@ -1,5 +1,9 @@
 ---
 description: Create or update the infrastructure project principles from interactive or provided inputs, ensuring all dependent templates stay in sync
+handoffs: 
+  - label: Build infra specification
+    agent: iac.specify
+    prompt: Implement the infrastructure specification based on the updated constitution. I want to build...
 ---
 
 ## User Input
