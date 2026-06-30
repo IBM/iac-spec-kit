@@ -169,6 +169,11 @@ def self_upgrade(
         raise typer.Exit(3)
 
     if dry_run:
+        if not _is_newer(tag, installed):
+            console.print(f"[green]Already on latest release:[/green] {installed}")
+            console.print(f"Dry run — would execute: {_render_argv(argv)}")
+            console.print(f"  (No upgrade needed — latest release is {latest_display})")
+            return
         console.print(f"Dry run — would execute: {_render_argv(argv)}")
         console.print(f"  Current: {installed}")
         console.print(f"  Target:  {latest_display}")

@@ -960,7 +960,8 @@ def init(
         f"○ [cyan]/iac.clarify[/] [bright_black](optional)[/bright_black] - Ask structured questions to de-risk ambiguous areas before planning (run before [cyan]/iac.plan[/] if used)",
         f"○ [cyan]/iac.enrichplan[/] [bright_black](optional)[/bright_black] - Deep research, module specs, and quickstart guide (run after [cyan]/iac.plan[/])",
         f"○ [cyan]/iac.analyze[/] [bright_black](optional)[/bright_black] - Cross-artifact consistency & alignment report (after [cyan]/iac.tasks[/], before [cyan]/iac.implement[/])",
-        f"○ [cyan]/iac.checklist[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/iac.plan[/])"
+        f"○ [cyan]/iac.checklist[/] [bright_black](optional)[/bright_black] - Generate quality checklists to validate requirements completeness, clarity, and consistency (after [cyan]/iac.plan[/])",
+        f"○ [cyan]/iac.converge[/] [bright_black](optional)[/bright_black] - Assess Terraform codebase against spec/plan/tasks and append remaining work as new tasks (after [cyan]/iac.implement[/])"
     ]
     enhancements_panel = Panel("\n".join(enhancement_lines), title="Enhancement Commands", border_style="cyan", padding=(1,2))
     console.print()
