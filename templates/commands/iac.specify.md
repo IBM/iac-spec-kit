@@ -3,6 +3,14 @@ description: Create or update the infrastructure specification from a natural la
 scripts:
   sh: scripts/bash/create-new-feature.sh --json "{ARGS}"
   ps: scripts/powershell/create-new-feature.ps1 -Json "{ARGS}"
+handoffs:
+  - label: Build Technical Plan
+    agent: iac.plan
+    prompt: Create a plan for the spec. I am building with...
+  - label: Clarify Spec Requirements
+    agent: iac.clarify
+    prompt: Clarify specification requirements
+    send: true
 ---
 
 ## User Input

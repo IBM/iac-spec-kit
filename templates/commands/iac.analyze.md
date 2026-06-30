@@ -71,7 +71,7 @@ Load only the minimal necessary context from each artifact:
 
 Create internal representations (do not include raw artifacts in output):
 
-- **Requirements inventory**: Each functional + non-functional requirement with a stable key (derive slug based on imperative phrase; e.g., "User can upload file" → `user-can-upload-file`; for Success Criteria, use SC-### identifier)
+- **Requirements inventory**: For each Functional Requirement (FR-###) and Success Criterion (SC-###), record a stable key. Use the explicit FR-/SC- identifier as the primary key when present, and optionally also derive an imperative-phrase slug for readability (e.g., "System must deploy in under 5 minutes" → `deploy-under-5-minutes`). Include only Success Criteria items that require buildable work (e.g., performance tooling, security audit infrastructure), and exclude post-launch outcome metrics and business KPIs.
 - **User story/action inventory**: Discrete user actions with acceptance criteria
 - **Task coverage mapping**: Map each task to one or more requirements or stories (inference by keyword / explicit reference patterns like IDs or key phrases)
 - **Principles rule set**: Extract principle names and MUST/SHOULD normative statements

@@ -3,6 +3,10 @@ description: Identify underspecified areas in the current infrastructure spec by
 scripts:
    sh: scripts/bash/check-prerequisites.sh --json --paths-only
    ps: scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly
+handoffs:
+  - label: Build Technical Plan
+    agent: iac.plan
+    prompt: Create a plan for the spec. I am building with...
 ---
 
 ## User Input
