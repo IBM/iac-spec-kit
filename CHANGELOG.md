@@ -22,26 +22,9 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 > Syncs with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.12.0](https://github.com/github/spec-kit/releases/tag/v0.12.0) (upstream, 2026-06-29), plus IaC-specific additions and corrections.
 > Note: v0.0.8 was an unintended early release from `main` containing only dependency updates; this release supersedes it with the full upstream sync.
 
-### Added (from upstream — [v0.1.6 → v0.12.0](https://github.com/github/spec-kit/blob/main/CHANGELOG.md))
-
-- **19 new agent integrations**: Cline, Devin for Terminal, Firebender, Forge, Goose, Hermes, iFlow, Junie, Kimi Code, Kiro CLI, Lingma, OMP, Pi Coding Agent, RovoDev ACLI, Tabnine CLI, Trae, Mistral Vibe, ZCode, Zed — bringing total supported agents to 38
-- **`setup-tasks.sh` / `setup-tasks.ps1`**: Script pair for task prerequisite validation — ported from upstream
-- **`SPECIFY_INIT_DIR` monorepo support**: Set this env var to target a member project from the repo root in bash/PowerShell scripts — ported from upstream
-- **`find_specify_root()` in scripts**: Scripts now find the project root via `.specify/` directory marker instead of `.git`, enabling non-git repo support — ported from upstream
-- **`iac-specify self check`**: Check whether a newer release is available — ported from upstream `specify self check`
-- **`iac-specify self upgrade`**: Upgrade the CLI in-place via `uv`, `pipx`, or source — ported from upstream `specify self upgrade`
-- **Extension hook blocks** in all command templates (`before_*` / `after_*` hooks via `.specify/extensions.yml`) — ported from upstream
-- **`handoffs` frontmatter** in `iac.specify.md` and `iac.clarify.md` for agent-to-agent chaining — ported from upstream
-
 ### Added (IaC-specific)
 
-- **New `/iac.converge` command**: Assesses the Terraform codebase against spec/plan/tasks and appends remaining unbuilt work as new tasks to `tasks.md` — IaC-original, not in upstream
-- **New `.devcontainer/`**: Devcontainer configuration with Junie CLI, Pi Coding Agent, Kiro CLI, and Kimi Code CLI pre-installed (adapted from upstream; excludes Amazon Q)
-
-### Changed (from upstream)
-
-- **`update-agent-context.sh` / `.ps1`**: Plan path now derived from `.specify/feature.json` with fallback to `SPECIFY_FEATURE` env var — ported from upstream
-- CLI refactored into sub-modules (`_console.py`, `_github_http.py`, `_utils.py`, `_version.py`, `integrations/`) — no behaviour change for users, ported from upstream
+- **New `/iac.converge` command**: Assesses the Terraform codebase against spec/plan/tasks and appends remaining unbuilt work as new tasks to `tasks.md`
 
 ### Changed (IaC-specific corrections)
 
@@ -50,6 +33,23 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 - **`iac.clarify.md`**: Replaced software-app taxonomy (personas, data model, rate limiting, UX behavior) with IaC equivalents (consumer teams/service accounts, resource & config model, provisioning failure, quota breaches)
 - **`iac.converge.md`**: Replaced User Stories / `US1/AC2` references with acceptance criteria checkboxes and `SC-###` style keys
 - **`iac.specify.md`**: Clarification priority uses `operational impact` instead of `UX impact`
+
+### Added (from upstream — [v0.1.6 → v0.12.0](https://github.com/github/spec-kit/blob/main/CHANGELOG.md))
+
+- **19 new agent integrations**: Cline, Devin for Terminal, Firebender, Forge, Goose, Hermes, iFlow, Junie, Kimi Code, Kiro CLI, Lingma, OMP, Pi Coding Agent, RovoDev ACLI, Tabnine CLI, Trae, Mistral Vibe, ZCode, Zed — bringing total supported agents to 38
+- **`setup-tasks.sh` / `setup-tasks.ps1`**: Script pair for task prerequisite validation
+- **`SPECIFY_INIT_DIR` monorepo support**: Set this env var to target a member project from the repo root in bash/PowerShell scripts
+- **`find_specify_root()` in scripts**: Scripts now find the project root via `.specify/` directory marker instead of `.git`, enabling non-git repo support
+- **`iac-specify self check`**: Check whether a newer release is available (ported from upstream `specify self check`)
+- **`iac-specify self upgrade`**: Upgrade the CLI in-place via `uv`, `pipx`, or source (ported from upstream `specify self upgrade`)
+- **Extension hook blocks** in all command templates (`before_*` / `after_*` hooks via `.specify/extensions.yml`)
+- **`handoffs` frontmatter** in `iac.specify.md` and `iac.clarify.md` for agent-to-agent chaining
+- **New `.devcontainer/`**: Devcontainer configuration with Junie CLI, Pi Coding Agent, Kiro CLI, and Kimi Code CLI pre-installed (adapted from upstream; excludes Amazon Q)
+
+### Changed (from upstream)
+
+- **`update-agent-context.sh` / `.ps1`**: Plan path now derived from `.specify/feature.json` with fallback to `SPECIFY_FEATURE` env var
+- CLI refactored into sub-modules (`_console.py`, `_github_http.py`, `_utils.py`, `_version.py`, `integrations/`) — no behaviour change for users
 
 ### Fixed (from upstream)
 
