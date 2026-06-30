@@ -589,7 +589,7 @@ def install_ai_skills(project_path: Path, selected_ai: str, tracker: StepTracker
 @app.command()
 def init(
     project_name: str = typer.Argument(None, help="Name for your new project directory (optional if using --here, or use '.' for current directory)"),
-    ai_assistant: str = typer.Option(None, "--ai", help="AI assistant to use: claude, gemini, copilot, cursor-agent, qwen, opencode, codex, windsurf, kilocode, auggie, codebuddy, amp, shai, q, agy, bob, qodercli, or generic (requires --ai-commands-dir)"),
+    ai_assistant: str = typer.Option(None, "--ai", help="AI assistant to use: agy, amp, auggie, bob, cline, claude, codebuddy, codex, copilot, cursor-agent, devin, firebender, forge, gemini, generic (requires --ai-commands-dir), goose, hermes, iflow, junie, kimi, kiro-cli, kilocode, lingma, omp, opencode, pi, q, qodercli, qwen, roo, rovodev, shai, tabnine, trae, vibe, windsurf, zcode, zed"),
     ai_commands_dir: str = typer.Option(None, "--ai-commands-dir", help="Directory for agent command files (required with --ai generic, e.g. .myagent/commands/)"),
     script_type: str = typer.Option(None, "--script", help="Script type to use: sh or ps"),
     ignore_agent_tools: bool = typer.Option(False, "--ignore-agent-tools", help="Skip checks for AI agent tools like Claude Code"),

@@ -39,6 +39,25 @@ def _register_builtins() -> None:
     from .agy import AgyIntegration
     from .bob import BobIntegration
     from .generic import GenericIntegration
+    from .cline import ClineIntegration
+    from .devin import DevinIntegration
+    from .firebender import FirebenderIntegration
+    from .forge import ForgeIntegration
+    from .goose import GooseIntegration
+    from .hermes import HermesIntegration
+    from .iflow import IflowIntegration
+    from .junie import JunieIntegration
+    from .kimi import KimiIntegration
+    from .kiro_cli import KiroCliIntegration
+    from .lingma import LingmaIntegration
+    from .omp import OmpIntegration
+    from .pi import PiIntegration
+    from .rovodev import RovodevIntegration
+    from .tabnine import TabnineIntegration
+    from .trae import TraeIntegration
+    from .vibe import VibeIntegration
+    from .zcode import ZcodeIntegration
+    from .zed import ZedIntegration
 
     _register(CopilotIntegration())
     _register(ClaudeIntegration())
@@ -59,6 +78,25 @@ def _register_builtins() -> None:
     _register(AgyIntegration())
     _register(BobIntegration())
     _register(GenericIntegration())
+    _register(ClineIntegration())
+    _register(DevinIntegration())
+    _register(FirebenderIntegration())
+    _register(ForgeIntegration())
+    _register(GooseIntegration())
+    _register(HermesIntegration())
+    _register(IflowIntegration())
+    _register(JunieIntegration())
+    _register(KimiIntegration())
+    _register(KiroCliIntegration())
+    _register(LingmaIntegration())
+    _register(OmpIntegration())
+    _register(PiIntegration())
+    _register(RovodevIntegration())
+    _register(TabnineIntegration())
+    _register(TraeIntegration())
+    _register(VibeIntegration())
+    _register(ZcodeIntegration())
+    _register(ZedIntegration())
 
 
 _register_builtins()

@@ -31,25 +31,44 @@ Specify supports multiple AI agents by generating agent-specific command files a
 
 | Agent | Directory | Format | CLI Tool | Description |
 |-------|-----------|---------|----------|-------------|
-| **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
-| **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
-| **GitHub Copilot** | `.github/agents/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
-| **Cursor** | `.cursor/commands/` | Markdown | `cursor-agent` | Cursor CLI |
-| **Qwen Code** | `.qwen/commands/` | TOML | `qwen` | Alibaba's Qwen Code CLI |
-| **opencode** | `.opencode/command/` | Markdown | `opencode` | opencode CLI |
-| **Codex CLI** | `.codex/prompts/` | Markdown | `codex` | Codex CLI |
-| **Windsurf** | `.windsurf/workflows/` | Markdown | N/A (IDE-based) | Windsurf IDE workflows |
-| **Kilo Code** | `.kilocode/workflows/` | Markdown | N/A (IDE-based) | Kilo Code IDE |
-| **Auggie CLI** | `.augment/commands/` | Markdown | `auggie` | Auggie CLI |
-| **Roo Code** | `.roo/commands/` | Markdown | N/A (IDE-based) | Roo Code IDE |
-| **CodeBuddy CLI** | `.codebuddy/commands/` | Markdown | `codebuddy` | CodeBuddy CLI |
 | **Amazon Q Developer CLI** | `.amazonq/prompts/` | Markdown | `q` | Amazon Q Developer CLI |
 | **Amp** | `.agents/commands/` | Markdown | `amp` | Amp CLI |
-| **IBM Bob** | `.bob/commands/` | Markdown | N/A (IDE-based) | IBM Bob IDE |
-| **SHAI** | `.shai/commands/` | Markdown | `shai` | OVHcloud SHAI CLI |
 | **Antigravity** | `.agent/workflows/` | Markdown | N/A (IDE-based) | Antigravity IDE |
-| **Qoder CLI** | `.qoder/commands/` | Markdown | `qodercli` | Qoder CLI |
+| **Auggie CLI** | `.augment/commands/` | Markdown | `auggie` | Auggie CLI |
+| **Claude Code** | `.claude/commands/` | Markdown | `claude` | Anthropic's Claude Code CLI |
+| **Cline** | `.clinerules/workflows/` | Markdown | N/A (IDE-based) | Cline IDE |
+| **CodeBuddy CLI** | `.codebuddy/commands/` | Markdown | `codebuddy` | CodeBuddy CLI |
+| **Codex CLI** | `.codex/prompts/` | Markdown | `codex` | Codex CLI |
+| **Cursor** | `.cursor/commands/` | Markdown | `cursor-agent` | Cursor CLI |
+| **Devin for Terminal** | `.devin/skills/` | Markdown | `devin` | Cognition AI Devin |
+| **Firebender** | `.firebender/commands/` | Markdown | N/A (IDE-based) | Android Studio / IntelliJ |
+| **Forge** | `.forge/commands/` | Markdown | `forge` | Forge CLI |
+| **Gemini CLI** | `.gemini/commands/` | TOML | `gemini` | Google's Gemini CLI |
 | **Generic** | *(user-defined)* | Markdown | N/A | Bring-your-own agent (use `--ai-commands-dir`) |
+| **GitHub Copilot** | `.github/agents/` | Markdown | N/A (IDE-based) | GitHub Copilot in VS Code |
+| **Goose** | `.goose/recipes/` | YAML | `goose` | Block/Square Goose agent |
+| **Hermes** | `.hermes/commands/` | Markdown | `hermes` | Hermes CLI |
+| **IBM Bob** | `.bob/commands/` | Markdown | N/A (IDE-based) | IBM Bob IDE |
+| **iFlow** | `.iflow/commands/` | Markdown | N/A (IDE-based) | iFlow IDE |
+| **Junie** | `.junie/commands/` | Markdown | `junie` | JetBrains Junie |
+| **Kilo Code** | `.kilocode/workflows/` | Markdown | N/A (IDE-based) | Kilo Code IDE |
+| **Kimi Code** | `.kimi-code/skills/` | Markdown | `kimi` | Moonshot AI Kimi Code |
+| **Kiro CLI** | `.kiro/prompts/` | Markdown | `kiro-cli` | AWS Kiro CLI |
+| **Lingma** | `.lingma/commands/` | Markdown | N/A (IDE-based) | Alibaba Lingma |
+| **Mistral Vibe** | `.vibe/skills/` | Markdown | `vibe` | Mistral Vibe |
+| **OMP** | `.omp/commands/` | Markdown | `omp` | OMP CLI |
+| **opencode** | `.opencode/command/` | Markdown | `opencode` | opencode CLI |
+| **Pi Coding Agent** | `.pi/commands/` | Markdown | `pi` | Pi Coding Agent |
+| **Qoder CLI** | `.qoder/commands/` | Markdown | `qodercli` | Qoder CLI |
+| **Qwen Code** | `.qwen/commands/` | TOML | `qwen` | Alibaba's Qwen Code CLI |
+| **Roo Code** | `.roo/commands/` | Markdown | N/A (IDE-based) | Roo Code IDE |
+| **RovoDev ACLI** | `.rovodev/skills/` | Markdown | `acli` | Atlassian Rovo Dev |
+| **SHAI** | `.shai/commands/` | Markdown | `shai` | OVHcloud SHAI CLI |
+| **Tabnine CLI** | `.tabnine/agent/commands/` | TOML | `tabnine` | Tabnine CLI |
+| **Trae** | `.trae/skills/` | Markdown | N/A (IDE-based) | Trae IDE |
+| **Windsurf** | `.windsurf/workflows/` | Markdown | N/A (IDE-based) | Windsurf IDE workflows |
+| **ZCode** | `.zcode/skills/` | Markdown | `zcode` | Z.AI ZCode |
+| **Zed** | `.agents/skills/` | Markdown | N/A (IDE-based) | Zed editor |
 
 ### Step-by-Step Integration Guide
 
