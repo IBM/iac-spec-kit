@@ -17,9 +17,10 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
-## [0.0.8] - 2026-06-30
+## [0.0.9] - 2026-06-30
 
 > This release syncs the installer with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.12.0](https://github.com/github/spec-kit/releases/tag/v0.12.0) (upstream, 2026-06-29).
+> Note: v0.0.8 was an unintended early release from `main` that contained only dependency updates; this release supersedes it with the full upstream sync.
 
 ### Added
 
@@ -30,10 +31,21 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 - **`find_specify_root()` in scripts**: Scripts now find the project root via `.specify/` directory marker instead of `.git`, enabling non-git repo support
 - **New `.devcontainer/`**: Devcontainer configuration with Junie CLI, Pi Coding Agent, Kiro CLI, and Kimi Code CLI pre-installed
 
+### Added (continued)
+
+- **`iac-specify self check`**: Check whether a newer release is available
+- **`iac-specify self upgrade`**: Upgrade the CLI in-place via `uv`, `pipx`, or source
+- **Extension hook blocks** in all 10 IaC command templates (`before_*` / `after_*` hooks via `.specify/extensions.yml`)
+- **`handoffs` frontmatter** in `iac.specify.md` and `iac.clarify.md` for agent-to-agent chaining
+
 ### Changed
 
-- **`spec-template.md`**: Added `## Assumptions` section with IaC-specific placeholder bullets
-- **`iac.analyze.md`**: Renamed "Non-Functional Requirements" → "Success Criteria" for clearer semantics
+- **`spec-template.md`**: Added `## Assumptions` section; replaced app-tier NFR examples with infra-tier examples (subnet throughput, storage IOPS, scale-out time); removed duplicate section appended by upstream sync
+- **`iac.analyze.md`**: Load step now reads NFR + SC-### instead of User Stories; semantic model uses acceptance criteria inventory instead of user-story inventory
+- **`iac.clarify.md`**: Replaced software-app taxonomy (personas, data model, rate limiting, UX behavior) with IaC equivalents (consumer teams/service accounts, resource & config model, provisioning failure, quota breaches)
+- **`iac.converge.md`**: Replaced User Stories / `US1/AC2` references with acceptance criteria checkboxes and `SC-###` style keys
+- **`iac.specify.md`**: Clarification priority uses `operational impact` instead of `UX impact`
+- **`update-agent-context.sh` / `.ps1`**: Plan path now derived from `.specify/feature.json` with fallback to `SPECIFY_FEATURE` env var
 - CLI refactored into sub-modules (`_console.py`, `_github_http.py`, `_utils.py`, `_version.py`, `integrations/`) — no behaviour change for users
 
 ### Fixed

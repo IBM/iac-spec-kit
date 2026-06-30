@@ -1,6 +1,6 @@
 [project]
 name = "iac-specify-cli"
-version = "0.0.8"
+version = "0.0.9"
 description = "IaC Specify CLI. A tool to bootstrap your infrastructure projects for Spec-Driven Development (SDD)."
 requires-python = ">=3.11"
 dependencies = [
