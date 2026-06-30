@@ -10,7 +10,7 @@
   - [Multi-Cloud Infrastructure Support](#multi-cloud-infrastructure-support)
 - [Get Started](#get-started)
   - [1. Install IaC Specify CLI](#1-install-iac-specify-cli)
-  - [2. Establish project principles](#2-establish-project-principles)
+  - [2. Create the spec](#2-create-the-spec)
   - [3. Create the spec](#3-create-the-spec)
   - [4. Create a technical implementation plan](#4-create-a-technical-implementation-plan)
   - [5. Break down into tasks](#5-break-down-into-tasks)
@@ -136,7 +136,13 @@ iac-specify init <PROJECT_NAME>
 iac-specify check
 ```
 
-To upgrade iac-specify run:
+To upgrade iac-specify, use the built-in self-upgrade command:
+
+```bash
+iac-specify self upgrade
+```
+
+Or upgrade manually with uv:
 
 ```bash
 uv tool install iac-specify-cli --force --from git+https://github.com/ibm/iac-spec-kit.git
@@ -335,6 +341,7 @@ The `iac-specify` command supports the following options:
 | `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `auggie`, `codebuddy`, `qodercli`, `shai`, `amp`, `q`, `bob`, `devin`, `forge`, `goose`, `hermes`, `junie`, `kimi`, `kiro-cli`, `omp`, `pi`, `rovodev`, `tabnine`, `vibe`, `zcode`) |
 | `version`   | Display the installed version of IaC Specify CLI                   |
 | `extension` | Manage extensions (subcommands: `list`, `add`, `remove`, `search`, `info`, `update`, `enable`, `disable`) |
+| `self`      | Manage the CLI itself (subcommands: `check` — check for updates, `upgrade` — upgrade in-place) |
 
 ### `iac-specify init` Arguments & Options
 
@@ -422,6 +429,7 @@ After running `iac-specify init`, your AI coding agent will have access to these
 | `/iac.clarify` | Clarify underspecified areas | Before `/iac.plan` - reduces rework downstream |
 | `/iac.analyze` | Cross-artifact consistency analysis | After `/iac.tasks`, before `/iac.implement` |
 | `/iac.checklist` | Generate custom quality checklists | Anytime - validates requirements completeness |
+| `/iac.converge` | Assess Terraform codebase against spec/plan/tasks, append remaining work as new tasks | After `/iac.implement` - closes the gap between spec intent and current code |
 
 
 
@@ -468,9 +476,10 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 
 ### Environment Variables
 
-| Variable         | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
-| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
+| Variable            | Description                                                                                    |
+|---------------------|------------------------------------------------------------------------------------------------|
+| `SPECIFY_FEATURE`   | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
+| `SPECIFY_INIT_DIR`  | Override the project root for monorepo layouts. Set to the path of the member project that contains `.specify/` (e.g., `services/my-service`). Used by all bash and PowerShell scripts so they operate on the correct sub-project without changing your working directory. |
 
 ## Core Philosophy
 
