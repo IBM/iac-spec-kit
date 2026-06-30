@@ -75,15 +75,15 @@ Execution steps:
 2. Load the current spec file. Perform a structured ambiguity & coverage scan using this taxonomy. For each category, mark status: Clear / Partial / Missing. Produce an internal coverage map used for prioritization (do not output raw map unless no questions will be asked).
 
    Functional Scope & Behavior:
-   - Core user goals & success criteria
+   - Core infrastructure goals & success criteria
    - Explicit out-of-scope declarations
-   - User roles / personas differentiation
+   - Consumer teams / service account access patterns
 
-   Domain & Data Model:
-   - Entities, attributes, relationships
-   - Identity & uniqueness rules
-   - Lifecycle/state transitions
-   - Data volume / scale assumptions
+   Resource & Configuration Model:
+   - Resource types, attributes, and relationships (e.g., VPC → subnets → security groups)
+   - Identity & naming conventions
+   - Resource lifecycle and state transitions (e.g., provisioning → running → decommissioned)
+   - Scale assumptions (instance counts, storage volumes, data volumes)
 
    Infrastructure Operations & Provisioning Flow:
    - Critical provisioning sequences and dependencies (e.g., VPC before subnets, network before compute)
@@ -104,9 +104,9 @@ Execution steps:
    - Protocol/versioning assumptions
 
    Edge Cases & Failure Handling:
-   - Negative scenarios
-   - Rate limiting / throttling
-   - Conflict resolution (e.g., concurrent edits)
+   - Negative scenarios (e.g., provider outage, quota exhaustion, misconfigured IAM)
+   - Provisioning failure handling and rollback
+   - Quota / resource limit breaches
 
    Constraints & Tradeoffs:
    - Technical constraints (language, storage, hosting)
@@ -133,7 +133,7 @@ Execution steps:
     - Each question must be answerable with EITHER:
        - A short multiple‑choice selection (2–5 distinct, mutually exclusive options), OR
        - A one-word / short‑phrase answer (explicitly constrain: "Answer in <=5 words").
-    - Only include questions whose answers materially impact architecture, data modeling, task decomposition, test design, UX behavior, operational readiness, or compliance validation.
+    - Only include questions whose answers materially impact architecture, resource modeling, task decomposition, validation strategy, operational readiness, or compliance validation.
     - Ensure category coverage balance: attempt to cover the highest impact unresolved categories first; avoid asking two low-impact questions when a single high-impact area (e.g., security posture) is unresolved.
     - Exclude questions already answered, trivial stylistic preferences, or plan-level execution details (unless blocking correctness).
     - Favor clarifications that reduce downstream rework risk or prevent misaligned acceptance tests.
@@ -192,10 +192,10 @@ Execution steps:
     - Append a bullet line immediately after acceptance: `- Q: <question> → A: <final answer>`.
     - Then immediately apply the clarification to the most appropriate section(s):
        - Functional ambiguity → Update or add a bullet in Functional Requirements.
-       - User interaction / actor distinction → Update User Stories or Actors subsection (if present) with clarified role, constraint, or scenario.
-       - Data shape / entities → Update Data Model (add fields, types, relationships) preserving ordering; note added constraints succinctly.
-       - Non-functional constraint → Add/modify measurable criteria in Non-Functional / Quality Attributes section (convert vague adjective to metric or explicit target).
-       - Edge case / negative flow → Add a new bullet under Edge Cases / Error Handling (or create such subsection if template provides placeholder for it).
+       - Access / consumer pattern → Update or add a bullet in the relevant Functional or Non-Functional Requirement, or add a note in Assumptions.
+       - Resource configuration / scale → Update Resource & Configuration Model details in the relevant FR or NFR (add constraints, types, sizes); preserve ordering.
+       - Non-functional constraint → Add/modify measurable criteria in Non-Functional Requirements or Success Criteria (convert vague adjective to metric or explicit target).
+       - Edge case / failure handling → Add a new bullet in the relevant FR or a new `## Edge Cases` section if not present.
        - Terminology conflict → Normalize term across spec; retain original only if necessary by adding `(formerly referred to as "X")` once.
     - If the clarification invalidates an earlier ambiguous statement, replace that statement instead of duplicating; leave no obsolete contradictory text.
     - Save the spec file AFTER each integration to minimize risk of context loss (atomic overwrite).

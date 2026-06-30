@@ -108,9 +108,10 @@ Load only the minimal necessary context from each artifact:
 **From spec.md:**
 
 - Functional Requirements (FR-###)
+- Non-Functional Requirements
 - Success Criteria (SC-###) — include only items requiring buildable work; exclude
   post-launch outcome metrics and business KPIs
-- User Stories and their Acceptance Scenarios
+- Acceptance criteria checkboxes (Code Validation, Security Validation, Performance Validation, Operational Validation)
 - Edge Cases (if present)
 
 **From plan.md:**
@@ -133,8 +134,8 @@ Load only the minimal necessary context from each artifact:
 
 Create an internal model (do not echo raw artifacts):
 
-- **Requirements inventory**: one stable key per FR-### / SC-### / user-story acceptance
-  scenario (e.g. `US1/AC2`), plus the plan decisions and constitution principles that
+- **Requirements inventory**: one stable key per FR-### / SC-### / acceptance criterion
+  (e.g. `SC-002/perf-validation`), plus the plan decisions and constitution principles that
   impose buildable obligations.
 - **Code-scope map**: from the file paths named in `plan.md` and `tasks.md`, plus a keyword
   search for the concepts each requirement describes, derive the set of source files and
@@ -167,7 +168,7 @@ severity, and a short human-readable description with the evidence (the file/are
 ### 5. Assign Severity
 
 - **CRITICAL**: violates a constitution MUST principle, or a `missing`/`contradicts` gap
-  that blocks baseline functionality of a P1 user story.
+  that blocks a core Functional Requirement or a CRITICAL Success Criterion.
 - **HIGH**: a `missing` or `partial` gap on a core functional requirement or acceptance
   criterion.
 - **MEDIUM**: a `partial` gap on a secondary requirement, or an `unrequested` addition with
@@ -209,7 +210,7 @@ Append to the **end** of `tasks.md`, per the append contract:
    ```
 
    `<source-ref>` traces the task to its origin: e.g. `FR-003`, `SC-002`,
-   `US1/AC2`, `plan: storage decision`, `Constitution II`.
+   `SC-002/perf-validation`, `FR-003`, `plan: storage decision`, `Constitution II`.
 
    `<gap-type>` is one of `missing`, `partial`, `contradicts`, `unrequested`.
 

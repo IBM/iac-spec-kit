@@ -65,15 +65,17 @@
 
 ### Non-Functional Requirements
 
+<!-- These feed the Success Criteria section — each NFR must produce at least one measurable SC. -->
+
 #### Performance
 
 <!--
-  ACTION REQUIRED: Define performance requirements.
+  ACTION REQUIRED: Define infrastructure-level performance requirements.
 -->
 
-- [Performance requirement, e.g., "API response latency p95 < 100ms, p99 < 200ms"]
-- [Performance requirement, e.g., "Support 10,000 requests per second"]
-- [Performance requirement, e.g., "Handle 50,000 concurrent connections"]
+- [Performance requirement, e.g., "Network throughput between subnets ≥ 10 Gbps"]
+- [Performance requirement, e.g., "Storage IOPS ≥ 3,000 sustained for database volumes"]
+- [Performance requirement, e.g., "New compute instances healthy and in-service within 90 seconds of scale-out trigger"]
 
 #### Availability
 
@@ -185,12 +187,14 @@
 ## Assumptions *(include if making assumptions)*
 
 <!--
-  ACTION REQUIRED: Document any assumptions made when creating this specification.
+  ACTION REQUIRED: Document assumptions made when creating this specification.
+  Focus on infrastructure scope, environment, and existing dependencies.
 -->
 
-- [Assumption, e.g., "Assume 20% monthly traffic growth"]
-- [Assumption, e.g., "Assume read-heavy workload (80% reads, 20% writes)"]
-- [Assumption, e.g., "Assume business hours 6 AM - 10 PM EST"]
+- [Assumption about target environment, e.g., "Target cloud is AWS us-east-1"]
+- [Assumption about scope boundaries, e.g., "Multi-region DR is out of scope for v1"]
+- [Assumption about existing infrastructure, e.g., "Existing VPC will be reused"]
+- [Dependency on existing system/service, e.g., "Requires access to existing IAM roles"]
 
 ## Out of Scope *(include if explicitly excluding items)*
 
@@ -217,24 +221,3 @@
 - [Additional note or context]
 - [Additional note or context]
 
----
-
-**Specification Quality Checklist**:
-- [ ] No implementation details (cloud providers, specific tools)
-- [ ] All requirements are testable and unambiguous
-- [ ] Success criteria are measurable
-- [ ] Cost constraints clearly defined
-- [ ] Compliance requirements specified (if applicable)
-
-## Assumptions
-
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right assumptions based on reasonable defaults
-  chosen when the infrastructure description did not specify certain details.
--->
-
-- [Assumption about target environment, e.g., "Target cloud is AWS us-east-1"]
-- [Assumption about scope boundaries, e.g., "Multi-region DR is out of scope for v1"]
-- [Assumption about existing infrastructure, e.g., "Existing VPC will be reused"]
-- [Dependency on existing system/service, e.g., "Requires access to existing IAM roles"]

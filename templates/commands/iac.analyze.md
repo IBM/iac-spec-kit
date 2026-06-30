@@ -83,9 +83,9 @@ Load only the minimal necessary context from each artifact:
 **From spec.md:**
 
 - Overview/Context
-- Functional Requirements
-- Success Criteria
-- User Stories
+- Functional Requirements (FR-###)
+- Non-Functional Requirements
+- Success Criteria (SC-###)
 - Edge Cases (if present)
 
 **From plan.md:**
@@ -111,9 +111,9 @@ Load only the minimal necessary context from each artifact:
 
 Create internal representations (do not include raw artifacts in output):
 
-- **Requirements inventory**: For each Functional Requirement (FR-###) and Success Criterion (SC-###), record a stable key. Use the explicit FR-/SC- identifier as the primary key when present, and optionally also derive an imperative-phrase slug for readability (e.g., "System must deploy in under 5 minutes" → `deploy-under-5-minutes`). Include only Success Criteria items that require buildable work (e.g., performance tooling, security audit infrastructure), and exclude post-launch outcome metrics and business KPIs.
-- **User story/action inventory**: Discrete user actions with acceptance criteria
-- **Task coverage mapping**: Map each task to one or more requirements or stories (inference by keyword / explicit reference patterns like IDs or key phrases)
+- **Requirements inventory**: For each Functional Requirement (FR-###) and Success Criterion (SC-###), record a stable key. Use the explicit FR-/SC- identifier as the primary key when present, and optionally also derive an imperative-phrase slug for readability (e.g., "Infrastructure must provision within 5 minutes" → `provision-under-5-minutes`). Include only Success Criteria items that require buildable work (e.g., performance tooling, security audit infrastructure), and exclude post-launch outcome metrics and business KPIs.
+- **Acceptance criteria inventory**: For each SC-###, enumerate the checkboxes under Code Validation, Security Validation, Performance Validation, and Operational Validation as discrete verifiable items.
+- **Task coverage mapping**: Map each task to one or more requirements or acceptance criteria (inference by keyword / explicit reference patterns like IDs or key phrases)
 - **Principles rule set**: Extract principle names and MUST/SHOULD normative statements
 
 ### 4. Detection Passes (Token-Efficient Analysis)
@@ -133,7 +133,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 #### C. Underspecification
 
 - Requirements with verbs but missing object or measurable outcome
-- User stories missing acceptance criteria alignment
+- Success Criteria (SC-###) lacking at least one linked task
 - Tasks referencing files or components not defined in spec/plan
 
 #### D. Principles Alignment
