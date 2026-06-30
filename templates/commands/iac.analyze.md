@@ -44,7 +44,7 @@ Load only the minimal necessary context from each artifact:
 
 - Overview/Context
 - Functional Requirements
-- Non-Functional Requirements
+- Success Criteria
 - User Stories
 - Edge Cases (if present)
 
@@ -71,7 +71,7 @@ Load only the minimal necessary context from each artifact:
 
 Create internal representations (do not include raw artifacts in output):
 
-- **Requirements inventory**: Each functional + non-functional requirement with a stable key (derive slug based on imperative phrase; e.g., "User can upload file" → `user-can-upload-file`)
+- **Requirements inventory**: Each functional + non-functional requirement with a stable key (derive slug based on imperative phrase; e.g., "User can upload file" → `user-can-upload-file`; for Success Criteria, use SC-### identifier)
 - **User story/action inventory**: Discrete user actions with acceptance criteria
 - **Task coverage mapping**: Map each task to one or more requirements or stories (inference by keyword / explicit reference patterns like IDs or key phrases)
 - **Principles rule set**: Extract principle names and MUST/SHOULD normative statements
@@ -105,7 +105,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 
 - Requirements with zero associated tasks
 - Tasks with no mapped requirement/story
-- Non-functional requirements not reflected in tasks (e.g., performance, security)
+- Success Criteria requiring buildable work (performance, security, availability) not reflected in tasks
 
 #### F. Inconsistency
 
@@ -120,7 +120,7 @@ Use this heuristic to prioritize findings:
 
 - **CRITICAL**: Violates principles MUST, missing core spec artifact, or requirement with zero coverage that blocks baseline functionality
 - **HIGH**: Duplicate or conflicting requirement, ambiguous security/performance attribute, untestable acceptance criterion
-- **MEDIUM**: Terminology drift, missing non-functional task coverage, underspecified edge case
+- **MEDIUM**: Terminology drift, missing Success Criteria task coverage, underspecified edge case
 - **LOW**: Style/wording improvements, minor redundancy not affecting execution order
 
 ### 6. Produce Compact Analysis Report

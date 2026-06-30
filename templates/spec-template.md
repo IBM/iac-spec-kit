@@ -225,3 +225,16 @@
 - [ ] Success criteria are measurable
 - [ ] Cost constraints clearly defined
 - [ ] Compliance requirements specified (if applicable)
+
+## Assumptions
+
+<!--
+  ACTION REQUIRED: The content in this section represents placeholders.
+  Fill them out with the right assumptions based on reasonable defaults
+  chosen when the infrastructure description did not specify certain details.
+-->
+
+- [Assumption about target environment, e.g., "Target cloud is AWS us-east-1"]
+- [Assumption about scope boundaries, e.g., "Multi-region DR is out of scope for v1"]
+- [Assumption about existing infrastructure, e.g., "Existing VPC will be reused"]
+- [Dependency on existing system/service, e.g., "Requires access to existing IAM roles"]
