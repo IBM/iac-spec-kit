@@ -1703,6 +1703,15 @@ def extension_disable(
 
 
 def main():
+    # On Windows the default stdout/stderr code page (e.g. cp1252) cannot encode
+    # the Rich banner and box-drawing glyphs, causing UnicodeEncodeError when output
+    # is piped or redirected. Force UTF-8 with graceful replacement. No-op on POSIX.
+    if sys.platform == "win32":
+        for _stream in (sys.stdout, sys.stderr):
+            try:
+                _stream.reconfigure(encoding="utf-8", errors="replace")
+            except (AttributeError, ValueError, OSError):
+                pass
     app()
 
 if __name__ == "__main__":
