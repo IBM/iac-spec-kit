@@ -63,6 +63,7 @@ from ._utils import (
     handle_vscode_settings, merge_json_files,
 )
 from ._version import get_speckit_version, GITHUB_API_LATEST
+from ._self import self_app
 from ._agent_config import AGENT_CONFIG, SCRIPT_TYPE_CHOICES
 
 app = typer.Typer(
@@ -1097,6 +1098,7 @@ extension_app = typer.Typer(
     add_completion=False,
 )
 app.add_typer(extension_app, name="extension")
+app.add_typer(self_app, name="self")
 
 
 @extension_app.command("list")
