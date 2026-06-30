@@ -55,6 +55,115 @@ source "$SCRIPT_DIR/common.sh"
 # Get all paths and variables from common functions
 eval $(get_feature_paths)
 
+#==============================================================================
+# Plan Path Derivation
+#==============================================================================
+
+# Derive plan path: prefer .specify/feature.json, fallback to SPECIFY_FEATURE env var,
+# then fallback to most recently modified specs/*/plan.md
+get_plan_path() {
+    local repo_root="$1"
+    local feature_json="$repo_root/.specify/feature.json"
+
+    # 1. Try feature.json
+    if [[ -f "$feature_json" ]]; then
+        local plan_from_json
+        # Extract plan path from JSON (works without jq using python3 fallback)
+        if command -v python3 >/dev/null 2>&1; then
+            plan_from_json=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('$feature_json'))
+    p = d.get('plan_path') or d.get('planPath') or d.get('plan')
+    if p: print(p)
+except: pass
+" 2>/dev/null)
+        fi
+        if [[ -n "$plan_from_json" && -f "$plan_from_json" ]]; then
+            echo "$plan_from_json"
+            return 0
+        fi
+        # Try constructing from feature dir in JSON
+        if command -v python3 >/dev/null 2>&1; then
+            local feature_dir
+            feature_dir=$(python3 -c "
+import json, sys
+try:
+    d = json.load(open('$feature_json'))
+    p = d.get('feature_dir') or d.get('featureDir') or d.get('dir')
+    if p: print(p)
+except: pass
+" 2>/dev/null)
+            local candidate="$feature_dir/plan.md"
+            if [[ -n "$feature_dir" && -f "$candidate" ]]; then
+                echo "$candidate"
+                return 0
+            fi
+        fi
+    fi
+
+    # 2. Try SPECIFY_FEATURE env var
+    if [[ -n "${SPECIFY_FEATURE:-}" ]]; then
+        local candidate="$repo_root/specs/$SPECIFY_FEATURE/plan.md"
+        if [[ -f "$candidate" ]]; then
+            echo "$candidate"
+            return 0
+        fi
+    fi
+
+    # 3. Try git branch name
+    local branch
+    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+    if [[ -n "$branch" && "$branch" != "HEAD" ]]; then
+        local candidate="$repo_root/specs/$branch/plan.md"
+        if [[ -f "$candidate" ]]; then
+            echo "$candidate"
+            return 0
+        fi
+    fi
+
+    # 4. Most recently modified plan.md
+    local latest
+    latest=$(find "$repo_root/specs" -name "plan.md" -type f 2>/dev/null | \
+        xargs ls -t 2>/dev/null | head -1)
+    if [[ -n "$latest" ]]; then
+        echo "$latest"
+        return 0
+    fi
+
+    return 1
+}
+
+# Get list of context files for an agent (reads from .specify/extensions/agent-context/agent-context-config.yml if present)
+get_context_files() {
+    local agent_type="$1"
+    local repo_root="$2"
+    local config_file="$repo_root/.specify/extensions/agent-context/agent-context-config.yml"
+
+    if [[ -f "$config_file" ]] && command -v python3 >/dev/null 2>&1; then
+        python3 -c "
+import sys
+try:
+    import yaml
+    with open('$config_file') as f:
+        config = yaml.safe_load(f)
+    files = config.get('context_files', config.get('context_file', None))
+    if isinstance(files, list):
+        for f in files: print(f)
+    elif files:
+        print(files)
+except: pass
+" 2>/dev/null
+    fi
+}
+
+# Override IMPL_PLAN with the best available plan path
+_derived_plan=$(get_plan_path "$REPO_ROOT" 2>/dev/null || true)
+if [[ -n "$_derived_plan" ]]; then
+    IMPL_PLAN="$_derived_plan"
+fi
+unset _derived_plan
+
 NEW_PLAN="$IMPL_PLAN"  # Alias for compatibility with existing code
 AGENT_TYPE="${1:-}"
 

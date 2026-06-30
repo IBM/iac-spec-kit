@@ -41,6 +41,55 @@ $REPO_ROOT     = $envData.REPO_ROOT
 $CURRENT_BRANCH = $envData.CURRENT_BRANCH
 $HAS_GIT       = $envData.HAS_GIT
 $IMPL_PLAN     = $envData.IMPL_PLAN
+
+function Get-PlanPath {
+    param([string]$RepoRoot)
+
+    $featureJson = Join-Path $RepoRoot ".specify/feature.json"
+
+    # 1. Try feature.json
+    if (Test-Path $featureJson) {
+        try {
+            $data = Get-Content $featureJson -Raw | ConvertFrom-Json
+            $planPath = $data.plan_path ?? $data.planPath ?? $data.plan
+            if ($planPath -and (Test-Path $planPath)) { return $planPath }
+
+            $featureDir = $data.feature_dir ?? $data.featureDir ?? $data.dir
+            if ($featureDir) {
+                $candidate = Join-Path $featureDir "plan.md"
+                if (Test-Path $candidate) { return $candidate }
+            }
+        } catch {}
+    }
+
+    # 2. SPECIFY_FEATURE env var
+    if ($env:SPECIFY_FEATURE) {
+        $candidate = Join-Path $RepoRoot "specs/$($env:SPECIFY_FEATURE)/plan.md"
+        if (Test-Path $candidate) { return $candidate }
+    }
+
+    # 3. Git branch
+    try {
+        $branch = (git rev-parse --abbrev-ref HEAD 2>$null).Trim()
+        if ($branch -and $branch -ne "HEAD") {
+            $candidate = Join-Path $RepoRoot "specs/$branch/plan.md"
+            if (Test-Path $candidate) { return $candidate }
+        }
+    } catch {}
+
+    # 4. Most recently modified plan.md
+    $latest = Get-ChildItem -Path (Join-Path $RepoRoot "specs") -Filter "plan.md" -Recurse -ErrorAction SilentlyContinue |
+              Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if ($latest) { return $latest.FullName }
+
+    return $null
+}
+
+# Override IMPL_PLAN with the best available plan path
+$_derivedPlan = Get-PlanPath -RepoRoot $REPO_ROOT
+if ($_derivedPlan) { $IMPL_PLAN = $_derivedPlan }
+Remove-Variable _derivedPlan -ErrorAction SilentlyContinue
+
 $NEW_PLAN = $IMPL_PLAN
 
 # Agent file paths
