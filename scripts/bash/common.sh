@@ -1,15 +1,68 @@
 #!/usr/bin/env bash
 # Common functions and variables for all scripts
 
-# Get repository root, with fallback for non-git repositories
+# Find repository root by searching upward for .specify directory
+# This is the primary marker for spec-kit/iac-spec-kit projects
+find_specify_root() {
+    local dir="${1:-$(pwd)}"
+    # Normalize to absolute path
+    dir="$(cd -- "$dir" 2>/dev/null && pwd)" || return 1
+    local prev_dir=""
+    while true; do
+        if [ -d "$dir/.specify" ]; then
+            echo "$dir"
+            return 0
+        fi
+        # Stop if we've reached filesystem root or dirname stops changing
+        if [ "$dir" = "/" ] || [ "$dir" = "$prev_dir" ]; then
+            break
+        fi
+        prev_dir="$dir"
+        dir="$(dirname "$dir")"
+    done
+    return 1
+}
+
+# Resolve an explicit SPECIFY_INIT_DIR project override.
+# Use this env var to target a member project from a monorepo root.
+resolve_specify_init_dir() {
+    local init_root
+    if ! init_root="$(CDPATH="" cd -- "$SPECIFY_INIT_DIR" 2>/dev/null && pwd)"; then
+        echo "ERROR: SPECIFY_INIT_DIR does not point to an existing directory: $SPECIFY_INIT_DIR" >&2
+        return 1
+    fi
+    if [[ ! -d "$init_root/.specify" ]]; then
+        echo "ERROR: SPECIFY_INIT_DIR is not a Spec Kit project (no .specify/ directory): $init_root" >&2
+        return 1
+    fi
+    printf '%s\n' "$init_root"
+}
+
+# Get repository root, prioritizing .specify directory
+# This prevents using a parent repository when spec-kit is initialized in a subdirectory
 get_repo_root() {
+    # Explicit project override wins
+    if [[ -n "${SPECIFY_INIT_DIR:-}" ]]; then
+        resolve_specify_init_dir
+        return
+    fi
+
+    # First, look for .specify directory (spec-kit's own marker)
+    local specify_root
+    if specify_root=$(find_specify_root); then
+        echo "$specify_root"
+        return
+    fi
+
+    # Fall back to git root if available
     if git rev-parse --show-toplevel >/dev/null 2>&1; then
         git rev-parse --show-toplevel
-    else
-        # Fall back to script location for non-git repos
-        local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-        (cd "$script_dir/../../.." && pwd)
+        return
     fi
+
+    # Final fallback to script location
+    local script_dir="$(CDPATH="" cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    (cd "$script_dir/../../.." && pwd)
 }
 
 # Get current branch, with fallback for non-git repositories

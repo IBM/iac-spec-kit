@@ -1,17 +1,63 @@
 #!/usr/bin/env pwsh
 # Common PowerShell functions analogous to common.sh
 
-function Get-RepoRoot {
-    try {
-        $result = git rev-parse --show-toplevel 2>$null
-        if ($LASTEXITCODE -eq 0) {
-            return $result
+# Find repository root by searching upward for .specify directory
+function Find-SpecifyRoot {
+    param([string]$StartDir = (Get-Location).Path)
+    $dir = $StartDir
+    while ($true) {
+        if (Test-Path (Join-Path $dir ".specify")) {
+            return $dir
         }
-    } catch {
-        # Git command failed
+        $parent = Split-Path $dir -Parent
+        if (-not $parent -or $parent -eq $dir) {
+            break
+        }
+        $dir = $parent
     }
-    
-    # Fall back to script location for non-git repos
+    return $null
+}
+
+# Resolve an explicit SPECIFY_INIT_DIR project override
+function Resolve-SpecifyInitDir {
+    $initRoot = $env:SPECIFY_INIT_DIR
+    if (-not $initRoot) {
+        Write-Error "SPECIFY_INIT_DIR is not set"
+        return $null
+    }
+    if (-not (Test-Path $initRoot)) {
+        Write-Error "SPECIFY_INIT_DIR does not point to an existing directory: $initRoot"
+        return $null
+    }
+    $absRoot = (Resolve-Path $initRoot).Path
+    if (-not (Test-Path (Join-Path $absRoot ".specify"))) {
+        Write-Error "SPECIFY_INIT_DIR is not a Spec Kit project (no .specify/ directory): $absRoot"
+        return $null
+    }
+    return $absRoot
+}
+
+function Get-RepoRoot {
+    # Explicit project override wins
+    if ($env:SPECIFY_INIT_DIR) {
+        return Resolve-SpecifyInitDir
+    }
+
+    # First, look for .specify directory
+    $specifyRoot = Find-SpecifyRoot
+    if ($specifyRoot) {
+        return $specifyRoot
+    }
+
+    # Fall back to git root if available
+    try {
+        $gitRoot = git rev-parse --show-toplevel 2>$null
+        if ($LASTEXITCODE -eq 0 -and $gitRoot) {
+            return $gitRoot.Trim()
+        }
+    } catch {}
+
+    # Final fallback to script location
     return (Resolve-Path (Join-Path $PSScriptRoot "../../..")).Path
 }
 
