@@ -3,6 +3,10 @@ description: Identify underspecified areas in the current infrastructure spec by
 scripts:
    sh: scripts/bash/check-prerequisites.sh --json --paths-only
    ps: scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly
+handoffs:
+  - label: Build Technical Plan
+    agent: iac.plan
+    prompt: Create a plan for the spec. I am building with...
 ---
 
 ## User Input
@@ -12,6 +16,46 @@ $ARGUMENTS
 ```
 
 You **MUST** consider the user input before proceeding (if not empty).
+
+## Pre-Execution Checks
+
+**Check for extension hooks (before clarification)**:
+
+- Check if `.specify/extensions.yml` exists in the project root.
+- If it exists, read it and look for entries under the `hooks.before_iac_clarify` key
+- If the YAML cannot be parsed or is invalid, skip hook checking silently and continue normally
+- Filter out hooks where `enabled` is explicitly `false`. Treat hooks without an `enabled` field as enabled by default.
+- For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
+  - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
+  - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
+- For each executable hook, output the following based on its `optional` flag:
+  - **Optional hook** (`optional: true`):
+
+    ```text
+    ## Extension Hooks
+
+    **Optional Pre-Hook**: {extension}
+    Command: `/{command}`
+    Description: {description}
+
+    Prompt: {prompt}
+    To execute: `/{command}`
+    ```
+
+  - **Mandatory hook** (`optional: false`):
+
+    ```text
+    ## Extension Hooks
+
+    **Automatic Pre-Hook**: {extension}
+    Executing: `/{command}`
+    EXECUTE_COMMAND: {command}
+
+    Wait for the result of the hook command before proceeding to the Outline.
+    ```
+    After emitting the block above you MUST actually invoke the hook and wait for it to finish before continuing. Run it the same way you would run the command yourself in this agent/session (the invocation may differ from the literal `{command}` id shown above, e.g. a skills-mode agent runs it as `/skill:speckit-...` or `$speckit-...`). Emitting the block alone does not run the hook.
+
+- If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
 ## Outline
 
@@ -31,15 +75,15 @@ Execution steps:
 2. Load the current spec file. Perform a structured ambiguity & coverage scan using this taxonomy. For each category, mark status: Clear / Partial / Missing. Produce an internal coverage map used for prioritization (do not output raw map unless no questions will be asked).
 
    Functional Scope & Behavior:
-   - Core user goals & success criteria
+   - Core infrastructure goals & success criteria
    - Explicit out-of-scope declarations
-   - User roles / personas differentiation
+   - Consumer teams / service account access patterns
 
-   Domain & Data Model:
-   - Entities, attributes, relationships
-   - Identity & uniqueness rules
-   - Lifecycle/state transitions
-   - Data volume / scale assumptions
+   Resource & Configuration Model:
+   - Resource types, attributes, and relationships (e.g., VPC → subnets → security groups)
+   - Identity & naming conventions
+   - Resource lifecycle and state transitions (e.g., provisioning → running → decommissioned)
+   - Scale assumptions (instance counts, storage volumes, data volumes)
 
    Infrastructure Operations & Provisioning Flow:
    - Critical provisioning sequences and dependencies (e.g., VPC before subnets, network before compute)
@@ -60,9 +104,9 @@ Execution steps:
    - Protocol/versioning assumptions
 
    Edge Cases & Failure Handling:
-   - Negative scenarios
-   - Rate limiting / throttling
-   - Conflict resolution (e.g., concurrent edits)
+   - Negative scenarios (e.g., provider outage, quota exhaustion, misconfigured IAM)
+   - Provisioning failure handling and rollback
+   - Quota / resource limit breaches
 
    Constraints & Tradeoffs:
    - Technical constraints (language, storage, hosting)
@@ -89,7 +133,7 @@ Execution steps:
     - Each question must be answerable with EITHER:
        - A short multiple‑choice selection (2–5 distinct, mutually exclusive options), OR
        - A one-word / short‑phrase answer (explicitly constrain: "Answer in <=5 words").
-    - Only include questions whose answers materially impact architecture, data modeling, task decomposition, test design, UX behavior, operational readiness, or compliance validation.
+    - Only include questions whose answers materially impact architecture, resource modeling, task decomposition, validation strategy, operational readiness, or compliance validation.
     - Ensure category coverage balance: attempt to cover the highest impact unresolved categories first; avoid asking two low-impact questions when a single high-impact area (e.g., security posture) is unresolved.
     - Exclude questions already answered, trivial stylistic preferences, or plan-level execution details (unless blocking correctness).
     - Favor clarifications that reduce downstream rework risk or prevent misaligned acceptance tests.
@@ -148,10 +192,10 @@ Execution steps:
     - Append a bullet line immediately after acceptance: `- Q: <question> → A: <final answer>`.
     - Then immediately apply the clarification to the most appropriate section(s):
        - Functional ambiguity → Update or add a bullet in Functional Requirements.
-       - User interaction / actor distinction → Update User Stories or Actors subsection (if present) with clarified role, constraint, or scenario.
-       - Data shape / entities → Update Data Model (add fields, types, relationships) preserving ordering; note added constraints succinctly.
-       - Non-functional constraint → Add/modify measurable criteria in Non-Functional / Quality Attributes section (convert vague adjective to metric or explicit target).
-       - Edge case / negative flow → Add a new bullet under Edge Cases / Error Handling (or create such subsection if template provides placeholder for it).
+       - Access / consumer pattern → Update or add a bullet in the relevant Functional or Non-Functional Requirement, or add a note in Assumptions.
+       - Resource configuration / scale → Update Resource & Configuration Model details in the relevant FR or NFR (add constraints, types, sizes); preserve ordering.
+       - Non-functional constraint → Add/modify measurable criteria in Non-Functional Requirements or Success Criteria (convert vague adjective to metric or explicit target).
+       - Edge case / failure handling → Add a new bullet in the relevant FR or a new `## Edge Cases` section if not present.
        - Terminology conflict → Normalize term across spec; retain original only if necessary by adding `(formerly referred to as "X")` once.
     - If the clarification invalidates an earlier ambiguous statement, replace that statement instead of duplicating; leave no obsolete contradictory text.
     - Save the spec file AFTER each integration to minimize risk of context loss (atomic overwrite).

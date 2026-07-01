@@ -17,6 +17,47 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.9] - 2026-06-30
+
+> Syncs with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.12.0](https://github.com/github/spec-kit/releases/tag/v0.12.0) (upstream, 2026-06-29), plus IaC-specific additions and corrections.
+> Note: v0.0.8 was an unintended early release from `main` containing only dependency updates; this release supersedes it with the full upstream sync.
+
+### Added (IaC-specific)
+
+- **New `/iac.converge` command**: Assesses the Terraform codebase against spec/plan/tasks and appends remaining unbuilt work as new tasks to `tasks.md`
+
+### Changed (IaC-specific corrections)
+
+- **`spec-template.md`**: Added `## Assumptions` section with infra-scope examples; replaced app-tier NFR performance examples (API latency, RPS) with infra-tier equivalents (subnet throughput, storage IOPS, scale-out time)
+- **`iac.analyze.md`**: Replaced User Stories load step and user-story inventory with NFR + SC-### acceptance criteria inventory
+- **`iac.clarify.md`**: Replaced software-app taxonomy (personas, data model, rate limiting, UX behavior) with IaC equivalents (consumer teams/service accounts, resource & config model, provisioning failure, quota breaches)
+- **`iac.converge.md`**: Replaced User Stories / `US1/AC2` references with acceptance criteria checkboxes and `SC-###` style keys
+- **`iac.specify.md`**: Clarification priority uses `operational impact` instead of `UX impact`
+
+### Added (from upstream — [v0.1.6 → v0.12.0](https://github.com/github/spec-kit/blob/main/CHANGELOG.md))
+
+- **19 new agent integrations**: Cline, Devin for Terminal, Firebender, Forge, Goose, Hermes, iFlow, Junie, Kimi Code, Kiro CLI, Lingma, OMP, Pi Coding Agent, RovoDev ACLI, Tabnine CLI, Trae, Mistral Vibe, ZCode, Zed — bringing total supported agents to 38
+- **`setup-tasks.sh` / `setup-tasks.ps1`**: Script pair for task prerequisite validation
+- **`SPECIFY_INIT_DIR` monorepo support**: Set this env var to target a member project from the repo root in bash/PowerShell scripts
+- **`find_specify_root()` in scripts**: Scripts now find the project root via `.specify/` directory marker instead of `.git`, enabling non-git repo support
+- **`iac-specify self check`**: Check whether a newer release is available (ported from upstream `specify self check`)
+- **`iac-specify self upgrade`**: Upgrade the CLI in-place via `uv`, `pipx`, or source (ported from upstream `specify self upgrade`)
+- **Extension hook blocks** in all command templates (`before_*` / `after_*` hooks via `.specify/extensions.yml`)
+- **`handoffs` frontmatter** in `iac.specify.md` and `iac.clarify.md` for agent-to-agent chaining
+- **New `.devcontainer/`**: Devcontainer configuration with Junie CLI, Pi Coding Agent, Kiro CLI, and Kimi Code CLI pre-installed (adapted from upstream; excludes Amazon Q)
+
+### Changed (from upstream)
+
+- **`update-agent-context.sh` / `.ps1`**: Plan path now derived from `.specify/feature.json` with fallback to `SPECIFY_FEATURE` env var
+- CLI refactored into sub-modules (`_console.py`, `_github_http.py`, `_utils.py`, `_version.py`, `integrations/`) — no behaviour change for users
+
+### Fixed (from upstream)
+
+- `run_command()` now rejects `shell=True` with a clear error (security hardening)
+- Windows: force UTF-8 stdout/stderr to prevent `UnicodeEncodeError` on non-UTF-8 code pages
+
+---
+
 ## [0.0.7] - 2026-03-02
 
 > This release syncs the installer with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.1.6](https://github.com/github/spec-kit/releases/tag/v0.1.6) (upstream, 2026-02-23). There is no change to the IaC templates.

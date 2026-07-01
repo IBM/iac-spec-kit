@@ -10,7 +10,7 @@
   - [Multi-Cloud Infrastructure Support](#multi-cloud-infrastructure-support)
 - [Get Started](#get-started)
   - [1. Install IaC Specify CLI](#1-install-iac-specify-cli)
-  - [2. Establish project principles](#2-establish-project-principles)
+  - [2. Create the spec](#2-create-the-spec)
   - [3. Create the spec](#3-create-the-spec)
   - [4. Create a technical implementation plan](#4-create-a-technical-implementation-plan)
   - [5. Break down into tasks](#5-break-down-into-tasks)
@@ -60,6 +60,7 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ## About this project
 
+[![CI](https://github.com/IBM/iac-spec-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/IBM/iac-spec-kit/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/IBM/iac-spec-kit?color=blue)](https://github.com/IBM/iac-spec-kit/releases)
 [![License](https://img.shields.io/github/license/IBM/iac-spec-kit)](https://github.com/IBM/iac-spec-kit/blob/main/LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org/downloads/)
@@ -136,7 +137,13 @@ iac-specify init <PROJECT_NAME>
 iac-specify check
 ```
 
-To upgrade iac-specify run:
+To upgrade iac-specify, use the built-in self-upgrade command:
+
+```bash
+iac-specify self upgrade
+```
+
+Or upgrade manually with uv:
 
 ```bash
 uv tool install iac-specify-cli --force --from git+https://github.com/ibm/iac-spec-kit.git
@@ -284,24 +291,43 @@ For example, in agents like Claude Code or IBM Bob, you can create a custom "Inf
 
 | Agent                                                     | Support | Notes                                             |
 |-----------------------------------------------------------|---------|---------------------------------------------------|
-| [Claude Code](https://www.anthropic.com/claude-code)      | ✅ |                                                   |
-| [GitHub Copilot](https://code.visualstudio.com/)          | ✅ |                                                   |
-| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | ✅ |                                                   |
-| [Cursor](https://cursor.sh/)                              | ✅ |                                                   |
-| [Qwen Code](https://github.com/QwenLM/qwen-code)          | ✅ |                                                   |
-| [opencode](https://opencode.ai/)                          | ✅ |                                                   |
-| [Windsurf](https://windsurf.com/)                         | ✅ |                                                   |
-| [Kilo Code](https://github.com/Kilo-Org/kilocode)         | ✅ |                                                   |
-| [Auggie CLI](https://docs.augmentcode.com/cli/overview)   | ✅ |                                                   |
-| [CodeBuddy CLI](https://www.codebuddy.ai/cli)             | ✅ |                                                   |
-| [Roo Code](https://roocode.com/)                          | ✅ |                                                   |
-| [Codex CLI](https://github.com/openai/codex)              | ✅ |                                                   |
 | [Amazon Q Developer CLI](https://aws.amazon.com/developer/learning/q-developer-cli/) | ⚠️ | Amazon Q Developer CLI [does not support](https://github.com/aws/amazon-q-developer-cli/issues/3064) custom arguments for slash commands. |
 | [Amp](https://ampcode.com/) | ✅ | |
-| [IBM Bob](https://www.ibm.com/products/bob) | ✅ | IDE-based agent with slash command support |
-| [SHAI](https://github.com/ovh/shai) | ✅ | OVHcloud CLI agent |
 | [Antigravity](https://antigravity.dev/) | ✅ | IDE-based agent |
+| [Auggie CLI](https://docs.augmentcode.com/cli/overview)   | ✅ |                                                   |
+| [Claude Code](https://www.anthropic.com/claude-code)      | ✅ |                                                   |
+| [Cline](https://github.com/cline/cline) | ✅ | IDE-based agent |
+| [CodeBuddy CLI](https://www.codebuddy.ai/cli)             | ✅ |                                                   |
+| [Codex CLI](https://github.com/openai/codex)              | ✅ |                                                   |
+| [Cursor](https://cursor.sh/)                              | ✅ |                                                   |
+| [Devin for Terminal](https://cli.devin.ai/docs) | ✅ | Cognition AI Devin |
+| [Firebender](https://firebender.dev) | ✅ | Android Studio / IntelliJ IDE-based agent |
+| [Forge](https://forge.cli) | ✅ | |
+| [Gemini CLI](https://github.com/google-gemini/gemini-cli) | ✅ |                                                   |
+| [GitHub Copilot](https://code.visualstudio.com/)          | ✅ |                                                   |
+| [Goose](https://goose-docs.ai) | ✅ | Block/Square Goose agent |
+| [Hermes](https://hermes.cli) | ✅ | |
+| [IBM Bob](https://www.ibm.com/products/bob) | ✅ | IDE-based agent with slash command support |
+| [iFlow](https://iflow.ide) | ✅ | IDE-based agent |
+| [Junie](https://junie.jetbrains.com/) | ✅ | JetBrains Junie |
+| [Kilo Code](https://github.com/Kilo-Org/kilocode)         | ✅ |                                                   |
+| [Kimi Code](https://code.kimi.com/) | ✅ | Moonshot AI Kimi Code |
+| [Kiro CLI](https://kiro.dev/docs/cli/) | ✅ | AWS Kiro CLI |
+| [Lingma](https://lingma.alibaba.com/) | ✅ | Alibaba Lingma IDE-based agent |
+| [Mistral Vibe](https://github.com/mistralai/mistral-vibe) | ✅ | |
+| [OMP](https://omp.cli) | ✅ | |
+| [opencode](https://opencode.ai/)                          | ✅ |                                                   |
+| [Pi Coding Agent](https://www.earendil.works/pi) | ✅ | |
 | [Qoder CLI](https://qoder.com/cli) | ✅ | |
+| [Qwen Code](https://github.com/QwenLM/qwen-code)          | ✅ |                                                   |
+| [Roo Code](https://roocode.com/)                          | ✅ |                                                   |
+| [RovoDev ACLI](https://www.atlassian.com/software/rovo-dev) | ✅ | Atlassian Rovo Dev |
+| [SHAI](https://github.com/ovh/shai) | ✅ | OVHcloud CLI agent |
+| [Tabnine CLI](https://docs.tabnine.com/main/getting-started/tabnine-cli) | ✅ | |
+| [Trae](https://trae.ai/) | ✅ | IDE-based agent |
+| [Windsurf](https://windsurf.com/)                         | ✅ |                                                   |
+| [ZCode](https://zcode.z.ai/) | ✅ | Z.AI ZCode |
+| [Zed](https://zed.dev/) | ✅ | IDE-based agent |
 | Generic (bring your own agent) | ✅ | Use with `--ai-commands-dir` to specify custom commands directory |
 
 ## IaC Specify CLI Reference
@@ -313,16 +339,17 @@ The `iac-specify` command supports the following options:
 | Command     | Description                                                    |
 |-------------|----------------------------------------------------------------|
 | `init`      | Initialize a new IaC Specify project from the latest template      |
-| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `auggie`, `codebuddy`, `qodercli`, `shai`, `amp`, `q`, `bob`) |
+| `check`     | Check for installed tools (`git`, `claude`, `gemini`, `code`/`code-insiders`, `cursor-agent`, `windsurf`, `qwen`, `opencode`, `codex`, `auggie`, `codebuddy`, `qodercli`, `shai`, `amp`, `q`, `bob`, `devin`, `forge`, `goose`, `hermes`, `junie`, `kimi`, `kiro-cli`, `omp`, `pi`, `rovodev`, `tabnine`, `vibe`, `zcode`) |
 | `version`   | Display the installed version of IaC Specify CLI                   |
 | `extension` | Manage extensions (subcommands: `list`, `add`, `remove`, `search`, `info`, `update`, `enable`, `disable`) |
+| `self`      | Manage the CLI itself (subcommands: `check` — check for updates, `upgrade` — upgrade in-place) |
 
 ### `iac-specify init` Arguments & Options
 
 | Argument/Option        | Type     | Description                                                                  |
 |------------------------|----------|------------------------------------------------------------------------------|
 | `<project-name>`       | Argument | Name for your new project directory (optional if using `--here`, or use `.` for current directory) |
-| `--ai`                 | Option   | AI assistant to use: `claude`, `gemini`, `copilot`, `cursor-agent`, `qwen`, `opencode`, `codex`, `windsurf`, `kilocode`, `auggie`, `roo`, `codebuddy`, `amp`, `q`, `bob`, `shai`, `agy`, `qodercli`, or `generic` |
+| `--ai`                 | Option   | AI assistant to use: `agy`, `amp`, `auggie`, `bob`, `cline`, `claude`, `codebuddy`, `codex`, `copilot`, `cursor-agent`, `devin`, `firebender`, `forge`, `gemini`, `generic`, `goose`, `hermes`, `iflow`, `junie`, `kimi`, `kiro-cli`, `kilocode`, `lingma`, `omp`, `opencode`, `pi`, `q`, `qodercli`, `qwen`, `roo`, `rovodev`, `shai`, `tabnine`, `trae`, `vibe`, `windsurf`, `zcode`, `zed` |
 | `--script`             | Option   | Script variant to use: `sh` (bash/zsh) or `ps` (PowerShell)                 |
 | `--ignore-agent-tools` | Flag     | Skip checks for AI agent tools like Claude Code                             |
 | `--no-git`             | Flag     | Skip git repository initialization                                          |
@@ -403,6 +430,7 @@ After running `iac-specify init`, your AI coding agent will have access to these
 | `/iac.clarify` | Clarify underspecified areas | Before `/iac.plan` - reduces rework downstream |
 | `/iac.analyze` | Cross-artifact consistency analysis | After `/iac.tasks`, before `/iac.implement` |
 | `/iac.checklist` | Generate custom quality checklists | Anytime - validates requirements completeness |
+| `/iac.converge` | Assess Terraform codebase against spec/plan/tasks, append remaining work as new tasks | After `/iac.implement` - closes the gap between spec intent and current code |
 
 
 
@@ -449,9 +477,10 @@ When using `/iac.plan` for infrastructure projects, your `plan.md` will include 
 
 ### Environment Variables
 
-| Variable         | Description                                                                                    |
-|------------------|------------------------------------------------------------------------------------------------|
-| `SPECIFY_FEATURE` | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>**Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
+| Variable            | Description                                                                                    |
+|---------------------|------------------------------------------------------------------------------------------------|
+| `SPECIFY_FEATURE`   | Override feature detection for non-Git repositories. Set to the feature directory name (e.g., `001-vpc-infrastructure`) to work on a specific feature when not using Git branches.<br/>Must be set in the context of the agent you're working with prior to using `/iac.plan` or follow-up commands. |
+| `SPECIFY_INIT_DIR`  | Override the project root for monorepo layouts. Set to the path of the member project that contains `.specify/` (e.g., `services/my-service`). Used by all bash and PowerShell scripts so they operate on the correct sub-project without changing your working directory. |
 
 ## Core Philosophy
 

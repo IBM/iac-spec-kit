@@ -37,7 +37,6 @@ env/
 *.log
 .env
 .env.local
-*.lock
 
 # build and speckit files
 .genreleases/

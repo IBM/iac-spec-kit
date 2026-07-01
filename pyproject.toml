@@ -1,6 +1,6 @@
 [project]
 name = "iac-specify-cli"
-version = "0.0.7"
+version = "0.0.9"
 description = "IaC Specify CLI. A tool to bootstrap your infrastructure projects for Spec-Driven Development (SDD)."
 requires-python = ">=3.11"
 dependencies = [
@@ -14,6 +14,15 @@ dependencies = [
     "packaging>=23.0",
     "click>=8.1",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-mock>=3.15.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [project.scripts]
 iac-specify = "iac_specify_cli:main"
