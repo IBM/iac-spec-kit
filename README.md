@@ -60,6 +60,7 @@ Specification-Driven Development (SDD) is an emerging methodology where detailed
 
 ## About this project
 
+[![CI](https://github.com/IBM/iac-spec-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/IBM/iac-spec-kit/actions/workflows/ci.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/IBM/iac-spec-kit?color=blue)](https://github.com/IBM/iac-spec-kit/releases)
 [![License](https://img.shields.io/github/license/IBM/iac-spec-kit)](https://github.com/IBM/iac-spec-kit/blob/main/LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue)](https://www.python.org/downloads/)
