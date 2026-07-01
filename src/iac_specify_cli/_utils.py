@@ -105,9 +105,16 @@ def init_git_repo(project_path: Path, quiet: bool = False) -> Tuple[bool, Option
         os.chdir(project_path)
         if not quiet:
             console.print("[cyan]Initializing git repository...[/cyan]")
+        git_env = {
+            **os.environ,
+            "GIT_AUTHOR_NAME": os.environ.get("GIT_AUTHOR_NAME") or "Specify",
+            "GIT_AUTHOR_EMAIL": os.environ.get("GIT_AUTHOR_EMAIL") or "specify@iac-spec-kit",
+            "GIT_COMMITTER_NAME": os.environ.get("GIT_COMMITTER_NAME") or "Specify",
+            "GIT_COMMITTER_EMAIL": os.environ.get("GIT_COMMITTER_EMAIL") or "specify@iac-spec-kit",
+        }
         subprocess.run(["git", "init"], check=True, capture_output=True, text=True)
         subprocess.run(["git", "add", "."], check=True, capture_output=True, text=True)
-        subprocess.run(["git", "commit", "-m", "Initial commit from Specify template"], check=True, capture_output=True, text=True)
+        subprocess.run(["git", "commit", "-m", "Initial commit from Specify template"], check=True, capture_output=True, text=True, env=git_env)
         if not quiet:
             console.print("[green]✓[/green] Git repository initialized")
         return True, None
