@@ -10,5 +10,5 @@ class ForgeIntegration(IntegrationBase):
         "folder": ".forge/",
         "commands_subdir": "commands",
         "install_url": None,
-        "requires_cli": True,
+        "requires_cli": False,
     }

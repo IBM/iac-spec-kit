@@ -34,27 +34,15 @@ class TestAgentConfigStructure:
                 f"Agent '{key}'.requires_cli must be a bool"
             )
 
-    # These agents are known to be missing install_url despite requiring CLI.
-    # They are tracked as bugs; the test uses xfail so CI doesn't silently ignore them.
-    _KNOWN_MISSING_INSTALL_URL = {"forge", "hermes", "omp"}
-
     def test_install_url_present_for_cli_agents(self):
         missing = []
         for key, cfg in AGENT_CONFIG.items():
             if cfg["requires_cli"] and not cfg["install_url"]:
-                if key not in self._KNOWN_MISSING_INSTALL_URL:
-                    missing.append(key)
+                missing.append(key)
         assert not missing, (
-            f"New CLI agents missing install_url: {missing}\n"
+            f"CLI agents missing install_url: {missing}\n"
             "Add the install URL or set requires_cli=False."
         )
-
-    @pytest.mark.xfail(reason="Known bug: forge/hermes/omp require CLI but have no install_url", strict=True)
-    def test_known_missing_install_url_agents_are_fixed(self):
-        """Flip to xpass once forge/hermes/omp have real install_url values."""
-        for key in self._KNOWN_MISSING_INSTALL_URL:
-            cfg = AGENT_CONFIG.get(key, {})
-            assert cfg.get("install_url"), f"'{key}' still missing install_url"
 
     def test_known_agents_present(self):
         expected = {"claude", "copilot", "gemini", "bob", "opencode", "windsurf"}
