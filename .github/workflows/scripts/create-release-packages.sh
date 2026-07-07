@@ -203,6 +203,8 @@ build_variant() {
       mkdir -p "$base_dir/.specify/commands"
       generate_commands generic md "\$ARGUMENTS" "$base_dir/.specify/commands" "$script" ;;
   esac
+  # Ensure all shell scripts in the package have execute permissions
+  find "$base_dir" -type f -name "*.sh" -exec chmod +x {} + 2>/dev/null || true
   ( cd "$base_dir" && zip -r "../iac-spec-kit-template-${agent}-${script}-${NEW_VERSION}.zip" . )
   echo "Created $GENRELEASES_DIR/iac-spec-kit-template-${agent}-${script}-${NEW_VERSION}.zip"
 }
