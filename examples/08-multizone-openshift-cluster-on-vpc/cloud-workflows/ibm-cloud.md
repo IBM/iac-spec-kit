@@ -117,7 +117,7 @@ In this example, no clarification was needed — all requirements were clear eno
 - Network ACLs: default-deny with explicit allow rules at subnet level
 - KMS: one Key Protect instance + one CRK per environment, 365-day auto-rotation
 - State backend: COS per-env bucket, separate `-backend-config` `.hcl` files (not workspaces)
-- Compliance: Checkov FSCloud profile (preventive CI gate) + IBM SCC daily scans (detective)
+- Compliance: Checkov FSCloud profile (preventive CI gate)
 
 *Complexity*: Organised structure justified (6 resource types, 3 environments, compliance scanning)
 
@@ -228,7 +228,7 @@ After `/iac.implement` completes, you have compliance-ready Terraform code. The 
    terraform -chdir=iac output -json cluster_api_endpoint  # sensitive
    ```
 
-**Deployment order**: `dev` → `staging` → `prod`. Checkov scan + SCC baseline report must pass in each environment before promoting to the next.
+**Deployment order**: `dev` → `staging` → `prod`. Checkov scan.
 
 ---
 
