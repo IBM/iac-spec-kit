@@ -26,6 +26,7 @@ The workflow commands (`/iac.principles`, `/iac.specify`, `/iac.plan`, etc.) rem
 | [05-three-tier-webapp](./05-three-tier-webapp/) | Medium | Minimal or Enriched | Multi-tier architecture, security layers. Use enrichplan for production-grade implementations. |
 | [06-data-pipeline](./06-data-pipeline/) | High | Enriched (with principles) | Event-driven patterns, data governance. Enrichplan recommended for complex data flows. |
 | [07-microservices](./07-microservices/) | High | Enriched (with principles) | Distributed systems, service mesh. Principles essential. Enrichplan critical for quality. |
+| [08-multizone-openshift-cluster-on-vpc](./08-multizone-openshift-cluster-on-vpc/) | Medium | Enriched (with principles) | Distributed systems, service mesh. Principles essential. Enrichplan critical for quality. |
 
 ## How to Use These Examples
 
