@@ -4,4 +4,4 @@ A compliance-grade OpenShift Container Platform cluster example demonstrating th
 
 ## Cloud Workflows
 
-- **[IBM Cloud](./cloud-workflows/ibm-cloud.md)** - ROKS on VPC, Key Protect, IBM Cloud Logs, Monitoring, SCC
+- **[IBM Cloud](./cloud-workflows/ibm-cloud.md)** - ROKS on VPC, Key Protect, IBM Cloud Logs, Monitoring
