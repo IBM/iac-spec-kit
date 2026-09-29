@@ -4,7 +4,4 @@ A compliance-grade OpenShift Container Platform cluster example demonstrating th
 
 ## Cloud Workflows
 
-- **[AWS](./cloud-workflows/aws.md)** - EKS cluster, VPC, KMS, CloudWatch, GuardDuty
-- **[Azure](./cloud-workflows/azure.md)** - ARO / AKS cluster, VNet, Key Vault, Azure Monitor
-- **[GCP](./cloud-workflows/gcp.md)** - GKE cluster, VPC Network, Cloud KMS, Cloud Logging
 - **[IBM Cloud](./cloud-workflows/ibm-cloud.md)** - ROKS on VPC, Key Protect, IBM Cloud Logs, Monitoring, SCC
