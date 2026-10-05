@@ -347,15 +347,25 @@ def download_and_extract_template(project_path: Path, ai_assistant: str, script_
 
 
 def ensure_executable_scripts(project_path: Path, tracker: StepTracker | None = None) -> None:
-    """Ensure POSIX .sh scripts under .specify/scripts (recursively) have execute bits (no-op on Windows)."""
+    """Ensure POSIX .sh scripts under .specify and .speckit (recursively) have execute bits (no-op on Windows)."""
     if os.name == "nt":
+        if tracker:
+            tracker.add("chmod", "Set script permissions recursively")
+            tracker.skip("chmod", "Windows (no-op)")
         return  # Windows: skip silently
-    scripts_root = project_path / ".specify" / "scripts"
-    if not scripts_root.is_dir():
+    target_dirs = [project_path / ".specify", project_path / ".speckit"]
+    scripts_found: list[Path] = []
+    for d in target_dirs:
+        if d.is_dir():
+            scripts_found.extend(d.rglob("*.sh"))
+    if not scripts_found:
+        if tracker:
+            tracker.add("chmod", "Set script permissions recursively")
+            tracker.complete("chmod", "0 updated")
         return
     failures: list[str] = []
     updated = 0
-    for script in scripts_root.rglob("*.sh"):
+    for script in scripts_found:
         try:
             if script.is_symlink() or not script.is_file():
                 continue
@@ -377,7 +387,7 @@ def ensure_executable_scripts(project_path: Path, tracker: StepTracker | None = 
             os.chmod(script, new_mode)
             updated += 1
         except Exception as e:
-            failures.append(f"{script.relative_to(scripts_root)}: {e}")
+            failures.append(f"{script.relative_to(project_path)}: {e}")
     if tracker:
         detail = f"{updated} updated" + (f", {len(failures)} failed" if failures else "")
         tracker.add("chmod", "Set script permissions recursively")

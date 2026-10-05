@@ -16,6 +16,7 @@ from iac_specify_cli._console import StepTracker
 # ---------------------------------------------------------------------------
 
 class TestEnsureExecutableScripts:
+    @pytest.mark.skipif(os.name == "nt", reason="POSIX executable bits are not supported on Windows")
     def test_makes_sh_scripts_executable(self, tmp_path):
         scripts_dir = tmp_path / ".specify" / "scripts"
         scripts_dir.mkdir(parents=True)
@@ -29,6 +30,20 @@ class TestEnsureExecutableScripts:
         mode = script.stat().st_mode
         assert mode & stat.S_IXUSR, "Owner exec bit should be set"
 
+    @pytest.mark.skipif(os.name == "nt", reason="POSIX executable bits are not supported on Windows")
+    def test_makes_sh_scripts_in_speckit_executable(self, tmp_path):
+        scripts_dir = tmp_path / ".speckit" / "scripts"
+        scripts_dir.mkdir(parents=True)
+        script = scripts_dir / "setup.sh"
+        script.write_bytes(b"#!/bin/bash\necho hello\n")
+        script.chmod(0o644)
+
+        ensure_executable_scripts(tmp_path)
+
+        mode = script.stat().st_mode
+        assert mode & stat.S_IXUSR, "Owner exec bit should be set on .speckit script"
+
+    @pytest.mark.skipif(os.name == "nt", reason="POSIX executable bits are not supported on Windows")
     def test_skips_non_shebang_sh_files(self, tmp_path):
         scripts_dir = tmp_path / ".specify" / "scripts"
         scripts_dir.mkdir(parents=True)
@@ -58,8 +73,12 @@ class TestEnsureExecutableScripts:
         ensure_executable_scripts(tmp_path, tracker=tracker)
         step = next((s for s in tracker.steps if s["key"] == "chmod"), None)
         assert step is not None
-        assert step["status"] == "done"
-        assert "3 updated" in step["detail"]
+        if os.name == "nt":
+            assert step["status"] == "skipped"
+            assert "Windows" in step["detail"]
+        else:
+            assert step["status"] == "done"
+            assert "3 updated" in step["detail"]
 
 
 # ---------------------------------------------------------------------------
