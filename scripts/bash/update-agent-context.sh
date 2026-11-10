@@ -53,7 +53,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/common.sh"
 
 # Get all paths and variables from common functions
-eval $(get_feature_paths)
+load_feature_paths || exit 1
 
 #==============================================================================
 # Plan Path Derivation

@@ -65,17 +65,35 @@ get_repo_root() {
     (cd "$script_dir/../../.." && pwd)
 }
 
+# Validate a branch/feature name against a strict allowlist.
+# Branch names come from ref metadata (or the environment) and are untrusted;
+# git itself permits characters such as ' ; > $ ` that are dangerous in shell contexts.
+is_safe_branch_name() {
+    local name="$1"
+    [[ -n "$name" && "$name" =~ ^[A-Za-z0-9._/-]+$ && "$name" != *..* ]]
+}
+
 # Get current branch, with fallback for non-git repositories
+# Fails closed (non-zero exit, no output) if the branch name contains unsafe characters.
 get_current_branch() {
+    local branch
+
     # First check if SPECIFY_FEATURE environment variable is set
     if [[ -n "${SPECIFY_FEATURE:-}" ]]; then
-        echo "$SPECIFY_FEATURE"
-        return
+        branch="$SPECIFY_FEATURE"
+    # Then check git if available
+    elif branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null); then
+        :
+    else
+        branch=""
     fi
 
-    # Then check git if available
-    if git rev-parse --abbrev-ref HEAD >/dev/null 2>&1; then
-        git rev-parse --abbrev-ref HEAD
+    if [[ -n "$branch" ]]; then
+        if ! is_safe_branch_name "$branch"; then
+            echo "ERROR: Unsafe branch name rejected. Allowed characters: A-Z a-z 0-9 . _ / -" >&2
+            return 1
+        fi
+        echo "$branch"
         return
     fi
 
@@ -177,31 +195,27 @@ find_feature_dir_by_prefix() {
     fi
 }
 
-get_feature_paths() {
-    local repo_root=$(get_repo_root)
-    local current_branch=$(get_current_branch)
-    local has_git_repo="false"
+# Populate feature path variables directly in the caller's shell.
+# Variables are assigned (never evaluated), so untrusted values such as branch
+# names cannot be interpreted as shell code. Do NOT reintroduce eval-based loading.
+load_feature_paths() {
+    REPO_ROOT=$(get_repo_root) || return 1
+    CURRENT_BRANCH=$(get_current_branch) || return 1
+    HAS_GIT="false"
 
     if has_git; then
-        has_git_repo="true"
+        HAS_GIT="true"
     fi
 
     # Use prefix-based lookup to support multiple branches per spec
-    local feature_dir=$(find_feature_dir_by_prefix "$repo_root" "$current_branch")
-
-    cat <<EOF
-REPO_ROOT='$repo_root'
-CURRENT_BRANCH='$current_branch'
-HAS_GIT='$has_git_repo'
-FEATURE_DIR='$feature_dir'
-FEATURE_SPEC='$feature_dir/spec.md'
-IMPL_PLAN='$feature_dir/plan.md'
-TASKS='$feature_dir/tasks.md'
-RESEARCH='$feature_dir/research.md'
-MODULES='$feature_dir/modules.md'
-ARCHITECTURE='$feature_dir/architecture.md'
-QUICKSTART='$feature_dir/quickstart.md'
-EOF
+    FEATURE_DIR=$(find_feature_dir_by_prefix "$REPO_ROOT" "$CURRENT_BRANCH")
+    FEATURE_SPEC="$FEATURE_DIR/spec.md"
+    IMPL_PLAN="$FEATURE_DIR/plan.md"
+    TASKS="$FEATURE_DIR/tasks.md"
+    RESEARCH="$FEATURE_DIR/research.md"
+    MODULES="$FEATURE_DIR/modules.md"
+    ARCHITECTURE="$FEATURE_DIR/architecture.md"
+    QUICKSTART="$FEATURE_DIR/quickstart.md"
 }
 
 check_file() { [[ -f "$1" ]] && echo "  ✓ $2" || echo "  ✗ $2"; }
