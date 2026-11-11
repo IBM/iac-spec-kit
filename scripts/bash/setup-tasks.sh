@@ -56,7 +56,7 @@ resolve_template() {
 # --- End stubs ---
 
 # Get feature paths
-eval $(get_feature_paths)
+load_feature_paths || exit 1
 
 # Validate required files
 if [[ ! -f "$IMPL_PLAN" ]]; then
