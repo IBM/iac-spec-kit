@@ -17,6 +17,15 @@ IaC Spec Kit provides infrastructure-specific templates, foundational principles
 
 ---
 
+## [0.0.10] - 2026-07-07
+
+### Fixed (IaC-specific)
+
+- **Executable bash scripts out of the box OOTB (#11)**:
+  - Updated git repository index permissions for `scripts/bash/*.sh` to `100755`.
+  - Added explicit `chmod +x` step in `.github/workflows/scripts/create-release-packages.sh` before zipping release archives.
+  - Improved `ensure_executable_scripts` in CLI core to check `.specify` and `.speckit` directories recursively and properly complete progress tracker step on Windows.
+
 ## [0.0.9] - 2026-06-30
 
 > Syncs with [GitHub Spec Kit](https://github.com/github/spec-kit) [v0.12.0](https://github.com/github/spec-kit/releases/tag/v0.12.0) (upstream, 2026-06-29), plus IaC-specific additions and corrections.
